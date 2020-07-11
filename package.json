@@ -1,0 +1,27 @@
+{
+  "name": "fsd",
+  "version": "1.0.0",
+  "description": "fsd second step",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gamabuntat/fsd-step-2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gamabuntat/fsd-step-2/issues"
+  },
+  "homepage": "https://github.com/gamabuntat/fsd-step-2#readme",
+  "devDependencies": {
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "pug-html-loader": "^1.1.5",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  }
+}
