@@ -11,14 +11,30 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.pug',
-            minify: 'false'
         }),
     ],
     module: {
-        rules: [{
-            test: /\.pug/,
-            loaders: ['html-loader', 'pug-html-loader'],
-        }]
+        rules: [
+            {
+                test: /\.css/,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.sass/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.pug/,
+                use: ['html-loader',
+                {
+                    loader: 'pug-html-loader',
+                    options: {
+                        pretty: true
+                    },
+                },
+                ],
+            }
+        ]
     }
 }
 
