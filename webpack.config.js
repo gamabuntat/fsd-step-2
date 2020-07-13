@@ -3,14 +3,22 @@ const path = require('path');
 
 module.exports = {
     mode: 'development',
-    entry: './src/index.js',
+    entry: {colorsAndType: './src/UI kit/Colors & Type/colors&type.js' },
     output: {
-        filename: 'main.js',
-        path: path.resolve(__dirname, 'dist')
+        filename: '[name].js',
+        path: path.resolve(__dirname, 'dist'),
+    },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './')
+        },
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.pug',
+            filename: 'colorsAndType.html',
+            template: './src/UI kit/Colors & Type/colors&type.pug',
+            minify: 'false',
+            chunks: ['colorsAndType'],
         }),
     ],
     module: {
@@ -18,6 +26,10 @@ module.exports = {
             {
                 test: /\.s[ac]ss$/i,
                 use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
             },
             {
                 test: /\.pug/,

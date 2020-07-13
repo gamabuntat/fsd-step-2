@@ -1,0 +1,21 @@
+mixin colorBlock(params)
+    .color.container
+        .container
+            if params
+                - const colorRectangle = 'rectangle_' + params.color
+                - const light = 'rectangle_darck-shade-' + params.light
+                span.rectangle(class = colorRectangle, class = light)
+            else
+                span.rectangle
+        .container.container_direction-column
+            h2.h2 sign1
+            h2.h2 
+                em sign2
+
++colorBlock( {color: '#1F2041'} )
++colorBlock( {color: '#1F2041', light: '75'} )
++colorBlock( {color: '#1F2041'} )
++colorBlock( {color: '#1F2041'} )
++colorBlock( {color: '#1F2041'} )
++colorBlock( {color: '#1F2041'} )
++colorBlock( {color: '#1F2041'} )

@@ -1,0 +1,23 @@
+$base-color: #1F2041
+
+=lighterColor($color)
+  background: $color
+
+.rectangle
+  width: 70px
+  height: 70px
+  border-radius: 3px
+  background: $base-color
+
+.rectangle_darck-shade-15
+  +lighterColor(lighten($base-color, 15%))
+
+.rectangle_darck-shade-75
+  +lighterColor(lighten($base-color, 50%))
+
+.rectangle_darck-shade-75
+  +lighterColor(lighten($base-color, 75%))
+
+.rectangle_darck-shade-75
+  +lighterColor(lighten($base-color, 75%))
+
