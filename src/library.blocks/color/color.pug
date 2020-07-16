@@ -1,21 +1,16 @@
 mixin colorBlock(params)
     .color.container
-        .container
-            if params
-                - const colorRectangle = 'rectangle_' + params.color
-                - const light = 'rectangle_darck-shade-' + params.light
-                span.rectangle(class = colorRectangle, class = light)
-            else
-                span.rectangle
-        .container.container_direction-column
-            h2.h2 sign1
-            h2.h2 
-                em sign2
+        .container.container_align-items-center
+            - let colorRectangle = 'rectangle_' + params.color
+            span.rectangle(class=colorRectangle)
+        .container.container_direction-column.color__sign
+            h2.h2= params.title
+            h2.h2= params.hexColor
 
-+colorBlock( {color: '#1F2041'} )
-+colorBlock( {color: '#1F2041', light: '75'} )
-+colorBlock( {color: '#1F2041'} )
-+colorBlock( {color: '#1F2041'} )
-+colorBlock( {color: '#1F2041'} )
-+colorBlock( {color: '#1F2041'} )
-+colorBlock( {color: '#1F2041'} )
++colorBlock( {color: 'color-1', title: 'Darck Shade 100%', hexColor: '#1F2041'} )
++colorBlock( {color: 'color-2', title: 'Darck Shade 75%', hexColor: '#1F2041'} )
++colorBlock( {color: 'color-3', title: 'Darck Shade 50%', hexColor: '#1F2041'} )
++colorBlock( {color: 'color-4', title: 'Darck Shade 25%', hexColor: '#1F2041'} )
++colorBlock( {color: 'color-5', title: 'Darck Shade 5%', hexColor: '#1F2041'} )
++colorBlock( {color: 'color-6', title: 'Purple', hexColor: '#BC9CFF'} )
++colorBlock( {color: 'color-7', title: 'Green', hexColor: '#6FCF97'} )

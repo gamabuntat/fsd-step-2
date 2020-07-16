@@ -1,14 +1,17 @@
+- const path = '../../'
+
 doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
         title
     body
-        .container
+        img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
+        .container.container_justify-content-space-around.body__container
             .container.container_direction-column
                 include ../../library.blocks/color/color.pug
             .container.container_direction-column
-                h1 hello
-                h2 hello
-                h1 hello
-                h2 hello
+                h1 h1 hello
+                h2 h2 hello
+                h1 h3 hello
+                h2 body hello

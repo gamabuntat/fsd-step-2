@@ -1,23 +1,34 @@
-$base-color: #1F2041
-
-=lighterColor($color)
-  background: $color
+$base-color-1: #1F2041
+$base-color-2: #575870
+$base-color-3: #8F8FA0
+$base-color-4: #C7C7CF
+$base-color-5: #F4F4F5
+$base-color-6: #BC9CFF
+$base-color-7: #6FCF97
 
 .rectangle
   width: 70px
   height: 70px
-  border-radius: 3px
-  background: $base-color
+  border-radius: 5px
+  background: $base-color-1
 
-.rectangle_darck-shade-15
-  +lighterColor(lighten($base-color, 15%))
+.rectangle_color-2
+  background: $base-color-2
 
-.rectangle_darck-shade-75
-  +lighterColor(lighten($base-color, 50%))
+.rectangle_color-3
+  background: $base-color-3
 
-.rectangle_darck-shade-75
-  +lighterColor(lighten($base-color, 75%))
+.rectangle_color-4
+  background: $base-color-4
 
-.rectangle_darck-shade-75
-  +lighterColor(lighten($base-color, 75%))
+.rectangle_color-5
+  background: $base-color-5
 
+.rectangle_color-6
+  background: $base-color-6
+
+.rectangle_color-7
+  background: $base-color-7
+
+.color__sign
+  padding-left: 10px

@@ -1,5 +1,6 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -10,7 +11,10 @@ module.exports = {
     },
     resolve: {
         alias: {
-            '@': path.resolve(__dirname, './')
+            '@': path.resolve(__dirname, './'),
+            '@src': path.resolve(__dirname, 'src'),
+            '@dist': path.resolve(__dirname, 'dist'),
+            '@library': path.resolve(__dirname, 'src/library.blocks'),
         },
     },
     plugins: [
@@ -20,6 +24,11 @@ module.exports = {
             minify: 'false',
             chunks: ['colorsAndType'],
         }),
+        //new CopyWebpackPlugin({
+        //    patterns: [
+        //        { from: 'src/library.blocks/i', to: 'colorsAndType' },
+        //    ]
+        //}),
     ],
     module: {
         rules: [
@@ -30,6 +39,28 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.(svg|png|jpe?g|gif)$/i,
+                use: 
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'i',
+                        }
+                    },
+            },
+            {
+                test: /\.(ttf|otf|eot|woff)$/i,
+                use:
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts',
+                        }
+                    },
             },
             {
                 test: /\.pug/,
