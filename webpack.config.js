@@ -4,7 +4,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: {colorsAndType: './src/UI kit/Colors & Type/colors&type.js' },
+    entry: {
+        colorsAndType: './src/UI kit/Colors & Type/colors&type.js',
+        formElements: './src/UI kit/Form Elements/formElements.js',
+    },
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
@@ -23,6 +26,12 @@ module.exports = {
             template: './src/UI kit/Colors & Type/colors&type.pug',
             minify: 'false',
             chunks: ['colorsAndType'],
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'formElements.html',
+            template: './src/UI kit/Form Elements/formElements.pug',
+            minify: 'false',
+            chunks: ['formElements'],
         }),
         //new CopyWebpackPlugin({
         //    patterns: [
