@@ -51,6 +51,7 @@ module.exports = {
             },
             {
                 test: /\.(svg|png|jpe?g|gif)$/i,
+                exclude: [path.resolve(__dirname, 'src/fonts')],
                 use: 
                     {
                         loader: 'file-loader',
@@ -60,8 +61,21 @@ module.exports = {
                         }
                     },
             },
+//            {
+//                test: /\.(svg|png|jpg|gif)$/i,
+//                use: [
+//                    {
+//                        loader: 'url-loader',
+//                        options: {
+//                            name: '[name].[ext]',
+//                            esModule: false,
+//                        },
+//                    },
+//                ],
+//            },
             {
-                test: /\.(ttf|otf|eot|woff)$/i,
+                test: /\.(svg|ttf|otf|eot|woff)$/i,
+                include: [path.resolve(__dirname, 'src/fonts')],
                 use:
                     {
                         loader: 'file-loader',

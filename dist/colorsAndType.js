@@ -259,7 +259,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (__webpack_require__.p + \"i/Montserrat-Bold.svg\");\n\n//# sourceURL=webpack:///./src/fonts/montserrat-bold/fonts/Montserrat-Bold.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (__webpack_require__.p + \"fonts/Montserrat-Bold.svg\");\n\n//# sourceURL=webpack:///./src/fonts/montserrat-bold/fonts/Montserrat-Bold.svg?");
 
 /***/ }),
 
@@ -318,7 +318,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (__webpack_require__.p + \"i/Montserrat-Regular.svg\");\n\n//# sourceURL=webpack:///./src/fonts/montserrat-regular/fonts/Montserrat-Regular.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (__webpack_require__.p + \"fonts/Montserrat-Regular.svg\");\n\n//# sourceURL=webpack:///./src/fonts/montserrat-regular/fonts/Montserrat-Regular.svg?");
 
 /***/ }),
 
@@ -377,7 +377,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (__webpack_require__.p + \"i/Quicksand-Bold.svg\");\n\n//# sourceURL=webpack:///./src/fonts/quicksand-bold/fonts/Quicksand-Bold.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (__webpack_require__.p + \"fonts/Quicksand-Bold.svg\");\n\n//# sourceURL=webpack:///./src/fonts/quicksand-bold/fonts/Quicksand-Bold.svg?");
 
 /***/ }),
 
