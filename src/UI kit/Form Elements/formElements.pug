@@ -1,4 +1,5 @@
 - const path = '../../'
+include ../../library.blocks/text-field/text-field.pug
 
 doctype html
 html(lang="en")
@@ -9,6 +10,6 @@ html(lang="en")
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
         .page__container
             .container.container_direction-column
-                include ../../library.blocks/text-field/text-field.pug
-                include ../../library.blocks/text-field/text-field.pug
+                +textFiled( {focus: 'anything', example: 'default'} )
+                +textFiled( {hover: 'true', example: 'hover/focus'} )
         
