@@ -1,0 +1,13 @@
+mixin dropdown(params)
+    - let {hover, example} = params
+    .container.container_direction-column.dropdown
+        .container.container_justify-content-space-between
+            h3.h3.dropdown__sign dropdown
+        .dropdown__content(id="dropdown__content")
+            .container.container_justify-content-space-between.container_align-items-center.dropdown__button(id="dropdown__button")
+                span Сколько гостей
+                img.dropdown__expand-icon(src=path + "library.blocks/dropdown/__expand-icon/expand-icon.svg", alt="")
+            .dropdown__expand-list(id="dropdown__expand-list") 
+                h3.h3 взрослые
+                h3.h3 дети
+                h3.h3 младенцы

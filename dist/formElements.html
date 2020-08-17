@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
   </head>
-  <body class="page"><img class="watermark" src="i/watermark.svg" alt="">
+  <body class="page" id="page"><img class="watermark" src="i/watermark.svg" alt="">
     <div class="page__container">
       <div class="container container_direction-column">
         <div class="container container_direction-column text-field">
@@ -23,6 +23,28 @@
           </div>
           <div class="container">
             <input class="text-field__input text-field__input_hover-focus" type="text" placeholder="Email" value="This is pretty awesome"/>
+          </div>
+        </div>
+        <div class="container container_direction-column dropdown">
+          <div class="container container_justify-content-space-between">
+            <h3 class="h3 dropdown__sign">dropdown</h3>
+          </div>
+          <div class="dropdown__content" id="dropdown__content">
+            <div class="container container_justify-content-space-between container_align-items-center dropdown__button" id="dropdown__button"><span>Сколько гостей</span><img class="dropdown__expand-icon" src="i/expand-icon.svg" alt=""/></div>
+            <div class="dropdown__expand-list" id="dropdown__expand-list"> 
+              <h3 class="h3">взрослые</h3>
+              <h3 class="h3">дети</h3>
+              <h3 class="h3">младенцы</h3>
+            </div>
+          </div>
+        </div>
+        <div class="container container_direction-column text-field">
+          <div class="container container_justify-content-space-between">
+            <h3 class="h3 text-field__sign">text field</h3>
+            <h3 class="h3 text-field__sign color-50 font font_montserrat-r">default</h3>
+          </div>
+          <div class="container">
+            <input class="text-field__input" type="text" placeholder="Email"/>
           </div>
         </div>
       </div>

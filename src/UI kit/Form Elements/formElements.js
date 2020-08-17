@@ -3,5 +3,6 @@ import '@src/fonts/quicksand-regular/fonts.css'
 import '@src/fonts/quicksand-bold/fonts.css'
 import '@src/fonts/montserrat-regular/fonts.css'
 import '@src/fonts/montserrat-bold/fonts.css'
+import '@src/library.blocks/dropdown/__button/dropdown__button.js'
 import '@/node_modules/normalize.css'
 

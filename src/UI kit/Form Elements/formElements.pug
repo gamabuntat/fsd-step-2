@@ -1,15 +1,18 @@
 - const path = '../../'
 include ../../library.blocks/text-field/text-field.pug
+include ../../library.blocks/dropdown/dropdown.pug
 
 doctype html
 html(lang="en")
     head
         meta(charset="UTF-8")
         title
-    body.page
+    body.page(id="page")
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
         .page__container
             .container.container_direction-column
                 +textFiled( {focus: 'anything', example: 'default'} )
                 +textFiled( {hover: 'true', example: 'hover/focus'} )
+                +dropdown( {} )
+                +textFiled( {focus: 'anything', example: 'default'} )
         
