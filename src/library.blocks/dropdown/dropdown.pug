@@ -8,6 +8,21 @@ mixin dropdown(params)
                 span Сколько гостей
                 img.dropdown__expand-icon(src=path + "library.blocks/dropdown/__expand-icon/expand-icon.svg", alt="")
             .dropdown__expand-list(id="dropdown__expand-list") 
-                h3.h3 взрослые
-                h3.h3 дети
-                h3.h3 младенцы
+                .container.container_justify-content-space-between.container_align-items-center.dropdown__expand-items
+                    h3.h3 взрослые
+                    .container.container_justify-content-space-between.container_align-items-center
+                        button.dropdown__decrease-button(type="button") -
+                        .container.container_justify-content-center.dropdown__counter 0
+                        button.dropdown__decrease-button(type="button") +
+                .container.container_justify-content-space-between.container_align-items-center.dropdown__expand-items
+                    h3.h3 дети
+                    .container.container_justify-content-space-between.container_align-items-center
+                        button.dropdown__decrease-button(type="button") -
+                        .container.container_justify-content-center.dropdown__counter 0
+                        button.dropdown__decrease-button(type="button") +
+                .container.container_justify-content-space-between.container_align-items-center.dropdown__expand-items
+                    h3.h3 младенцы
+                    .container.container_justify-content-space-between.container_align-items-center
+                        button.dropdown__decrease-button(type="button") -
+                        .container.container_justify-content-center.dropdown__counter 0
+                        button.dropdown__decrease-button(type="button") +
