@@ -1,5 +1,7 @@
 {
-    Array.from(document.querySelectorAll('.dropdown__button')).forEach(elem => elem.addEventListener('click', dropdownExpandList));
+    Array.from(document.getElementsByClassName('dropdown__button')).forEach(elem => elem.addEventListener('click', dropdownExpandList));
+
+    let expandList = Array.from(document.getElementsByClassName('dropdown__expand-list'));
 
     function dropdownExpandList(e) {
 
@@ -32,13 +34,9 @@
             console.log(elementClicked);
             elementClicked = elementClicked.parentElement;
         }
-        console.log('hide');
 
-        for (let item of document.querySelectorAll('.dropdown__expand-list')) {
-            if (item.classList.contains('dropdown__expand-list_open')) {
-                showOrHideElement(item);
-            }
-        }
+        expandList.forEach(list => list.classList.contains('dropdown__expand-list_open') ? showOrHideElement(list) : '');
+
         document.removeEventListener('click', closeDropdownExpandList);
     }
 
