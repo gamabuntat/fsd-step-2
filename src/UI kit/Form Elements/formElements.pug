@@ -9,10 +9,12 @@ html(lang="en")
         title
     body.page(id="page")
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
-        .page__container
+        .container.page__container
             .container.container_direction-column
                 +textFiled( {focus: 'anything', example: 'default'} )
                 +textFiled( {hover: 'true', example: 'hover/focus'} )
                 +dropdown( {} )
                 +textFiled( {focus: 'anything', example: 'default'} )
+            .container.container_direction-column
+                +dropdown( {} )
         
