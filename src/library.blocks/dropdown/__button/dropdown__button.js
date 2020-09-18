@@ -1,20 +1,49 @@
 {
-    document.addEventListener('click', dropdownExpandList);
+    Array.from(document.querySelectorAll('.dropdown__button')).forEach(elem => elem.addEventListener('click', dropdownExpandList));
 
     function dropdownExpandList(e) {
 
-        if (!e.target.classList.contains('dropdown__button')) return;
+        let target = e.target.closest('.dropdown__button');
+        let expandList = target.nextElementSibling;
 
-        for (let expandList of document.querySelectorAll('.dropdown__expand-list')) {
-            if (e.target.parentElement.contains(expandList)) {
-                renderingExpandList(expandList);
-                break;
+        for (let item of document.querySelectorAll('.dropdown__expand-list')) {
+            if (item.classList.contains('dropdown__expand-list_open') || item == expandList) {
+                showOrHideElement(item);
             }
         }
+
+        document.removeEventListener('click', closeDropdownExpandList);
+        
+        if (expandList.classList.contains('dropdown__expand-list_open')) {
+            document.addEventListener('click', closeDropdownExpandList);
+        };
     }
 
-    function renderingExpandList(elem) {
+    function closeDropdownExpandList(e) {
 
+        let elementClicked = e.target;
+
+        while (elementClicked != document.body.parentElement) {
+
+            if (elementClicked.parentElement.classList.contains('dropdown__content')) {
+                return;
+            }
+
+            console.log(elementClicked);
+            elementClicked = elementClicked.parentElement;
+        }
+        console.log('hide');
+
+        for (let item of document.querySelectorAll('.dropdown__expand-list')) {
+            if (item.classList.contains('dropdown__expand-list_open')) {
+                showOrHideElement(item);
+            }
+        }
+        document.removeEventListener('click', closeDropdownExpandList);
+    }
+
+    function showOrHideElement(elem) {
+        
         let coordXParentElem = elem.parentElement.getBoundingClientRect().x;
 
         elem.style.left = coordXParentElem + 'px';
