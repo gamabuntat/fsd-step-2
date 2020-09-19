@@ -1,51 +1,46 @@
 {
-    Array.from(document.getElementsByClassName('dropdown__button')).forEach(elem => elem.addEventListener('click', dropdownExpandList));
+    let buttons = Array.from(document.getElementsByClassName('dropdown__button'));
+    buttons.forEach(elem => elem.addEventListener('click', clickOnButton));
 
-    let expandList = Array.from(document.getElementsByClassName('dropdown__expand-list'));
-
-    function dropdownExpandList(e) {
+    function clickOnButton(e) {
 
         let target = e.target.closest('.dropdown__button');
-        let expandList = target.nextElementSibling;
 
-        for (let item of document.querySelectorAll('.dropdown__expand-list')) {
-            if (item.classList.contains('dropdown__expand-list_open') || item == expandList) {
-                showOrHideElement(item);
-            }
-        }
+        buttons.forEach(button => button.classList.contains('dropdown__button_open') || button === target ? showOrHideElement(button) : false);
 
-        document.removeEventListener('click', closeDropdownExpandList);
+        document.removeEventListener('click', clickOutsideButton);
         
-        if (expandList.classList.contains('dropdown__expand-list_open')) {
-            document.addEventListener('click', closeDropdownExpandList);
+        if (target.classList.contains('dropdown__button_open')) {
+            document.addEventListener('click', clickOutsideButton);
         };
     }
 
-    function closeDropdownExpandList(e) {
+    function clickOutsideButton(e) {
 
         let elementClicked = e.target;
 
         while (elementClicked != document.body.parentElement) {
 
-            if (elementClicked.parentElement.classList.contains('dropdown__content')) {
-                return;
-            }
+            if (elementClicked.closest('.dropdown__button') || elementClicked.closest('.dropdown__expand-list')) return;
 
-            console.log(elementClicked);
             elementClicked = elementClicked.parentElement;
         }
 
-        expandList.forEach(list => list.classList.contains('dropdown__expand-list_open') ? showOrHideElement(list) : '');
+        showOrHideElement(buttons.find(button => button.classList.contains('dropdown__button_open')));
 
-        document.removeEventListener('click', closeDropdownExpandList);
+        document.removeEventListener('click', clickOutsideButton);
     }
 
     function showOrHideElement(elem) {
         
-        let coordXParentElem = elem.parentElement.getBoundingClientRect().x;
+        let coord = elem.getBoundingClientRect();
+        let expandList = elem.nextElementSibling;
 
-        elem.style.left = coordXParentElem + 'px';
-        elem.parentElement.classList.toggle('dropdown__content_expand');
-        elem.classList.toggle('dropdown__expand-list_open');
+        expandList.style.left = coord.x + window.pageXOffest + 'px';
+        expandList.style.top = coord.y + coord.height + window.pageYOffset - elem.clientTop + 'px';
+        expandList.style.width = coord.width - 2*elem.clientLeft + 'px';
+        expandList.style.borderWidth = elem.clientLeft;
+        elem.classList.toggle('dropdown__button_open');
+        expandList.classList.toggle('dropdown__expand-list_open');
     }
 }

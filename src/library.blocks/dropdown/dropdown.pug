@@ -1,28 +1,26 @@
 mixin dropdown(params)
     - let {hover, example} = params
     .container.container_direction-column.dropdown
-        .container.container_justify-content-space-between
-            h3.h3.dropdown__sign dropdown
-        .dropdown__content
-            .container.container_justify-content-space-between.container_align-items-center.dropdown__button
-                span Сколько гостей
-                img.dropdown__expand-icon(src=path + "library.blocks/dropdown/__expand-icon/expand-icon.svg", alt="")
-            .dropdown__expand-list
-                .container.container_justify-content-space-between.container_align-items-center.dropdown__expand-items
-                    h3.h3 взрослые
-                    .container.container_justify-content-space-between.container_align-items-center
-                        button.dropdown__decrease-button(type="button") -
-                        .container.container_justify-content-center.dropdown__counter 0
-                        button.dropdown__decrease-button(type="button") +
-                .container.container_justify-content-space-between.container_align-items-center.dropdown__expand-items
-                    h3.h3 дети
-                    .container.container_justify-content-space-between.container_align-items-center
-                        button.dropdown__decrease-button(type="button") -
-                        .container.container_justify-content-center.dropdown__counter 0
-                        button.dropdown__decrease-button(type="button") +
-                .container.container_justify-content-space-between.container_align-items-center.dropdown__expand-items
-                    h3.h3 младенцы
-                    .container.container_justify-content-space-between.container_align-items-center
-                        button.dropdown__decrease-button(type="button") -
-                        .container.container_justify-content-center.dropdown__counter 0
-                        button.dropdown__decrease-button(type="button") +
+        h3.h3.dropdown__sign dropdown
+        button.container.container_justify-content-space-between.container_align-items-center.dropdown__button
+            span Сколько гостей
+            img.dropdown__expand-icon(src=path + "library.blocks/dropdown/__expand-icon/expand-icon.svg", alt="")
+        .dropdown__expand-list
+            .container.container_justify-content-space-between.container_align-items-center.dropdown__expand-items
+                h3.h3 взрослые
+                .container.container_justify-content-space-between.container_align-items-center
+                    button.dropdown__decrease-button(type="button") -
+                    .container.container_justify-content-center.dropdown__counter 0
+                    button.dropdown__decrease-button(type="button") +
+            .container.container_justify-content-space-between.container_align-items-center.dropdown__expand-items
+                h3.h3 дети
+                .container.container_justify-content-space-between.container_align-items-center
+                    button.dropdown__decrease-button(type="button") -
+                    .container.container_justify-content-center.dropdown__counter 0
+                    button.dropdown__decrease-button(type="button") +
+            .container.container_justify-content-space-between.container_align-items-center.dropdown__expand-items
+                h3.h3 младенцы
+                .container.container_justify-content-space-between.container_align-items-center
+                    button.dropdown__decrease-button(type="button") -
+                    .container.container_justify-content-center.dropdown__counter 0
+                    button.dropdown__decrease-button(type="button") +
