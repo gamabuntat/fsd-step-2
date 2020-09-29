@@ -5,9 +5,8 @@ mixin textFiled(params)
             h3.h3.text-field__sign text field
             if example
                 h3.h3.text-field__sign.color-50.font.font_montserrat-r #{example}
-        .container
-            if hover
-                input.text-field__input.text-field__input_hover-focus(type="text" placeholder="Email" value="This is pretty awesome") 
-            else
-                input.text-field__input(type="text" placeholder="Email") 
+        if hover
+            input.text-field__input.text-field__input_hover-focus(type="text" placeholder="Email" value="This is pretty awesome") 
+        else
+            input.text-field__input(type="text" placeholder="Email") 
 

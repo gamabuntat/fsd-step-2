@@ -1,96 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8">
     <title></title>
   </head>
-  <body class="page" id="page"><img class="watermark" src="i/watermark.svg" alt="">
+  <body class="page color-100"><img class="watermark" src="i/watermark.svg" alt="">
     <div class="container page__container">
       <div class="container container_direction-column">
-        <div class="container container_direction-column text-field">
-          <div class="container container_justify-content-space-between">
-            <h3 class="h3 text-field__sign">text field</h3>
-            <h3 class="h3 text-field__sign color-50 font font_montserrat-r">default</h3>
-          </div>
-          <div class="container">
-            <input class="text-field__input" type="text" placeholder="Email"/>
-          </div>
-        </div>
-        <div class="container container_direction-column dropdown">
+        <!--+textFiled( {focus: 'anything', example: 'default'} )-->
+        <!--+textFiled( {hover: 'true', example: 'hover/focus'} )-->
+        <div class="dropdown container container_direction-column">
           <h3 class="h3 dropdown__sign">dropdown</h3>
-          <button class="container container_justify-content-space-between container_align-items-center dropdown__button"><span>Сколько гостей</span><img class="dropdown__expand-icon" src="i/expand-icon.svg" alt=""/></button>
+          <button class="dropdown__button container container_justify-content-space-between container_align-items-center"><span>Сколько гостей</span><img class="dropdown__expand-icon" src="i/expand-icon.svg" alt=""/></button>
           <div class="dropdown__expand-list">
-            <div class="container container_justify-content-space-between container_align-items-center dropdown__expand-items">
+            <div class="dropdown__expand-items container container_justify-content-space-between container_align-items-center">
               <h3 class="h3">взрослые</h3>
               <div class="container container_justify-content-space-between container_align-items-center">
-                <button class="dropdown__decrease-button" type="button">-</button>
-                <div class="container container_justify-content-center dropdown__counter">0</div>
+                <button class="dropdown__decrease-button dropdown__decrease-button_disabled" type="button">-</button>
+                <div class="dropdown__counter container container_justify-content-center">0</div>
                 <button class="dropdown__increase-button" type="button">+</button>
               </div>
             </div>
-            <div class="container container_justify-content-space-between container_align-items-center dropdown__expand-items">
+            <div class="dropdown__expand-items container container_justify-content-space-between container_align-items-center">
               <h3 class="h3">дети</h3>
               <div class="container container_justify-content-space-between container_align-items-center">
-                <button class="dropdown__decrease-button" type="button">-</button>
-                <div class="container container_justify-content-center dropdown__counter">0</div>
+                <button class="dropdown__decrease-button dropdown__decrease-button_disabled" type="button">-</button>
+                <div class="dropdown__counter container container_justify-content-center">0</div>
                 <button class="dropdown__increase-button" type="button">+</button>
               </div>
             </div>
-            <div class="container container_justify-content-space-between container_align-items-center dropdown__expand-items">
+            <div class="dropdown__expand-items container container_justify-content-space-between container_align-items-center">
               <h3 class="h3">младенцы</h3>
               <div class="container container_justify-content-space-between container_align-items-center">
-                <button class="dropdown__decrease-button" type="button">-</button>
-                <div class="container container_justify-content-center dropdown__counter">0</div>
+                <button class="dropdown__decrease-button dropdown__decrease-button_disabled" type="button">-</button>
+                <div class="dropdown__counter container container_justify-content-center">0</div>
                 <button class="dropdown__increase-button" type="button">+</button>
               </div>
             </div>
           </div>
         </div>
-        <div class="container container_direction-column text-field">
-          <div class="container container_justify-content-space-between">
-            <h3 class="h3 text-field__sign">text field</h3>
-            <h3 class="h3 text-field__sign color-50 font font_montserrat-r">hover/focus</h3>
-          </div>
-          <div class="container">
-            <input class="text-field__input text-field__input_hover-focus" type="text" placeholder="Email" value="This is pretty awesome"/>
-          </div>
-        </div>
-        <div class="container container_direction-column text-field">
-          <div class="container container_justify-content-space-between">
-            <h3 class="h3 text-field__sign">text field</h3>
-            <h3 class="h3 text-field__sign color-50 font font_montserrat-r">default</h3>
-          </div>
-          <div class="container">
-            <input class="text-field__input" type="text" placeholder="Email"/>
-          </div>
-        </div>
-      </div>
-      <div class="container container_direction-column">
-        <div class="container container_direction-column dropdown">
+        <div class="dropdown container container_direction-column">
           <h3 class="h3 dropdown__sign">dropdown</h3>
-          <button class="container container_justify-content-space-between container_align-items-center dropdown__button"><span>Сколько гостей</span><img class="dropdown__expand-icon" src="i/expand-icon.svg" alt=""/></button>
+          <button class="dropdown__button container container_justify-content-space-between container_align-items-center"><span>Сколько гостей</span><img class="dropdown__expand-icon" src="i/expand-icon.svg" alt=""/></button>
           <div class="dropdown__expand-list">
-            <div class="container container_justify-content-space-between container_align-items-center dropdown__expand-items">
+            <div class="dropdown__expand-items container container_justify-content-space-between container_align-items-center">
               <h3 class="h3">взрослые</h3>
               <div class="container container_justify-content-space-between container_align-items-center">
-                <button class="dropdown__decrease-button" type="button">-</button>
-                <div class="container container_justify-content-center dropdown__counter">0</div>
+                <button class="dropdown__decrease-button dropdown__decrease-button_disabled" type="button">-</button>
+                <div class="dropdown__counter container container_justify-content-center">0</div>
                 <button class="dropdown__increase-button" type="button">+</button>
               </div>
             </div>
-            <div class="container container_justify-content-space-between container_align-items-center dropdown__expand-items">
+            <div class="dropdown__expand-items container container_justify-content-space-between container_align-items-center">
               <h3 class="h3">дети</h3>
               <div class="container container_justify-content-space-between container_align-items-center">
-                <button class="dropdown__decrease-button" type="button">-</button>
-                <div class="container container_justify-content-center dropdown__counter">0</div>
+                <button class="dropdown__decrease-button dropdown__decrease-button_disabled" type="button">-</button>
+                <div class="dropdown__counter container container_justify-content-center">0</div>
                 <button class="dropdown__increase-button" type="button">+</button>
               </div>
             </div>
-            <div class="container container_justify-content-space-between container_align-items-center dropdown__expand-items">
+            <div class="dropdown__expand-items container container_justify-content-space-between container_align-items-center">
               <h3 class="h3">младенцы</h3>
               <div class="container container_justify-content-space-between container_align-items-center">
-                <button class="dropdown__decrease-button" type="button">-</button>
-                <div class="container container_justify-content-center dropdown__counter">0</div>
+                <button class="dropdown__decrease-button dropdown__decrease-button_disabled" type="button">-</button>
+                <div class="dropdown__counter container container_justify-content-center">0</div>
                 <button class="dropdown__increase-button" type="button">+</button>
               </div>
             </div>

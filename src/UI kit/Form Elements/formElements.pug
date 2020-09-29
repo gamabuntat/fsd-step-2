@@ -3,17 +3,15 @@ include ../../library.blocks/text-field/text-field.pug
 include ../../library.blocks/dropdown/dropdown.pug
 
 doctype html
-html(lang="en")
+html(lang="ru")
     head
         meta(charset="UTF-8")
         title
-    body.page(id="page")
+    body.page.color-100
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
         .container.page__container
             .container.container_direction-column
-                +textFiled( {focus: 'anything', example: 'default'} )
+                //+textFiled( {focus: 'anything', example: 'default'} )
+                //+textFiled( {hover: 'true', example: 'hover/focus'} )
                 +dropdown( {} )
-                +textFiled( {hover: 'true', example: 'hover/focus'} )
-                +textFiled( {focus: 'anything', example: 'default'} )
-            .container.container_direction-column
                 +dropdown( {} )
