@@ -5,7 +5,7 @@
     function clickOnButton(e) {
         let target = e.target.closest('.dropdown__button');
 
-        buttons.forEach(button => button.classList.contains('dropdown__button_open') || button === target ? showOrHideElement(button) : false);
+        buttons.forEach(button => button.classList.contains('dropdown__button_open') || button === target ? showOrHideElements(button) : false);
 
         document.removeEventListener('click', clickOutsideButton);
         
@@ -22,20 +22,24 @@
 
             elementClicked = elementClicked.parentElement;
         }
-        showOrHideElement(buttons.find(button => button.classList.contains('dropdown__button_open')));
+        showOrHideElements(buttons.find(button => button.classList.contains('dropdown__button_open')));
 
         document.removeEventListener('click', clickOutsideButton);
     }
 
-    function showOrHideElement(elem) {
-        let coord = elem.getBoundingClientRect();
-        let expandList = elem.nextElementSibling;
+    function showOrHideElements(button) {
+        let coord = button.getBoundingClientRect();
+        let expandList = button.nextElementSibling;
 
         expandList.style.left = coord.x + window.pageXOffest + 'px';
-        expandList.style.top = coord.y + coord.height + window.pageYOffset - elem.clientTop + 'px';
-        expandList.style.width = coord.width - 2*elem.clientLeft + 'px';
-        expandList.style.borderWidth = elem.clientLeft;
-        elem.classList.toggle('dropdown__button_open');
-        expandList.classList.toggle('dropdown__expand-list_open');
+        expandList.style.top = coord.y + coord.height + window.pageYOffset - button.clientTop + 'px';
+        expandList.style.width = coord.width - 2*button.clientLeft + 'px';
+        expandList.style.borderWidth = button.clientLeft;
+        button.classList.toggle('dropdown__button_open');
+
+        /* Expand or collapse dropdown */
+        button.classList.contains('dropdown__button_open') ? expandList.style.display = 'block' : 
+            expandList.style.display = 'none';
+        setTimeout(() => expandList.classList.toggle('dropdown__expand-list_open'), 0);
     }
 }

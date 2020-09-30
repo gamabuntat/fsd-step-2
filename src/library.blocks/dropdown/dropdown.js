@@ -1,4 +1,6 @@
 {
+    let prevSum = 0;
+
     let observer = new MutationObserver(mutations => {
         mutations.forEach(mutation => mutation.target.classList.contains('dropdown__counter') ? 
             showNumberOfGuestes(mutation.target) : 'false');
@@ -8,13 +10,18 @@
                 target = target.parentElement;
             }
 
+            if (!prevSum) showOrHideCancelButton(target);
+
             let sum = Array.from(target.querySelectorAll('.dropdown__counter')).
                 reduce((sum, counter) => +counter.innerHTML + sum, 0);
+
+            prevSum = sum;
 
             let partOfString = '';
 
             if (!sum) {
                 sum = 'Сколько гостей';
+                showOrHideCancelButton(target);
             } else if (sum == 1) {
                 partOfString = ' гость';
             } else if (sum < 5) {
@@ -24,6 +31,10 @@
             }
 
             target.querySelector('.dropdown__button').firstElementChild.innerHTML = `${sum}${partOfString}`;
+        }
+
+        function showOrHideCancelButton(dropdown) {
+            let cancelButton = dropdown.querySelector('.dropdown__cancel-button_hidden');
         }
     })
 
