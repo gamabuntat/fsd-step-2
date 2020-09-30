@@ -1,6 +1,6 @@
 {
     let buttons = Array.from(document.getElementsByClassName('dropdown__button'));
-    buttons.forEach(elem => elem.addEventListener('click', clickOnButton));
+    buttons.forEach(button => button.addEventListener('click', clickOnButton));
 
     function clickOnButton(e) {
         let target = e.target.closest('.dropdown__button');
@@ -37,9 +37,12 @@
         expandList.style.borderWidth = button.clientLeft;
         button.classList.toggle('dropdown__button_open');
 
-        /* Expand or collapse dropdown */
-        button.classList.contains('dropdown__button_open') ? expandList.style.display = 'block' : 
-            expandList.style.display = 'none';
-        setTimeout(() => expandList.classList.toggle('dropdown__expand-list_open'), 0);
+        if (button.classList.contains('dropdown__button_open')) {
+            expandList.style.display = 'block';
+            setTimeout(() => expandList.classList.toggle('dropdown__expand-list_open'), 0);
+            return;
+        }
+        expandList.style.display = 'none';
+        expandList.classList.toggle('dropdown__expand-list_open');
     }
 }
