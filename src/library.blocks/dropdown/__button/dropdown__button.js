@@ -38,7 +38,7 @@
         button.classList.toggle('dropdown__button_open');
 
         if (button.classList.contains('dropdown__button_open')) {
-            expandList.style.display = 'block';
+            expandList.style.display = 'flex';
             setTimeout(() => expandList.classList.toggle('dropdown__expand-list_open'), 0);
             return;
         }

@@ -5,7 +5,7 @@ mixin dropdown(params)
         button.dropdown__button.container.container_justify-content-space-between.container_align-items-center
             span Сколько гостей
             img.dropdown__expand-icon(src=path + "library.blocks/dropdown/__expand-icon/expand-icon.svg", alt="")
-        .dropdown__expand-list
+        .dropdown__expand-list.container.container_direction-column.container_justify-content-space-between
             .dropdown__expand-items.container.container_justify-content-space-between.container_align-items-center
                 h3.h3 взрослые
                 .container.container_justify-content-space-between.container_align-items-center
@@ -24,8 +24,8 @@ mixin dropdown(params)
                     button.dropdown__decrease-button.dropdown__decrease-button_disabled(type="button") -
                     .dropdown__counter.container.container_justify-content-center 0
                     button.dropdown__increase-button(type="button") +
-            .dropdown__expand-items.container.container_justify-content-space-between.container_align-items-center.container_direction-row-reverse
-                button.dropdown__cancel-button.dropdown__cancel-button_hidden
-                    h3 очистить
-                button.dropdown__submit-button
-                    h3 применить
+            .dropdown__expand-items.container.container_direction-row-reverse.container_justify-content-space-between
+                button.text-button.dropdown__submit-button
+                    h3.h3 применить
+                button.text-button.text-button_cancel.dropdown__cancel-button.dropdown__cancel-button_hidden
+                    h3.h3 очистить
