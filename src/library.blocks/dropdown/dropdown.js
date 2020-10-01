@@ -1,44 +1,24 @@
-{
-    let prevSum = 0;
+import {decreaseButton} from './__decrease-button/dropdown__decrease-button.js'
 
-    let observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => mutation.target.classList.contains('dropdown__counter') ? 
-            showNumberOfGuestes(mutation.target) : 'false');
+document.querySelector('.dropdown').addEventListener('click', f);
 
-        function showNumberOfGuestes(target) {
-            while (!target.classList.contains('dropdown')) {
-                target = target.parentElement;
-            }
-
-            if (!prevSum) showOrHideCancelButton(target);
-
-            let sum = Array.from(target.querySelectorAll('.dropdown__counter')).
-                reduce((sum, counter) => +counter.innerHTML + sum, 0);
-
-            prevSum = sum;
-
-            let partOfString = '';
-
-            if (!sum) {
-                sum = 'Сколько гостей';
-                showOrHideCancelButton(target);
-            } else if (sum == 1) {
-                partOfString = ' гость';
-            } else if (sum < 5) {
-                partOfString = ' гостя';
-            } else {
-                partOfString = ' гостей';
-            }
-
-            target.querySelector('.dropdown__button').firstElementChild.innerHTML = `${sum}${partOfString}`;
-        }
-
-        function showOrHideCancelButton(dropdown) {
-            let cancelButton = dropdown.querySelector('.dropdown__cancel-button_hidden');
-        }
-    })
-
-    let dropdowns = Array.from(document.querySelectorAll('.dropdown'));
-
-    dropdowns.forEach(dropdown => observer.observe(dropdown, { childList: true, subtree: true }));
+function f() {
+    let prop = methodsProp.find( prop => methods.targetElem = event.target.closest(`.${prop}`) );
+    if (methods.targetElem) methods[prop]();
 }
+
+let methods = {
+    dropdown__button: function() {
+        console.log(this.targetElem)
+    },
+
+    'dropdown__increase-button': function() {
+        decreaseButton.call(this, 'isIncrease')
+    }, 
+
+    'dropdown__decrease-button': function() {
+        decreaseButton.call(this)
+    }, 
+}
+
+let methodsProp = Object.keys(methods);
