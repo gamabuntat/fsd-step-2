@@ -1,4 +1,5 @@
-export function decreaseButton(increase = null) {
+export function decreaseButton() {
     let counter = this.targetElem.parentElement.querySelector('.dropdown__counter');
-    increase ? counter.innerHTML++ : +counter.innerHTML > 0 ? counter.innerHTML-- : null;
+    if (counter.innerHTML == 0) return;
+    counter.innerHTML--;
 }

@@ -1,6 +1,8 @@
 import {decreaseButton} from './__decrease-button/dropdown__decrease-button.js'
+import {increaseButton} from './__increase-button/dropdown__increase-button.js'
 
-document.querySelector('.dropdown').addEventListener('click', f);
+let dropdowns = Array.from(document.querySelectorAll('.dropdown'));
+dropdowns.forEach(dropdown => dropdown.addEventListener('click', f));
 
 function f() {
     let prop = methodsProp.find( prop => methods.targetElem = event.target.closest(`.${prop}`) );
@@ -13,7 +15,7 @@ let methods = {
     },
 
     'dropdown__increase-button': function() {
-        decreaseButton.call(this, 'isIncrease')
+        increaseButton.call(this)
     }, 
 
     'dropdown__decrease-button': function() {
