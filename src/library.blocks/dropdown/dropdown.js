@@ -4,9 +4,9 @@ import {increaseButton} from './__increase-button/dropdown__increase-button.js'
 import {cancelButton} from './__cancel-button/dropdown__cancel-button.js'
 
 let dropdowns = Array.from(document.querySelectorAll('.dropdown'));
-dropdowns.forEach(dropdown => dropdown.addEventListener('click', f));
+dropdowns.forEach(dropdown => dropdown.addEventListener('click', defineElement));
 
-function f() {
+function defineElement() {
     let prop = methodsProp.find( prop => methods.targetElem = event.target.closest(`.${prop}`) );
     if (methods.targetElem) methods[prop]();
 }
