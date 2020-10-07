@@ -1,24 +1,24 @@
 let observer = new MutationObserver(function(mutations) {
     for (let mutation of mutations) {
         if (mutation.target.classList.contains('dropdown__counter')) {
-            showNumberOfGuestes(mutation);
+            makeChangesInDropdown(mutation);
         }
     }
 
-    function showNumberOfGuestes(mutation) {
+    function makeChangesInDropdown(mutation) {
         let target = mutation.target;
         let showCancleButton = false;
 
         if (mutation.removedNodes[0].data == 0 && mutation.addedNodes[0].data == 1) {
-            target.previousElementSibling.classList.toggle('dropdown__decrease-button_disabled');
-            flag = true;
+            target.previousElementSibling.classList.remove('dropdown__decrease-button_disabled');
+            showCancleButton = true;
 
         } else if (mutation.addedNodes[0].data == 0) {
-            target.previousElementSibling.classList.toggle('dropdown__decrease-button_disabled');
+            target.previousElementSibling.classList.add('dropdown__decrease-button_disabled');
         };
 
-        while (!target.classList.contains('dropdown')) {
-            target = target.parentElement;
+        for (let dropdown of dropdowns) {
+            if (dropdown.contains(target)) target = dropdown;
         }
 
         let sum = Array.from(target.querySelectorAll('.dropdown__counter')).

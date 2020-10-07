@@ -1,4 +1,4 @@
 export function increaseButton() {
-    let counter = this.targetElem.parentElement.querySelector('.dropdown__counter');
+    let counter = this.targetElem.previousElementSibling;
     counter.innerHTML++;
 }
