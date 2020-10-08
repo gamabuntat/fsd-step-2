@@ -1,6 +1,8 @@
-//const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'june', 'july', 'aug', 'sept', 'oct', 'nov', 'dec'];
+const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'june', 'july', 'aug', 'sept', 'oct', 'nov', 'dec'];
 export let collectionOfDates = [];
 let calendar = document.querySelector('.calendar__table');
+let name = document.querySelector('.calendar__month-name');
+let year = document.querySelector('.calendar__year');
 let weeks = calendar.rows;
 let lastWeek = weeks[weeks.length - 1];
 
@@ -25,15 +27,20 @@ export class MyDate {
 
 collectionOfDates.push( new MyDate(new Date()) );
 collectionOfDates[0].callPrintCalendar();
+printCalendar.ordinal = 0;
 
 export function printCalendar() {
     let day = this.firstDayOfWeek;
+    let week = 1;
     let currentDate = 1;
     let nextMonthWeek = 5;
     lastWeek.classList.add('calendar__last-week');
 
+    name.innerHTML = MONTHS[this.month];
+    year.innerHTML = this.year;
+
     //this month
-    for (let week = 1; week < weeks.length; week++) {
+    for (; week < weeks.length; week++) {
         for (; day < weeks[week].cells.length; day++) {
             if (currentDate > this.lastDate) break;
             weeks[week].cells[day].firstElementChild.innerHTML = currentDate;
@@ -57,6 +64,7 @@ export function printCalendar() {
 
     //next month
     let nextMonthDate = 1;
+    if (week < 5) day = 0;
     for (; day < weeks[nextMonthWeek].cells.length; day++) {
         weeks[nextMonthWeek].cells[day].firstElementChild.innerHTML = nextMonthDate;
         nextMonthDate++;
