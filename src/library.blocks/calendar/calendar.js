@@ -1,14 +1,16 @@
-let calendar = document.querySelector('.calendar');
+//const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'june', 'july', 'aug', 'sept', 'oct', 'nov', 'dec'];
+export let collectionOfDates = [];
+let calendar = document.querySelector('.calendar__table');
 let weeks = calendar.rows;
 let lastWeek = weeks[weeks.length - 1];
 
-class MyDate {
+export class MyDate {
     constructor(date) {
         this.date = date.getDate();
         this.month = date.getMonth();
         this.year = date.getFullYear();
         this.firstDay = new Date(this.year, this.month, 1).getDay();
-        this.firstDayOfWeek = --this.firstDay == -1 ? 6 : --this.firstDay;
+        this.firstDayOfWeek = this.firstDay - 1 == -1 ? 6 : this.firstDay - 1;
         this.lastDate = new Date(this.year, this.month + 1, 0).getDate();
     }
 
@@ -21,12 +23,10 @@ class MyDate {
     }
 }
 
-let thisMonth = new MyDate(new Date());
-let secondMonth = new MyDate(new Date(thisMonth.year, thisMonth.month + 1));
-//thisMonth.callPrintCalendar();
-secondMonth.callPrintCalendar();
+collectionOfDates.push( new MyDate(new Date()) );
+collectionOfDates[0].callPrintCalendar();
 
-function printCalendar() {
+export function printCalendar() {
     let day = this.firstDayOfWeek;
     let currentDate = 1;
     let nextMonthWeek = 5;
