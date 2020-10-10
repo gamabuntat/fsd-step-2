@@ -1,9 +1,12 @@
-import {MyDate, collectionOfDates, printCalendar} from '../calendar.js';
+import {MyDate, collectionOfDates, printCalendar, updateTitle, container} from '../calendar.js';
 
-document.querySelector('.calendar__prev-button').addEventListener('click', f);
+let firstTable = document.querySelector('.calendar__table_first');
+document.querySelector('.calendar__prev-button').addEventListener('click', showPrevMonth);
 
-function f() {
+function showPrevMonth() {
     if (!printCalendar.ordinal) return;
-    printCalendar.ordinal--;
-    collectionOfDates[printCalendar.ordinal].callPrintCalendar();
+    collectionOfDates[--printCalendar.ordinal].updateTitle();
+    let y = parseInt(firstTable.style.marginLeft);
+    firstTable.style.marginLeft = y + 280 + 'px' ;
+    console.log(firstTable.style.marginLeft);
 }

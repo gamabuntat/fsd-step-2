@@ -1,14 +1,12 @@
 .calendar__table
-  width: 100%
+  width: 280px
   border-width: 0
   border-spacing: 0
   border-collapse: collapse
+  transition: all 0.2s
 
-td > button
-  margin: 0
-  width: 40px
-  height: 40px
-  border-radius: 50%
+.calendar__table_first
+  margin-left: 0
 
 td
   padding: 0
@@ -18,3 +16,16 @@ td
 
 .calendar__last-week
   display: none
+
+.calendar__button
+  margin: 0
+  width: 40px
+  height: 40px
+  border-radius: 50%
+
+.calendar__button_another-month
+  color: red
+
+.calendar__button_today
+  background: tomato
+  

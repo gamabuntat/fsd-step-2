@@ -1,18 +1,26 @@
-import {MyDate, collectionOfDates, printCalendar} from '../calendar.js';
+import {MyDate, collectionOfDates, printCalendar, updateTitle, container, addTodayClassForSecondMonth} from '../calendar.js';
+import {CALENDAR_TABLE_TEMPLATE} from '../calendar__template.js';
 
-document.querySelector('.calendar__next-button').addEventListener('click', f);
+let firstTable = document.querySelector('.calendar__table_first');
+document.querySelector('.calendar__next-button').addEventListener('click', showNextMonth);
 
-function f() {
-    printCalendar.ordinal++;
-    console.log(printCalendar.ordinal);
+function showNextMonth() {
     let length = collectionOfDates.length;
     let lastDate = collectionOfDates[length - 1];
 
+    printCalendar.ordinal++;
+
     if (!collectionOfDates[printCalendar.ordinal]) {
+        container.insertAdjacentHTML('beforeend', CALENDAR_TABLE_TEMPLATE);
         collectionOfDates.push(new MyDate(new Date(lastDate.year, lastDate.month + 1)));
         collectionOfDates[printCalendar.ordinal].callPrintCalendar();
+
+        if (printCalendar.ordinal == 1) addTodayClassForSecondMonth();
     }
-    else {
-        collectionOfDates[printCalendar.ordinal].callPrintCalendar();
-    }
+    console.log(printCalendar.ordinal);
+    collectionOfDates[printCalendar.ordinal].updateTitle();
+    let y = parseInt(firstTable.style.marginLeft);
+    if (!y) y = 0;
+    firstTable.style.marginLeft = y - 280 + 'px' ;
+    console.log(firstTable.style.marginLeft);
 }
