@@ -10,57 +10,57 @@ export const CALENDAR_TABLE_TEMPLATE =
     <th>вс</th>
 </tr>
 <tr>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
 </tr>
 <tr>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
 </tr>
 <tr>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
 </tr>
 <tr>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
 </tr>
 <tr>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
 </tr>
 <tr class='calendar__last-week'>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
-    <td><button class='calendar__button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
+    <td><button class='calendar__day-button'></button></td>
 </tr>
 </table>`

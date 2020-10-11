@@ -2,7 +2,8 @@ import {MyDate, collectionOfDates, printCalendar, updateTitle, container, addTod
 import {CALENDAR_TABLE_TEMPLATE} from '../calendar__template.js';
 
 let firstTable = document.querySelector('.calendar__table_first');
-document.querySelector('.calendar__next-button').addEventListener('click', showNextMonth);
+let nextButton = document.querySelector('.calendar__next-button');
+nextButton.addEventListener('click', showNextMonth);
 
 function showNextMonth() {
     let length = collectionOfDates.length;
@@ -17,10 +18,17 @@ function showNextMonth() {
 
         if (printCalendar.ordinal == 1) addTodayClassForSecondMonth();
     }
+    console.log(collectionOfDates[printCalendar.ordinal].elem.rows);
     console.log(printCalendar.ordinal);
     collectionOfDates[printCalendar.ordinal].updateTitle();
     let y = parseInt(firstTable.style.marginLeft);
     if (!y) y = 0;
     firstTable.style.marginLeft = y - 280 + 'px' ;
-    console.log(firstTable.style.marginLeft);
 }
+
+nextButton.addEventListener('keydown', function() {
+    if (event.code == 'Tab' && !event.shiftKey) {
+        event.preventDefault();
+        collectionOfDates[printCalendar.ordinal].elem.rows[1].cells[0].firstElementChild.focus();
+    }
+})

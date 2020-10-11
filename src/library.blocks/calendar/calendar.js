@@ -15,7 +15,7 @@ function init() {
     let row = Math.ceil(range / 7);
     let cell = range % 7;
     cell == 0 ? cell = 6 : --cell;
-    document.querySelector('.calendar__table_first').rows[row].cells[cell].firstElementChild.classList.add('calendar__button_today');
+    document.querySelector('.calendar__table_first').rows[row].cells[cell].firstElementChild.classList.add('calendar__day-button_today');
 
     printCalendar.ordinal = 0;
 }
@@ -41,13 +41,15 @@ export class MyDate {
 }
 
 export function printCalendar() {
-    let calendar = document.querySelector('.calendar__container').lastElementChild;
+    let calendar = container.lastElementChild;
     let weeks = calendar.rows;
     let lastWeek = weeks[weeks.length - 1];
     let day = this.firstDayOfWeek;
     let week = 1;
     let currentDate = 1;
     let nextMonthWeek = 5;
+
+    this.elem = calendar;
     lastWeek.classList.add('calendar__last-week');
 
     //this month
@@ -69,7 +71,7 @@ export function printCalendar() {
     let lastMonthDate = new Date(this.year, this.month, 0).getDate();
     let prevDay = this.firstDayOfWeek - 1;
     for (; prevDay >= 0; prevDay--) {
-        weeks[1].cells[prevDay].firstElementChild.classList.add('calendar__button_another-month');
+        weeks[1].cells[prevDay].firstElementChild.classList.add('calendar__day-button_another-month');
         weeks[1].cells[prevDay].firstElementChild.innerHTML = lastMonthDate;
         lastMonthDate--;
     }
@@ -78,7 +80,7 @@ export function printCalendar() {
     let nextMonthDate = 1;
     if (week < 5) day = 0;
     for (; day < 7; day++) {
-        weeks[nextMonthWeek].cells[day].firstElementChild.classList.add('calendar__button_another-month');
+        weeks[nextMonthWeek].cells[day].firstElementChild.classList.add('calendar__day-button_another-month');
         weeks[nextMonthWeek].cells[day].firstElementChild.innerHTML = nextMonthDate;
         nextMonthDate++;
     }
@@ -90,7 +92,7 @@ export function addTodayClassForSecondMonth() {
     let today = collectionOfDates[0].today;
     let firstDayOfWeek = collectionOfDates[1].firstDayOfWeek;
     for (let dayOfWeek = firstDayOfWeek - 1; dayOfWeek > 0; dayOfWeek--) {
-        if (firstWeek[dayOfWeek].firstElementChild.innerHTML == today) firstWeek[dayOfWeek].firstElementChild.classList.add('calendar__button_today');
+        if (firstWeek[dayOfWeek].firstElementChild.innerHTML == today) firstWeek[dayOfWeek].firstElementChild.classList.add('calendar__day-button_today');
     }
 }
 
