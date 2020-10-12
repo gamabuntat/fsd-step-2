@@ -87,7 +87,6 @@ export function printCalendar() {
 }
 
 export function addTodayClassForSecondMonth() {
-    console.log('hallo second');
     let firstWeek = document.querySelector('.calendar__container').lastElementChild.rows[1].cells;
     let today = collectionOfDates[0].today;
     let firstDayOfWeek = collectionOfDates[1].firstDayOfWeek;

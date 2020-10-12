@@ -1,9 +1,10 @@
 import {dropdownButton} from './__button/dropdown__button.js'
 import {decreaseButton} from './__decrease-button/dropdown__decrease-button.js'
 import {increaseButton} from './__increase-button/dropdown__increase-button.js'
+import {submitButton} from './__submit-button/dropdown__submit-button.js'
 import {cancelButton} from './__cancel-button/dropdown__cancel-button.js'
 
-let dropdowns = Array.from(document.querySelectorAll('.dropdown'));
+let dropdowns = document.querySelectorAll('.dropdown');
 dropdowns.forEach(dropdown => dropdown.addEventListener('click', defineElement));
 
 function defineElement() {
@@ -22,6 +23,10 @@ let methods = {
 
     'dropdown__decrease-button'() {
         decreaseButton.call(this)
+    }, 
+
+    'dropdown__submit-button'() {
+        submitButton.call(this)
     }, 
 
     'dropdown__cancel-button'() {

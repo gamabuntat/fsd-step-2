@@ -31,7 +31,7 @@ function clickOutsideButton(e) {
 }
 
 
-function showOrHideExpandlist(button) {
+export function showOrHideExpandlist(button) {
     let coord = button.getBoundingClientRect();
     let expandList = button.nextElementSibling;
 

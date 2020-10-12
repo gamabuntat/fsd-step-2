@@ -18,7 +18,6 @@ function showNextMonth() {
 
         if (printCalendar.ordinal == 1) addTodayClassForSecondMonth();
     }
-    console.log(collectionOfDates[printCalendar.ordinal].elem.rows);
     console.log(printCalendar.ordinal);
     collectionOfDates[printCalendar.ordinal].updateTitle();
     let y = parseInt(firstTable.style.marginLeft);
