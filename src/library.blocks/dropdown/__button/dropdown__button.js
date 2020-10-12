@@ -3,15 +3,12 @@ export function dropdownButton() {
 
     document.removeEventListener('click', clickOutsideButton);
 
-    if (this.targetElem == openButton) {
-        showOrHideExpandlist(this.targetElem);
-    } 
-    else if (!openButton) {
-        showOrHideExpandlist(this.targetElem);
+    showOrHideExpandlist(this.targetElem);
+
+    if (!openButton) {
         document.addEventListener('click', clickOutsideButton)
     }
-    else {
-        showOrHideExpandlist(this.targetElem);
+    else if (this.targetElem != openButton) {
         showOrHideExpandlist(openButton);
         document.addEventListener('click', clickOutsideButton)
     }

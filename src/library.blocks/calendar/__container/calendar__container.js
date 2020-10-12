@@ -3,12 +3,16 @@ import {collectionOfDates, printCalendar, container} from '../calendar.js';
 let nextButton = document.querySelector('.calendar__next-button');
 let calendar= document.querySelector('.calendar__table');
 
-let drawRange = function() {
+let dataPicker = function() {
     let startRange = true,
         startRangeElem,
         startRangeIndex,
+        startRangeX,
+        startRangeY,
         endRangeElem,
-        endRangeIndex;
+        endRangeIndex,
+        endRangeX,
+        endRangeY;
 
     return function() {
         let target = event.target;
@@ -17,23 +21,52 @@ let drawRange = function() {
             if (startRangeElem) {
                 removeRange();
             }
+            startRangeIndex = printCalendar.ordinal;
             target.classList.add('calendar__day-button_range');
             startRangeElem = target;
-            startRangeIndex = printCalendar.ordinal;
             startRange = false;
+            startRangeX = startRangeElem.parentElement.cellIndex;
+            startRangeY = startRangeElem.parentElement.parentElement.rowIndex;
         }
         else {
             endRangeIndex = printCalendar.ordinal;
-            if (endRangeIndex < startRangeIndex) {
+            endRangeX = target.parentElement.cellIndex;
+            endRangeY = target.parentElement.parentElement.rowIndex;
+
+            let coordRelativePosition = [
+                endRangeIndex - startRangeIndex, 
+                endRangeY - startRangeY,
+                endRangeX - startRangeX
+            ];
+
+            coordRelativePosition.find((coord, index) => 
+                coord > 0 ? setCorrectRange() :
+                coord < 0 ? setReverseRange() :
+                coord == 0 && index == 2 ? setUnitRange() : null
+            )
+
+            function setCorrectRange() {
+                endRangeElem = target;
+                drawRange();
+                return true;
+            }
+
+            function setReverseRange() {
                 endRangeElem = startRangeElem;
                 startRangeElem = target;
+                drawRange();
+                return true;
             }
-            else {
-                endRangeElem = target;
+
+            function setUnitRange() {
+                endRangeElem = startRangeElem;
             }
-            endRangeElem.parentElement.classList.add('calendar__range-end');
+        }
+
+        function drawRange() {
+            endRangeElem.parentElement.classList.toggle('calendar__range-end');
             target.classList.add('calendar__day-button_range');
-            startRangeElem.parentElement.classList.add('calendar__range-start');
+            startRangeElem.parentElement.classList.toggle('calendar__range-start');
             startRange = true;
         }
 
@@ -46,7 +79,7 @@ let drawRange = function() {
     }
 }
 
-container.addEventListener('click', drawRange());
+container.addEventListener('click', dataPicker());
 container.addEventListener('focus', function() {
     let calendar = collectionOfDates[printCalendar.ordinal].elem;
     let row = 5;
