@@ -3,21 +3,20 @@ import {CALENDAR_TABLE_TEMPLATE} from './calendar__template.js';
 const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'june', 'july', 'aug', 'sept', 'oct', 'nov', 'dec'];
 export let collectionOfDates = [];
 export let container = document.querySelector('.calendar__container');
+export let firstTable = document.querySelector('.calendar__table_first');
 let titleMonth = document.querySelector('.calendar__month-name');
 let titleYear = document.querySelector('.calendar__year');
 
 function init() {
-    collectionOfDates.push( new MyDate(new Date()) );
-    collectionOfDates[0].callPrintCalendar();
-    collectionOfDates[0].updateTitle();
-    //add today class
-    let range = collectionOfDates[0].today + collectionOfDates[0].firstDayOfWeek;
-    let row = Math.ceil(range / 7);
-    let cell = range % 7;
-    cell == 0 ? cell = 6 : --cell;
-    document.querySelector('.calendar__table_first').rows[row].cells[cell].firstElementChild.classList.add('calendar__day-button_today');
-
     printCalendar.ordinal = 0;
+    collectionOfDates.push( new MyDate(new Date()) );
+    collectionOfDates.push( new MyDate(new Date(collectionOfDates[0].year, collectionOfDates[0].month + 1)) );
+    //collectionOfDates[0].callPrintCalendar();
+    collectionOfDates[0].updateTitle();
+
+    addTodayClassForFirstMonth();
+    //printCalendar();
+    //addTodayClassForSecondMonth();
 }
 
 export class MyDate {
@@ -28,6 +27,8 @@ export class MyDate {
         this.firstDay = new Date(this.year, this.month, 1).getDay();
         this.firstDayOfWeek = this.firstDay - 1 == -1 ? 6 : this.firstDay - 1;
         this.lastDate = new Date(this.year, this.month + 1, 0).getDate();
+        
+        this.isPrint = false;
     }
 
     updateTitle() {
@@ -40,8 +41,26 @@ export class MyDate {
     }
 }
 
-export function printCalendar() {
-    let calendar = container.lastElementChild;
+export function printCalendar(ordinalValue) {
+
+    let index;
+
+    if (!collectionOfDates[ordinalValue].isPrint) {
+        printcalendar.calendar = container.querySelector(`[data-counter="${ordinalValue}"]`);
+    }
+    else if (!collectionOfDates[ordinalValue + 1].isPrint) {
+        printcalendar.calendar = container.querySelector(`[data-counter="${ordinalValue + 1}"]`);
+    }
+    else if (!collectionOfDates[ordinalValue - 1].isPrint) {
+        printcalendar.calendar = container.querySelector(`[data-counter="${ordinalValue - 1}"]`);
+    }
+    else if (index = collectionOfDates.lastIndexOf(date => !date.isPrint)) {
+        printcalendar.calendar = container.querySelector(`[data-counter="${index}"]`);
+    }
+    else {
+        return;
+    }
+
     let weeks = calendar.rows;
     let lastWeek = weeks[weeks.length - 1];
     let day = this.firstDayOfWeek;
@@ -71,7 +90,7 @@ export function printCalendar() {
     let lastMonthDate = new Date(this.year, this.month, 0).getDate();
     let prevDay = this.firstDayOfWeek - 1;
     for (; prevDay >= 0; prevDay--) {
-        weeks[1].cells[prevDay].firstElementChild.classList.add('calendar__day-button_another-month');
+        weeks[1].cells[prevDay].firstElementChild.classList.add('calendar__day-button_prev-month');
         weeks[1].cells[prevDay].firstElementChild.innerHTML = lastMonthDate;
         lastMonthDate--;
     }
@@ -80,13 +99,21 @@ export function printCalendar() {
     let nextMonthDate = 1;
     if (week < 5) day = 0;
     for (; day < 7; day++) {
-        weeks[nextMonthWeek].cells[day].firstElementChild.classList.add('calendar__day-button_another-month');
+        weeks[nextMonthWeek].cells[day].firstElementChild.classList.add('calendar__day-button_next-month');
         weeks[nextMonthWeek].cells[day].firstElementChild.innerHTML = nextMonthDate;
         nextMonthDate++;
     }
 }
 
-export function addTodayClassForSecondMonth() {
+function addTodayClassForFirstMonth() {
+    let range = collectionOfDates[0].today + collectionOfDates[0].firstDayOfWeek;
+    let row = Math.ceil(range / 7);
+    let cell = range % 7;
+    cell == 0 ? cell = 6 : --cell;
+    firstTable.rows[row].cells[cell].firstElementChild.classList.add('calendar__day-button_today');
+}
+
+function addTodayClassForSecondMonth() {
     let firstWeek = document.querySelector('.calendar__container').lastElementChild.rows[1].cells;
     let today = collectionOfDates[0].today;
     let firstDayOfWeek = collectionOfDates[1].firstDayOfWeek;
