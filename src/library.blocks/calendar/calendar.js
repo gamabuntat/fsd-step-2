@@ -11,12 +11,12 @@ function init() {
     printCalendar.ordinal = 0;
     collectionOfDates.push( new MyDate(new Date()) );
     collectionOfDates.push( new MyDate(new Date(collectionOfDates[0].year, collectionOfDates[0].month + 1)) );
-    //collectionOfDates[0].callPrintCalendar();
+    collectionOfDates[0].elem = container.firstElementChild;
+    collectionOfDates[1].elem = container.lastElementChild;
+    specifyMonth(printCalendar.ordinal);
     collectionOfDates[0].updateTitle();
 
     addTodayClassForFirstMonth();
-    //printCalendar();
-    //addTodayClassForSecondMonth();
 }
 
 export class MyDate {
@@ -27,7 +27,6 @@ export class MyDate {
         this.firstDay = new Date(this.year, this.month, 1).getDay();
         this.firstDayOfWeek = this.firstDay - 1 == -1 ? 6 : this.firstDay - 1;
         this.lastDate = new Date(this.year, this.month + 1, 0).getDate();
-        
         this.isPrint = false;
     }
 
@@ -41,35 +40,37 @@ export class MyDate {
     }
 }
 
-export function printCalendar(ordinalValue) {
-
-    let index;
+export function specifyMonth(ordinalValue) {
+    let calendarObj;
 
     if (!collectionOfDates[ordinalValue].isPrint) {
-        printcalendar.calendar = container.querySelector(`[data-counter="${ordinalValue}"]`);
+        calendarObj = collectionOfDates[ordinalValue];
     }
     else if (!collectionOfDates[ordinalValue + 1].isPrint) {
-        printcalendar.calendar = container.querySelector(`[data-counter="${ordinalValue + 1}"]`);
+        calendarObj = collectionOfDates[ordinalValue + 1];
     }
     else if (!collectionOfDates[ordinalValue - 1].isPrint) {
-        printcalendar.calendar = container.querySelector(`[data-counter="${ordinalValue - 1}"]`);
-    }
-    else if (index = collectionOfDates.lastIndexOf(date => !date.isPrint)) {
-        printcalendar.calendar = container.querySelector(`[data-counter="${index}"]`);
+        calendarObj = collectionOfDates[ordinalValue - 1];
     }
     else {
-        return;
+        let index = collectionOfDates.lastIndexOf(date => !date.isPrint)
+        if (~index) calendarObj = collectionOfDates[index];
+        else return;
     }
 
+    calendarObj.callPrintCalendar();
+}
+
+export function printCalendar() {
+    this.isPrint = true;
+    let calendar = this.elem;
     let weeks = calendar.rows;
     let lastWeek = weeks[weeks.length - 1];
+
     let day = this.firstDayOfWeek;
     let week = 1;
     let currentDate = 1;
     let nextMonthWeek = 5;
-
-    this.elem = calendar;
-    lastWeek.classList.add('calendar__last-week');
 
     //this month
     for (; week < weeks.length; week++) {
