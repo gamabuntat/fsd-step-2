@@ -14,9 +14,11 @@ function init() {
     collectionOfDates[0].elem = container.firstElementChild;
     collectionOfDates[1].elem = container.lastElementChild;
     specifyMonth(printCalendar.ordinal);
+    specifyMonth(printCalendar.ordinal);
     collectionOfDates[0].updateTitle();
 
-    addTodayClassForFirstMonth();
+    addTodayClass();
+    console.log(collectionOfDates[1].isPrint);
 }
 
 export class MyDate {
@@ -106,20 +108,17 @@ export function printCalendar() {
     }
 }
 
-function addTodayClassForFirstMonth() {
+function addTodayClass() {
     let range = collectionOfDates[0].today + collectionOfDates[0].firstDayOfWeek;
-    let row = Math.ceil(range / 7);
+    let row = collectionOfDates[0].y = Math.ceil(range / 7);
     let cell = range % 7;
     cell == 0 ? cell = 6 : --cell;
+    collectionOfDates[0].x = cell;
     firstTable.rows[row].cells[cell].firstElementChild.classList.add('calendar__day-button_today');
-}
+    let lastWeekOfFirstTable = firstTable.querySelector('.calendar__last-week') ? 5 : 6;
 
-function addTodayClassForSecondMonth() {
-    let firstWeek = document.querySelector('.calendar__container').lastElementChild.rows[1].cells;
-    let today = collectionOfDates[0].today;
-    let firstDayOfWeek = collectionOfDates[1].firstDayOfWeek;
-    for (let dayOfWeek = firstDayOfWeek - 1; dayOfWeek > 0; dayOfWeek--) {
-        if (firstWeek[dayOfWeek].firstElementChild.innerHTML == today) firstWeek[dayOfWeek].firstElementChild.classList.add('calendar__day-button_today');
+    if (row == lastWeekOfFirstTable && firstTable.querySelector('.calendar__day-button_next-month')) {
+        container.lastElementChild.rows[1].cells[collectionOfDates[0].x].firstElementChild.classList.add('calendar__day-button_today');
     }
 }
 
