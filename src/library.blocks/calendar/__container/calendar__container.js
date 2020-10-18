@@ -1,7 +1,6 @@
 import {collectionOfDates, printCalendar, container} from '../calendar.js';
 
 let nextButton = document.querySelector('.calendar__next-button');
-let calendar= document.querySelector('.calendar__table');
 
 let dataPicker = function() {
     let startRange = true,
@@ -36,7 +35,6 @@ let dataPicker = function() {
 
             chooseAdditionalButton(range);
 
-            console.log(range);
             range.forEach(elem => elem.classList.add('calendar__day-button_range'));
         }
 
@@ -62,52 +60,102 @@ let dataPicker = function() {
         function drawRange() {
             let elems = startRangeElem.concat(endRangeElem);
             elems.sort(compareElems);
-            console.log(elems);
-        }
+            if (elems.length == 2) drawFirstLine();
+            //else if (elems.length == 3) {
+            //    startRangeElem.find(elem => elem == elems[0]) && startRange.length == 2 ? console.log('start') : drawSingleRange();
+            //}
+            //else 
 
-        function compareElems(a, b) {
-            let result;
-            let coordRelativePosition = [
-                a.rangeIndex - b.rangeIndex, 
-                a.rangeY - b.rangeY,
-                a.rangeX - b.rangeX
-            ];
-            coordRelativePosition.find(coord => {
-                if (coord != 0) {
-                    result = coord;
-                    return true;
+            function drawFirstLine() {
+                let index = elems[0].rangeIndex;
+                let row = elems[0].rangeY;
+                let daysOfCurrentWeek = collectionOfDates[index].elem.rows[row].cells;
+                let cell = elems[0].rangeX + 1;
+                console.log(daysOfCurrentWeek[cell]);
+                for (; cell < 7; cell++) {
+                    if (daysOfCurrentWeek[cell].firstElementChild.classList.contains('calendar__day-button_range')) {
+
+                        break;
+                    }
+                    daysOfCurrentWeek[cell].firstElementChild.classList.add('calendar__day-button_range');
                 }
-            })
-            return result;
+                for ( ; index <= elems[elems.length - 1].rangeIndex; index++) {
+                    let lastWeek = collectionOfDates[index].elem.querySelector('.calendar__last-week') ? 5 : 6;
+                    let row = index > elems[0].rangeIndex ? 1 : elems[0].rangeY + 1;
+                    for ( ; row <= lastWeek; row++) {
+                        for (let cell = 0; cell < 7; cell++) {
+                            if (collectionOfDates[index].elem.rows[row].cells[cell].firstElementChild.classList.contains('calendar__day-button_range')) return;
+                            collectionOfDates[index].elem.rows[row].cells[cell].firstElementChild.classList.add('calendar__day-button_range');
+                        }
+                    }
+                }
+
+            }
+            function drawSingleRange(elem) {
+                //let index elem.rangeIndex;
+                let row = elem.rangeY;
+                let cell = elem.rangeX + 1;
+
+                for ( ; index <= elems[elems.length - 1].rangeIndex; index++) {
+                    let lastWeek = collectionOfDates[index].elem.querySelector('.calendar__last-week') ? 5 : 6;
+                    let row = index > elem.rangeIndex ? 1 : elem.rangeY;
+                    for ( ; row <= lastWeek; row++) {
+                        let cell = index > elem.rangeIndex ? 0 : elem.rangeX;
+                        for ( ; cell < 7; cell++) {
+
+                        }
+                    }
+                }
+            }
+
+            function compareElems(a, b) {
+                let result;
+                let coordRelativePosition = [
+                    a.rangeIndex - b.rangeIndex, 
+                    a.rangeY - b.rangeY,
+                    a.rangeX - b.rangeX
+                ];
+
+                coordRelativePosition.find(coord => {
+                    if (coord != 0) {
+                        result = coord;
+                        return true;
+                    }
+                })
+                return result;
+            }
         }
 
         function removeRange() {
-            endRangeElem.forEach(elem => elem.classList.remove('calendar__day-button_range'));
-            startRangeElem.forEach(elem => elem.classList.remove('calendar__day-button_range'));
+            for (let button of container.querySelectorAll('.calendar__day-button_range')) {
+                button.classList.remove('calendar__day-button_range');
+            }
+            //endRangeElem.forEach(elem => elem.classList.remove('calendar__day-button_range'));
+            //startRangeElem.forEach(elem => elem.classList.remove('calendar__day-button_range'));
             endRangeElem = [];
             startRangeElem = [];
         }
 
-        function chooseEndButton() {
+        //function chooseEndButton() {
 
-            endRangeX = target.parentElement.cellIndex;
-            endRangeY = target.parentElement.parentElement.rowIndex;
+        //    endRangeX = target.parentElement.cellIndex;
+        //    endRangeY = target.parentElement.parentElement.rowIndex;
 
 
-            coordRelativePosition.find((coord, index) => {
-                if (coord > 0) {
-                    setCorrectRange();
-                    return true;
-                }
-                else if (coord < 0) {
-                    setReverseRange();
-                    return true;
-                }
-                else if (index == 2 && coord == 0) {
-                    setUnitRange();
-                }
-            })
-        }
+        //    coordRelativePosition.find((coord, index) => {
+        //        if (coord > 0) {
+        //            setCorrectRange();
+        //            return true;
+        //        }
+        //        else if (coord < 0) {
+        //            setReverseRange();
+        //            return true;
+        //        }
+        //        else if (index == 2 && coord == 0) {
+        //            setUnitRange();
+        //        }
+        //    })
+        //}
 
         //function setCorrectRange() {
         //    endRangeElem = target;
