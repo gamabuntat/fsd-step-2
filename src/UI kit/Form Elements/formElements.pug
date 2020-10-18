@@ -11,6 +11,9 @@ html(lang="ru")
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
         .container.page__container
             .container.container_direction-column
-                include ../../library.blocks/calendar/calendar.pug
+                +textFiled({})
+                +textFiled({hover: 'hello', focus: 'default'})
+                +dropdown({})
+                +dropdown({})
             .container.container_direction-column
-                //+dropdown({})
+                include ../../library.blocks/calendar/calendar.pug

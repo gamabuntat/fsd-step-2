@@ -75,7 +75,7 @@ let dataPicker = function() {
                 for (; cell < 7; cell++) {
                     if (daysOfCurrentWeek[cell].firstElementChild.classList.contains('calendar__day-button_range')) {
 
-                        break;
+                        return;
                     }
                     daysOfCurrentWeek[cell].firstElementChild.classList.add('calendar__day-button_range');
                 }
