@@ -110,15 +110,17 @@ export function printCalendar() {
 
 function addTodayClass() {
     let range = collectionOfDates[0].today + collectionOfDates[0].firstDayOfWeek;
-    let row = collectionOfDates[0].y = Math.ceil(range / 7);
+    let row = Math.ceil(range / 7);
     let cell = range % 7;
     cell == 0 ? cell = 6 : --cell;
-    collectionOfDates[0].x = cell;
+    collectionOfDates[0].todayY = row;
+    collectionOfDates[0].todayX = cell;
     firstTable.rows[row].cells[cell].firstElementChild.classList.add('calendar__day-button_today');
     let lastWeekOfFirstTable = firstTable.querySelector('.calendar__last-week') ? 5 : 6;
 
     if (row == lastWeekOfFirstTable && firstTable.querySelector('.calendar__day-button_next-month')) {
         container.lastElementChild.rows[1].cells[collectionOfDates[0].x].firstElementChild.classList.add('calendar__day-button_today');
+        collectionOfDates[1].haveToday = true;
     }
 }
 
