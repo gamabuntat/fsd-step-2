@@ -28,7 +28,6 @@ let dataPicker = function() {
         }
         else {
             chooseButton(endRangeElem);
-            console.log(endRangeElem);
             if (startRangeElem.find(elem => elem == endRangeElem[0])) {
                 endRangeElem = [];
                 return;
@@ -93,7 +92,7 @@ let dataPicker = function() {
                         drawOneWeek(elems[nextElemIndex]);
                         return;
                     }
-                    button.classList.add('calendar__day-button_range');
+                    //button.classList.add('calendar__day-button_in-range');
                     button.parentElement.classList.add('calendar__range');
                 }
                 let lastWeek = collectionOfDates[index].elem.querySelector('.calendar__last-week') ? 5 : 6;
@@ -120,7 +119,7 @@ let dataPicker = function() {
                                     drawOneWeek(elems[nextElemIndex]);
                                     return;
                                 }
-                                button.classList.add('calendar__day-button_range');
+                                //button.classList.add('calendar__day-button_in-range');
                                 button.parentElement.classList.add('calendar__range');
                             }
                         }

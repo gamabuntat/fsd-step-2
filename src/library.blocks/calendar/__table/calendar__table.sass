@@ -1,3 +1,5 @@
+@use '@library/color/base-color' as colors
+
 .calendar__table
   width: 280px
   border-width: 0
@@ -12,14 +14,14 @@ td
   position: relative
   padding: 0
   width: 40px
-  background-color: lightblue
   text-align: center
 
 .calendar__last-week
   display: none
 
 .calendar__range
-  background: magenta
+  background: linear-gradient(rgba(188, 156, 255, .3), rgba(139, 164, 249, .3), rgba(188, 156, 255, .3))
+
 .calendar__range-start
 
   &:after
@@ -29,7 +31,7 @@ td
     display: inline-block
     width: 20px
     height: 100%
-    background: magenta
+    background: linear-gradient(rgba(188, 156, 255, .3), rgba(139, 164, 249, .3), rgba(188, 156, 255, .3))
 
 .calendar__range-end
 
@@ -40,4 +42,4 @@ td
     display: inline-block
     width: 20px
     height: 40px
-    background: magenta
+    background: linear-gradient(rgba(188, 156, 255, .3), rgba(139, 164, 249, .3), rgba(188, 156, 255, .3))
