@@ -2,6 +2,7 @@ import {CALENDAR_TABLE_TEMPLATE} from './calendar__template.js';
 
 const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'june', 'july', 'aug', 'sept', 'oct', 'nov', 'dec'];
 export let collectionOfDates = [];
+export let calendar = document.querySelector('.calendar');
 export let container = document.querySelector('.calendar__container');
 export let firstTable = document.querySelector('.calendar__table_first');
 let titleMonth = document.querySelector('.calendar__month-name');

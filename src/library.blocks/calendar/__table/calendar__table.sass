@@ -1,5 +1,7 @@
 @use '@library/color/base-color' as colors
 
+$gradient: linear-gradient(rgba(139, 164, 249, .2), rgba(188, 156, 255, .2), rgba(144, 163, 250, .2))
+
 .calendar__table
   width: 280px
   border-width: 0
@@ -20,7 +22,7 @@ td
   display: none
 
 .calendar__range
-  background: linear-gradient(rgba(188, 156, 255, .3), rgba(139, 164, 249, .3), rgba(188, 156, 255, .3))
+  background: $gradient
 
 .calendar__range-start
 
@@ -31,7 +33,7 @@ td
     display: inline-block
     width: 20px
     height: 100%
-    background: linear-gradient(rgba(188, 156, 255, .3), rgba(139, 164, 249, .3), rgba(188, 156, 255, .3))
+    background: $gradient
 
 .calendar__range-end
 
@@ -42,4 +44,4 @@ td
     display: inline-block
     width: 20px
     height: 40px
-    background: linear-gradient(rgba(188, 156, 255, .3), rgba(139, 164, 249, .3), rgba(188, 156, 255, .3))
+    background: $gradient
