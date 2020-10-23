@@ -1,13 +1,13 @@
 export const CALENDAR_TABLE_TEMPLATE = 
 `<table class='calendar__table'>
 <tr>
-    <th>пн</th>
-    <th>вт</th>
-    <th>ср</th>
-    <th>чт</th>
-    <th>пт</th>
-    <th>сб</th>
-    <th>вс</th>
+    <th>Пн</th>
+    <th>Вт</th>
+    <th>Ср</th>
+    <th>Чт</th>
+    <th>Пт</th>
+    <th>Сб</th>
+    <th>Вс</th>
 </tr>
 <tr>
     <td><button class='calendar__day-button calendar__day-button_common'></button></td>

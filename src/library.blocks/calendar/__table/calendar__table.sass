@@ -1,4 +1,4 @@
-@use '@library/color/base-color' as colors
+@use '@library/color/base-color' as color
 
 $gradient: linear-gradient(rgba(139, 164, 249, .2), rgba(188, 156, 255, .2), rgba(144, 163, 250, .2))
 
@@ -11,6 +11,12 @@ $gradient: linear-gradient(rgba(139, 164, 249, .2), rgba(188, 156, 255, .2), rgb
 
 .calendar__table_first
   margin-left: 0
+
+.calendar__table th
+  padding-bottom: 20px
+  color: color.$base-color-purple
+
+tr
 
 td
   position: relative

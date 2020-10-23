@@ -1,12 +1,13 @@
 import {CALENDAR_TABLE_TEMPLATE} from './calendar__template.js';
 
-const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'june', 'july', 'aug', 'sept', 'oct', 'nov', 'dec'];
+const MONTHS = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 export let collectionOfDates = [];
 export let calendar = document.querySelector('.calendar');
 export let container = document.querySelector('.calendar__container');
 export let firstTable = document.querySelector('.calendar__table_first');
-let titleMonth = document.querySelector('.calendar__month-name');
-let titleYear = document.querySelector('.calendar__year');
+export let submitButton = calendar.querySelector('.calendar__submit-button');
+export let cancelButton = calendar.querySelector('.calendar__cancel-button');
+let titleMonth = document.querySelector('.calendar__month-name').firstElementChild;
 
 function init() {
     printCalendar.ordinal = 0;
@@ -19,7 +20,6 @@ function init() {
     collectionOfDates[0].updateTitle();
 
     addTodayClass();
-    console.log(collectionOfDates[1].isPrint);
 }
 
 export class MyDate {
@@ -31,11 +31,12 @@ export class MyDate {
         this.firstDayOfWeek = this.firstDay - 1 == -1 ? 6 : this.firstDay - 1;
         this.lastDate = new Date(this.year, this.month + 1, 0).getDate();
         this.isPrint = false;
+        this.lastWeek = 5;
     }
 
     updateTitle() {
         titleMonth.innerHTML = MONTHS[this.month];
-        titleYear.innerHTML = this.year;
+        titleMonth.innerHTML += ' ' + this.year;
     }
 
     callPrintCalendar() {
@@ -85,6 +86,7 @@ export function printCalendar() {
         if (week == 6) {
             nextMonthWeek = 6;
             lastWeek.classList.remove('calendar__last-week');
+            this.lastWeek = 6;
         }
         if (currentDate > this.lastDate) break;
         day = 0;

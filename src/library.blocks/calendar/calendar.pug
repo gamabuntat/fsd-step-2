@@ -1,20 +1,21 @@
 .calendar.container.container_direction-column
     .calendar__title.container.container_justify-content-space-between
-        button.calendar__prev-button prev month
+        button.calendar__prev-button.text-button 
+            img(src=path + "library.blocks/calendar/__prev-button/calendar__prev-button.svg", alt="")
         span.calendar__month-name 
-        | , 
-        span.calendar__year 2020
-        button.calendar__next-button next month
+            h2.h2
+        button.calendar__next-button.text-button
+            img(src=path + "library.blocks/calendar/__next-button/calendar__next-button.svg", alt="")
     .calendar__container.container
         table.calendar__table.calendar__table_first
             tr
-                th пн
-                th вт
-                th ср
-                th чт
-                th пт
-                th сб
-                th вс
+                th Пн
+                th Вт
+                th Ср
+                th Чт
+                th Пт
+                th Сб
+                th Вс
             tr
                 td
                     button.calendar__day-button.calendar__day-button_common
@@ -107,13 +108,13 @@
                     button.calendar__day-button.calendar__day-button_common
         table.calendar__table
             tr
-                th пн
-                th вт
-                th ср
-                th чт
-                th пт
-                th сб
-                th вс
+                th Пн
+                th Вт
+                th Ср
+                th Чт
+                th Пт
+                th Сб
+                th Вс
             tr
                 td
                     button.calendar__day-button.calendar__day-button_common

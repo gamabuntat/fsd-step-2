@@ -1,8 +1,13 @@
+@use '@library/color/base-color' as color
+@use '__title/calendar__title'
 @use '__table/calendar__table'
 @use '__container/calendar__container'
 @use '__day-button/calendar__day-button'
+@use '__submit-button/calendar__submit-button'
 
 .calendar
   position: relative
-  border: 1px solid black
+  padding: 20px
+  border: 1px solid color.$base-color-25
   border-radius: 2px
+  box-shadow: 0px 14px 14px #f2f2f2

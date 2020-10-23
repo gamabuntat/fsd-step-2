@@ -1,7 +1,6 @@
-import {collectionOfDates, printCalendar, calendar, container} from '../calendar.js';
+import {collectionOfDates, printCalendar, calendar, container, submitButton, cancelButton} from '../calendar.js';
 
 let nextButton = calendar.querySelector('.calendar__next-button');
-let cancelButton = calendar.querySelector('.calendar__cancel-button');
 
 dataPicker.startRange = true;
 dataPicker.startRangeElem = [];
@@ -50,7 +49,7 @@ export function dataPicker() {
 
     function chooseAdditionalButton(range) {
         let rangeWeek = range[0].parentElement.parentElement;
-        if (rangeWeek.querySelector('.calendar__day-button_prev-month') && range[0].rangeIndex) {
+        if (range[0].rangeY == 1 && range[0].rangeIndex && collectionOfDates[printCalendar.ordinal - 1].elem.querySelector('.calendar__day-button_next-month')) {
             let prevMonth = collectionOfDates[range[0].rangeIndex - 1].elem;
             let week = prevMonth.querySelector('.calendar__last-week') ? 5 : 6;
             range.push(prevMonth.rows[week].cells[range[0].rangeX].firstElementChild);
@@ -173,21 +172,21 @@ container.addEventListener('focus', function() {
 
     if (calendar.querySelector('.calendar__last-week') && 
         event.target == calendar.rows[row].cells[6].firstElementChild) {
-        event.target.addEventListener('keydown', focusOnFirstDay);
+        event.target.addEventListener('keydown', focusOnSubmitButton);
     }
     if (!calendar.querySelector('.calendar__last-week') && 
         event.target == calendar.rows[row + 1].cells[6].firstElementChild) {
-        event.target.addEventListener('keydown', focusOnFirstDay);
+        event.target.addEventListener('keydown', focusOnSubmitButton);
     }
     if (event.target == calendar.rows[1].cells[0].firstElementChild) {
         event.target.addEventListener('keydown', focusOnNextMonthButton);
     }
 }, true)
 
-function focusOnFirstDay() {
+function focusOnSubmitButton() {
     if (event.code == 'Tab' && !event.shiftKey) {
         event.preventDefault();
-        collectionOfDates[printCalendar.ordinal].elem.rows[1].cells[0].firstElementChild.focus();
+        submitButton.focus();
     }
 }
 
