@@ -16,4 +16,6 @@ import '@src/library.blocks/calendar/__container/calendar__container.js'
 import '@src/library.blocks/calendar/__submit-button/calendar__submit-button.js'
 import '@src/library.blocks/calendar/__cancel-button/calendar__cancel-button.js'
 
+import '@src/library.blocks/date-dropdown/__button/date-dropdown__button.js'
+
 import '@/node_modules/normalize.css'

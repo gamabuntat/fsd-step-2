@@ -3,17 +3,18 @@ include ../../library.blocks/text-field/text-field.pug
 include ../../library.blocks/dropdown/dropdown.pug
 
 doctype html
-html(lang="ru")
+html.html(lang="ru")
     head
         meta(charset="UTF-8")
         title
     body.page.color-100
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
         .container.page__container
+            h2 hello
             .container.container_direction-column
                 +textFiled({})
                 +textFiled({hover: 'hello', focus: 'default'})
                 +dropdown({})
                 +dropdown({})
+                include ../../library.blocks/date-dropdown/date-dropdown.pug
             .container.container_direction-column
-                include ../../library.blocks/calendar/calendar.pug
