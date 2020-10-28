@@ -1,31 +1,30 @@
 mixin dropdown(params)
-    - let {hover, example} = params
-    .dropdown.container.container_direction-column
-        h3.h3.dropdown__sign dropdown
-        button.dropdown__button.container.container_justify-content-space-between.container_align-items-center
-            span Сколько гостей
-            img.dropdown__expand-icon(src=path + "library.blocks/dropdown/__expand-icon/expand-icon.svg", alt="")
-        .dropdown__expand-list.container.container_direction-column.container_justify-content-space-between
-            .dropdown__expand-items.container.container_justify-content-space-between.container_align-items-center
-                h3.h3 взрослые
-                .container.container_justify-content-space-between.container_align-items-center
-                    button.dropdown__decrease-button.dropdown__decrease-button_disabled -
-                    .dropdown__counter.container.container_justify-content-center 0
-                    button.dropdown__increase-button +
-            .dropdown__expand-items.container.container_justify-content-space-between.container_align-items-center
-                h3.h3 дети
-                .container.container_justify-content-space-between.container_align-items-center
-                    button.dropdown__decrease-button.dropdown__decrease-button_disabled -
-                    .dropdown__counter.container.container_justify-content-center 0
-                    button.dropdown__increase-button +
-            .dropdown__expand-items.container.container_justify-content-space-between.container_align-items-center
-                h3.h3 младенцы
-                .container.container_justify-content-space-between.container_align-items-center
-                    button.dropdown__decrease-button.dropdown__decrease-button_disabled -
-                    .dropdown__counter.container.container_justify-content-center 0
-                    button.dropdown__increase-button +
-            .dropdown__expand-items.container.container_direction-row-reverse.container_justify-content-space-between
-                button.text-button.dropdown__submit-button
-                    h3.h3 применить
-                button.text-button.text-button_cancel.dropdown__cancel-button.dropdown__cancel-button_hidden
-                    h3.h3 очистить
+    - let {narrow = false, expand = false} = params
+    if narrow
+        if expand
+            .dropdown.dropdown_narrow.container.container_direction-column
+                h3.h3.dropdown__sign dropdown
+                button.dropdown__button.dropdown__button_narrow.container.container_justify-content-space-between.container_align-items-center
+                    span 2 спальни, 2 кровати...
+                    img.dropdown__expand-icon(src=path + "library.blocks/dropdown/__expand-icon/expand-icon.svg", alt="")
+                include ./__expand-list/_narrow/dropdown__expand-list_narrow.pug
+        else
+            .dropdown.dropdown_narrow.container.container_direction-column
+                h3.h3.dropdown__sign dropdown
+                button.dropdown__button.dropdown__button_narrow.container.container_justify-content-space-between.container_align-items-center
+                    span 2 спальни, 2 кровати...
+                    img.dropdown__expand-icon(src=path + "library.blocks/dropdown/__expand-icon/expand-icon.svg", alt="")
+    else
+        if expand
+            .dropdown.container.container_direction-column
+                h3.h3.dropdown__sign dropdown
+                button.dropdown__button.container.container_justify-content-space-between.container_align-items-center
+                    span Сколько гостей
+                    img.dropdown__expand-icon(src=path + "library.blocks/dropdown/__expand-icon/expand-icon.svg", alt="")
+                include ./__expand-list/dropdown__expand-list.pug
+        else
+            .dropdown.container.container_direction-column
+                h3.h3.dropdown__sign dropdown
+                button.dropdown__button.container.container_justify-content-space-between.container_align-items-center
+                    span Сколько гостей
+                    img.dropdown__expand-icon(src=path + "library.blocks/dropdown/__expand-icon/expand-icon.svg", alt="")

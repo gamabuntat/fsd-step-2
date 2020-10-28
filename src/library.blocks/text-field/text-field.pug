@@ -1,12 +1,16 @@
 mixin textFiled(params)
-    - let {hover, example} = params
+    - let {example = false, hover = false, masked = false} = params
     .container.container_direction-column.text-field
         .container.container_justify-content-space-between
-            h3.h3.text-field__sign text field
+            if masked
+                h3.h3.text-field__sign masked text field
+            else
+                h3.h3.text-field__sign text field
             if example
                 h3.h3.text-field__sign.color-50.font.font_montserrat-r #{example}
         if hover
-            input.text-field__input.text-field__input_hover-focus(type="text" placeholder="Email" value="This is pretty awesome") 
+            input.input.input_hover(type="text" placeholder="Email" value="This is pretty awesome") 
+        else if masked
+            input.input(type="text" placeholder="ДД.ММ.ГГ") 
         else
-            input.text-field__input(type="text" placeholder="Email") 
-
+            input.input(type="text" placeholder="Email") 

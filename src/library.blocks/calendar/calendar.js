@@ -122,7 +122,7 @@ function addTodayClass() {
     let lastWeekOfFirstTable = firstTable.querySelector('.calendar__last-week') ? 5 : 6;
 
     if (row == lastWeekOfFirstTable && firstTable.querySelector('.calendar__day-button_next-month')) {
-        container.lastElementChild.rows[1].cells[collectionOfDates[0].x].firstElementChild.classList.add('calendar__day-button_today');
+        container.lastElementChild.rows[1].cells[collectionOfDates[0].todayX].firstElementChild.classList.add('calendar__day-button_today');
         collectionOfDates[1].haveToday = true;
     }
 }

@@ -1,6 +1,6 @@
 - const path = '../../'
 include ../../library.blocks/text-field/text-field.pug
-include ../../library.blocks/dropdown/dropdown.pug
+include ../../library.blocks/dropdown/dropdown
 
 doctype html
 html.html(lang="ru")
@@ -10,11 +10,12 @@ html.html(lang="ru")
     body.page.color-100
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
         .container.page__container
-            h2 hello
             .container.container_direction-column
-                +textFiled({})
-                +textFiled({hover: 'hello', focus: 'default'})
-                +dropdown({})
-                +dropdown({})
+                +textFiled({example: 'default'})
+                +textFiled({example: 'hover / focus', hover: true})
+                +textFiled({example: 'default', masked: true})
                 include ../../library.blocks/date-dropdown/date-dropdown.pug
-            .container.container_direction-column
+                include ../../library.blocks/filter-date-dropdown/filter-date-dropdown.pug
+                include ../../library.blocks/sub-text-field/sub-text-field.pug
+                +dropdown({narrow: true, expand: true})
+                +dropdown({expand: true})

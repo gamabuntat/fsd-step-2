@@ -1,3 +1,5 @@
+import {methods} from '../dropdown.js'
+
 export function dropdownButton() {
     let openButton = document.querySelector('.dropdown__button_open');
 
@@ -38,11 +40,15 @@ export function showOrHideExpandlist(button) {
     expandList.style.borderWidth = button.clientLeft;
     button.classList.toggle('dropdown__button_open');
 
-    if (button.classList.contains('dropdown__button_open')) {
-        expandList.style.display = 'flex';
-        setTimeout(() => expandList.classList.toggle('dropdown__expand-list_open'), 0);
-        return;
-    }
-    expandList.style.display = 'none';
-    expandList.classList.toggle('dropdown__expand-list_open');
+    button.classList.contains('dropdown__button_open') ? expandList.style.display = 'flex' : 
+        expandList.style.display = 'none';
+
+    //if (button.classList.contains('dropdown__button_open')) {
+    //    expandList.style.display = 'flex';
+    //    setTimeout(() => expandList.classList.toggle('dropdown__expand-list_open'), 0);
+    //    return;
+    //}
+    //expandList.style.display = 'none';
+    //exandList.classList.toggle('dropdown__expand-list_open');
+    
 }

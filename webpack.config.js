@@ -17,6 +17,7 @@ module.exports = {
             '@': path.resolve(__dirname, './'),
             '@src': path.resolve(__dirname, 'src'),
             '@dist': path.resolve(__dirname, 'dist'),
+            '@common': path.resolve(__dirname, 'src/common.blocks'),
             '@library': path.resolve(__dirname, 'src/library.blocks'),
         },
     },
@@ -56,6 +57,7 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
+                            limit: 8000,
                             name: '[name].[ext]',
                             outputPath: 'i',
                         }
