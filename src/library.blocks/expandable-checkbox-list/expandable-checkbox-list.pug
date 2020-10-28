@@ -3,18 +3,26 @@ include ../check/check
 mixin checkList(params)
     - let {expand = false} = params
     if expand
-        .expandable-checkbox-list.container.container_direction-column
-            .expandable-checkbox-list__button.container.container_justify-content-space-around
+        .expandable-checkbox-list.expandable-checkbox-list_open.container.container_direction-column(tabindex=0)
+            .expandable-checkbox-list__button.container.container_justify-content-space-between
                 h3.h3 expandable checkbox list
                 span.expandable-checkbox-list__expand-icon >
-            .container.container_direction-column
-                +check({sign: 'allo', checked: true})
-                +check({sign: 'allo'})
+            .expandable-checkbox-list__check-container.container.container_direction-column.container_justify-content-space-between
+                +check({sign: 'Завтрак'})
+                +check({sign: 'Письменный стол', checked: true})
+                +check({sign: 'Стул для кормления', checked: true})
+                +check({sign: 'Кроватка', checked: true})
+                +check({sign: 'Телевизор'})
+                +check({sign: 'Шампунь'})
     else
-        .expandable-checkbox-list.container.container_direction-column
-            .expandable-checkbox-list__button.container.container_justify-content-space-around
+        .expandable-checkbox-list.container.container_direction-column(tabindex=0)
+            .expandable-checkbox-list__button.container.container_justify-content-space-between
                 h3.h3 expandable checkbox list
                 span.expandable-checkbox-list__expand-icon >
-            .container.container_direction-column
-                +check({sign: 'allo', checked: true})
-                +check({sign: 'allo'})
+            .expandable-checkbox-list__check-container.container.container_direction-column.container_justify-content-space-between
+                +check({sign: 'Завтрак'})
+                +check({sign: 'Письменный стол', checked: true})
+                +check({sign: 'Стул для кормления', checked: true})
+                +check({sign: 'Кроватка', checked: true})
+                +check({sign: 'Телевизор'})
+                +check({sign: 'Шампунь'})
