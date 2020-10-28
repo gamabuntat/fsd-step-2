@@ -31,17 +31,20 @@ function clickOutsideButton(e) {
 
 
 export function showOrHideExpandlist(button) {
+
+    button.classList.toggle('dropdown__button_open');
+
     let coord = button.getBoundingClientRect();
     let expandList = button.nextElementSibling;
+    let expandIcon = button.lastElementChild;
 
     expandList.style.left = coord.x + window.pageXOffest + 'px';
     expandList.style.top = coord.y + coord.height + window.pageYOffset - button.clientTop + 'px';
     expandList.style.width = coord.width - 2*button.clientLeft + 'px';
     expandList.style.borderWidth = button.clientLeft;
-    button.classList.toggle('dropdown__button_open');
 
-    button.classList.contains('dropdown__button_open') ? expandList.style.display = 'flex' : 
-        expandList.style.display = 'none';
+    expandList.classList.toggle('dropdown__expand-list_open');
+    expandIcon.classList.toggle('dropdown__expand-icon_open');
 
     //if (button.classList.contains('dropdown__button_open')) {
     //    expandList.style.display = 'flex';

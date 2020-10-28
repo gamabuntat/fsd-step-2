@@ -1,0 +1,20 @@
+include ../check/check
+
+mixin checkList(params)
+    - let {expand = false} = params
+    if expand
+        .expandable-checkbox-list.container.container_direction-column
+            .expandable-checkbox-list__button.container.container_justify-content-space-around
+                h3.h3 expandable checkbox list
+                span.expandable-checkbox-list__expand-icon >
+            .container.container_direction-column
+                +check({sign: 'allo', checked: true})
+                +check({sign: 'allo'})
+    else
+        .expandable-checkbox-list.container.container_direction-column
+            .expandable-checkbox-list__button.container.container_justify-content-space-around
+                h3.h3 expandable checkbox list
+                span.expandable-checkbox-list__expand-icon >
+            .container.container_direction-column
+                +check({sign: 'allo', checked: true})
+                +check({sign: 'allo'})

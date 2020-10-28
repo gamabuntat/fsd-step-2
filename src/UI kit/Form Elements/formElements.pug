@@ -1,6 +1,7 @@
 - const path = '../../'
-include ../../library.blocks/text-field/text-field.pug
+include ../../library.blocks/text-field/text-field
 include ../../library.blocks/dropdown/dropdown
+include ../../library.blocks/check/check
 
 doctype html
 html.html(lang="ru")
@@ -9,13 +10,19 @@ html.html(lang="ru")
         title
     body.page.color-100
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
-        .container.page__container
-            .container.container_direction-column
-                +textFiled({example: 'default'})
-                +textFiled({example: 'hover / focus', hover: true})
-                +textFiled({example: 'default', masked: true})
-                include ../../library.blocks/date-dropdown/date-dropdown.pug
-                include ../../library.blocks/filter-date-dropdown/filter-date-dropdown.pug
-                include ../../library.blocks/sub-text-field/sub-text-field.pug
-                +dropdown({narrow: true, expand: true})
-                +dropdown({expand: true})
+        .page__container.container.container_direction-column
+            .container
+                .container.container_direction-column
+                    +textFiled({example: 'default'})
+                    +textFiled({example: 'hover / focus', hover: true})
+                    +dropdown({})
+                    +textFiled({example: 'default', masked: true})
+                    include ../../library.blocks/date-dropdown/date-dropdown
+                    include ../../library.blocks/filter-date-dropdown/filter-date-dropdown
+                    include ../../library.blocks/sub-text-field/sub-text-field
+            .container
+                .container.container_direction-column
+                    +dropdown({narrow: true})
+                    +dropdown({narrow: true, expand: true})
+                    +dropdown({narrow: true})
+                    include ../../library.blocks/expandable-checkbox-list/expandable-checkbox-list
