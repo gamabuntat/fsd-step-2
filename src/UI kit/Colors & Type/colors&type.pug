@@ -1,14 +1,14 @@
 - const path = '../../'
 
 doctype html
-html(lang="en")
+html.html(lang="ru")
     head
         meta(charset="UTF-8")
         title
-    body.page
+    body.page.color-100
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
         .container.container_justify-content-space-around.page__container
             .container.container_direction-column
                 include ../../library.blocks/color/color.pug
             .container.container_direction-column
-                include ../../library.blocks/font-type/font-type.pug
+                include ../../common.blocks/font-type/font-type.pug

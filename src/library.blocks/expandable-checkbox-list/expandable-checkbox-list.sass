@@ -1,7 +1,15 @@
 @use '__check-container/expandable-checkbox-list__check-container'
+@use '__expand-icon/expandable-checkbox-list__expand-icon'
+@use '__expand-icon/expandable-checkbox-list__expand-icon_open'
 
 .expandable-checkbox-list
+  width: 266px
   outline: none
+  cursor: pointer
 
   &:hover .expandable-checkbox-list__check-container
     display: flex
+
+  &:hover .expandable-checkbox-list__expand-icon
+    transform: rotate(180deg)
+    transition: transform .3s ease-out
