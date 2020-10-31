@@ -1,0 +1,15 @@
+@use '@library/color/base-color' as colors
+
+.radio__input
+  appearance: none
+  -moz-appearance: none
+  -webkit-appearance: none
+
+.radio__input:checked + .radio__button
+  border-color: colors.$base-color-purple
+
+.radio__input:checked + .radio__button::after
+  background: linear-gradient(colors.$base-color-purple, #8BA4F9)
+
+.radio__input:checked ~ .radio__sign
+  color: colors.$base-color-75

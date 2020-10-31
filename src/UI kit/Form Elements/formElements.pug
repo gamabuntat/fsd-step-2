@@ -1,7 +1,9 @@
 - const path = '../../'
 include ../../library.blocks/text-field/text-field
 include ../../library.blocks/dropdown/dropdown
-include ../../library.blocks/check/check
+include ../../library.blocks/radio/radio
+//include ../../library.blocks/check/check
+include ../../common.blocks/checkbox-buttons/checkbox-buttons
 include ../../library.blocks/expandable-checkbox-list/expandable-checkbox-list
 
 doctype html
@@ -11,8 +13,8 @@ html.html(lang="ru")
         title
     body.page.color-100
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
-        .page__container.container.container_direction-column
-            .container
+        .page__container.container.container_direction-column.container_align-items-start
+            .container.container_justify-content-space-between
                 .container.container_direction-column
                     +textFiled({example: 'default'})
                     +textFiled({example: 'hover / focus', hover: true})
@@ -21,6 +23,9 @@ html.html(lang="ru")
                     include ../../library.blocks/date-dropdown/date-dropdown
                     include ../../library.blocks/filter-date-dropdown/filter-date-dropdown
                     include ../../library.blocks/sub-text-field/sub-text-field
+                .container.container_direction-column
+                    +checkboxButtons({})
+                    +radio({})
             .container
                 .container.container_direction-column
                     +dropdown({narrow: true})

@@ -1,3 +1,4 @@
+@use '__check-content/expandable-checkbox-list__check-content'
 @use '__check-container/expandable-checkbox-list__check-container'
 @use '__expand-icon/expandable-checkbox-list__expand-icon'
 @use '__expand-icon/expandable-checkbox-list__expand-icon_open'
@@ -8,6 +9,10 @@
   cursor: pointer
 
   &:hover .expandable-checkbox-list__check-container
+    transition: all .4s ease-out
+    height: 171px
+
+  &:hover .expandable-checkbox-list__check-content
     display: flex
 
   &:hover .expandable-checkbox-list__expand-icon

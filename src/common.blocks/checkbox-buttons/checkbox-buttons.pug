@@ -1,0 +1,9 @@
+include ../../library.blocks/check/check
+
+mixin checkboxButtons(params)
+    - let {title = 'Checkbox Buttons'} = params
+    h3.h3.checkbox-buttons__title #{title}
+    .checkbox-buttons__container.container.container_direction-column
+        +check({sign: 'Можно курить'})
+        +check({sign: 'Можно с питомцами', checked: true})
+        +check({sign: 'Можно пригласить гостей (до 10 человек)', checked: true})
