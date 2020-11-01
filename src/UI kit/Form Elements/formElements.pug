@@ -2,7 +2,8 @@
 include ../../library.blocks/text-field/text-field
 include ../../library.blocks/dropdown/dropdown
 include ../../library.blocks/radio/radio
-//include ../../library.blocks/check/check
+include ../../library.blocks/check/check
+include ../../library.blocks/toggle/toggle
 include ../../common.blocks/checkbox-buttons/checkbox-buttons
 include ../../library.blocks/expandable-checkbox-list/expandable-checkbox-list
 
@@ -26,6 +27,7 @@ html.html(lang="ru")
                 .container.container_direction-column
                     +checkboxButtons({})
                     +radio({})
+                    include ../../common.blocks/toggle-buttons/toggle-button
             .container
                 .container.container_direction-column
                     +dropdown({narrow: true})

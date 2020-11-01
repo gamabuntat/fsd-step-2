@@ -1,0 +1,9 @@
+mixin toggle(params)
+    - let {sign = 'Получать спецпредложения', checked = false} = params
+    label.check.toggle.container
+        if checked
+            input.check__input.toggle__input(type="checkbox" checked)
+        else
+            input.check__input.toggle__input(type="checkbox")
+        span.toggle__box
+        span.check__sign.toggle__sign.container.container_align-items-center #{sign}

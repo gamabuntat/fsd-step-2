@@ -1,0 +1,22 @@
+@use '@library/color/base-color' as colors
+
+.toggle__box
+  position: relative
+  display: inline-block
+  width: 40px
+  height: 20px
+  background: white
+  border: 1px solid colors.$base-color-25
+  border-radius: 16px
+  cursor: pointer
+
+  &::before
+    position: absolute
+    content: ''
+    top: 4px
+    left: 4px
+    width: 12px
+    height: 12px
+    background: colors.$base-color-25
+    border-radius: 50%
+    transition: .3s
