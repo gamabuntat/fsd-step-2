@@ -1,0 +1,43 @@
+.rate
+  position: relative
+  margin: 2px
+  padding: 0
+  width: 120px
+  height: 24px
+  background-image: url(@library/rate/rate.svg)
+
+.rate__star
+  position: absolute
+  top: 0
+  left: 0
+  height: 24px
+  background-repeat: repeat-x
+  appearance: none
+  -moz-appearance: none
+  -webkit-appearance: none
+
+.rate__star:focus
+  outline: none
+
+.rate__star:checked
+  background-image: url(@library/rate/rate__star.svg)
+
+.rate__star:nth-of-type(1)
+  z-index: 5
+  width: 24px
+
+.rate__star:nth-of-type(2)
+  z-index: 4
+  width: 48px
+
+.rate__star:nth-of-type(3)
+  z-index: 3
+  width: 72px
+
+.rate__star:nth-of-type(4)
+  z-index: 2
+  width: 96px
+
+.rate__star:nth-of-type(5)
+  z-index: 1
+  width: 120px

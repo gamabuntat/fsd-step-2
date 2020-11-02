@@ -1,0 +1,22 @@
+@use '@library/color/base-color' as colors
+@use '@library/html/html'
+@use '_like/like-button_like'
+
+.like-button
+  margin-right: 10px
+  padding-left: 5px
+  padding-right: 12px
+  width: 40px
+  height: 20px
+  border: 1px solid colors.$base-color-25
+  border-radius: 16px
+  outline: none
+
+.like-button__counter
+  color: colors.$base-color-25
+  font-size: html.rem-size(10)
+
+.like-button__icon
+  width: 10px
+  height: 8px
+  background-image: url(@library/like-button/like-button__icon.svg)

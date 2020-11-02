@@ -10,6 +10,8 @@ import '@src/library.blocks/sub-text-field/sub-text-field.js'
 
 //import '@src/library.blocks/expandable-checkbox-list/expandable-checkbox-list.js'
 
+import '@src/library.blocks/like-button/like-button.js'
+
 import '@src/library.blocks/dropdown/_disabled/dropdown_disabled.js'
 import '@src/library.blocks/dropdown/dropdown.js'
 import '@src/library.blocks/dropdown/dropdown__observer.js'

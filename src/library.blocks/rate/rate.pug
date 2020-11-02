@@ -1,0 +1,11 @@
+- let arr = []
+mixin rate(params)
+    - arr.push(rate)
+    - let {} = params
+    - let name = `rate${arr.length}`
+    div.rate
+        input.rate__star(type="radio" name=name value="1" aria-label="ужасно" checked)
+        input.rate__star(type="radio" name=name value="2" aria-label="терпимо")
+        input.rate__star(type="radio" name=name value="3" aria-label="нормально")
+        input.rate__star(type="radio" name=name value="4" aria-label="хорошо")
+        input.rate__star(type="radio" name=name value="5" aria-label="отлично")
