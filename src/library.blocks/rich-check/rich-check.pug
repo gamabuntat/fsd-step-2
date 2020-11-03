@@ -1,0 +1,8 @@
+mixin richCheck(params)
+    - let {title = '', sign = ''} = params
+    label.check.rich-check.container
+        input.check__input(type="checkbox")
+        span.check__box
+        .container.container_direction-column
+            span.rich-check__title.container.container_align-items-center #{title}
+            span.check__sign.rich-check__sign.container.container_align-items-center #{sign}
