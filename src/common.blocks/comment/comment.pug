@@ -1,0 +1,9 @@
+mixin comment(params)
+    - let {img = "common.blocks/comment/__avatar/comment__avatar.svg", author = 'Мурад Сарафанов'} = params
+    .comment
+        img.comment__avatar(src=path + img, alt="")
+        .container.container_direction-column.container_justify-content-space-around
+            span.comment__author #{author}
+            span.comment__time 5 дней назад
+        +likeButton({like: 1})
+        span Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.
