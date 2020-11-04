@@ -3,10 +3,12 @@
 
 .comment
   display: grid
-  grid-template-columns: auto auto
+  grid-template-columns: auto minmax(auto, 700px)
   row-gap: 10px
   column-gap: 10px
   color: colors.$base-color-75
 
 .comment__author
   font-family: 'Conv_Montserrat-Bold'
+
+.comment__content

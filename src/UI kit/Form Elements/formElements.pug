@@ -45,7 +45,9 @@ html.html(lang="ru")
                     +title('rich Checkbox Buttons')
                     +richCheck({title: 'Широкий коридор', sign: 'Ширина коридоров в номере не менее 91 см.'})
                     +richCheck({title: 'Помощник для инвалидов', sign: 'На 1 этаже вас встретит специалист  и проводит до номера.'})
-                    +comment({})
+                .container.container_direction-column
+                    +title('range slider')
+                    include ../../library.blocks/range-slider/range-slider
             .container
                 .container.container_direction-column
                     +dropdown({narrow: true})
@@ -54,3 +56,5 @@ html.html(lang="ru")
                     +checkList({})
                     +checkList({expand: true})
                     include ../../common.blocks/room-detalis/room-detalis
+                .container.container_direction-column
+                    +comment({})
