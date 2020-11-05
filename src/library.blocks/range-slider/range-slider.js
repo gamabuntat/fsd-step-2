@@ -3,8 +3,8 @@ let sliderButtonStart = document.querySelector('.range-slider__button_start-rang
 let sliderButtonEnd = document.querySelector('.range-slider__button_end-range');
 let startRange = slider.querySelector('.range-slider__start-range');
 let endRange = slider.querySelector('.range-slider__end-range');
-let priceFrom = document.querySelector('.range-slider__price-from');
-let priceTo = document.querySelector('.range-slider__price-to');
+let priceFrom = document.querySelector('.range-slider__price_from');
+let priceTo = document.querySelector('.range-slider__price_to');
 
 let buttonWidth = sliderButtonStart.getBoundingClientRect().width;
 let sliderWidth = slider.getBoundingClientRect().width;
@@ -12,7 +12,11 @@ let priceRange = 15000;
 let priceWeight = priceRange/(sliderWidth - 2*buttonWidth);
 
 function calculateThePrice(x) {
-    return Math.trunc(x * priceWeight)
+    return Math.trunc(x * priceWeight / 100) * 100;
+}
+
+function calculateTheWidth(price) {
+    return price / priceWeight
 }
 
 sliderButtonStart.addEventListener('mousedown', setStartRange);
@@ -21,13 +25,13 @@ sliderButtonEnd.addEventListener('mousedown', setEndRange);
 init();
 
 function init() {
+    let sliderCoord = slider.getBoundingClientRect();
+    sliderButtonStart.style.left = calculateTheWidth(5000) + 'px';
+    sliderButtonEnd.style.left = calculateTheWidth(10000) + buttonWidth + 'px';
     let startButtonCoord = sliderButtonStart.getBoundingClientRect();
     let endButtonCoord = sliderButtonEnd.getBoundingClientRect();
-    let sliderCoord = slider.getBoundingClientRect();
     startRange.style.width = startButtonCoord.x - sliderCoord.x + startButtonCoord.width/2 + 'px';
     endRange.style.width = sliderCoord.right - endButtonCoord.x - startButtonCoord.width/2 + 'px';
-    priceFrom.innerHTML = calculateThePrice(startButtonCoord.x - sliderCoord.x) + '₽';
-    priceTo.innerHTML = calculateThePrice(endButtonCoord.x - sliderCoord.x - buttonWidth) + '₽';
 }
 
 function setStartRange() {
@@ -50,7 +54,9 @@ function setStartRange() {
         }
         button.style.left = x + 'px';
         startRange.style.width = x + buttonCoord.width/2 + 'px';
-        priceFrom.innerHTML = calculateThePrice(x) + '₽';
+        let price = calculateThePrice(x);
+        if (price >= 1000) price = Math.trunc(price/1000) + ' ' + (price%1000 || '000');
+        priceFrom.innerHTML = price;
     }
 
     function onMouseMove(event) {
@@ -87,7 +93,9 @@ function setEndRange() {
         }
         button.style.left = x + 'px';
         endRange.style.width = sliderCoord.width - x - buttonCoord.width/2 + 'px';
-        priceTo.innerHTML = calculateThePrice(x - buttonWidth) + '₽';
+        let price = calculateThePrice(x - buttonWidth);
+        if (price >= 1000) price = Math.trunc(price/1000) + ' ' + (price%1000 || '000');
+        priceTo.innerHTML = price;
     }
 
     function onMouseMove(event) {
