@@ -47,6 +47,17 @@ html.html(lang="ru")
                     +richCheck({title: 'Помощник для инвалидов', sign: 'На 1 этаже вас встретит специалист  и проводит до номера.'})
                 .container.container_direction-column
                     include ../../library.blocks/range-slider/range-slider
+                    +title('buttons')
+                    .container
+                        button.button.button_focus
+                            h3.h3 click me
+                        button.button
+                            h3.h3 click me
+                    .container
+                        button.button.button_focus.button_border
+                            h3.h3 click me
+                        button.button.button_border
+                            h3.h3 click me
             .container
                 .container.container_direction-column
                     +dropdown({narrow: true})
