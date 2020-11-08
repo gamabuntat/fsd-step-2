@@ -1,6 +1,7 @@
 - const path = '../../'
 include ../../library.blocks/title/title
 include ../../library.blocks/text-field/text-field
+include ../../library.blocks/button/_big/button_big
 include ../../library.blocks/dropdown/dropdown
 include ../../library.blocks/radio/radio
 include ../../library.blocks/check/check
@@ -58,6 +59,12 @@ html.html(lang="ru")
                             h3.h3 click me
                         button.button.button_border
                             h3.h3 click me
+                    .container
+                        button.text-button 
+                            h3.h3 click me
+                        button.text-button.text-button_cancel
+                            h3.h3 click me
+                    +bigButton()
             .container
                 .container.container_direction-column
                     +dropdown({narrow: true})
