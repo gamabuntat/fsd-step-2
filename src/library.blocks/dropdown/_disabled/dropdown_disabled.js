@@ -1,6 +1,8 @@
 // For formELements page
 for (let dropdown of document.querySelectorAll('.dropdown')) {
-    dropdown.classList.add('dropdown_disabled')
+    if (!dropdown.classList.contains('dropdown_special')) {
+        dropdown.classList.add('dropdown_disabled')
+    }
 }
 
 for (let expandList of document.querySelectorAll('.dropdown__expand-list')) {

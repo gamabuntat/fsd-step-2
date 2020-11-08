@@ -1,0 +1,12 @@
+@use '@library/html/html'
+@use '@library/color/base-color' as colors
+
+.bullet-list
+  margin: 0
+
+.bullet-list__item
+  max-width: 240px
+
+.bullet-list__item::marker
+  font-size: html.rem-size(20)
+  color: colors.$base-color-25
