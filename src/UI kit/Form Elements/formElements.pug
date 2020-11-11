@@ -20,74 +20,67 @@ html.html(lang="ru")
         title
     body.pages.pages_formElements.color-100
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
+        .box-1-1.container.container_direction-column
+            +textFiled({example: 'default'})
+            +textFiled({example: 'hover / focus', hover: true})
+            +dropdown({})
+            +textFiled({example: 'default', masked: true})
+            include ../../library.blocks/date-dropdown/date-dropdown
+            include ../../library.blocks/filter-date-dropdown/filter-date-dropdown
+            include ../../library.blocks/sub-text-field/sub-text-field
+        .box-1-2.container.container_direction-column
+            +checkboxButtons({})
+            +radio({})
+            include ../../common.blocks/toggle-button/toggle-button
+            .container.container_direction-column
+                +title('like button')
+                .container
+                    +likeButton({})
+                    +likeButton({like: true})
+            .container.container_direction-column
+                +title('rate button')
+                .container
+                    +rate({checked: '4'})
+                    +rate({checked: '5'})
+        .box-1-3.container.container_direction-column
+            include ../../library.blocks/range-slider/range-slider
+            +title('buttons')
+            .container
+                button.button.button_focus
+                    h3.h3 click me
+                button.button
+                    h3.h3 click me
+            .container
+                button.button.button_focus.button_border
+                    h3.h3 click me
+                button.button.button_border
+                    h3.h3 click me
+            .container
+                button.text-button 
+                    h3.h3 click me
+                button.text-button.text-button_cancel
+                    h3.h3 click me
+            +bigButton()
+            +title('pagination')
+            include ../../library.blocks/pagination/pagination
         .container.container_direction-column
-                    +textFiled({example: 'default'})
-                    +textFiled({example: 'hover / focus', hover: true})
-                    +dropdown({})
-                    +textFiled({example: 'default', masked: true})
-                    include ../../library.blocks/date-dropdown/date-dropdown
-                    include ../../library.blocks/filter-date-dropdown/filter-date-dropdown
-                    include ../../library.blocks/sub-text-field/sub-text-field
+            +dropdown({narrow: true})
+            +dropdown({narrow: true, expand: true})
         .container
+            +dropdown({expand: true})
         .container
+            +dropdown({special: 1})
         .container.container_direction-column
-                    +dropdown({narrow: true})
-                    +dropdown({narrow: true, expand: true})
+            +checkList({})
+            +checkList({expand: true})
+        .container.container_direction-column
+            +title('rich Checkbox Buttons')
+            +richCheck({title: 'Широкий коридор', sign: 'Ширина коридоров в номере не менее 91 см.'})
+            +richCheck({title: 'Помощник для инвалидов', sign: 'На 1 этаже вас встретит специалист  и проводит до номера.'})
+        .container.container_direction-column
+            +title('bullet-list')
+            include ../../library.blocks/bullet-list/bullet-list
         .container
-        .container
-        .container
-        .container
-        .container
-        .container
-        .container
-//        .page__container.container.container_direction-column.container_align-items-start
-//            .container.container_justify-content-space-between
-//                .container.container_direction-column
-//                .container.container_direction-column
-//                    +checkboxButtons({})
-//                    +radio({})
-//                    include ../../common.blocks/toggle-button/toggle-button
-//                    +title('like button')
-//                    .container
-//                        +likeButton({})
-//                        +likeButton({like: true})
-//                    +title('rate button')
-//                    .container
-//                        +rate({checked: '4'})
-//                        +rate({checked: '5'})
-//                    +dropdown({expand: true})
-//                    +title('rich Checkbox Buttons')
-//                    +richCheck({title: 'Широкий коридор', sign: 'Ширина коридоров в номере не менее 91 см.'})
-//                    +richCheck({title: 'Помощник для инвалидов', sign: 'На 1 этаже вас встретит специалист  и проводит до номера.'})
-//                .container.container_direction-column
-//                    include ../../library.blocks/range-slider/range-slider
-//                    +title('buttons')
-//                    .container
-//                        button.button.button_focus
-//                            h3.h3 click me
-//                        button.button
-//                            h3.h3 click me
-//                    .container
-//                        button.button.button_focus.button_border
-//                            h3.h3 click me
-//                        button.button.button_border
-//                            h3.h3 click me
-//                    .container
-//                        button.text-button 
-//                            h3.h3 click me
-//                        button.text-button.text-button_cancel
-//                            h3.h3 click me
-//                    +bigButton()
-//                    +title('pagination')
-//                    include ../../library.blocks/pagination/pagination
-//                    +dropdown({special: 1})
-//                    +title('bullet-list')
-//                    include ../../library.blocks/bullet-list/bullet-list
-//            .container
-//                .container.container_direction-column
-//                    +dropdown({narrow: true})
-//                    +checkList({})
-//                    +checkList({expand: true})
-//                    include ../../common.blocks/room-detalis/room-detalis
-//                .container.container_direction-column
-//                    +comment({})
+            include ../../common.blocks/room-detalis/room-detalis
+        .box-4-2.container
+            +comment({})
