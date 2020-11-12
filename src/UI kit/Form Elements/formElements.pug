@@ -24,10 +24,10 @@ html.html(lang="ru")
     body.pages.pages_formElements.color-100
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
         .box-1-1.container.container_direction-column
-            +textFiled({example: 'default'})
-            +textFiled({example: 'hover / focus', hover: true})
+            +textFiled({title: 'text field', subTitle: 'default'})
+            +textFiled({title: 'text field', subTitle: 'hover / focus', hover: true})
             +dropdown({})
-            +textFiled({example: 'default', masked: true})
+            +textFiled({title: 'masked text field', subTitle: 'default', masked: true})
             +dateDropdown(1)
             +filterDateDropdown(1)
             +subTextField('subscription text field')
@@ -47,25 +47,27 @@ html.html(lang="ru")
                     +rate({checked: '5'})
         .box-1-3.container.container_direction-column
             include ../../library.blocks/range-slider/range-slider
-            +title('buttons')
-            .container
-                button.button.button_focus
-                    h3.h3 click me
-                button.button
-                    h3.h3 click me
-            .container
-                button.button.button_focus.button_border
-                    h3.h3 click me
-                button.button.button_border
-                    h3.h3 click me
-            .container
-                button.text-button 
-                    h3.h3 click me
-                button.text-button.text-button_cancel
-                    h3.h3 click me
-            +bigButton()
-            +title('pagination')
-            include ../../library.blocks/pagination/pagination
+            .container.container_direction-column
+                +title('buttons')
+                .container
+                    button.button.button_focus
+                        h3.h3 click me
+                    button.button
+                        h3.h3 click me
+                .container
+                    button.button.button_focus.button_border
+                        h3.h3 click me
+                    button.button.button_border
+                        h3.h3 click me
+                .container
+                    button.text-button 
+                        h3.h3 click me
+                    button.text-button.text-button_cancel
+                        h3.h3 click me
+                +bigButton()
+            .container.container_direction-column
+                +title('pagination')
+                include ../../library.blocks/pagination/pagination
         .container.container_direction-column
             +dropdown({narrow: true})
             +dropdown({narrow: true, expand: true})
