@@ -1,7 +1,7 @@
 mixin textFiled(params)
     - let {example = false, hover = false, masked = false} = params
     .container.container_direction-column.text-field
-        .container.container_justify-content-space-between
+        .text-field__sign-container.container.container_justify-content-space-between
             if masked
                 h3.h3.text-field__sign masked text field
             else

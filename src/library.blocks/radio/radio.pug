@@ -1,8 +1,10 @@
 mixin radio(params)
     - let {title = 'Radio Buttons', sign1 = 'Мужчина', sign2 = 'Женщина', name = 'sex'} = params
     .radio.container.container_direction-column
-        h3.h3.radio__title #{title}
-        .container
+        if title
+            h3.h3.radio__title #{title}
+        else
+        .radio__content.container
             label.radio__label.container.container_align-items-center
                 input.radio__input(type="radio" name=name checked)
                 span.radio__button

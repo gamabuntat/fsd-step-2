@@ -7,14 +7,14 @@
   <body class="pages pages_formElements color-100"><img class="watermark" src="i/watermark.svg" alt="">
     <div class="box-1-1 container container_direction-column">
       <div class="container container_direction-column text-field">
-        <div class="container container_justify-content-space-between">
+        <div class="text-field__sign-container container container_justify-content-space-between">
           <h3 class="h3 text-field__sign">text field</h3>
           <h3 class="h3 text-field__sign color-50 font font_montserrat-r">default</h3>
         </div>
         <input class="input" type="text" placeholder="Email"/>
       </div>
       <div class="container container_direction-column text-field">
-        <div class="container container_justify-content-space-between">
+        <div class="text-field__sign-container container container_justify-content-space-between">
           <h3 class="h3 text-field__sign">text field</h3>
           <h3 class="h3 text-field__sign color-50 font font_montserrat-r">hover / focus</h3>
         </div>
@@ -25,7 +25,7 @@
         <button class="dropdown__button container container_justify-content-space-between container_align-items-center"><span>Сколько гостей</span><span class="dropdown__expand-icon"></span></button>
       </div>
       <div class="container container_direction-column text-field">
-        <div class="container container_justify-content-space-between">
+        <div class="text-field__sign-container container container_justify-content-space-between">
           <h3 class="h3 text-field__sign">masked text field</h3>
           <h3 class="h3 text-field__sign color-50 font font_montserrat-r">default</h3>
         </div>
@@ -33,18 +33,18 @@
       </div>
       <div class="date-dropdown container container_justify-content-space-between">
         <div class="date-dropdown__container container container_direction-column">
-          <h3 class="h3">date dropdown</h3>
+          <h3 class="h3 date-dropdown__sign">date dropdown</h3>
           <button class="date-dropdown__button date-dropdown__start-date-button container container_justify-content-space-between container_align-items-center"><span class="date-dropdown__start-date">ДД.ММ.ГГГГ</span><span class="date-dropdown__expand-icon"></span></button>
         </div>
         <div class="date-dropdown__container container container_direction-column">
-          <h3 class="h3">date dropdown</h3>
+          <h3 class="h3 date-dropdown__sign">date dropdown</h3>
           <button class="date-dropdown__button date-dropdown__end-date-button container container_justify-content-space-between container_align-items-center"><span class="date-dropdown__end-date">ДД.ММ.ГГГГ</span><span class="date-dropdown__expand-icon"></span></button>
         </div>
         <div class="calendar container container_direction-column">
           <div class="calendar__title container container_justify-content-space-between">
-            <button class="calendar__prev-button text-button"> <img src="i/calendar__prev-button.svg" alt=""></button><span class="calendar__month-name"> 
+            <button class="calendar__prev-button text-button"> <img src="i/calendar__prev-button.svg" alt=""/></button><span class="calendar__month-name"> 
               <h2 class="h2"></h2></span>
-            <button class="calendar__next-button text-button"><img src="i/calendar__next-button.svg" alt=""></button>
+            <button class="calendar__next-button text-button"><img src="i/calendar__next-button.svg" alt=""/></button>
           </div>
           <div class="calendar__container container">
             <table class="calendar__table calendar__table_first">
@@ -357,7 +357,7 @@
         </div>
       </div>
       <div class="filter-date-dropdown container container_direction-column container_justify-content-space-between">
-        <h3 class="h3">filter date dropdown</h3>
+        <h3 class="h3 filter-date-dropdown__sign">filter date dropdown</h3>
         <button class="filter-date-dropdown__button container container_justify-content-space-between container_align-items-center">
           <div class="container"><span class="filter-date-dropdown__date-start">19 авг </span>&nbsp; - &nbsp;<span class="filter-date-dropdown__date-end">23 авг</span></div><span class="filter-date-dropdown__expand-icon"></span>
         </button>
@@ -365,7 +365,7 @@
       <div class="sub-text-field container container_direction-column">
         <h3 class="h3 sub-text-field__sign">subscription text field</h3>
         <div class="input sub-text-field__container container">
-          <input class="sub-text-field__input" type="text" placeholder="Email">
+          <input class="sub-text-field__input" type="text" placeholder="Email"/>
           <button class="text-button sub-text-field__button"></button>
         </div>
       </div>
@@ -387,7 +387,7 @@
       </div>
       <div class="radio container container_direction-column">
         <h3 class="h3 radio__title">Radio Buttons</h3>
-        <div class="container">
+        <div class="radio__content container">
           <label class="radio__label container container_align-items-center">
             <input class="radio__input" type="radio" name="sex" checked="checked"/><span class="radio__button"></span><span class="radio__sign">Мужчина</span>
           </label>

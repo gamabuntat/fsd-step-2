@@ -1,5 +1,8 @@
-.sub-text-field.container.container_direction-column
-    h3.h3.sub-text-field__sign subscription text field
-    .input.sub-text-field__container.container
-        input.sub-text-field__input(type="text" placeholder="Email") 
-        button.text-button.sub-text-field__button
+mixin subTextField(title)
+    .sub-text-field.container.container_direction-column
+        if title
+            h3.h3.sub-text-field__sign #{title}
+        else
+        .input.sub-text-field__container.container
+            input.sub-text-field__input(type="text" placeholder="Email") 
+            button.text-button.sub-text-field__button

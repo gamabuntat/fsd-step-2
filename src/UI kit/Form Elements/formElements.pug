@@ -1,7 +1,10 @@
 - const path = '../../'
 include ../../library.blocks/title/title
+include ../../library.blocks/sub-text-field/sub-text-field
 include ../../library.blocks/text-field/text-field
 include ../../library.blocks/button/_big/button_big
+include ../../library.blocks/filter-date-dropdown/filter-date-dropdown
+include ../../library.blocks/date-dropdown/date-dropdown
 include ../../library.blocks/dropdown/dropdown
 include ../../library.blocks/radio/radio
 include ../../library.blocks/check/check
@@ -25,9 +28,9 @@ html.html(lang="ru")
             +textFiled({example: 'hover / focus', hover: true})
             +dropdown({})
             +textFiled({example: 'default', masked: true})
-            include ../../library.blocks/date-dropdown/date-dropdown
-            include ../../library.blocks/filter-date-dropdown/filter-date-dropdown
-            include ../../library.blocks/sub-text-field/sub-text-field
+            +dateDropdown(1)
+            +filterDateDropdown(1)
+            +subTextField('subscription text field')
         .box-1-2.container.container_direction-column
             +checkboxButtons({})
             +radio({})
