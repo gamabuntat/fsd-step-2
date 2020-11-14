@@ -68,24 +68,24 @@ html.html(lang="ru")
             .container.container_direction-column
                 +title('pagination')
                 include ../../library.blocks/pagination/pagination
-        .container.container_direction-column
+        .box-2-1.container.container_direction-column
             +dropdown({narrow: true})
             +dropdown({narrow: true, expand: true})
-        .container
+        .box-2-2.container
             +dropdown({expand: true})
-        .container
+        .box-2-3.container
             +dropdown({special: 1})
-        .container.container_direction-column
+        .box-3-1.container.container_direction-column
             +checkList({})
             +checkList({expand: true})
-        .container.container_direction-column
+        .box-3-2.container.container_direction-column
             +title('rich Checkbox Buttons')
             +richCheck({title: 'Широкий коридор', sign: 'Ширина коридоров в номере не менее 91 см.'})
             +richCheck({title: 'Помощник для инвалидов', sign: 'На 1 этаже вас встретит специалист  и проводит до номера.'})
-        .container.container_direction-column
-            +title('bullet-list')
+        .box-3-3.container.container_direction-column
+            +title('bullet list')
             include ../../library.blocks/bullet-list/bullet-list
-        .container
+        .box-4-1.container
             include ../../common.blocks/room-detalis/room-detalis
         .box-4-2.container
             +comment({})

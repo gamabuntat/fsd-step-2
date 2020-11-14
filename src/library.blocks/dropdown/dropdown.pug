@@ -10,14 +10,18 @@ mixin dropdown(params)
     else if narrow
         if expand
             .dropdown.dropdown_narrow.container.container_direction-column
-                h3.h3.dropdown__sign dropdown
+                .container.container_justify-content-space-between
+                    h3.h3.dropdown__sign dropdown
+                    h3.h3.dropdown__sign.dropdown__sign_bright expanded
                 button.dropdown__button.dropdown__button_open.dropdown__button_narrow.container.container_justify-content-space-between.container_align-items-center
                     span 2 спальни, 2 кровати...
                     span.dropdown__expand-icon
                 include ./__expand-list/_narrow/dropdown__expand-list_narrow.pug
         else
             .dropdown.dropdown_narrow.container.container_direction-column
-                h3.h3.dropdown__sign dropdown
+                .container.container_justify-content-space-between
+                    h3.h3.dropdown__sign dropdown
+                    h3.h3.dropdown__sign.dropdown__sign_bright default
                 button.dropdown__button.dropdown__button_narrow.container.container_justify-content-space-between.container_align-items-center
                     span 2 спальни, 2 кровати...
                     span.dropdown__expand-icon
@@ -31,7 +35,9 @@ mixin dropdown(params)
                 include ./__expand-list/dropdown__expand-list.pug
         else
             .dropdown.container.container_direction-column
-                h3.h3.dropdown__sign dropdown
+                .container.container_justify-content-space-between
+                    h3.h3.dropdown__sign dropdown
+                    h3.h3.dropdown__sign.dropdown__sign_bright default
                 button.dropdown__button.container.container_justify-content-space-between.container_align-items-center
                     span Сколько гостей
                     span.dropdown__expand-icon

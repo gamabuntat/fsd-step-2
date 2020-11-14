@@ -11,9 +11,12 @@ mixin dateDropdown(title)
         .date-dropdown__container.container.container_direction-column
             if title
                 h3.h3.date-dropdown__sign date dropdown
+                button.date-dropdown__button.date-dropdown__end-date-button.container.container_justify-content-space-between.container_align-items-center
+                    span.date-dropdown__end-date 19.08.2019
+                    span.date-dropdown__expand-icon
             else
                 h3.h3.date-dropdown__sign выезд
-            button.date-dropdown__button.date-dropdown__end-date-button.container.container_justify-content-space-between.container_align-items-center
-                span.date-dropdown__end-date ДД.ММ.ГГГГ
-                span.date-dropdown__expand-icon
-        include ../../library.blocks/calendar/calendar.pug
+                button.date-dropdown__button.date-dropdown__end-date-button.container.container_justify-content-space-between.container_align-items-center
+                    span.date-dropdown__end-date ДД.ММ.ГГГГ
+                    span.date-dropdown__expand-icon
+            include ../../library.blocks/calendar/calendar.pug

@@ -3,10 +3,17 @@
 
 .bullet-list
   margin: 0
+  padding-left: 1em
+  list-style-image: url(@library/bullet-list/bullet-list__icon.svg)
+
+  & > *:last-child
+    margin-bottom: 0
 
 .bullet-list__item
-  max-width: 240px
+  max-width: 249px
+  margin-bottom: 12px
 
-.bullet-list__item::marker
-  font-size: html.rem-size(20)
-  color: colors.$base-color-25
+.bullet-list__content
+  display: flex
+  margin-left: 6px
+  line-height: 23px
