@@ -1,8 +1,8 @@
 mixin comment(params)
-    - let {img = "common.blocks/comment/__avatar/comment__avatar.svg", author = 'Мурад Сарафанов'} = params
+    - let {img = "common.blocks/comment/__avatar/avatar.svg", author = 'Мурад Сарафанов'} = params
     .comment
         img.comment__avatar(src=path + img, alt="")
-        .container.container_direction-column.container_justify-content-space-around
+        .container.container_direction-column
             span.comment__author #{author}
             span.comment__time 5 дней назад
         +likeButton({like: 1})

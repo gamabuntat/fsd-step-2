@@ -3,10 +3,19 @@
 
 .comment
   display: grid
-  grid-template-columns: auto minmax(auto, 700px)
-  row-gap: 10px
+  grid-template-columns: auto minmax(auto, 652px)
+  grid-template-rows: 51px auto
+  row-gap: 8px
   column-gap: 10px
   color: colors.$base-color-75
 
+  & > *:nth-child(3)
+    margin-top: 1px
+
 .comment__author
+  margin-top: 4px
+  margin-bottom: 8px
   font-family: 'Conv_Montserrat-Bold'
+
+.comment__content
+  line-height: 24px
