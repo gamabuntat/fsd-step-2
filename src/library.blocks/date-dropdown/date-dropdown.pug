@@ -1,22 +1,14 @@
-mixin dateDropdown(title)
+mixin dateDropdown(params)
+    - let {firstTitle = "прибытие", secondTitle = "выезд", firstDate = "ДД.ММ.ГГГГ", secondDate = "ДД.ММ.ГГГГ"} = params
     .date-dropdown.container.container_justify-content-space-between
         .date-dropdown__container.container.container_direction-column
-            if title
-                h3.h3.date-dropdown__sign date dropdown
-            else
-                h3.h3.date-dropdown__sign прибытие
+            h3.h3.date-dropdown__sign #{firstTitle}
             button.date-dropdown__button.date-dropdown__start-date-button.container.container_justify-content-space-between.container_align-items-center
-                span.date-dropdown__start-date ДД.ММ.ГГГГ
+                span.date-dropdown__start-date #{firstDate}
                 span.date-dropdown__expand-icon
         .date-dropdown__container.container.container_direction-column
-            if title
-                h3.h3.date-dropdown__sign date dropdown
-                button.date-dropdown__button.date-dropdown__end-date-button.container.container_justify-content-space-between.container_align-items-center
-                    span.date-dropdown__end-date 19.08.2019
-                    span.date-dropdown__expand-icon
-            else
-                h3.h3.date-dropdown__sign выезд
-                button.date-dropdown__button.date-dropdown__end-date-button.container.container_justify-content-space-between.container_align-items-center
-                    span.date-dropdown__end-date ДД.ММ.ГГГГ
-                    span.date-dropdown__expand-icon
+            h3.h3.date-dropdown__sign #{secondTitle}
+            button.date-dropdown__button.date-dropdown__end-date-button.container.container_justify-content-space-between.container_align-items-center
+                span.date-dropdown__end-date #{secondDate}
+                span.date-dropdown__expand-icon
             include ../../library.blocks/calendar/calendar.pug

@@ -8,6 +8,7 @@ module.exports = {
     entry: {
         colorsAndType: './src/UI kit/Colors & Type/colors&type.js',
         formElements: './src/UI kit/Form Elements/formElements.js',
+        cards: './src/UI kit/cards/cards.js',
     },
     output: {
         filename: '[name].js',
@@ -39,6 +40,12 @@ module.exports = {
             template: './src/UI kit/Form Elements/formElements.pug',
             minify: 'false',
             chunks: ['formElements'],
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'cards.html',
+            template: './src/UI kit/cards/cards.pug',
+            minify: 'false',
+            chunks: ['cards'],
         }),
         //new CopyWebpackPlugin({
         //    patterns: [
