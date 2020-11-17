@@ -13,8 +13,9 @@ function expandCalendar() {
         calendarOpen = false;
         return;
     }
-    let coord = dateDropdown.getBoundingClientRect();
-    calendar.style.top = coord.height + 5 + 'px';
+    let coordDropdown = dateDropdown.getBoundingClientRect();
+    let coordButton = startDateButton.getBoundingClientRect();
+    calendar.style.top = coordButton.bottom - coordDropdown.y + 5 + 'px';
     calendar.style.display = 'block';
     calendarOpen = true;
 }

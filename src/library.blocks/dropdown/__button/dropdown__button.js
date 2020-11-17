@@ -1,6 +1,9 @@
 import {methods} from '../dropdown.js'
 
 export function dropdownButton() {
+    //for formElements page
+    if (methods.targetElem.parentElement.classList.contains('dropdown_disabled')) return;
+
     let openButton = document.querySelector('.dropdown__button_open');
 
     document.removeEventListener('click', clickOutsideButton);
@@ -17,6 +20,7 @@ export function dropdownButton() {
 }
 
 function clickOutsideButton(e) {
+    //return;
     let elementClicked = e.target;
 
     while (elementClicked != document.body.parentElement) {
@@ -40,18 +44,9 @@ export function showOrHideExpandlist(button) {
 
     expandList.style.left = coord.x + window.pageXOffest + 'px';
     expandList.style.top = coord.y + coord.height + window.pageYOffset - button.clientTop + 'px';
-    expandList.style.width = coord.width - 2*button.clientLeft + 'px';
+    expandList.style.width = coord.width + 'px';
     expandList.style.borderWidth = button.clientLeft;
 
     expandList.classList.toggle('dropdown__expand-list_open');
     expandIcon.classList.toggle('dropdown__expand-icon_open');
-
-    //if (button.classList.contains('dropdown__button_open')) {
-    //    expandList.style.display = 'flex';
-    //    setTimeout(() => expandList.classList.toggle('dropdown__expand-list_open'), 0);
-    //    return;
-    //}
-    //expandList.style.display = 'none';
-    //exandList.classList.toggle('dropdown__expand-list_open');
-    
 }

@@ -1,12 +1,26 @@
 - const path = '../../'
 include ../../library.blocks/date-dropdown/date-dropdown
+include ../../library.blocks/dropdown/dropdown
+include ../../library.blocks/button/_big/button_big
 
 doctype html
-html(lang="ru")
+html.html(lang="ru")
     head
         meta(charset="UTF-8")
         title
     body.pages.pages_cards
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
-        +dateDropdown({})
-
+        .card.container
+            h1.h1 Найдём номера под 
+                br
+                | ваши пожелания
+            +dateDropdown({})
+            +dropdown({})
+            +bigButton('подобрать номер')
+        .card.container
+            h1.h1 Найдём номера под 
+                br
+                | ваши пожелания
+            +dateDropdown({})
+            +dropdown({})
+            +bigButton('подобрать номер')

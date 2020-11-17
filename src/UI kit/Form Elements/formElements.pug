@@ -26,7 +26,7 @@ html.html(lang="ru")
         .box-1-1.container.container_direction-column
             +textFiled({title: 'text field', subTitle: 'default'})
             +textFiled({title: 'text field', subTitle: 'hover / focus', hover: true})
-            +dropdown({})
+            +dropdown({onlyButton: 1, sign: 'dropdown', subSign: 'default'})
             +textFiled({title: 'masked text field', subTitle: 'default', masked: true})
             +dateDropdown({firstTitle: 'dropdown', secondTitle: 'dropdown', secondDate: '19.08.2019'})
             +filterDateDropdown(1)
@@ -60,7 +60,7 @@ html.html(lang="ru")
                     button.button.button_border
                         h3.h3 click me
                 .container
-                    button.text-button 
+                    button.text-button
                         h3.h3 click me
                     button.text-button.text-button_cancel
                         h3.h3 click me
@@ -69,12 +69,12 @@ html.html(lang="ru")
                 +title('pagination')
                 include ../../library.blocks/pagination/pagination
         .box-2-1.container.container_direction-column
-            +dropdown({narrow: true})
-            +dropdown({narrow: true, expand: true})
+            +dropdown({narrow: true, onlyButton: 1, sign: 'dropdown', subSign: 'default'})
+            +dropdown({narrow: true, sign: 'dropdown', subSign: 'expanded'})
         .box-2-2.container
-            +dropdown({expand: true})
+            +dropdown({sign: 'dropdown'})
         .box-2-3.container
-            +dropdown({special: 1})
+            +dropdown({sign: 'dropdown'})
         .box-3-1.container.container_direction-column
             +checkList({})
             +checkList({expand: true})

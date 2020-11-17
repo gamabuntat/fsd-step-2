@@ -13,10 +13,10 @@ import '@src/library.blocks/sub-text-field/sub-text-field.js'
 
 import '@src/library.blocks/like-button/like-button.js'
 
-import '@src/library.blocks/dropdown/_disabled/dropdown_disabled.js'
 import '@src/library.blocks/dropdown/dropdown.js'
 import '@src/library.blocks/dropdown/dropdown__observer.js'
 import '@src/library.blocks/dropdown/_special/dropdown_special.js'
+import '@src/library.blocks/dropdown/_disabled/dropdown_disabled.js'
 
 import '@src/library.blocks/calendar/calendar.js'
 import '@src/library.blocks/calendar/__next-button/calendar__next-button.js'
