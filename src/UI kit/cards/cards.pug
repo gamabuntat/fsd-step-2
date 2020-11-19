@@ -1,4 +1,8 @@
 - const path = '../../'
+include ../../library.blocks/title/title
+include ../../library.blocks/text-field/text-field
+include ../../library.blocks/radio/radio
+include ../../library.blocks/toggle/toggle
 include ../../library.blocks/date-dropdown/date-dropdown
 include ../../library.blocks/dropdown/dropdown
 include ../../library.blocks/button/_big/button_big
@@ -10,17 +14,5 @@ html.html(lang="ru")
         title
     body.pages.pages_cards
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
-        .card.container
-            h1.h1 Найдём номера под 
-                br
-                | ваши пожелания
-            +dateDropdown({})
-            +dropdown({})
-            +bigButton('подобрать номер')
-        .card.container
-            h1.h1 Найдём номера под 
-                br
-                | ваши пожелания
-            +dateDropdown({})
-            +dropdown({})
-            +bigButton('подобрать номер')
+        include ../../common.blocks/card/_primary-parameters/card_primary-parameters
+        include ../../common.blocks/card/_registration/card_registration

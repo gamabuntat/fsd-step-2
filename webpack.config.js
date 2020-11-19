@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    watch: true,
+    //watch: true,
     entry: {
         colorsAndType: './src/UI kit/Colors & Type/colors&type.js',
         formElements: './src/UI kit/Form Elements/formElements.js',
@@ -24,9 +24,9 @@ module.exports = {
         },
     },
     devServer: {
-        //lazy: true,
-        //filename: "formElements.js",
-        port: 4200,
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        port: 9000,
     },
     plugins: [
         new HtmlWebpackPlugin({

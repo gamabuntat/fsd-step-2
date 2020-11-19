@@ -1,0 +1,15 @@
+.card.card_registration.container
+    h1.h1 Регистрация аккаунта
+    +textFiled({placeholder: 'Имя'})
+    +textFiled({placeholder: 'Фамилия'})
+    +radio({})
+    +textFiled({masked: 1, title: 'дата рождения'})
+    +textFiled({title: 'данные для входа в сервис'})
+    +textFiled({placeholder: 'Пароль'})
+    +toggle({sign: 'Получать спецпредложения'})
+    +bigButton()
+    .container.container_justify-content-space-between.container_align-items-center
+        span Уже есть аккаунт на Toxin
+        .button__border-wrap
+            button.button.button_border
+                h3.h3 войти

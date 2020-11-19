@@ -1,5 +1,5 @@
 mixin radio(params)
-    - let {title = 'Radio Buttons', sign1 = 'Мужчина', sign2 = 'Женщина', name = 'sex'} = params
+    - let {title, sign1 = 'Мужчина', sign2 = 'Женщина', name = 'sex'} = params
     .radio.container.container_direction-column
         if title
             h3.h3.radio__title #{title}
