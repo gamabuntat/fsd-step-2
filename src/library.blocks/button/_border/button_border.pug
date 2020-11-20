@@ -1,0 +1,10 @@
+mixin buttonBorder(params)
+    - let {disabled = false, sign = 'войти'} = params
+    if disabled
+        .button.button_border.button_disabled
+            button
+                h3.h3 #{sign}
+    else
+        .button.button_border
+            button
+                h3.h3 #{sign}

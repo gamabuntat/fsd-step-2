@@ -2,6 +2,7 @@
 include ../../library.blocks/title/title
 include ../../library.blocks/sub-text-field/sub-text-field
 include ../../library.blocks/text-field/text-field
+include ../../library.blocks/button/_border/button_border
 include ../../library.blocks/button/_big/button_big
 include ../../library.blocks/filter-date-dropdown/filter-date-dropdown
 include ../../library.blocks/date-dropdown/date-dropdown
@@ -50,15 +51,13 @@ html.html(lang="ru")
             .container.container_direction-column
                 +title('buttons')
                 .container
-                    button.button.button_focus
-                        h3.h3 click me
                     button.button
                         h3.h3 click me
+                    button.button.button_disabled
+                        h3.h3 click me
                 .container
-                    button.button.button_focus.button_border
-                        h3.h3 click me
-                    button.button.button_border
-                        h3.h3 click me
+                    +buttonBorder({sign: 'click me'})
+                    +buttonBorder({sign: 'click me', disabled: 1})
                 .container
                     button.text-button
                         h3.h3 click me

@@ -1,21 +1,6 @@
 @use '@library/color/base-color' as colors
 
 .button_border
-  width: 95px
-  height: 40px
-  background: white
-  opacity: 1
-
-  &:active.button_border::before
-    opacity: 1
-
-  &:active h3
-    opacity: 1
-
-.button_border h3
-  color: colors.$base-color-purple
-
-.button__border-wrap
   display: flex
   align-items: center
   justify-content: center
@@ -24,14 +9,17 @@
   border-radius: 22px
   background: linear-gradient(colors.$base-color-purple, #8BA4F9)
 
-//.button.button_border::before
-  content: ''
-  display: block
-  position: absolute
-  left: 1px
-  top: 1px
-  width: calc(100% - 2px)
-  height: calc(100% - 2px)
+.button_border h3
+  color: colors.$base-color-purple
+
+.button_border > button
+  width: 95px
+  height: 40px
   background: white
+  border: none
   border-radius: 22px
-  opacity: 1
+  outline: none
+  cursor: pointer
+
+.button_border.button_disabled h3
+  opacity: .9
