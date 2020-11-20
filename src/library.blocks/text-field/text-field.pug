@@ -9,8 +9,11 @@ mixin textFiled(params)
                 else
         else
         if hover
-            input.input.input_hover(type="text" placeholder="Email" value="This is pretty awesome")
+            form
+                input.input.input_hover(type="text" placeholder="Email" value="This is pretty awesome")
         else if masked
-            input.input(type="text" placeholder="ДД.ММ.ГГГГ")
+            form
+                input.input.input_masked(type="text" placeholder="ДД.ММ.ГГГГ")
         else
-            input.input(type="text" placeholder=placeholder)
+            form
+                input.input(type="text" placeholder=placeholder)

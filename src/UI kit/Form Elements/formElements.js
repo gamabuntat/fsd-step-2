@@ -7,9 +7,8 @@ import '@src/fonts/montserrat-regular/fonts.css'
 import '@src/fonts/montserrat-bold/fonts.css'
 import '@src/fonts/nunito-bold/fonts.css'
 
+import '@src/library.blocks/input/_masked/input_masked.js'
 import '@src/library.blocks/sub-text-field/sub-text-field.js'
-
-//import '@src/library.blocks/expandable-checkbox-list/expandable-checkbox-list.js'
 
 import '@src/library.blocks/like-button/like-button.js'
 
