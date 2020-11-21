@@ -15,5 +15,9 @@ html.html(lang="ru")
         title
     body.pages.pages_cards
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
-        include ../../common.blocks/card/_primary-parameters/card_primary-parameters
-        include ../../common.blocks/card/_registration/card_registration
+        .container.container_direction-column
+            include ../../common.blocks/card/_primary-parameters/card_primary-parameters
+            include ../../common.blocks/card/_registration/card_registration
+        .container.container_direction-column
+            include ../../common.blocks/card/_room-details/card_room-details
+        .container.container_direction-column

@@ -2,6 +2,7 @@
 @use '@library/card/card'
 @use '@common/card/_primary-parameters/card_primary-parameters'
 @use '@common/card/_registration/card_registration'
+@use '@common/card/_room-details/card_room-details'
 @use '@library/radio/radio'
 @use '@library/check/check'
 @use '@library/toggle/toggle'
@@ -11,6 +12,12 @@
 
 .pages_cards
   padding: 140px 200px
-  display: grid
+  display: flex
+  column-gap: 40px
   row-gap: 40px
   background: #E5E5E5
+  justify-content: center
+
+  & > *
+    align-items: center
+    row-gap: 40px

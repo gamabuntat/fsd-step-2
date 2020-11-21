@@ -1,0 +1,67 @@
+@use '@library/color/base-color' as colors
+@use '@library/html/html'
+
+.card_room-details
+
+  & > *:first-child
+    align-items: flex-end
+    justify-content: space-between
+
+  & > *:first-child > *:first-child
+    text-align: center
+
+.room__number
+  margin-bottom: -4px
+  &:before
+    content: '№ '
+    font-size: html.rem-size(14)
+
+.room__luxury-status
+  align-self: flex-end
+  font-family: 'Conv_Montserrat-Bold'
+  font-size: html.rem-size(12)
+  text-transform: uppercase
+  color: colors.$base-color-purple
+
+.room__price
+  font-family: 'Conv_Montserrat-Bold'
+  color: colors.$base-color-50
+
+  &:after
+    content: '₽'
+
+.room__billing-period
+  padding-left: 0.3em
+  color: colors.$base-color-50
+
+.cost-table
+  margin: 0
+  padding: 0
+  width: 100%
+  border-spacing: 0
+  border-collapse: collapse
+
+.cost-table__service
+  min-width: 214px
+  text-align: left
+
+.cost-table__info
+  display: block
+  width: 20px
+  height: 20px
+  background-image: url(@common//card/_room-details/cost-table__info.svg)
+  vertical-align: top
+
+.cost-table__price
+  min-width: 57px
+  text-align: right
+  vertical-align: top
+
+  &:after
+    content: '₽'
+
+.total__filling-block
+  display: inline-block
+  flex-grow: 1
+  width: 100%
+  border-bottom: 1px solid colors.$base-color-50

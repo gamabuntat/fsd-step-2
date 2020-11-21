@@ -14,7 +14,6 @@ inputMasked.forEach(input => input.addEventListener('input', function() {
     let lastSymb = input.value.slice(-1);
     let pos = input.value.split('.').length;
     let lastString = input.value.split('.').pop();
-    console.log([ lastSymb, pos, lastString ])
 
     if (input.value.length > 10) {
         removeLastSymb();
