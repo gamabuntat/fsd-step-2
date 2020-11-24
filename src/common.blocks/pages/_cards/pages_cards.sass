@@ -3,12 +3,16 @@
 @use '@common/card/_primary-parameters/card_primary-parameters'
 @use '@common/card/_registration/card_registration'
 @use '@common/card/_room-details/card_room-details'
+@use '@common/card/_login/card_login'
 @use '@library/radio/radio'
 @use '@library/check/check'
 @use '@library/toggle/toggle'
 @use '@library/date-dropdown/date-dropdown'
 @use '@library/calendar/calendar'
+@use '@common/calendar/calendar_card'
 @use '@library/dropdown/dropdown'
+@use '@common/have-acc/have-acc'
+@use '@common/room-card/room-card'
 
 .pages_cards
   padding: 140px 200px
@@ -21,3 +25,6 @@
   & > *
     align-items: center
     row-gap: 40px
+
+  & .room-card
+    align-self: flex-start

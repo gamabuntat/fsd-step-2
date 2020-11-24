@@ -11,14 +11,18 @@
           <h3 class="h3 text-field__sign">text field</h3>
           <h3 class="h3 text-field__sub-sign font font_montserrat-r">default</h3>
         </div>
-        <input class="input" type="text" placeholder="Email"/>
+        <form>
+          <input class="input" type="text" placeholder="Email"/>
+        </form>
       </div>
       <div class="container container_direction-column text-field">
         <div class="text-field__sign-container container container_justify-content-space-between">
           <h3 class="h3 text-field__sign">text field</h3>
           <h3 class="h3 text-field__sub-sign font font_montserrat-r">hover / focus</h3>
         </div>
-        <input class="input input_hover" type="text" placeholder="Email" value="This is pretty awesome"/>
+        <form>
+          <input class="input input_hover" type="text" placeholder="Email" value="This is pretty awesome"/>
+        </form>
       </div>
       <div class="dropdown container container_direction-column">
         <div class="container container_justify-content-space-between">
@@ -32,7 +36,9 @@
           <h3 class="h3 text-field__sign">masked text field</h3>
           <h3 class="h3 text-field__sub-sign font font_montserrat-r">default</h3>
         </div>
-        <input class="input" type="text" placeholder="ДД.ММ.ГГГГ"/>
+        <form>
+          <input class="input input_masked" type="text" placeholder="ДД.ММ.ГГГГ"/>
+        </form>
       </div>
       <div class="date-dropdown container container_justify-content-space-between">
         <div class="date-dropdown__container container container_direction-column">
@@ -61,7 +67,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <button class="calendar__day-button calendar__day-button_common"></button>
+                    <button class="calendar__day-button calendar__day-button_common">1</button>
                   </td>
                   <td>
                     <button class="calendar__day-button calendar__day-button_common"></button>
@@ -389,7 +395,7 @@
         </div>
       </div>
       <div class="radio container container_direction-column">
-        <h3 class="h3 radio__title">Radio Buttons</h3>
+        <h3 class="h3 radio__title">radio buttons</h3>
         <div class="radio__content container">
           <label class="radio__label container container_align-items-center">
             <input class="radio__input" type="radio" name="sex" checked="checked"/><span class="radio__button"></span><span class="radio__sign">Мужчина</span>
@@ -453,20 +459,24 @@
       <div class="container container_direction-column">
         <h3 class="h3 title">buttons</h3>
         <div class="container">
-          <button class="button button_focus">
+          <button class="button">
             <h3 class="h3">click me</h3>
           </button>
-          <button class="button">
+          <button class="button button_disabled">
             <h3 class="h3">click me</h3>
           </button>
         </div>
         <div class="container">
-          <button class="button button_focus button_border">
-            <h3 class="h3">click me</h3>
-          </button>
-          <button class="button button_border">
-            <h3 class="h3">click me</h3>
-          </button>
+          <div class="button button_border">
+            <button>
+              <h3 class="h3">click me</h3>
+            </button>
+          </div>
+          <div class="button button_border button_disabled">
+            <button>
+              <h3 class="h3">click me</h3>
+            </button>
+          </div>
         </div>
         <div class="container">
           <button class="text-button">

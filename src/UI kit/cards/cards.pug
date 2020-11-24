@@ -7,6 +7,8 @@ include ../../library.blocks/toggle/toggle
 include ../../library.blocks/date-dropdown/date-dropdown
 include ../../library.blocks/dropdown/dropdown
 include ../../library.blocks/button/_big/button_big
+include ../../common.blocks/have-acc/have-acc
+include ../../common.blocks/room-card/room-card
 
 doctype html
 html.html(lang="ru")
@@ -20,4 +22,7 @@ html.html(lang="ru")
             include ../../common.blocks/card/_registration/card_registration
         .container.container_direction-column
             include ../../common.blocks/card/_room-details/card_room-details
+            include ../../common.blocks/card/_login/card_login
         .container.container_direction-column
+            include ../../common.blocks/calendar/calendar
+            +roomCard({})
