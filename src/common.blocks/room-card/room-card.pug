@@ -1,12 +1,14 @@
 mixin roomCard(params)
-    - let {} = params
+    - let {number = 3} = params
+    - let name = Math.random()
     .room-card
         .room-card__carousel
             .room-card__carousel-container
-                .room-card__image
-                .room-card__image
-                .room-card__image
-        button.room-card__prev-button.text-button prev
-        button.room-card__next-button.text-button next
+                - for (let i = 1; i <= number; i++)
+                    .room-card__image(data-img-order=i)
+            button.room-card__prev-button prev
+            button.room-card__next-button next
+        - for (let i = 1; i <= number; i++)
+            input(type="radio" name=name data-input-order=i)
         .h1 hallo
         .h1 bye
