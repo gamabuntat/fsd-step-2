@@ -1,7 +1,13 @@
 import {nextImage} from './__next-button/room-card__next-button.js'
+import {prevImage} from './__prev-button/room-card__prev-button.js'
+import './__input/room-card__input.js'
 
 export let nameSpace = {
     width: 270,
+    number: 4,
+    setMaxWidth() {
+        this.maxWidth = this.width * this.number - this.width
+    },
 
     getPosition(x) {
         return Math.abs(x / this.width) + 1;
@@ -9,7 +15,6 @@ export let nameSpace = {
     getRoomCard(elem) {
         while (!elem.classList.contains('room-card') && elem != document.body) {
             elem = elem.parentElement 
-            console.log(elem);
         }
         return elem;
 
@@ -21,3 +26,5 @@ export let nameSpace = {
         inputs[position - 1].checked = true;
     },
 }
+
+nameSpace.setMaxWidth();

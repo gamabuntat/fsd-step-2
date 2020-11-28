@@ -1,14 +1,21 @@
 mixin roomCard(params)
-    - let {number = 3} = params
-    - let name = Math.random()
+    - let {number = 4} = params
+    - let name = Math.trunc(Math.random() * 10000)
     .room-card
         .room-card__carousel
             .room-card__carousel-container
                 - for (let i = 1; i <= number; i++)
                     .room-card__image(data-img-order=i)
-            button.room-card__prev-button prev
-            button.room-card__next-button next
-        - for (let i = 1; i <= number; i++)
-            input(type="radio" name=name data-input-order=i)
-        .h1 hallo
-        .h1 bye
+            button.text-button.room-card__prev-button
+            button.text-button.room-card__next-button
+            .room-card__input-container
+                - for (let i = 1; i <= number; i++)
+                    if i == 1
+                        label.room-card__label
+                            input.room-card__input(type="radio" name='room-card-input-' + name data-input-order=i checked)
+                            span.room-card__input-button
+                    else
+                        label.room-card__label
+                            input.room-card__input(type="radio" name='room-card-input-' + name data-input-order=i)
+                            span.room-card__input-button
+        .h4 hallo
