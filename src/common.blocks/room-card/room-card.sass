@@ -1,13 +1,62 @@
+@use '@library/color/base-color' as colors
+@use '@library/html/html'
 @use "@common/room-card/__carousel/room-card__carousel"
 @use "@common/room-card/__image/room-card__image"
 @use "@common/room-card/__next-button/room-card__next-button"
 @use "@common/room-card/__prev-button/room-card__prev-button"
 @use "@common/room-card/__input-container/room-card__input-container"
+@use "@common/room-card/__bottom/room-card__bottom"
 @use "@common/room-card/__label/room-card__label"
 @use "@common/room-card/__input/room-card__input"
+@use "@common/room-card/__number/room-card__number"
 
 .room-card
   background: white
   -webkit-border-radius: 10px
   -moz-border-radius: 10px
   border-radius: 4px
+
+.room-card__shadow
+  position: absolute
+  top: 0
+  width: 100%
+  height: 100%
+  box-shadow: 42px 0px 40px -10px  rgba(0,0,0,0.5) inset, -42px 0px 40px -10px rgba(0,0,0,0.5) inset
+
+.room-card__number
+  margin-bottom: -2px
+
+  &:before
+    content: '№ '
+    font-size: html.rem-size(14)
+
+.room-card__price
+  font-family: 'Conv_Montserrat-Bold'
+  color: colors.$base-color-50
+
+  &:after
+    content: '₽'
+
+.room-card__luxury-status
+  margin-left: .3em
+  font-family: 'Conv_Montserrat-Regular'
+  font-weight: bold
+  font-size: html.rem-size(15)
+  color: colors.$base-color-purple
+
+.room-card__period
+  margin-left: .3em
+  font-size: html.rem-size(12)
+  color: colors.$base-color-50
+
+.room-card__reviews
+  font-family: 'Conv_Montserrat-Bold'
+  color: colors.$base-color-50
+
+  &:after
+    font-family: 'Conv_Montserrat-Regular'
+    content: ' Отзывов'
+
+.hr
+  margin-top: 10px
+  margin-bottom: 10px

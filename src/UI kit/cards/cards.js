@@ -13,6 +13,8 @@ import '@src/library.blocks/dropdown/dropdown.js'
 import '@src/library.blocks/dropdown/dropdown__observer.js'
 import '@src/common.blocks/dropdown/dropdown_three-guests.js'
 
+import '@src/common.blocks/room-card/__rate/room-card__rate.js'
+
 import '@src/common.blocks/room-card/room-card.js'
 
 import '@/node_modules/normalize.css'

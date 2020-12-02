@@ -1,103 +1,144 @@
-<!DOCTYPE html>
-<html class="html" lang="ru">
-  <head>
-    <meta charset="UTF-8">
-    <title></title>
-  </head>
-  <body class="page color-100"><img class="watermark" src="i/watermark.svg" alt="">
-    <div class="container container_justify-content-space-around page__container">
-      <div class="container container_direction-column">
-                <div class="color container container_align-items-center">
-                  <div class="container"><span class="rectangle rectangle_color-100"></span>
-                  </div>
-                  <div class="container container_direction-column color__sign">
-                    <h2 class="h2">Dark Shade 100%</h2>
-                    <h2 class="h2 font font_quicksand-l">#1F2041</h2>
-                  </div>
-                </div>
-                <div class="color container container_align-items-center">
-                  <div class="container"><span class="rectangle rectangle_color-75"></span>
-                  </div>
-                  <div class="container container_direction-column color__sign">
-                    <h2 class="h2">Dark Shade 75%</h2>
-                    <h2 class="h2 font font_quicksand-l">#1F2041</h2>
-                  </div>
-                </div>
-                <div class="color container container_align-items-center">
-                  <div class="container"><span class="rectangle rectangle_color-50"></span>
-                  </div>
-                  <div class="container container_direction-column color__sign">
-                    <h2 class="h2">Dark Shade 50%</h2>
-                    <h2 class="h2 font font_quicksand-l">#1F2041</h2>
-                  </div>
-                </div>
-                <div class="color container container_align-items-center">
-                  <div class="container"><span class="rectangle rectangle_color-25"></span>
-                  </div>
-                  <div class="container container_direction-column color__sign">
-                    <h2 class="h2">Dark Shade 25%</h2>
-                    <h2 class="h2 font font_quicksand-l">#1F2041</h2>
-                  </div>
-                </div>
-                <div class="color container container_align-items-center">
-                  <div class="container"><span class="rectangle rectangle_color-5"></span>
-                  </div>
-                  <div class="container container_direction-column color__sign">
-                    <h2 class="h2">Dark Shade 5%</h2>
-                    <h2 class="h2 font font_quicksand-l">#1F2041</h2>
-                  </div>
-                </div>
-                <div class="color container container_align-items-center">
-                  <div class="container"><span class="rectangle rectangle_color-purple"></span>
-                  </div>
-                  <div class="container container_direction-column color__sign">
-                    <h2 class="h2">Purple</h2>
-                    <h2 class="h2 font font_quicksand-l">#BC9CFF</h2>
-                  </div>
-                </div>
-                <div class="color container container_align-items-center">
-                  <div class="container"><span class="rectangle rectangle_color-green"></span>
-                  </div>
-                  <div class="container container_direction-column color__sign">
-                    <h2 class="h2">Green</h2>
-                    <h2 class="h2 font font_quicksand-l">#6FCF97</h2>
-                  </div>
-                </div>
-      </div>
-      <div class="container container_direction-column">
-        <div class="font-type container">
-          <div class="container container_justify-content-flex-end font-type__symbol">
-            <h1 class="h1 font font_montserrat-r color-25">H1 </h1>
-          </div>
-          <div class="container font-type__example">
-            <h1 class="h1">This one is the sub-section or<br>widget title</h1>
-          </div>
-        </div>
-        <div class="font-type container">
-          <div class="container container_justify-content-flex-end font-type__symbol">
-            <h2 class="h2 font font_montserrat-r color-25">H2 </h2>
-          </div>
-          <div class="container font-type__example">
-            <h2 class="h2">Next one is the item title inside<br>widgets</h2>
-          </div>
-        </div>
-        <div class="font-type container">
-          <div class="container container_justify-content-flex-end font-type__symbol">
-            <h3 class="h3 font font_montserrat-r color-25">H3 </h3>
-          </div>
-          <div class="container container_justify-content-flex-start font-type__example">
-            <h3 class="h3">This is a label or CTA text</h3>
-          </div>
-        </div>
-        <div class="font-type container">
-          <div class="container container_justify-content-flex-end font-type__symbol">
-            <p class="p color-25">body </p>
-          </div>
-          <div class="container font-type__example">
-            <p class="p">This is the body text which is used for most<br>of the design, like paragraphs, lists, etc.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  <script src="colorsAndType.js"></script></body>
-</html>
+Html Webpack Plugin:
+<pre>
+  Error: Child compilation failed:
+  Module build failed (from ./node_modules/pug-html-loader/lib/index.js):
+  Error: /home/gamabunta/fsd-step-2/src/common.blocks/room-card/room-card.pug:29:29
+      27|                 span.room-card__price #{formatPrice}
+      28|                 span.room-card__period #{period}
+    > 29|             +rate({checked = 5})
+  ------------------------------------^
+      30| 
+  Syntax Error: Shorthand property assignments are valid only in destructuring patterns
+  
+  - index.js:32 makeError
+    [fsd-step-2]/[pug-error]/index.js:32:13
+  
+  - index.js:59 Lexer.error
+    [fsd-step-2]/[pug-lexer]/index.js:59:15
+  
+  - index.js:87 Lexer.assertExpression
+    [fsd-step-2]/[pug-lexer]/index.js:87:12
+  
+  - index.js:857 Lexer.call
+    [fsd-step-2]/[pug-lexer]/index.js:857:16
+  
+  - index.js:1460 Lexer.callLexerFunction
+    [fsd-step-2]/[pug-lexer]/index.js:1460:23
+  
+  - index.js:1486 Lexer.advance
+    [fsd-step-2]/[pug-lexer]/index.js:1486:15
+  
+  - index.js:1460 Lexer.callLexerFunction
+    [fsd-step-2]/[pug-lexer]/index.js:1460:23
+  
+  - index.js:1516 Lexer.getTokens
+    [fsd-step-2]/[pug-lexer]/index.js:1516:12
+  
+  - index.js:12 lex
+    [fsd-step-2]/[pug-lexer]/index.js:12:42
+  
+  - index.js:100 Object.lex
+    [fsd-step-2]/[pug]/lib/index.js:100:27
+  
+  - index.js:44 Function.loadString [as string]
+    [fsd-step-2]/[pug-load]/index.js:44:24
+  
+  - index.js:31 
+    [fsd-step-2]/[pug-load]/index.js:31:27
+  
+  - index.js:23 walkAST
+    [fsd-step-2]/[pug-walk]/index.js:23:18
+  
+  - index.js:104 
+    [fsd-step-2]/[pug-walk]/index.js:104:20
+  
+  - Array.reduce
+  
+  - index.js:103 walkAndMergeNodes
+    [fsd-step-2]/[pug-walk]/index.js:103:18
+  
+  - index.js:37 walkAST
+    [fsd-step-2]/[pug-walk]/index.js:37:19
+  
+  - index.js:13 load
+    [fsd-step-2]/[pug-load]/index.js:13:10
+  
+  - index.js:46 Function.loadString [as string]
+    [fsd-step-2]/[pug-load]/index.js:46:10
+  
+  - index.js:86 compileBody
+    [fsd-step-2]/[pug]/lib/index.js:86:18
+  
+  - index.js:242 Object.exports.compile
+    [fsd-step-2]/[pug]/lib/index.js:242:16
+  
+  
+  - Error: /home/gamabunta/fsd-step-2/src/common.blocks/room-card/room-card.pug:29:29
+  
+  - 27|                 span.room-card__price #{formatPrice}
+  
+  - 28|                 span.room-card__period #{period}
+  
+  - > 29|             +rate({checked = 5})
+  
+  - ------------------------------------^
+  
+  - 30|
+  
+  - Syntax Error: Shorthand property assignments are valid only in destructuring pattern    s
+  
+  - child-compiler.js:122 
+    [fsd-step-2]/[html-webpack-plugin]/lib/child-compiler.js:122:18
+  
+  - Compiler.js:343 
+    [fsd-step-2]/[webpack]/lib/Compiler.js:343:11
+  
+  - Compiler.js:681 
+    [fsd-step-2]/[webpack]/lib/Compiler.js:681:15
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [fsd-step-2]/[tapable]/lib/Hook.js:154:20
+  
+  - Compiler.js:678 
+    [fsd-step-2]/[webpack]/lib/Compiler.js:678:31
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [fsd-step-2]/[tapable]/lib/Hook.js:154:20
+  
+  - Compilation.js:1423 
+    [fsd-step-2]/[webpack]/lib/Compilation.js:1423:35
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [fsd-step-2]/[tapable]/lib/Hook.js:154:20
+  
+  - Compilation.js:1414 
+    [fsd-step-2]/[webpack]/lib/Compilation.js:1414:32
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [fsd-step-2]/[tapable]/lib/Hook.js:154:20
+  
+  - Compilation.js:1409 
+    [fsd-step-2]/[webpack]/lib/Compilation.js:1409:36
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [fsd-step-2]/[tapable]/lib/Hook.js:154:20
+  
+  - Compilation.js:1405 
+    [fsd-step-2]/[webpack]/lib/Compilation.js:1405:32
+  
+  
+  - Hook.js:154 AsyncSeriesHook.lazyCompileHook
+    [fsd-step-2]/[tapable]/lib/Hook.js:154:20
+  
+  - Compilation.js:1342 Compilation.seal
+    [fsd-step-2]/[webpack]/lib/Compilation.js:1342:27
+  
+  - Compiler.js:675 
+    [fsd-step-2]/[webpack]/lib/Compiler.js:675:18
+  
+</pre><script src="colorsAndType.js"></script>

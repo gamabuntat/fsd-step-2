@@ -1,16 +1,17 @@
 mixin roomCard(params)
-    - let {number = 4} = params
+    - let {imgPath, roomNumber = 888, price = 9990, luxuryStatus = 'люкс', rate = 5, period = 'в сутки', reviews = 145} = params
     - let name = Math.trunc(Math.random() * 10000)
     .room-card
         .room-card__carousel
             .room-card__carousel-container
-                - for (let i = 1; i <= number; i++)
-                    .room-card__image(data-img-order=i)
+                - for (let i = 0; i < imgPath.length; i++)
+                    img.room-card__image(src=path + imgPath[i], alt="")
+            .room-card__shadow
             button.text-button.room-card__prev-button
             button.text-button.room-card__next-button
             .room-card__input-container
-                - for (let i = 1; i <= number; i++)
-                    if i == 1
+                - for (let i = 0; i < imgPath.length; i++)
+                    if i == 0
                         label.room-card__label
                             input.room-card__input(type="radio" name='room-card-input-' + name data-input-order=i checked)
                             span.room-card__input-button
@@ -18,4 +19,16 @@ mixin roomCard(params)
                         label.room-card__label
                             input.room-card__input(type="radio" name='room-card-input-' + name data-input-order=i)
                             span.room-card__input-button
-        .h4 hallo
+        .container.container_direction-column.room-card__bottom
+            .container.container_justify-content-space-between
+                .container.container_align-items-flex-end
+                    span.h2.room-card__number #{roomNumber}
+                    span.room-card__luxury-status #{luxuryStatus}
+                .container.container_align-items-flex-end
+                    - let formatPrice = Math.trunc(price / 1000) + " " + price % 1000
+                    span.room-card__price #{formatPrice}
+                    span.room-card__period #{period}
+            .hr
+            .container.container_justify-content-space-between.container_align-items-center
+                +rate(rate)
+                span.room-card__reviews #{reviews}

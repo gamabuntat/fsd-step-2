@@ -3,7 +3,7 @@ import {prevImage} from './__prev-button/room-card__prev-button.js'
 import './__input/room-card__input.js'
 
 export let nameSpace = {
-    width: 270,
+    width: 271,
     number: 4,
     setMaxWidth() {
         this.maxWidth = this.width * this.number - this.width
