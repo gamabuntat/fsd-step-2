@@ -9,6 +9,7 @@ module.exports = {
         colorsAndType: './src/UI kit/Colors & Type/colors&type.js',
         formElements: './src/UI kit/Form Elements/formElements.js',
         cards: './src/UI kit/cards/cards.js',
+        headersAndFooters: './src/UI kit/headers-and-footers/headers-and-footers.js',
     },
     output: {
         filename: '[name].js',
@@ -46,6 +47,12 @@ module.exports = {
             template: './src/UI kit/cards/cards.pug',
             minify: 'false',
             chunks: ['cards'],
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'headers-and-footers.html',
+            template: './src/UI kit/headers-and-footers/headers-and-footers.pug',
+            minify: 'false',
+            chunks: ['headersAndFooters'],
         }),
         //new CopyWebpackPlugin({
         //    patterns: [

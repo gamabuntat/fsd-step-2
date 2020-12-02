@@ -1,4 +1,9 @@
-mixin bigButton(sign = 'перейти к оплате')
-    button.button.button_big.container.container_align-items-center.container_justify-content-space-between
-        h3.h3.button__sign #{sign}
-        span.button__arrow
+mixin bigButton(params)
+    - let {sign = 'перейти к оплате', header = false} = params
+    if (!header)
+        button.button.button_big.container.container_align-items-center.container_justify-content-space-between
+            h3.h3.button__sign #{sign}
+            span.button__arrow
+    else
+        button.header__button.button.button_big.container.container_align-items-center.container_justify-content-space-between
+            h3.h3.button__sign #{sign}
