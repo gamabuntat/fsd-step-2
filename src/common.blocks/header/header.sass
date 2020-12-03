@@ -2,9 +2,17 @@
 @use '@common/header/__menu-item/header__menu-item'
 @use '@common/header/__menu-item/header__menu-item_expandable'
 @use '@common/header/__button/header__button'
+@use '@common/header/__v-line/header__v-line'
 
 .header
+  min-width: 900px
   height: 70px
   padding-left: 140px
   padding-right: 140px
   background: white
+  box-shadow: 0 10px 20px 0 rgba(31, 32, 65, .05)
+
+@media screen and (max-width: 1150px)
+  .header
+    padding-left: 1em
+    padding-right: 1em

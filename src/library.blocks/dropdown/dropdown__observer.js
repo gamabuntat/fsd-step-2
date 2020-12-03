@@ -29,8 +29,8 @@ let observer = new MutationObserver(function(mutations) {
 
         let diff = sum - lastSum;
 
-        let partOfString = '';
-        let babyString = '';
+        let partOfString,
+            babyString;
 
         if (diff == 0) {partOfString = ``}
         else if (diff == 1) {partOfString = `${diff} гость`}
@@ -44,7 +44,8 @@ let observer = new MutationObserver(function(mutations) {
 
         let result = `${partOfString} ${babyString}`
         result = result.split(' ');
-        result.length == 4 ? result = `${result[0]} ${result[1]}, ${result[2]} ${result[3]}` : 
+        result.length == 4 ?
+            result = `${partOfString}, ${babyString}` :
             result = result.join(' ')
 
         if (!sum) {

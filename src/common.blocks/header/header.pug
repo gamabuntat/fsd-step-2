@@ -1,9 +1,10 @@
 include ../../common.blocks/header/__menu-item/header__menu-item_expandable
 
-mixin header(param)
-    //- let {width} = param
+mixin header(params)
+    - let {authorized = false} = params
     .header.container.container_justify-content-space-between.container_align-items-center
-        img.logo.header__logo(src=path + "library.blocks/logo/logo.svg", alt="")
+        a(href="#")
+            img.logo.header__logo(src=path + "library.blocks/logo/logo.svg", alt="")
         ul.header__menu
             li
                 a.header__menu-item(href="#") О нас
@@ -15,7 +16,13 @@ mixin header(param)
                 a.header__menu-item(href="#") Новости
             li
                 +itemExpandable({title: ' Соглашения', number: 2})
-            li
-                +buttonBorder({sign: 'Войти', header: 1})
-            li
-                +bigButton({sign: 'зарегистрироваться', header: 1})
+            if !authorized
+                li
+                    +buttonBorder({sign: 'Войти', header: 1})
+                li
+                    +bigButton({sign: 'зарегистрироваться', header: 1})
+            else
+                li
+                    .header__v-line
+                li
+                    a.header__menu-item(href="#") Юлий Цезарь

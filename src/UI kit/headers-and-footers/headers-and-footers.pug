@@ -1,5 +1,6 @@
 - const path = '../../'
 include ../../common.blocks/header/header
+include ../../common.blocks/footer/footer
 include ../../library.blocks/button/_border/button_border
 include ../../library.blocks/button/_big/button_big
 
@@ -10,4 +11,7 @@ html.html(lang="ru")
         title
     body.pages.pages_headers-and-footers
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
-        +header()
+        .container.container_direction-column
+            +header({})
+            +header({authorized: 1})
+            +footer({})
