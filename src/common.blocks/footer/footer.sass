@@ -1,34 +1,70 @@
+@use '@common/footer/footer_mobile'
+@use '@library/color/base-color' as colors
+
 .footer
-  padding-left: 140px
-  padding-right: 140px
   background: white
   box-shadow: 0 10px 20px 0 rgba(31, 32, 65, .05)
+  color: colors.$base-color-75
+
+  & a
+    color: colors.$base-color-50
+    text-decoration: none
+
+  & a:hover, & a:focus
+    outline: none
+
+  & p
+    line-height: 24px
 
 .footer__main-content
   display: grid
   grid-template-columns: repeat(12, 1fr)
   grid-column-gap: 40px
+  padding-left: 140px
+  padding-right: 140px
   padding-top: 100px
   padding-bottom: 100px
 
+  & > *
+    row-gap: 20px
+
   & > *:first-child, & > *:nth-child(5)
     grid-column: span 3
-    background: lightyellow
 
   & > *:nth-child(2)
     grid-column: span 2
-    background: lightblue
 
   & > *:nth-child(3)
     grid-column: span 2
-    background: lightgreen
 
   & > *:nth-child(4)
     grid-column: span 2
-    background: tomato
 
-.footer__social
+.footer__social-content
   display: flex
   justify-content: space-between
   align-items: center
+  padding-left: 140px
+  padding-right: 140px
   height: 70px
+  border-top: 1px solid #DEDEE3
+
+.footer__social-container
+  display: flex
+  align-items: center
+  column-gap: 20px
+
+.footer__social-icon
+  width: 22px
+  height: 22px
+
+  &.twitter-icon
+    width: 24px
+    height: 20px
+    background-image: url(@common/footer/twitter-icon.svg)
+
+  &.facebook-icon
+    background-image: url(@common/footer/facebook-icon.svg)
+
+  &.instagram-icon
+    background-image: url(@common/footer/instagram-icon.svg)

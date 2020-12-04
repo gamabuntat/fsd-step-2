@@ -2,12 +2,12 @@ include ../../common.blocks/header/__menu-item/header__menu-item_expandable
 
 mixin header(params)
     - let {authorized = false} = params
-    .header.container.container_justify-content-space-between.container_align-items-center
+    header.header.container.container_justify-content-space-between.container_align-items-center
         a(href="#")
             img.logo.header__logo(src=path + "library.blocks/logo/logo.svg", alt="")
         ul.header__menu
             li
-                a.header__menu-item(href="#") О нас
+                a.header__menu-item(href="cards.html") О нас
             li
                 +itemExpandable({})
             li
