@@ -1,8 +1,95 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html class="html" lang="ru">
   <head>
     <meta charset="UTF-8">
     <title></title>
   </head>
-  <body><img class="watermark" src="i/watermark.svg" alt=""><script src="headersAndFooters.js"></script></body>
+  <body class="pages pages_headers-and-footers"><img class="watermark" src="i/watermark.svg" alt="">
+    <div class="container container_direction-column">
+      <header class="header container container_justify-content-space-between container_align-items-center"><a href="#"><img class="logo header__logo" src="i/logo.svg" alt=""/></a>
+        <ul class="header__menu">
+          <li><a class="header__menu-item" href="cards.html">О нас</a></li>
+          <li>
+            <div class="header__menu-item header__menu-item_expandable">Услуги</div>
+            <div class="header__expandable-content container container_direction-column"><a href="#">Item of list 1</a><a href="#">Item of list 2</a><a href="#">Item of list 3</a>
+            </div>
+          </li>
+          <li><a class="header__menu-item" href="#">Вакансии</a></li>
+          <li><a class="header__menu-item" href="#">Новости</a></li>
+          <li>
+            <div class="header__menu-item header__menu-item_expandable"> Соглашения</div>
+            <div class="header__expandable-content container container_direction-column"><a href="#">Item of list 1</a><a href="#">Item of list 2</a>
+            </div>
+          </li>
+          <li>
+            <div class="button header__button button_border">
+              <button>
+                <h3 class="h3">Войти</h3>
+              </button>
+            </div>
+          </li>
+          <li>
+            <button class="header__button button button_big container container_align-items-center container_justify-content-space-between">
+              <h3 class="h3 button__sign">зарегистрироваться</h3>
+            </button>
+          </li>
+        </ul>
+      </header>
+      <header class="header container container_justify-content-space-between container_align-items-center"><a href="#"><img class="logo header__logo" src="i/logo.svg" alt=""/></a>
+        <ul class="header__menu">
+          <li><a class="header__menu-item" href="cards.html">О нас</a></li>
+          <li>
+            <div class="header__menu-item header__menu-item_expandable">Услуги</div>
+            <div class="header__expandable-content container container_direction-column"><a href="#">Item of list 1</a><a href="#">Item of list 2</a><a href="#">Item of list 3</a>
+            </div>
+          </li>
+          <li><a class="header__menu-item" href="#">Вакансии</a></li>
+          <li><a class="header__menu-item" href="#">Новости</a></li>
+          <li>
+            <div class="header__menu-item header__menu-item_expandable"> Соглашения</div>
+            <div class="header__expandable-content container container_direction-column"><a href="#">Item of list 1</a><a href="#">Item of list 2</a>
+            </div>
+          </li>
+          <li>
+            <div class="header__v-line"></div>
+          </li>
+          <li><a class="header__menu-item" href="#">Юлий Цезарь</a></li>
+        </ul>
+      </header>
+      <footer class="footer">
+        <div class="footer__main-content">
+          <div class="container container_direction-column container_align-items-flex-start"><img class="logo footer__logo" src="i/logo.svg" alt=""/>
+            <p class="p">Бронирование номеров в лучшем<br/>отеле 2019 года по версии<br/>ассоциации «Отельные взгляды»</p>
+          </div>
+          <div class="container container_direction-column">
+            <h3 class="h3">навигация</h3><a href="#">О нас</a><a href="#">Новости</a><a href="#">Служба поддержки</a><a href="#">Услуги</a>
+          </div>
+          <div class="container container_direction-column">
+            <h3 class="h3">о нас</h3><a href="#">О сервисе</a><a href="#">Наша команда</a><a href="#">Вакансии</a><a href="#">Инвесторы</a>
+          </div>
+          <div class="container container_direction-column">
+            <h3 class="h3">Служба поддержки</h3><a href="#">Соглашения</a><a href="#">Сообщества</a><a href="#">Связь с нами</a>
+          </div>
+          <div class="container container_direction-column">
+            <h3 class="h3">Подписка</h3>
+            <p class="p">Получайте специальные предложения и новости сервиса</p>
+            <div class="sub-text-field container container_direction-column">
+              <div class="input sub-text-field__container container">
+                <input class="sub-text-field__input" type="text" placeholder="Email"/>
+                <button class="text-button sub-text-field__button"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer__social-content">
+          <p class="p">Copyright © 2018 Toxin отель. Все права зачищены.</p>
+          <div class="footer__social-container"><a class="footer__social-icon twitter-icon" href="#"></a><a class="footer__social-icon facebook-icon" href="#"></a><a class="footer__social-icon instagram-icon" href="#"></a></div>
+        </div>
+      </footer>
+      <footer class="footer footer_mobile"><img class="logo footer__logo" src="i/logo.svg" alt=""/>
+        <p class="p">Copyright © 2018 Toxin отель. Все права зачищены.</p>
+        <div class="footer__social-container"><a class="footer__social-icon twitter-icon" href="#"></a><a class="footer__social-icon facebook-icon" href="#"></a><a class="footer__social-icon instagram-icon" href="#"></a></div>
+      </footer>
+    </div>
+  <script src="headersAndFooters.js"></script></body>
 </html>

@@ -10,6 +10,7 @@ module.exports = {
         formElements: './src/UI kit/Form Elements/formElements.js',
         cards: './src/UI kit/cards/cards.js',
         headersAndFooters: './src/UI kit/headers-and-footers/headers-and-footers.js',
+        landing: './src/page/landing/landing.js',
     },
     output: {
         filename: '[name].js',
@@ -53,6 +54,12 @@ module.exports = {
             template: './src/UI kit/headers-and-footers/headers-and-footers.pug',
             minify: 'false',
             chunks: ['headersAndFooters'],
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'landing.html',
+            template: './src/page/landing/landing.pug',
+            minify: 'false',
+            chunks: ['landing'],
         }),
         //new CopyWebpackPlugin({
         //    patterns: [

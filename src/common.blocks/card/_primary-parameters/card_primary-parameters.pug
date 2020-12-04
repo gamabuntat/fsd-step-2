@@ -1,7 +1,12 @@
-.card.card_primary-parameters.container
-    h1.h1 Найдём номера под
-        br
-        | ваши пожелания
-    +dateDropdown({onlyByttons: true})
-    +dropdown({})
-    +bigButton({sign: 'подобрать номер'})
+mixin primaryCard(params)
+    - let {calendar = true} = params
+    .card.card_primary-parameters.container
+        h1.h1 Найдём номера под
+            br
+            | ваши пожелания
+        if calendar
+            +dateDropdown({})
+        else
+            +dateDropdown({onlyByttons: true})
+        +dropdown({})
+        +bigButton({sign: 'подобрать номер'})

@@ -1,0 +1,24 @@
+@use '@library/sub-text-field/sub-text-field'
+@use '@common/header/header'
+@use '@common/footer/footer'
+@use '@library/card/card'
+@use '@common/card/_primary-parameters/card_primary-parameters'
+@use '@library/date-dropdown/date-dropdown'
+@use '@library/dropdown/dropdown'
+@use '@library/calendar/calendar'
+
+.pages__landing
+  display: flex
+  flex-direction: column
+
+.main
+  flex-grow: 1
+  width: 100%
+  min-height: 900px
+  padding: 70px 140px 18px 140px
+  background-image: url(@src/page/landing/image.svg)
+  background-repeat: no-repeat
+  background-size: cover
+  background-position: center center
+  background-attachment: scroll
+  box-sizing: border-box

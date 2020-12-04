@@ -2,7 +2,7 @@ include ../../common.blocks/header/__menu-item/header__menu-item_expandable
 
 mixin header(params)
     - let {authorized = false} = params
-    header.header.container.container_justify-content-space-between.container_align-items-center
+    header.header
         a(href="#")
             img.logo.header__logo(src=path + "library.blocks/logo/logo.svg", alt="")
         ul.header__menu

@@ -10,6 +10,7 @@ include ../../library.blocks/dropdown/dropdown
 include ../../library.blocks/button/_big/button_big
 include ../../common.blocks/have-acc/have-acc
 include ../../common.blocks/room-card/room-card
+include ../../common.blocks/card/_primary-parameters/card_primary-parameters
 
 doctype html
 html.html(lang="ru")
@@ -19,7 +20,7 @@ html.html(lang="ru")
     body.pages.pages_cards
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
         .container.container_direction-column
-            include ../../common.blocks/card/_primary-parameters/card_primary-parameters
+            +primaryCard({calendar: false})
             include ../../common.blocks/card/_registration/card_registration
         .container.container_direction-column
             include ../../common.blocks/card/_room-details/card_room-details
@@ -32,7 +33,7 @@ html.html(lang="ru")
             "common.blocks/room-card/__image/room-card__image-2.svg",
             "common.blocks/room-card/__image/room-card__image-1.svg",
             "common.blocks/room-card/__image/room-card__image-2.svg",
-            ], 
+            ],
             })
             +roomCard({
             imgPath: [
@@ -40,7 +41,7 @@ html.html(lang="ru")
             "common.blocks/room-card/__image/room-card__image-1.svg",
             "common.blocks/room-card/__image/room-card__image-2.svg",
             "common.blocks/room-card/__image/room-card__image-1.svg",
-            ], 
+            ],
             roomNumber: 840,
             price: 9900,
             luxuryStatus: '',
