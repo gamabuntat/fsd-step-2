@@ -1,5 +1,7 @@
+@use '@library/color/base-color' as colors
 @use '@library/sub-text-field/sub-text-field'
 @use '@common/header/header'
+@use '@common/header/header__media'
 @use '@common/footer/footer'
 @use '@library/card/card'
 @use '@common/card/_primary-parameters/card_primary-parameters'
@@ -12,13 +14,36 @@
   flex-direction: column
 
 .main
+  display: flex
+  flex-direction: column
+  justify-content: space-between
   flex-grow: 1
   width: 100%
   min-height: 900px
-  padding: 70px 140px 18px 140px
-  background-image: url(@src/page/landing/image.svg)
+  padding: 70px 140px 18px
   background-repeat: no-repeat
   background-size: cover
   background-position: center center
   background-attachment: scroll
   box-sizing: border-box
+  background-image: url(@src/page/landing/image.svg)
+
+  //animation: changeBg 20s infinite
+
+@keyframes changeBg
+  from
+    background-image: url(@src/page/landing/image.svg)
+  to
+    background-image: url(@src/page/landing/image-2.svg)
+
+.main__sign
+  display: flex
+  align-self: flex-end
+  text-align: right
+  color: colors.$base-color-75
+
+@media screen and (max-width: 668px)
+  .main
+    align-items: center
+    padding-right: 0
+    padding-left: 0

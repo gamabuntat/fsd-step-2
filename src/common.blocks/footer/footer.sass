@@ -68,3 +68,28 @@
 
   &.instagram-icon
     background-image: url(@common/footer/instagram-icon.svg)
+
+@media screen and (max-width: 1165px)
+  .footer
+    padding-bottom: 120px
+
+  .footer__main-content
+    display: flex
+    justify-content: center
+    padding-bottom: 20px
+
+    & > *
+      display: contents
+    & > * *
+      display: none
+
+  .footer__logo
+    display: initial
+
+  .footer__social-content
+    flex-direction: column
+    row-gap: 25px
+    border: none
+
+    & > *:first-child
+      text-align: center

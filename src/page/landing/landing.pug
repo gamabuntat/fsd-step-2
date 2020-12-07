@@ -12,9 +12,14 @@ doctype html
 html.html(lang="ru")
     head
         meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title
     body.pages.pages__landing
         +header({})
         main.main
             +primaryCard({})
+            .main__sign
+                | Лучшие номера для вашей работы,
+                br
+                | отдыха и просто вдохновения
         +footer({})
