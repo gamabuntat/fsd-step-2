@@ -1,3 +1,5 @@
+@use '@library/color/base-color' as colors
+
 .header__menu-button
   display: none
   background: rgba(1, 1, 1, .0)
@@ -5,3 +7,9 @@
   border: none
   outline: none
   cursor: pointer
+
+  &:hover .header__burger
+    fill: colors.$base-color-100
+
+.header__burger
+  fill: colors.$base-color-75

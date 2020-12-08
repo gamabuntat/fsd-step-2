@@ -1,4 +1,5 @@
 import {collectionOfDates, printCalendar, calendar, container, submitButton, cancelButton} from '../calendar.js';
+import {changeCalendarButtonsValue} from '../__submit-button/calendar__submit-button.js'
 
 let nextButton = calendar.querySelector('.calendar__next-button');
 
@@ -69,6 +70,7 @@ export function dataPicker() {
     function drawRange() {
         let elems = dataPicker.startRangeElem.concat(dataPicker.endRangeElem);
         elems.sort(compareElems);
+        changeCalendarButtonsValue.rangeButtons = elems;
         let nextElemIndex = 0;
         drawOneWeek(elems[nextElemIndex]);
 

@@ -19,7 +19,7 @@ export function dropdownButton() {
     }
 }
 
-function clickOutsideButton(e) {
+export function clickOutsideButton(e) {
     //return;
     let elementClicked = e.target;
 
