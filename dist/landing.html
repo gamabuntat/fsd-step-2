@@ -2,7 +2,446 @@
 <html class="html" lang="ru">
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
   </head>
-  <body><img class="watermark" src="i/watermark.svg" alt=""><script src="landing.js"></script></body>
+  <body class="pages pages__landing">
+    <header class="header">
+      <button class="header__menu-button"><svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24" aria-hidden="true">
+<path class="header__burger" fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+</path>
+</svg>
+      </button><a class="header__link-logo" href="#">
+        <div class="logo header__logo"></div></a>
+      <ul class="header__menu header__menu-js">
+        <li><a class="header__menu-item" href="cards.html">О нас</a></li>
+        <li>
+          <div class="header__menu-item header__menu-item_expandable">Услуги</div>
+          <div class="header__expandable-content container container_direction-column"><a href="#">Item of list 1</a><a href="#">Item of list 2</a><a href="#">Item of list 3</a>
+          </div>
+        </li>
+        <li><a class="header__menu-item" href="#">Вакансии</a></li>
+        <li><a class="header__menu-item" href="#">Новости</a></li>
+        <li>
+          <div class="header__menu-item header__menu-item_expandable"> Соглашения</div>
+          <div class="header__expandable-content container container_direction-column"><a href="#">Item of list 1</a><a href="#">Item of list 2</a>
+          </div>
+        </li>
+      </ul>
+      <div class="header__button-container container">
+        <div class="button header__button button_border">
+          <button>
+            <h3 class="h3">Войти</h3>
+          </button>
+        </div>
+        <button class="header__button button button_big container container_align-items-center container_justify-content-space-between">
+          <h3 class="h3 button__sign">зарегистрироваться</h3>
+        </button>
+      </div>
+    </header>
+    <main class="main">
+      <div class="card card_primary-parameters container">
+        <h1 class="h1">Найдём номера под<br/>ваши пожелания</h1>
+        <div class="date-dropdown container container_justify-content-space-between">
+          <div class="date-dropdown__container container container_direction-column">
+            <h3 class="h3 date-dropdown__sign">прибытие</h3>
+            <button class="date-dropdown__button date-dropdown__start-date-button container container_justify-content-space-between container_align-items-center"><span class="date-dropdown__start-date">ДД.ММ.ГГГГ</span><span class="date-dropdown__expand-icon"></span></button>
+          </div>
+          <div class="date-dropdown__container container container_direction-column">
+            <h3 class="h3 date-dropdown__sign">выезд</h3>
+            <button class="date-dropdown__button date-dropdown__end-date-button container container_justify-content-space-between container_align-items-center"><span class="date-dropdown__end-date">ДД.ММ.ГГГГ</span><span class="date-dropdown__expand-icon"></span></button>
+          </div>
+          <div class="calendar container container_direction-column">
+            <div class="calendar__title container container_justify-content-space-between">
+              <button class="calendar__prev-button text-button"> <img src="i/calendar__prev-button.svg" alt=""/></button><span class="calendar__month-name"> 
+                <h2 class="h2"></h2></span>
+              <button class="calendar__next-button text-button"><img src="i/calendar__next-button.svg" alt=""/></button>
+            </div>
+            <div class="calendar__container container">
+              <table class="calendar__table calendar__table_first">
+                <tr>
+                  <th>Пн</th>
+                  <th>Вт</th>
+                  <th>Ср</th>
+                  <th>Чт</th>
+                  <th>Пт</th>
+                  <th>Сб</th>
+                  <th>Вс</th>
+                </tr>
+                <tr>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common">1</button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                </tr>
+                <tr class="calendar__last-week">
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                </tr>
+              </table>
+              <table class="calendar__table">
+                <tr>
+                  <th>Пн</th>
+                  <th>Вт</th>
+                  <th>Ср</th>
+                  <th>Чт</th>
+                  <th>Пт</th>
+                  <th>Сб</th>
+                  <th>Вс</th>
+                </tr>
+                <tr>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                </tr>
+                <tr class="calendar__last-week">
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                  <td>
+                    <button class="calendar__day-button calendar__day-button_common"></button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="container container_direction-row-reverse container_justify-content-space-between">
+              <button class="text-button calendar__submit-button">
+                <h3 class="h3">применить</h3>
+              </button>
+              <button class="text-button text-button_cancel text-button_hidden calendar__cancel-button">
+                <h3 class="h3">очистить</h3>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown container container_direction-column">
+          <div class="container container_justify-content-space-between">
+            <h3 class="h3 dropdown__sign">гости</h3>
+          </div>
+          <button class="dropdown__button container container_justify-content-space-between container_align-items-center"><span>Сколько гостей</span><span class="dropdown__expand-icon"></span></button>
+          <div class="dropdown__expand-list container container_direction-column container_justify-content-space-between">
+            <div class="dropdown__expand-items container container_justify-content-space-between container_align-items-center">
+              <h3 class="h3">взрослые</h3>
+              <div class="container container_justify-content-space-between container_align-items-center">
+                <button class="dropdown__decrease-button dropdown__decrease-button_disabled">-</button>
+                <div class="h3 dropdown__counter container container_justify-content-center">0</div>
+                <button class="dropdown__increase-button">+</button>
+              </div>
+            </div>
+            <div class="dropdown__expand-items container container_justify-content-space-between container_align-items-center">
+              <h3 class="h3">дети</h3>
+              <div class="container container_justify-content-space-between container_align-items-center">
+                <button class="dropdown__decrease-button dropdown__decrease-button_disabled">-</button>
+                <div class="h3 dropdown__counter container container_justify-content-center">0</div>
+                <button class="dropdown__increase-button">+</button>
+              </div>
+            </div>
+            <div class="dropdown__expand-items container container_justify-content-space-between container_align-items-center">
+              <h3 class="h3">младенцы</h3>
+              <div class="container container_justify-content-space-between container_align-items-center">
+                <button class="dropdown__decrease-button dropdown__decrease-button_disabled">-</button>
+                <div class="h3 dropdown__counter container container_justify-content-center">0</div>
+                <button class="dropdown__increase-button">+</button>
+              </div>
+            </div>
+            <div class="dropdown__expand-items dropdown__expand-items_control-buttons container container_direction-row-reverse container_justify-content-space-between">
+              <button class="text-button dropdown__submit-button">
+                <h3 class="h3">применить</h3>
+              </button>
+              <button class="text-button text-button_cancel dropdown__cancel-button dropdown__cancel-button_hidden">
+                <h3 class="h3">очистить</h3>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button class="button button_big container container_align-items-center container_justify-content-space-between">
+          <h3 class="h3 button__sign">подобрать номер</h3><span class="button__arrow"></span>
+        </button>
+      </div>
+      <div class="main__sign">Лучшие номера для вашей работы,<br>отдыха и просто вдохновения</div>
+    </main>
+    <footer class="footer">
+      <div class="footer__main-content">
+        <div class="container container_direction-column container_align-items-flex-start"><img class="logo footer__logo" src="i/logo.svg" alt=""/>
+          <p class="p">Бронирование номеров в лучшем<br/>отеле 2019 года по версии<br/>ассоциации «Отельные взгляды»</p>
+        </div>
+        <div class="container container_direction-column">
+          <h3 class="h3">навигация</h3><a href="#">О нас</a><a href="#">Новости</a><a href="#">Служба поддержки</a><a href="#">Услуги</a>
+        </div>
+        <div class="container container_direction-column">
+          <h3 class="h3">о нас</h3><a href="#">О сервисе</a><a href="#">Наша команда</a><a href="#">Вакансии</a><a href="#">Инвесторы</a>
+        </div>
+        <div class="container container_direction-column">
+          <h3 class="h3">Служба поддержки</h3><a href="#">Соглашения</a><a href="#">Сообщества</a><a href="#">Связь с нами</a>
+        </div>
+        <div class="container container_direction-column">
+          <h3 class="h3">Подписка</h3>
+          <p class="p">Получайте специальные предложения и новости сервиса</p>
+          <div class="sub-text-field container container_direction-column">
+            <div class="input sub-text-field__container container">
+              <input class="sub-text-field__input" type="text" placeholder="Email"/>
+              <button class="text-button sub-text-field__button"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__social-content">
+        <p class="p">Copyright © 2018 Toxin отель. Все права зачищены.</p>
+        <div class="footer__social-container"><a class="footer__social-icon twitter-icon" href="#"></a><a class="footer__social-icon facebook-icon" href="#"></a><a class="footer__social-icon instagram-icon" href="#"></a></div>
+      </div>
+    </footer>
+  <script src="landing.js"></script></body>
 </html>

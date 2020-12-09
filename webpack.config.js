@@ -11,6 +11,7 @@ module.exports = {
         cards: './src/UI kit/cards/cards.js',
         headersAndFooters: './src/UI kit/headers-and-footers/headers-and-footers.js',
         landing: './src/page/landing/landing.js',
+        searchRoom: './src/page/search-room/search-room.js',
     },
     output: {
         filename: '[name].js',
@@ -60,6 +61,12 @@ module.exports = {
             template: './src/page/landing/landing.pug',
             minify: 'false',
             chunks: ['landing'],
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'search-room.html',
+            template: './src/page/search-room/search-room.pug',
+            minify: 'false',
+            chunks: ['searchRoom'],
         }),
         //new CopyWebpackPlugin({
         //    patterns: [

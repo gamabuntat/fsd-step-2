@@ -1,7 +1,7 @@
 import {collectionOfDates, printCalendar, calendar, container, submitButton} from '../calendar.js';
 import {dataPicker, removeRange} from '../__container/calendar__container.js'
-import {expandCalendar} from '@library/date-dropdown/__button/date-dropdown__button.js'
 
+let calendarHideEvent = new CustomEvent("calendarHide", {bubbles: true});
 
 submitButton.addEventListener('click', changeCalendarButtonsValue);
 
@@ -22,15 +22,13 @@ export function changeCalendarButtonsValue() {
             return ++month < 10 ? `0${month}` : month
         }
     }
-    let startDateButton = document.querySelector('.date-dropdown__start-date');
+    let startDateButton = document.querySelector('.date-dropdown__start-date') || document.querySelector('.filter-date-dropdown__date-start');
     startDateButton.innerHTML = `${formatDate.dd(startRangeButton.innerHTML)}.${formatDate.mm(startDate.month)}.${startDate.year}`;
 
-    let endDateButton = document.querySelector('.date-dropdown__end-date');
+    let endDateButton = document.querySelector('.date-dropdown__end-date') || document.querySelector('.filter-date-dropdown__date-end');
     endDateButton.innerHTML = `${formatDate.dd(endRangeButton.innerHTML)}.${formatDate.mm(endDate.month)}.${endDate.year}`;
 
-    console.log(startDate, endDate);
-
-    expandCalendar();
+    hideCalendar();
 
     function getStartRangeButton() {
         for (let button of changeCalendarButtonsValue.rangeButtons) {
@@ -53,6 +51,10 @@ export function changeCalendarButtonsValue() {
 
     function matchElems(elem) {
         return collectionOfDates.find(table => table.elem == elem);
+    }
+
+    function hideCalendar() {
+        calendar.dispatchEvent(calendarHideEvent);
     }
 }
 

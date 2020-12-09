@@ -1,9 +1,15 @@
 import {collectionOfDates, printCalendar, calendar, container, cancelButton} from '../calendar.js';
 import {dataPicker, removeRange} from '../__container/calendar__container.js'
 
+let mask = 'ДД.ММ.ГГГГ';
+
 cancelButton.addEventListener('click', function() {
     dataPicker.startRange = true;
     removeRange();
+    let startDateButton = document.querySelector('.date-dropdown__start-date');
+    let endDateButton = document.querySelector('.date-dropdown__end-date');
+    startDateButton.innerHTML = mask;
+    endDateButton.innerHTML = mask;
 })
 
 cancelButton.addEventListener('focus', focusOnFirstDay);

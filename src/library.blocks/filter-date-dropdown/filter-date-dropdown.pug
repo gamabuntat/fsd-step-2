@@ -1,4 +1,5 @@
-mixin filterDateDropdown(title)
+mixin filterDateDropdown(params)
+    - let {title = false, onlyButtons = false} = params
     .filter-date-dropdown.container.container_direction-column.container_justify-content-space-between
         if title
             h3.h3.filter-date-dropdown__sign filter date dropdown
@@ -10,3 +11,5 @@ mixin filterDateDropdown(title)
                 |&nbsp; - &nbsp;
                 span.filter-date-dropdown__date-end 23 авг
             span.filter-date-dropdown__expand-icon
+        if !onlyButtons
+            include ../../library.blocks/calendar/calendar.pug
