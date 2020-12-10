@@ -1,3 +1,5 @@
+@use '@library/html/html'
+
 .calendar_shrink
   padding-left: 20px
   padding-right: 20px
@@ -5,3 +7,6 @@
   & .calendar__day-button
     width: 32px
     height: 32px
+
+  & .calendar__month-name > .h2
+    font-size: html.rem-size(17)

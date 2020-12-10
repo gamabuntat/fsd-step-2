@@ -1,7 +1,9 @@
-import {collectionOfDates, printCalendar, calendar, container, submitButton} from '../calendar.js';
+import {collectionOfDates, printCalendar, calendar, container, submitButton, shrink, MONTHS} from '../calendar.js';
 import {dataPicker, removeRange} from '../__container/calendar__container.js'
 
 let calendarHideEvent = new CustomEvent("calendarHide", {bubbles: true});
+let startDateButton = document.querySelector('.date-dropdown__start-date') || document.querySelector('.filter-date-dropdown__date-start');
+let endDateButton = document.querySelector('.date-dropdown__end-date') || document.querySelector('.filter-date-dropdown__date-end');
 
 submitButton.addEventListener('click', changeCalendarButtonsValue);
 
@@ -20,13 +22,19 @@ export function changeCalendarButtonsValue() {
         },
         mm(month) {
             return ++month < 10 ? `0${month}` : month
+        },
+        stringMonth(month) {
+            return MONTHS[month].slice(0, 3).toLowerCase()
         }
     }
-    let startDateButton = document.querySelector('.date-dropdown__start-date') || document.querySelector('.filter-date-dropdown__date-start');
-    startDateButton.innerHTML = `${formatDate.dd(startRangeButton.innerHTML)}.${formatDate.mm(startDate.month)}.${startDate.year}`;
-
-    let endDateButton = document.querySelector('.date-dropdown__end-date') || document.querySelector('.filter-date-dropdown__date-end');
-    endDateButton.innerHTML = `${formatDate.dd(endRangeButton.innerHTML)}.${formatDate.mm(endDate.month)}.${endDate.year}`;
+    if (!shrink) {
+        startDateButton.innerHTML = `${formatDate.dd(startRangeButton.innerHTML)}.${formatDate.mm(startDate.month)}.${startDate.year}`;
+        endDateButton.innerHTML = `${formatDate.dd(endRangeButton.innerHTML)}.${formatDate.mm(endDate.month)}.${endDate.year}`;
+    }
+    else {
+        startDateButton.innerHTML = `${startRangeButton.innerHTML} ${formatDate.stringMonth(startDate.month)}`;
+        endDateButton.innerHTML = `${endRangeButton.innerHTML} ${formatDate.stringMonth(endDate.month)}`;
+    }
 
     hideCalendar();
 

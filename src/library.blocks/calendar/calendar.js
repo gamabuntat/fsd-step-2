@@ -1,13 +1,14 @@
 import {CALENDAR_TABLE_TEMPLATE} from './calendar__template.js';
 
-const MONTHS = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+export const MONTHS = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
 export let collectionOfDates = [];
 export let calendar = document.querySelector('.calendar');
 export let container = document.querySelector('.calendar__container');
 export let firstTable = document.querySelector('.calendar__table_first');
 export let submitButton = calendar.querySelector('.calendar__submit-button');
 export let cancelButton = calendar.querySelector('.calendar__cancel-button');
-export let step = calendar.classList.contains('calendar_shrink') ? 224 : 280;
+export let shrink = calendar.classList.contains('calendar_shrink');
+export let step =  shrink ? 224 : 280;
 let titleMonth = document.querySelector('.calendar__month-name').firstElementChild;
 
 function init() {

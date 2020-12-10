@@ -1,4 +1,11 @@
 - const path = '../../'
+include ../../common.blocks/header/header
+include ../../common.blocks/footer/footer
+include ../../common.blocks/room-card/room-card
+include ../../library.blocks/rate/rate
+include ../../library.blocks/button/_border/button_border
+include ../../library.blocks/button/_big/button_big
+include ../../library.blocks/sub-text-field/sub-text-field
 include ../../library.blocks/calendar/calendar.pug
 include ../../library.blocks/filter-date-dropdown/filter-date-dropdown
 
@@ -6,6 +13,49 @@ doctype html
 html.html(lang="ru")
     head
         meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title
     body.pages.pages_search-room
-        +filterDateDropdown({shrink: true})
+        +header({})
+        .container
+            aside
+                +filterDateDropdown({shrink: true})
+            main.main
+                +roomCard({
+                imgPath: [
+                "common.blocks/room-card/__image/room-card__image-1.svg",
+                "common.blocks/room-card/__image/room-card__image-2.svg",
+                "common.blocks/room-card/__image/room-card__image-1.svg",
+                "common.blocks/room-card/__image/room-card__image-2.svg",
+                ],
+                })
+                +roomCard({
+                imgPath: [
+                "common.blocks/room-card/__image/room-card__image-1.svg",
+                "common.blocks/room-card/__image/room-card__image-2.svg",
+                "common.blocks/room-card/__image/room-card__image-1.svg",
+                "common.blocks/room-card/__image/room-card__image-2.svg",
+                ],
+                })
+                +roomCard({
+                imgPath: [
+                "common.blocks/room-card/__image/room-card__image-2.svg",
+                "common.blocks/room-card/__image/room-card__image-1.svg",
+                "common.blocks/room-card/__image/room-card__image-2.svg",
+                "common.blocks/room-card/__image/room-card__image-1.svg",
+                ],
+                roomNumber: 840,
+                price: 9900,
+                luxuryStatus: '',
+                rate: 4,
+                reviews: 65,
+                })
+                +roomCard({
+                imgPath: [
+                "common.blocks/room-card/__image/room-card__image-1.svg",
+                "common.blocks/room-card/__image/room-card__image-2.svg",
+                "common.blocks/room-card/__image/room-card__image-1.svg",
+                "common.blocks/room-card/__image/room-card__image-2.svg",
+                ],
+                })
+        +footer({})
