@@ -12,4 +12,4 @@ mixin dateDropdown(params)
                 span.date-dropdown__end-date #{secondDate}
                 span.date-dropdown__expand-icon
         if !onlyByttons
-            include ../../library.blocks/calendar/calendar.pug
+            +calendar({})

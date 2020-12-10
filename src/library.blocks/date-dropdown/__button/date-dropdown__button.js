@@ -9,7 +9,7 @@ dateDropdownNameSpace.expandIcons = dateDropdownNameSpace.dateDropdown.querySele
 dateDropdownNameSpace.dateButtons.forEach(button => button.addEventListener('click', expandCalendar));
 dateDropdownNameSpace.dateDropdown.addEventListener('calendarHide', expandCalendar);
 
-export function expandCalendar() {
+function expandCalendar() {
     dateDropdownNameSpace.expandIcons.forEach(icon => icon.classList.toggle('date-dropdown__expand-icon_open'));
     let coordDropdown = dateDropdownNameSpace.dateDropdown.getBoundingClientRect();
     let coordButton = dateDropdownNameSpace.startDateButton.getBoundingClientRect();

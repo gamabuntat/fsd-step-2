@@ -10,7 +10,7 @@ console.log(filterDateDropdownNameSpace);
 filterDateDropdownNameSpace.button.addEventListener('click', expandCalendar);
 filterDateDropdownNameSpace.dropdown.addEventListener('calendarHide', expandCalendar);
 
-export function expandCalendar() {
+function expandCalendar() {
     filterDateDropdownNameSpace.expandIcon.classList.toggle('filter-date-dropdown__expand-icon_open');
     let coordDropdown = filterDateDropdownNameSpace.dropdown.getBoundingClientRect();
     let coordButton = filterDateDropdownNameSpace.button.getBoundingClientRect();

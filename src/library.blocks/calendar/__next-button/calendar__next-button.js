@@ -1,4 +1,4 @@
-import {MyDate, collectionOfDates, printCalendar, updateTitle, container, firstTable, specifyMonth} from '../calendar.js';
+import {MyDate, collectionOfDates, printCalendar, updateTitle, container, firstTable, specifyMonth, step} from '../calendar.js';
 import {CALENDAR_TABLE_TEMPLATE} from '../calendar__template.js';
 
 let nextButton = document.querySelector('.calendar__next-button');
@@ -12,7 +12,7 @@ function scrollNextMonth() {
     collectionOfDates[printCalendar.ordinal].updateTitle();
     let y = parseInt(firstTable.style.marginLeft);
     if (!y) y = 0;
-    firstTable.style.marginLeft = y - 280 + 'px' ;
+    firstTable.style.marginLeft = y - step + 'px' ;
 
     if (!collectionOfDates[printCalendar.ordinal + 1]) {
 

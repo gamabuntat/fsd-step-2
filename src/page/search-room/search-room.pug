@@ -1,10 +1,11 @@
 - const path = '../../'
+include ../../library.blocks/calendar/calendar.pug
 include ../../library.blocks/filter-date-dropdown/filter-date-dropdown
 
 doctype html
-html(lang="ru")
+html.html(lang="ru")
     head
         meta(charset="UTF-8")
         title
     body.pages.pages_search-room
-        +filterDateDropdown({})
+        +filterDateDropdown({shrink: true})

@@ -7,6 +7,7 @@ export let container = document.querySelector('.calendar__container');
 export let firstTable = document.querySelector('.calendar__table_first');
 export let submitButton = calendar.querySelector('.calendar__submit-button');
 export let cancelButton = calendar.querySelector('.calendar__cancel-button');
+export let step = calendar.classList.contains('calendar_shrink') ? 224 : 280;
 let titleMonth = document.querySelector('.calendar__month-name').firstElementChild;
 
 function init() {
