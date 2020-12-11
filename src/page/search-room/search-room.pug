@@ -7,6 +7,7 @@ include ../../library.blocks/button/_border/button_border
 include ../../library.blocks/button/_big/button_big
 include ../../library.blocks/sub-text-field/sub-text-field
 include ../../library.blocks/calendar/calendar.pug
+include ../../library.blocks/dropdown/dropdown
 include ../../library.blocks/filter-date-dropdown/filter-date-dropdown
 
 doctype html
@@ -17,10 +18,13 @@ html.html(lang="ru")
         title
     body.pages.pages_search-room
         +header({})
-        .container
-            aside
+        main.main
+            aside.aside
                 +filterDateDropdown({shrink: true})
-            main.main
+                +dropdown({small: 1})
+                +dropdown({narrow: 1})
+            .main__content.container
+                h1.h1.main__title Номера, которые мы для вас подобрали
                 +roomCard({
                 imgPath: [
                 "common.blocks/room-card/__image/room-card__image-1.svg",
@@ -39,16 +43,19 @@ html.html(lang="ru")
                 })
                 +roomCard({
                 imgPath: [
-                "common.blocks/room-card/__image/room-card__image-2.svg",
                 "common.blocks/room-card/__image/room-card__image-1.svg",
                 "common.blocks/room-card/__image/room-card__image-2.svg",
                 "common.blocks/room-card/__image/room-card__image-1.svg",
+                "common.blocks/room-card/__image/room-card__image-2.svg",
                 ],
-                roomNumber: 840,
-                price: 9900,
-                luxuryStatus: '',
-                rate: 4,
-                reviews: 65,
+                })
+                +roomCard({
+                imgPath: [
+                "common.blocks/room-card/__image/room-card__image-1.svg",
+                "common.blocks/room-card/__image/room-card__image-2.svg",
+                "common.blocks/room-card/__image/room-card__image-1.svg",
+                "common.blocks/room-card/__image/room-card__image-2.svg",
+                ],
                 })
                 +roomCard({
                 imgPath: [

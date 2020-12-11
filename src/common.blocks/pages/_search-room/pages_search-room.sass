@@ -8,20 +8,41 @@
 @use '@library/calendar/calendar'
 @use '@library/calendar/__open/calendar__open'
 @use '@library/calendar/_shrink/calendar_shrink'
+@use '@library/dropdown/dropdown'
+@use '@library/dropdown/_narrow/dropdown_narrow'
+@use '@library/dropdown/_small/dropdown_small'
 @use '@library/filter-date-dropdown/filter-date-dropdown'
 @use '@library/rate/rate'
 @use '@common/room-card/room-card'
 
 .pages_search-room
-
-  & > *:nth-child(2)
-    padding: 30px 140px
-    justify-content: center
-    column-gap: 60px
+  display: flex
+  flex-direction: column
+  column-gap: 60px
     
 .main
-  width: min(100%, 837px)
-  flex-wrap: wrap
+  padding-top: 30px
+  padding-left: 2em
+  padding-right: 2em
   display: flex
+  column-gap: 60px
+  justify-content: center
+  flex-grow: 1
+
+.main__content
+  max-width: 837px
+  flex-wrap: wrap
+  flex-grow: 1
   column-gap: 12px
   row-gap: 20px
+
+.main__title
+  flex-basis: 100%
+
+.aside
+  display: flex
+  flex-direction: column
+  row-gap: 30px
+
+  & > *:first-child
+    margin-bottom: -10px

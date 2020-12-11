@@ -17,6 +17,8 @@ import '@src/library.blocks/calendar/__container/calendar__container.js'
 import '@src/library.blocks/calendar/__submit-button/calendar__submit-button.js'
 import '@src/library.blocks/calendar/__cancel-button/calendar__cancel-button.js'
 
+import '@src/library.blocks/dropdown/dropdown.js'
+import '@src/library.blocks/dropdown/dropdown__observer.js'
 import '@library/filter-date-dropdown/__button/filter-date-dropdown__button.js'
 
 import '@src/common.blocks/room-card/__rate/room-card__rate.js'
