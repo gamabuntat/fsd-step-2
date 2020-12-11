@@ -6,18 +6,21 @@
 @use '@common/header/__v-line/header__v-line'
 
 .header
+  display: flex
+  justify-content: center
+  width: 100%
+  background: white
+  box-shadow: 0 10px 20px 0 rgba(31, 32, 65, .05)
+
+.header__container
   display: grid
   grid-template-columns: min-content auto min-content
   column-gap: 20px
   row-gap: .2em
   align-items: center
-  position: relative
-  padding-top: 15px
-  padding-bottom: 15px
-  padding-left: 140px
-  padding-right: 140px
-  background: white
-  box-shadow: 0 10px 20px 0 rgba(31, 32, 65, .05)
+  align-self: center
+  padding: 15px 1rem
+  width: min(1440px, 100%)
   box-sizing: border-box
 
 .header__link-logo

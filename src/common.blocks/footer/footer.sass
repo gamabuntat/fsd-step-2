@@ -2,8 +2,12 @@
 @use '@library/color/base-color' as colors
 
 .footer
+  display: flex
+  flex-direction: column
+  justify-content: center
+  width: 100%
   background: white
-  box-shadow: 0 10px 20px 0 rgba(31, 32, 65, .05)
+  box-shadow: 0 -10px 20px 0 rgba(31, 32, 65, .05)
   color: colors.$base-color-75
 
   & a
@@ -16,12 +20,20 @@
   & p
     line-height: 24px
 
+  & .footer__container:nth-child(2)
+    border-top: 1px solid #DEDEE3
+
+.footer__container
+  display: flex
+  justify-content: center
+  
 .footer__main-content
   display: grid
   grid-template-columns: repeat(12, 1fr)
   grid-column-gap: 40px
-  padding-left: 140px
-  padding-right: 140px
+  padding: 15px 1rem
+  width: min(1440px, 100%)
+  box-sizing: border-box
   padding-top: 100px
   padding-bottom: 100px
 
@@ -44,10 +56,10 @@
   display: flex
   justify-content: space-between
   align-items: center
-  padding-left: 140px
-  padding-right: 140px
+  padding: 15px 1rem
+  width: min(1440px, 100%)
   height: 70px
-  border-top: 1px solid #DEDEE3
+  box-sizing: border-box
 
 .footer__social-container
   display: flex
@@ -69,9 +81,12 @@
   &.instagram-icon
     background-image: url(@common/footer/instagram-icon.svg)
 
-@media screen and (max-width: 1165px)
+@media screen and (max-width: 1160px)
   .footer
     padding-bottom: 120px
+
+    & .footer__container:nth-child(2)
+      border-top: none
 
   .footer__main-content
     display: flex

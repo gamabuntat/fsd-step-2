@@ -2,47 +2,49 @@ mixin footer(params)
     - let {mobile = false} = params
     if !mobile
         footer.footer
-            .footer__main-content
-                .container.container_direction-column.container_align-items-flex-start
-                    img.logo.footer__logo(src=path + "library.blocks/logo/logo.svg", alt="")
-                    p.p
-                        | Бронирование номеров в лучшем
-                        br
-                        | отеле 2019 года по версии
-                        br
-                        | ассоциации «Отельные взгляды»
+            .footer__container
+                .footer__main-content
+                    .container.container_direction-column.container_align-items-flex-start
+                        img.logo.footer__logo(src=path + "library.blocks/logo/logo.svg", alt="")
+                        p.p
+                            | Бронирование номеров в лучшем
+                            br
+                            | отеле 2019 года по версии
+                            br
+                            | ассоциации «Отельные взгляды»
 
-                .container.container_direction-column
-                    h3.h3 навигация
-                    a(href="#") О нас
-                    a(href="#") Новости
-                    a(href="#") Служба поддержки
-                    a(href="#") Услуги
+                    .container.container_direction-column
+                        h3.h3 навигация
+                        a(href="#") О нас
+                        a(href="#") Новости
+                        a(href="#") Служба поддержки
+                        a(href="#") Услуги
 
-                .container.container_direction-column
-                    h3.h3 о нас
-                    a(href="#") О сервисе
-                    a(href="#") Наша команда
-                    a(href="#") Вакансии
-                    a(href="#") Инвесторы
+                    .container.container_direction-column
+                        h3.h3 о нас
+                        a(href="#") О сервисе
+                        a(href="#") Наша команда
+                        a(href="#") Вакансии
+                        a(href="#") Инвесторы
 
-                .container.container_direction-column
-                    h3.h3 Служба поддержки
-                    a(href="#") Соглашения
-                    a(href="#") Сообщества
-                    a(href="#") Связь с нами
+                    .container.container_direction-column
+                        h3.h3 Служба поддержки
+                        a(href="#") Соглашения
+                        a(href="#") Сообщества
+                        a(href="#") Связь с нами
 
-                .container.container_direction-column
-                    h3.h3 Подписка
-                    p.p Получайте специальные предложения и новости сервиса
-                    +subTextField()
+                    .container.container_direction-column
+                        h3.h3 Подписка
+                        p.p Получайте специальные предложения и новости сервиса
+                        +subTextField()
 
-            .footer__social-content
-                p.p Copyright © 2018 Toxin отель. Все права зачищены.
-                .footer__social-container
-                    a.footer__social-icon.twitter-icon(href="#")
-                    a.footer__social-icon.facebook-icon(href="#")
-                    a.footer__social-icon.instagram-icon(href="#")
+            .footer__container
+                .footer__social-content
+                    p.p Copyright © 2018 Toxin отель. Все права зачищены.
+                    .footer__social-container
+                        a.footer__social-icon.twitter-icon(href="#")
+                        a.footer__social-icon.facebook-icon(href="#")
+                        a.footer__social-icon.instagram-icon(href="#")
     else
         footer.footer.footer_mobile
             img.logo.footer__logo(src=path + "library.blocks/logo/logo.svg", alt="")
