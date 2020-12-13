@@ -23,37 +23,77 @@ let observer = new MutationObserver(function(mutations) {
 
         let counters = Array.from(target.querySelectorAll('.dropdown__counter'));
 
-        let sum = counters.reduce((sum, counter) => +counter.innerHTML + sum, 0);
+        let firstSum = +counters[0].innerHTML;
+        let secondSum = +counters[1].innerHTML;
+        let thirdSum = +counters[2].innerHTML;
 
-        let lastSum = +counters[counters.length - 1].innerHTML;
+        let sum = firstSum + secondSum + thirdSum;
 
-        let diff = sum - lastSum;
+        let diff = sum - thirdSum;
 
-        let partOfString,
-            babyString;
+        let result;
 
-        if (diff == 0) {partOfString = ``}
-        else if (diff == 1) {partOfString = `${diff} гость`}
-        else if (diff < 5) {partOfString = `${diff} гостя`}
-        else {partOfString = `${diff} гостей`}
+        formString();
 
-        if (lastSum == 0) {babyString = ''}
-        else if (lastSum == 1) {babyString = `${lastSum} младенец`}
-        else if (lastSum < 5) {babyString =  `${lastSum} младенца`}
-        else {babyString = `${lastSum} младенцев`}
+        function formString() {
 
-        let result = `${partOfString} ${babyString}`
-        result = result.split(' ');
-        result.length == 4 ?
-            result = `${partOfString}, ${babyString}` :
-            result = result.join(' ')
+            if (target.classList.contains('dropdown_narrow')) {
+                let firstString,
+                    secondString,
+                    thirdString;
 
-        if (!sum) {
-            result = 'Сколько гостей';
-            showOrHideCancelButton(target);
-        }
-        else if (sum == 1) {
-            if (showCancleButton) showOrHideCancelButton(target);
+                !firstSum ? firstString = '' 
+                    : firstSum == 1 ? firstString = `${firstSum} спальня`
+                    : firstSum < 5 ? firstString = `${firstSum} спальни`
+                    : firstString = `${firstSum} спальней`
+
+                !secondSum ? secondString = '' 
+                    : secondSum == 1 ? secondString = `${secondSum} кровать`
+                    : secondSum < 5 ? secondString = `${secondSum} кровати`
+                    : secondString = `${secondSum} кроватей`
+
+                !thirdSum ? thirdString = '' 
+                    : thirdSum == 1 ? thirdString = `${thirdSum} ванная комната`
+                    : thirdSum < 5 ? thirdString = `${thirdSum} ванные комнаты`
+                    : thirdString = `${thirdSum} ванных комнат`
+
+                result = [];
+                let temp = [firstString, secondString, thirdString].
+                    forEach(i => i && result.push(i));
+                if (result.length == 3) {
+                    result.pop();
+                    result = `${result.join(', ')}...`;
+                }
+                else {result = result.join(', ')}
+                return;
+            }
+
+            let partOfString,
+                babyString;
+
+            if (diff == 0) {partOfString = ``}
+            else if (diff == 1) {partOfString = `${diff} гость`}
+            else if (diff < 5) {partOfString = `${diff} гостя`}
+            else {partOfString = `${diff} гостей`}
+
+            if (thirdSum == 0) {babyString = ''}
+            else if (thirdSum == 1) {babyString = `${thirdSum} младенец`}
+            else if (thirdSum < 5) {babyString =  `${thirdSum} младенца`}
+            else {babyString = `${thirdSum} младенцев`}
+
+            result = `${partOfString} ${babyString}`
+            result = result.split(' ');
+            result.length == 4 ?
+                result = `${partOfString}, ${babyString}` :
+                result = result.join(' ')
+
+            if (!sum) {
+                result = 'Сколько гостей';
+                showOrHideCancelButton(target);
+            }
+            else if (sum == 1) {
+                if (showCancleButton) showOrHideCancelButton(target);
+            }
         }
 
         target.querySelector('.dropdown__button').firstElementChild.innerHTML = `${result}`;
@@ -61,6 +101,7 @@ let observer = new MutationObserver(function(mutations) {
 
     function showOrHideCancelButton(dropdown) {
         let cancelButton = dropdown.querySelector('.dropdown__cancel-button');
+        if (!cancelButton) return;
         cancelButton.classList.toggle('dropdown__cancel-button_hidden')
     }
 })

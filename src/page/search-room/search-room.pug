@@ -23,7 +23,7 @@ html.html(lang="ru")
                 +filterDateDropdown({shrink: true})
                 +dropdown({small: 1})
                 +dropdown({narrow: 1})
-            .main__content.container
+            .main__content
                 h1.h1.main__title Номера, которые мы для вас подобрали
                 +roomCard({
                 imgPath: [
@@ -65,4 +65,6 @@ html.html(lang="ru")
                 "common.blocks/room-card/__image/room-card__image-2.svg",
                 ],
                 })
+                .main__pagination
+                    include ../../library.blocks/pagination/pagination.pug
         +footer({})

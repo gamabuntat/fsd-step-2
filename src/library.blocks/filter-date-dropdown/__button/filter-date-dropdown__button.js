@@ -5,8 +5,6 @@ filterDateDropdownNameSpace.dropdown = document.querySelector('.filter-date-drop
 filterDateDropdownNameSpace.button = document.querySelector('.filter-date-dropdown__button');
 filterDateDropdownNameSpace.expandIcon = filterDateDropdownNameSpace.dropdown.querySelector('.filter-date-dropdown__expand-icon');
 
-console.log(filterDateDropdownNameSpace);
-
 filterDateDropdownNameSpace.button.addEventListener('click', expandCalendar);
 filterDateDropdownNameSpace.dropdown.addEventListener('calendarHide', expandCalendar);
 
