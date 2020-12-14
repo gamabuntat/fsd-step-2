@@ -1,6 +1,7 @@
 mixin roomCard(params)
     - let {imgPath, roomNumber = 888, price = 9990, luxuryStatus = 'люкс', rate = 5, period = 'в сутки', reviews = 145} = params
-    - let name = Math.trunc(Math.random() * 10000)
+    //- let name = Math.trunc(Math.random() * 10000)
+    - let name = roomNumber
     .room-card
         .room-card__carousel
             .room-card__carousel-container

@@ -15,6 +15,7 @@ include ../../library.blocks/rich-check/rich-check
 include ../../library.blocks/rate/rate
 include ../../library.blocks/toggle/toggle
 include ../../library.blocks/like-button/like-button
+include ../../library.blocks/pagination/pagination
 include ../../common.blocks/checkbox-buttons/checkbox-buttons
 include ../../library.blocks/expandable-checkbox-list/expandable-checkbox-list
 include ../../common.blocks/comment/comment
@@ -68,7 +69,7 @@ html.html(lang="ru")
                 +bigButton({})
             .container.container_direction-column
                 +title('pagination')
-                include ../../library.blocks/pagination/pagination
+                +pagination()
         .box-2-1.container.container_direction-column
             +dropdown({narrow: true, onlyButton: 1, sign: 'dropdown', subSign: 'default'})
             +dropdown({narrow: true, sign: 'dropdown', subSign: 'expanded'})
