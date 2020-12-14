@@ -25,7 +25,7 @@ mixin header(params)
             .header__button-container.container
                 if !authorized
                     +buttonBorder({sign: 'Войти', header: 1})
-                    +bigButton({sign: 'зарегистрироваться', header: 1})
+                    +bigButton({action: '#', sign: 'зарегистрироваться', header: 1})
                 else
                     .header__v-line
                     a.header__menu-item(href="#") Юлий Цезарь

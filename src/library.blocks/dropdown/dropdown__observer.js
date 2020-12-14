@@ -64,6 +64,9 @@ let observer = new MutationObserver(function(mutations) {
                     result.pop();
                     result = `${result.join(', ')}...`;
                 }
+                else if (!result.length) [
+                    result = 'Сколько комнат'
+                ]
                 else {result = result.join(', ')}
                 return;
             }

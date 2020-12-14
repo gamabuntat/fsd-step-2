@@ -21,6 +21,9 @@ import '@src/library.blocks/dropdown/dropdown.js'
 import '@src/library.blocks/dropdown/dropdown__observer.js'
 import '@library/filter-date-dropdown/__button/filter-date-dropdown__button.js'
 
+import '@src/library.blocks/range-slider/range-slider.js'
+import '@src/library.blocks/sub-text-field/sub-text-field.js'
+
 import '@src/common.blocks/room-card/__rate/room-card__rate.js'
 import '@src/common.blocks/room-card/room-card.js'
 

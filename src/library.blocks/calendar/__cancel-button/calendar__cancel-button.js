@@ -6,6 +6,7 @@ let mask = 'ДД.ММ.ГГГГ';
 cancelButton.addEventListener('click', function() {
     dataPicker.startRange = true;
     removeRange();
+    if (calendar.classList.contains('calendar_shrink')) return;
     let startDateButton = document.querySelector('.date-dropdown__start-date');
     let endDateButton = document.querySelector('.date-dropdown__end-date');
     startDateButton.innerHTML = mask;

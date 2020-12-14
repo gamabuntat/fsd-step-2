@@ -1,5 +1,5 @@
 mixin primaryCard(params)
-    - let {calendar = true} = params
+    - let {bigAction = '#', calendar = true} = params
     .card.card_primary-parameters.container
         h1.h1 Найдём номера под
             br
@@ -9,4 +9,4 @@ mixin primaryCard(params)
         else
             +dateDropdown({onlyByttons: true})
         +dropdown({})
-        +bigButton({sign: 'подобрать номер'})
+        +bigButton({action: bigAction, sign: 'подобрать номер'})
