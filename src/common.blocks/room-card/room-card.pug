@@ -26,7 +26,7 @@ mixin roomCard(params)
                     span.h2.room-card__number #{roomNumber}
                     span.room-card__luxury-status #{luxuryStatus}
                 .container.container_align-items-flex-end
-                    - let formatPrice = Math.trunc(price / 1000) + " " + price % 1000
+                    - let formatPrice = Math.trunc(price / 1000) + " " + (price % 1000 || '000')
                     span.room-card__price #{formatPrice}
                     span.room-card__period #{period}
             .hr

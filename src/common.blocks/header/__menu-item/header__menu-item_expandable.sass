@@ -12,19 +12,23 @@
     background-image: url(@common/header/__menu-item/header__menu-item_expandable.svg)
 
   &:hover + .header__expandable-content
-    display: flex
+    display: initial
 
 .header__expandable-content
   display: none
   position: absolute
+  padding: 0
   background: white
   box-shadow: 0 10px 20px 0 rgba(31, 32, 65, .05)
   z-index: 10
+  list-style-type: none
 
   &:hover
-    display: flex
+    display: initial
+
+  & li
+      padding: .6em .4em
 
   & a
-    padding: 1em .4em
     color: colors.$base-color-50
     text-decoration: none

@@ -2,6 +2,7 @@ mixin itemExpandable(params)
     - let {title = 'Услуги', number = 3, items = []} = params
     .header__menu-item.header__menu-item_expandable
         | #{title}
-    .header__expandable-content.container.container_direction-column
+    ul.header__expandable-content
         - for (let i = 1; i <= number; i++)
-            a(href="#") Item of list #{i}
+            li
+                a(href="#") Item of list #{i}
