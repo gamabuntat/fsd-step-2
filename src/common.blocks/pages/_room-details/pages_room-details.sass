@@ -1,0 +1,28 @@
+@use '@library/html/html'
+@use '@library/sub-text-field/sub-text-field'
+@use '@common/header/header'
+@use '@common/header/header__media'
+@use '@common/footer/footer'
+@use '@library/card/card'
+
+.pages_room-details
+
+.gallery
+  display: grid
+  grid-template-columns: 68.125% 1fr
+  height: 480px
+
+.gallery__main-image
+  background: tomato
+
+.gallery__minor-image
+  flex-basis: 100%
+  background: lightblue
+
+  &:first-child
+    background: lightgreen
+
+.svg
+  height: fit-content
+  padding: 1em
+  box-sizing: border-box

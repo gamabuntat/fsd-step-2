@@ -6,13 +6,18 @@ include ../../library.blocks/button/_big/button_big
 include ../../library.blocks/sub-text-field/sub-text-field
 
 doctype html
-html(lang="ru")
+html.html(lang="ru")
     head
         meta(charset="UTF-8")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title
-    body.pages
+    body.pages.pages_room-details
         +header({})
-        main
-            h1.h1 hallo
+        main.main
+            .gallery
+                .gallery__main-image
+                .container.container_direction-column
+                    .gallery__minor-image
+                    .gallery__minor-image
+            .svg
         +footer({})
