@@ -16,6 +16,7 @@
   min-width: 380px
 
 .main
+  position: relative
   display: flex
   flex-direction: column
   justify-content: space-between
@@ -28,15 +29,48 @@
   background-position: center center
   background-attachment: scroll
   box-sizing: border-box
-  background-image: url(@src/page/landing/image.svg)
+  //background-image: url(@src/page/landing/image-1.png)
 
-  //animation: changeBg 20s infinite
+  //animation: changeBg 10s infinite
 
-@keyframes changeBg
-  from
-    background-image: url(@src/page/landing/image.svg)
-  to
-    background-image: url(@src/page/landing/image-2.svg)
+.main__img-container
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-repeat: no-repeat
+  background-size: cover
+  background-position: center center
+  background-attachment: scroll
+  box-sizing: border-box
+  z-index: -1
+  animation-duration: 30s
+  animation-name: hideBg
+  animation-iteration-count: infinite
+
+.main__img-container_1
+  background-image: url(@src/page/landing/image-1.png)
+  animation-delay: 19s
+
+.main__img-container_2
+  background-image: url(@src/page/landing/image-2.png)
+  animation-delay: 9s
+
+.main__img-container_3
+  background-image: url(@src/page/landing/image-3.png)
+
+@keyframes hideBg
+  0%
+    opacity: 1
+  15%
+    opacity: 1
+  30%
+    opacity: 0
+  84.99%
+    opacity: 0
+  100%
+    opacity: 1
 
 .main__sign
   display: flex

@@ -1,10 +1,11 @@
 let nameSpace = {
-    width: 120,
-    height: 120,
     r: 60,
     gap: 4,
     fullAngle: 360,
 };
+
+nameSpace.width = nameSpace.r * 2;
+nameSpace.height = nameSpace.r * 2;
 
 let impressions = `<svg class="impressions" width=\"${nameSpace.width}\" height=\"${nameSpace.width}\" viewBox="-2 0 124 120">
                        <defs></defs> 
