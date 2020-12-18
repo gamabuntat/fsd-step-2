@@ -12,6 +12,7 @@ include ../../library.blocks/button/_big/button_big
 include ../../common.blocks/have-acc/have-acc
 include ../../common.blocks/room-card/room-card
 include ../../common.blocks/card/_primary-parameters/card_primary-parameters
+include ../../common.blocks/card/_room-details/card_room-details
 
 doctype html
 html.html(lang="ru")
@@ -24,7 +25,7 @@ html.html(lang="ru")
             +primaryCard({calendar: false})
             include ../../common.blocks/card/_registration/card_registration
         .container.container_direction-column
-            include ../../common.blocks/card/_room-details/card_room-details
+            +roomDetalisCard({onlyButtons: 1})
             include ../../common.blocks/card/_login/card_login
         .container.container_direction-column
             include ../../common.blocks/calendar/calendar

@@ -1,5 +1,5 @@
 mixin dateDropdown(params)
-    - let {firstTitle = "прибытие", secondTitle = "выезд", firstDate = "ДД.ММ.ГГГГ", secondDate = "ДД.ММ.ГГГГ", onlyByttons = false} = params
+    - let {firstTitle = "прибытие", secondTitle = "выезд", firstDate = "ДД.ММ.ГГГГ", secondDate = "ДД.ММ.ГГГГ", onlyButtons = false} = params
     .date-dropdown.container.container_justify-content-space-between
         .date-dropdown__container.container.container_direction-column
             h3.h3.date-dropdown__sign #{firstTitle}
@@ -11,5 +11,5 @@ mixin dateDropdown(params)
             button.date-dropdown__button.date-dropdown__end-date-button.container.container_justify-content-space-between.container_align-items-center
                 span.date-dropdown__end-date #{secondDate}
                 span.date-dropdown__expand-icon
-        if !onlyByttons
+        if !onlyButtons
             +calendar({})

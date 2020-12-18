@@ -5,8 +5,12 @@ include ../../common.blocks/gallery/gallery
 include ../../common.blocks/room-detalis/room-detalis
 include ../../library.blocks/button/_border/button_border
 include ../../library.blocks/button/_big/button_big
+include ../../library.blocks/calendar/calendar.pug
+include ../../library.blocks/date-dropdown/date-dropdown
+include ../../library.blocks/dropdown/dropdown
 include ../../library.blocks/sub-text-field/sub-text-field
 include ../../library.blocks/impressions/impressions
+include ../../common.blocks/card/_room-details/card_room-details
 
 doctype html
 html.html(lang="ru")
@@ -25,4 +29,5 @@ html.html(lang="ru")
                 .main__impressions
                     h2.h2 Впечатления от номера
                     +impressions()
+                +roomDetalisCard({onlyButtons: false})
         +footer({})
