@@ -1,3 +1,11 @@
-.room_detalis
-    include ./room-detalis__comfort
-    include ./room-detalis__convenience
+mixin roomDetalis(params)
+    - let {comfort = true, convenience = true, cosiness = false} = params
+    .room_detalis
+        if comfort
+            include ./room-detalis__comfort
+            .hr
+        if convenience
+            include ./room-detalis__convenience
+            .hr
+        if cosiness
+            include ./room-detalis__cosiness

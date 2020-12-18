@@ -1,9 +1,12 @@
 - const path = '../../'
 include ../../common.blocks/header/header
 include ../../common.blocks/footer/footer
+include ../../common.blocks/gallery/gallery
+include ../../common.blocks/room-detalis/room-detalis
 include ../../library.blocks/button/_border/button_border
 include ../../library.blocks/button/_big/button_big
 include ../../library.blocks/sub-text-field/sub-text-field
+include ../../library.blocks/impressions/impressions
 
 doctype html
 html.html(lang="ru")
@@ -14,10 +17,11 @@ html.html(lang="ru")
     body.pages.pages_room-details
         +header({})
         main.main
-            .gallery
-                .gallery__main-image
-                .container.container_direction-column
-                    .gallery__minor-image
-                    .gallery__minor-image
-            .svg
+            +gallery()
+            .main__content
+                .main__room-details
+                    .h2 Сведения о номере
+                    +roomDetalis({cosiness: 1})
+                .main__impressions
+                    +impressions()
         +footer({})

@@ -7,7 +7,7 @@ let nameSpace = {
 nameSpace.width = nameSpace.r * 2;
 nameSpace.height = nameSpace.r * 2;
 
-let impressions = `<svg class="impressions" width=\"${nameSpace.width}\" height=\"${nameSpace.width}\" viewBox="-2 0 124 120">
+let impressions = `<svg class="impressions__circle" width=\"${nameSpace.width}\" height=\"${nameSpace.width}\" viewBox="-2 0 124 120">
                        <defs></defs> 
                    </svg>`;
 
@@ -28,11 +28,12 @@ let defs = `<linearGradient id="amazing" x1="0%" y1="0%" x2="0%" y2="100%">
                 <stop offset="100%" style="stop-color:#3D4975;stop-opacity:1" />
             </linearGradient>`
 
-document.querySelector('.svg').insertAdjacentHTML('afterbegin', impressions)
-nameSpace.elem = document.querySelector('.impressions');
+document.querySelector('.impressions__circle-container').insertAdjacentHTML('afterbegin', impressions)
+nameSpace.elem = document.querySelector('.impressions__circle');
 nameSpace.elem.querySelector('defs').insertAdjacentHTML('beforeend', defs);
 
-drawImpressions({amazing: 4, cool: 2, bad: 2, veryBad: 0});
+drawImpressions({amazing: 130, cool: 65, bad: 65, veryBad: 0});
+insertSign();
 
 function drawImpressions(rating) {
     let {amazing = 0, cool = 0, bad = 0, veryBad = 0} = rating;
@@ -61,9 +62,8 @@ function drawImpressions(rating) {
 
     function calcAngles() {
         nameSpace.angles = [];
-        let sum = mark.reduce((sum, current) => sum + current);
-        mark.forEach(i => i && nameSpace.angles.push(nameSpace.fullAngle * i / sum));
-        console.log(nameSpace.angles);
+        nameSpace.sum = mark.reduce((sum, current) => sum + current);
+        mark.forEach(i => i && nameSpace.angles.push(nameSpace.fullAngle * i / nameSpace.sum));
     }
 
     function drawCircle() {
@@ -103,6 +103,12 @@ function getPoint(angle) {
         y = nameSpace.r * Math.sin(angleRad);
     x += nameSpace.r;
     y = Math.abs(y - nameSpace.r);
-    console.log(x, y, angle);
     return x + ' ' + y
+}
+
+function insertSign() {
+    let sign = `<text class="impressions__room-number" text-anchor="middle" x="60" y="65" fill="url(#bad)">${nameSpace.sum}</text>
+                <text class="impressions__room-votes" text-anchor="middle" x="60" y="81" fill="url(#bad)">голосов</text>`;
+
+    nameSpace.elem.insertAdjacentHTML('beforeend', sign);
 }

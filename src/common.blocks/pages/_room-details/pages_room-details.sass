@@ -1,27 +1,32 @@
 @use '@library/html/html'
+@use '@library/hr/hr'
 @use '@library/sub-text-field/sub-text-field'
 @use '@library/impressions/impressions'
+@use '@common/gallery/gallery'
 @use '@common/header/header'
 @use '@common/header/header__media'
 @use '@common/footer/footer'
+@use '@common/room-detalis/room-detalis'
 @use '@library/card/card'
 
 .pages_room-details
 
-.gallery
+.main__content
   display: grid
-  grid-template-columns: 68.125% 1fr
-  height: 480px
+  grid-template-columns: 1fr 1fr 1fr
+  grid-template-rows: auto auto
+  column-gap: 70px
+  row-gap: 30px
+  margin: 0 auto
+  padding: 70px 1rem
+  width: min(1440px, 100%)
+  box-sizing: border-box
 
-.gallery__main-image
-  background: tomato
-
-.gallery__minor-image
-  flex-basis: 100%
-  background: lightblue
-
-  &:first-child
-    background: lightgreen
+.main__room-details
+  display: flex
+  flex-direction: column
+  row-gap: 20px
+  width: max-content
 
 .svg
   height: fit-content

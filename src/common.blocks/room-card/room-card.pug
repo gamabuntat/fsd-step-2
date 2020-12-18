@@ -3,7 +3,7 @@ mixin roomCard(params)
     //- let name = Math.trunc(Math.random() * 10000)
     - let name = roomNumber
     .room-card
-        .room-card__carousel
+        a(href="#").room-card__carousel
             .room-card__carousel-container
                 - for (let i = 0; i < imgPath.length; i++)
                     - let imageNumber = imgPath[i].match(/\d/g).join('')

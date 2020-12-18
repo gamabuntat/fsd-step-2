@@ -16,6 +16,7 @@ include ../../library.blocks/rate/rate
 include ../../library.blocks/toggle/toggle
 include ../../library.blocks/like-button/like-button
 include ../../library.blocks/pagination/pagination
+include ../../common.blocks/room-detalis/room-detalis
 include ../../common.blocks/checkbox-buttons/checkbox-buttons
 include ../../library.blocks/expandable-checkbox-list/expandable-checkbox-list
 include ../../common.blocks/comment/comment
@@ -88,6 +89,6 @@ html.html(lang="ru")
             +title('bullet list')
             include ../../library.blocks/bullet-list/bullet-list
         .box-4-1.container
-            include ../../common.blocks/room-detalis/room-detalis
+            +roomDetalis({})
         .box-4-2.container
             +comment({})
