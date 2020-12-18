@@ -2,6 +2,9 @@
 @use '@library/color/base-color' as colors
 
 .impressions
+  display: flex
+  align-items: flex-end
+  column-gap: 30px
 
 .impressions__circle
   position: relative
@@ -14,3 +17,26 @@
   font-size: html.rem-size(12)
   font-weight: bold
   
+.impressions__list
+  height: min-content
+
+  & ul
+    margin: 0
+    padding: 0
+  & ul li::marker
+
+.impressions__list-item
+  padding-left: 5px
+  color: colors.$base-color-75
+
+.impressions__list-item_amazing
+  list-style-image: url(@library/impressions/__list-item/impressions__list-item_amazing.svg)
+
+.impressions__list-item_cool
+  list-style-image: url(@library/impressions/__list-item/impressions__list-item_cool.svg)
+
+.impressions__list-item_bad
+  list-style-image: url(@library/impressions/__list-item/impressions__list-item_bad.svg)
+
+.impressions__list-item_veryBad
+  list-style-image: url(@library/impressions/__list-item/impressions__list-item_veryBad.svg)
