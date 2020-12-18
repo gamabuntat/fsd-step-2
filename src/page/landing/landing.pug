@@ -21,9 +21,10 @@ html.html(lang="ru")
             .main__img-container.main__img-container_1
             .main__img-container.main__img-container_2
             .main__img-container.main__img-container_3
-            +primaryCard({bigAction: 'search-room.html'})
-            .main__sign
-                | Лучшие номера для вашей работы,
-                br
-                | отдыха и просто вдохновения
+            .main__content
+                +primaryCard({bigAction: 'search-room.html'})
+                .main__sign
+                    | Лучшие номера для вашей работы,
+                    br
+                    | отдыха и просто вдохновения
         +footer({})

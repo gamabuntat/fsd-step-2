@@ -6,7 +6,8 @@ mixin roomCard(params)
         .room-card__carousel
             .room-card__carousel-container
                 - for (let i = 0; i < imgPath.length; i++)
-                    img.room-card__image(src=path + imgPath[i], alt="")
+                    - let imageNumber = imgPath[i].match(/\d/g).join('')
+                    .room-card__image(class=`room-card__image_${imageNumber}`)
             .room-card__shadow
             button.text-button.room-card__prev-button
             button.text-button.room-card__next-button
