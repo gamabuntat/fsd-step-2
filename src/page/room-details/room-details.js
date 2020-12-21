@@ -8,6 +8,7 @@ import '@src/fonts/montserrat-regular/fonts.css'
 import '@src/fonts/montserrat-bold/fonts.css'
 import '@src/fonts/nunito-bold/fonts.css'
 
+import '@library/like-button/like-button.js'
 import '@library/impressions/impressions.js'
 import '@src/library.blocks/dropdown/dropdown.js'
 import '@src/library.blocks/dropdown/dropdown__observer.js'

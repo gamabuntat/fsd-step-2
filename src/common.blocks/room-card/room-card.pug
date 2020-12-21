@@ -3,7 +3,7 @@ mixin roomCard(params)
     //- let name = Math.trunc(Math.random() * 10000)
     - let name = roomNumber
     .room-card
-        a(href="#").room-card__carousel
+        .room-card__carousel
             .room-card__carousel-container
                 - for (let i = 0; i < imgPath.length; i++)
                     - let imageNumber = imgPath[i].match(/\d/g).join('')
@@ -24,7 +24,7 @@ mixin roomCard(params)
         .container.container_direction-column.room-card__bottom
             .container.container_justify-content-space-between
                 .container.container_align-items-flex-end
-                    span.h2.room-card__number #{roomNumber}
+                    a(href="room-details.html").h2.room-card__number #{roomNumber}
                     span.room-card__luxury-status #{luxuryStatus}
                 .container.container_align-items-flex-end
                     - let formatPrice = Math.trunc(price / 1000) + " " + (price % 1000 || '000')

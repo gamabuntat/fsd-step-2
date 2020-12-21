@@ -1,11 +1,15 @@
+@use '@library/color/base-color' as colors
 @use '@library/html/html'
 @use '@library/hr/hr'
 @use '@library/sub-text-field/sub-text-field'
+@use '@library/like-button/like-button'
 @use '@library/impressions/impressions'
 @use '@library/date-dropdown/date-dropdown'
 @use '@library/calendar/calendar'
 @use '@library/calendar/__open/calendar__open'
 @use '@library/dropdown/dropdown'
+@use '@library/bullet-list/bullet-list'
+@use '@common/comment/comment'
 @use '@common/gallery/gallery'
 @use '@common/header/header'
 @use '@common/header/header__media'
@@ -18,14 +22,19 @@
 
 .main__content
   display: grid
-  grid-template-columns: 1fr 1fr 1fr
-  grid-template-rows: auto auto
+  grid-template-columns: repeat(auto-fit, minmax(380px, max-content))
   column-gap: 70px
   row-gap: 30px
   margin: 0 auto
   padding: 70px 1rem
   width: min(1440px, 100%)
   box-sizing: border-box
+
+.main__container
+  display: flex
+  flex-flow: row wrap
+  column-gap: 70px
+  row-gap: 30px
 
 .main__room-details
   display: flex
@@ -38,4 +47,32 @@
   flex-direction: column
   row-gap: 20px
   width: max-content
+
+.main__card
+  display: flex
+  grid-column: -2
+  grid-row: 1
   
+.main__comment
+  flex-basis: 100%
+  display: flex
+  flex-direction: column
+  row-gap: 20px
+
+.main__bullet-list
+  display: flex
+  flex-direction: column
+  row-gap: 20px
+
+  & > .h2
+    padding-left: 1em
+
+.main__cancel
+  width: min(100%, 341px)
+  display: flex
+  flex-direction: column
+  row-gap: 20px
+  padding-left: 1em
+
+  & > .p
+    color: colors.$base-color-75

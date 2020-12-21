@@ -10,7 +10,10 @@ include ../../library.blocks/date-dropdown/date-dropdown
 include ../../library.blocks/dropdown/dropdown
 include ../../library.blocks/sub-text-field/sub-text-field
 include ../../library.blocks/impressions/impressions
+include ../../library.blocks/bullet-list/bullet-list
 include ../../common.blocks/card/_room-details/card_room-details
+include ../../library.blocks/like-button/like-button
+include ../../common.blocks/comment/comment
 
 doctype html
 html.html(lang="ru")
@@ -23,11 +26,23 @@ html.html(lang="ru")
         main.main
             +gallery()
             .main__content
-                .main__room-details
-                    h2.h2 Сведения о номере
-                    +roomDetalis({cosiness: 1})
-                .main__impressions
-                    h2.h2 Впечатления от номера
-                    +impressions()
-                +roomDetalisCard({onlyButtons: false})
+                .main__container
+                    .main__room-details
+                        h2.h2 Сведения о номере
+                        +roomDetalis({cosiness: 1})
+                    .main__impressions
+                        h2.h2 Впечатления от номера
+                        +impressions()
+                    .main__comment
+                        h2.h2 Отзывы посетителей номера
+                        +comment({})
+                        +comment({img: "common.blocks/comment/__avatar/comment__avatar_2.png", author: "Патрисия Стёклышкова"})
+                    .main__bullet-list
+                        h2.h2 Правила
+                        +bulletList()
+                    .main__cancel
+                        h2.h2 Отмена
+                        p.p Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.
+                .main__card
+                    +roomDetalisCard({onlyButtons: false})
         +footer({})
