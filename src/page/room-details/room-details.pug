@@ -34,9 +34,11 @@ html.html(lang="ru")
                         h2.h2 Впечатления от номера
                         +impressions()
                     .main__comment
-                        h2.h2 Отзывы посетителей номера
-                        +comment({})
-                        +comment({img: "common.blocks/comment/__avatar/comment__avatar_2.png", author: "Патрисия Стёклышкова"})
+                        .main__comment-container
+                            h2.h2 Отзывы посетителей номера
+                            span 2 отзыва
+                            +comment({})
+                            +comment({img: "common.blocks/comment/__avatar/comment__avatar_2.png", author: "Патрисия Стёклышкова", likeButton: 0, timeAgo: 'Неделю назад', commentText: 'Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент'})
                     .main__bullet-list
                         h2.h2 Правила
                         +bulletList()
