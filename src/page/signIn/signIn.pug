@@ -1,0 +1,23 @@
+- const path = '../../'
+include ../../common.blocks/header/header
+include ../../common.blocks/footer/footer
+include ../../library.blocks/text-field/text-field
+include ../../library.blocks/button/_border/button_border
+include ../../library.blocks/button/_big/button_big
+include ../../library.blocks/sub-text-field/sub-text-field
+include ../../common.blocks/have-acc/have-acc
+include ../../common.blocks/card/_login/card_login
+
+doctype html
+html.html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title
+    body.pages.pages_signIn
+        +header({})
+        main.main
+            .main__img-container.main__img-container_2
+            .main__img-container.main__img-container_1
+            +login()
+        +footer({})
