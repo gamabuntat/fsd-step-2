@@ -1,13 +1,14 @@
-.card.card_registration.container
-    h1.h1 Регистрация аккаунта
-    .container.container_direction-column
-        +textFiled({placeholder: 'Имя'})
-        +textFiled({placeholder: 'Фамилия'})
-        +radio({})
-    +textFiled({masked: 1, title: 'дата рождения'})
-    .container.container_direction-column
-        +textFiled({title: 'данные для входа в сервис'})
-        +textFiled({placeholder: 'Пароль'})
-        +toggle({sign: 'Получать спецпредложения'})
-    +bigButton({})
-    +haveAcc()
+mixin registration()
+    .card.card_registration.container
+        h1.h1 Регистрация аккаунта
+        .container.container_direction-column
+            +textFiled({placeholder: 'Имя'})
+            +textFiled({placeholder: 'Фамилия'})
+            +radio({})
+        +textFiled({masked: 1, title: 'дата рождения'})
+        .container.container_direction-column
+            +textFiled({title: 'данные для входа в сервис'})
+            +textFiled({placeholder: 'Пароль'})
+            +toggle({sign: 'Получать спецпредложения'})
+        +bigButton({})
+        +haveAcc()

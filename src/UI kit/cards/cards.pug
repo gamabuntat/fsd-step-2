@@ -13,6 +13,7 @@ include ../../common.blocks/have-acc/have-acc
 include ../../common.blocks/room-card/room-card
 include ../../common.blocks/card/_primary-parameters/card_primary-parameters
 include ../../common.blocks/card/_room-details/card_room-details
+include ../../common.blocks/card/_registration/card_registration
 
 doctype html
 html.html(lang="ru")
@@ -23,7 +24,7 @@ html.html(lang="ru")
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
         .container.container_direction-column
             +primaryCard({calendar: false})
-            include ../../common.blocks/card/_registration/card_registration
+            +registration()
         .container.container_direction-column
             +roomDetalisCard({onlyButtons: 1})
             include ../../common.blocks/card/_login/card_login
