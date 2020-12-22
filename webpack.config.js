@@ -12,6 +12,10 @@ module.exports = {
         headersAndFooters: './src/UI kit/headers-and-footers/headers-and-footers.js',
         landing: './src/page/landing/landing.js',
         searchRoom: './src/page/search-room/search-room.js',
+        roomDetails: './src/page/room-details/room-details.js',
+        registration: './src/page/registration/registration.js',
+        signIn: './src/page/signIn/signIn.js',
+        index: './src/page/index/index.js',
     },
     output: {
         filename: '[name].js',
@@ -67,6 +71,30 @@ module.exports = {
             template: './src/page/search-room/search-room.pug',
             minify: 'false',
             chunks: ['searchRoom'],
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'room-details.html',
+            template: './src/page/room-details/room-details.pug',
+            minify: 'false',
+            chunks: ['roomDetails'],
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'registration.html',
+            template: './src/page/registration/registration.pug',
+            minify: 'false',
+            chunks: ['registration'],
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'signIn.html',
+            template: './src/page/signIn/signIn.pug',
+            minify: 'false',
+            chunks: ['signIn'],
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: './src/page/index/index.pug',
+            minify: 'false',
+            chunks: ['index'],
         }),
         //new CopyWebpackPlugin({
         //    patterns: [

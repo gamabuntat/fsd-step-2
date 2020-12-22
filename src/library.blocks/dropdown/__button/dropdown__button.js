@@ -38,12 +38,12 @@ export function showOrHideExpandlist(button) {
 
     button.classList.toggle('dropdown__button_open');
 
-    let coord = button.getBoundingClientRect();
+    let coord = button.parentElement.getBoundingClientRect();
     let expandList = button.nextElementSibling;
     let expandIcon = button.lastElementChild;
 
     expandList.style.left = coord.x + window.pageXOffest + 'px';
-    expandList.style.top = coord.y + coord.height + window.pageYOffset - button.clientTop + 'px';
+    expandList.style.top = coord.height - 1 + 'px'
     expandList.style.width = coord.width + 'px';
     expandList.style.borderWidth = button.clientLeft;
 
