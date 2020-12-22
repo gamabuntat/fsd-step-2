@@ -25,10 +25,10 @@ html.html(lang="ru")
         img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
         .container.container_direction-column
             +primaryCard({calendar: false})
-            +registration()
+            +registration({})
         .container.container_direction-column
             +roomDetalisCard({onlyButtons: 1})
-            +login()
+            +login({})
         .container.container_direction-column
             include ../../common.blocks/calendar/calendar
             +roomCard({

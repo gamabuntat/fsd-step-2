@@ -1,4 +1,5 @@
-mixin registration()
+mixin registration(params)
+    - let {} = params
     .card.card_registration.container
         h1.h1 Регистрация аккаунта
         .container.container_direction-column
@@ -11,4 +12,4 @@ mixin registration()
             +textFiled({placeholder: 'Пароль'})
             +toggle({sign: 'Получать спецпредложения'})
         +bigButton({})
-        +haveAcc()
+        +haveAcc({})

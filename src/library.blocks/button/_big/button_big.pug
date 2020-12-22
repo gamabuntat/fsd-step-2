@@ -1,11 +1,11 @@
 mixin bigButton(params)
     - let {action = '#', sign = 'перейти к оплате', header = false} = params
     if (!header)
-        form.form(action=action)
+        form.form.form_big(action=action)
             button.button.button_big
                 h3.h3.button__sign #{sign}
                 span.button__arrow
     else
-        form.form(action=action)
+        form.form.form_big(action="registration.html")
             button.header__button.button.button_big
                 h3.h3.button__sign #{sign}

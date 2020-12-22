@@ -1,8 +1,9 @@
-mixin login()
+mixin login(params)
+    - let {} = params
     .card.card_login.container.container_direction-column
         h1.h1 Войти
-        div
+        .container.container_direction-column
             +textFiled({})
             +textFiled({placeholder: 'Пароль'})
         +bigButton({sign: 'Войти'})
-        +haveAcc()
+        +haveAcc({login: 1})
