@@ -1,4 +1,5 @@
 import '@src/common.blocks/common.sass'
+import '@src/common.blocks/pages/_colors-and-types/pages_colors-and-types.sass'
 
 import '@src/fonts/quicksand-light/fonts.css'
 import '@src/fonts/quicksand-regular/fonts.css'
