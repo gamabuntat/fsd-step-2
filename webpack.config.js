@@ -113,7 +113,7 @@ module.exports = {
                 use: ['style-loader', 'css-loader'],
             },
             {
-                test: /\.(svg|png|jpe?g|gif)$/i,
+                test: /\.(svg|png|jpe?g|gif|webp)$/i,
                 exclude: [path.resolve(__dirname, 'src/fonts')],
                 use: 
                     {
