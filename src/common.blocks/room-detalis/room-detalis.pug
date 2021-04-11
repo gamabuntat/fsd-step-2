@@ -1,5 +1,5 @@
 mixin roomDetalis(params)
-    - let {comfort = true, convenience = true, cosiness = false} = params
+    - const {comfort = true, convenience = true, cosiness = false} = params
     .room-detalis
         if comfort
             include ./room-detalis__comfort

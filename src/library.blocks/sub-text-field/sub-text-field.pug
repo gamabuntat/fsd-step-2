@@ -1,8 +1,8 @@
 mixin subTextField(title)
-    .sub-text-field.container.container_direction-column
+    form.sub-text-field.container.container_direction-column
         if title
             h3.h3.sub-text-field__sign #{title}
         else
         .input.sub-text-field__container
-            input.sub-text-field__input(type="text" placeholder="Email") 
-            button.text-button.sub-text-field__button
+            input.sub-text-field__input(type="email" placeholder="Email") 
+            button.text-button.sub-text-field__button(type="submit")
