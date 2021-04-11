@@ -18,8 +18,9 @@
   },
   "homepage": "https://github.com/gamabuntat/fsd-step-2#readme",
   "devDependencies": {
-    "copy-webpack-plugin": "^8.1.1",
     "css-loader": "^5.2.0",
+    "eslint": "^7.24.0",
+    "eslint-webpack-plugin": "^2.5.3",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
     "normalize.css": "^8.0.1",

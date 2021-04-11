@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -35,6 +35,7 @@ module.exports = {
     port: 9000,
   },
   plugins: [
+    new ESLintPlugin(),
     // new HtmlWebpackPlugin({
     //   filename: 'colorsAndType.html',
     //   template: './src/UI kit/Colors & Type/colors&type.pug',
