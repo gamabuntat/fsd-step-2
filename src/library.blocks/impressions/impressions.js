@@ -2,6 +2,7 @@ const nameSpace = {
   r: 60,
   gap: 4,
   fullAngle: 360,
+  numberGaps: 0,
 };
 
 nameSpace.width = nameSpace.r * 2;
@@ -12,48 +13,43 @@ const impressions = `
     width=${nameSpace.width} 
     height=${nameSpace.width} 
     viewBox="-2 0 124 120">
-    <defs></defs> 
+    <defs>
+      <linearGradient id="amazing" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#FFE39C;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#FFBA9C;stop-opacity:1" />
+      </linearGradient>
+      <linearGradient id="cool" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#6FCF97;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#66D2EA;stop-opacity:1" />
+      </linearGradient>
+      <linearGradient id="bad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#BC9CFF;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#8BA4F9;stop-opacity:1" />
+      </linearGradient>
+      <linearGradient id="veryBad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:#909090;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#3D4975;stop-opacity:1" />
+      </linearGradient>
+    </defs> 
   </svg>
 `;
-const defs = `
-  <linearGradient id="amazing" x1="0%" y1="0%" x2="0%" y2="100%">
-    <stop offset="0%" style="stop-color:#FFE39C;stop-opacity:1" />
-    <stop offset="100%" style="stop-color:#FFBA9C;stop-opacity:1" />
-  </linearGradient>
-  <linearGradient id="cool" x1="0%" y1="0%" x2="0%" y2="100%">
-    <stop offset="0%" style="stop-color:#6FCF97;stop-opacity:1" />
-    <stop offset="100%" style="stop-color:#66D2EA;stop-opacity:1" />
-  </linearGradient>
-  <linearGradient id="bad" x1="0%" y1="0%" x2="0%" y2="100%">
-    <stop offset="0%" style="stop-color:#BC9CFF;stop-opacity:1" />
-    <stop offset="100%" style="stop-color:#8BA4F9;stop-opacity:1" />
-  </linearGradient>
-  <linearGradient id="veryBad" x1="0%" y1="0%" x2="0%" y2="100%">
-    <stop offset="0%" style="stop-color:#909090;stop-opacity:1" />
-    <stop offset="100%" style="stop-color:#3D4975;stop-opacity:1" />
-  </linearGradient>
-`;
-
-document.querySelector('.impressions__circle-container')
-  .insertAdjacentHTML('afterbegin', impressions);
+const container = document.querySelector('.impressions__circle-container');
+container.insertAdjacentHTML('afterbegin', impressions);
 nameSpace.elem = document.querySelector('.impressions__circle');
-nameSpace.elem.querySelector('defs').insertAdjacentHTML('beforeend', defs);
-
-drawImpressions({amazing: 130, cool: 65, bad: 65, veryBad: 0});
+drawImpressions({...container.dataset});
 insertSign();
 
 function drawImpressions(rating) {
-  const {amazing = 0, cool = 0, bad = 0, veryBad = 0} = rating;
-  const mark = [amazing, cool, bad, veryBad];
-  calcGaps();
+  const {amazing, cool, bad, veryBad} = rating;
+  const mark = [+amazing, +cool, +bad, +veryBad];
+  nameSpace.numberGaps = calcGaps(mark);
   getFullAngle();
   getClasses();
   calcAngles();
   nameSpace.angles.length == 1 ? drawCircle() : drawArcs();
 
-  function calcGaps() {
-    nameSpace.numberGaps = 0;
-    mark.forEach((i) => i && nameSpace.numberGaps++);
+  function calcGaps(marks) {
+    return marks.reduce((s, mark) => mark ? s + 1 : s, 0);
   }
 
   function getFullAngle() {
@@ -93,7 +89,7 @@ function drawImpressions(rating) {
     let startArc = nameSpace.gap / 2;
     let endArc = nameSpace.angles[0] + nameSpace.gap / 2;
     for (let i = 0; i < nameSpace.angles.length; i++) {
-      let largeArcFlag = nameSpace.angles[i] > 180 ? 1 : 0;
+      const largeArcFlag = nameSpace.angles[i] > 180 ? 1 : 0;
       if (i > 0) { endArc += nameSpace.angles[i] + nameSpace.gap; }
       arc = `
         <path 

@@ -17,34 +17,36 @@ include ../../common.blocks/comment/comment
 
 doctype html
 html.html(lang="ru")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        title
-    body.pages.pages_room-details
-        +header({})
-        main.main
-            +gallery()
-            .main__content
-                .main__container
-                    .main__room-details
-                        h2.h2 Сведения о номере
-                        +roomDetalis({cosiness: 1})
-                    .main__impressions
-                        h2.h2 Впечатления от номера
-                        +impressions()
-                    .main__comment
-                        .main__comment-container
-                            h2.h2 Отзывы посетителей номера
-                            span 2 отзыва
-                            +comment({})
-                            +comment({img: "common.blocks/comment/__avatar/comment__avatar_2.png", author: "Патрисия Стёклышкова", likeButton: 0, timeAgo: 'Неделю назад', commentText: 'Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент'})
-                    .main__bullet-list
-                        h2.h2 Правила
-                        +bulletList()
-                    .main__cancel
-                        h2.h2 Отмена
-                        p.p Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.
-                .main__card
-                    +roomDetalisCard({onlyButtons: false})
-        +footer({})
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title room-details
+  body.pages.pages_room-details
+    +header({})
+    main.main
+        +gallery()
+        .main__content
+            .main__container
+                .main__room-details
+                    h2.h2 Сведения о номере
+                    +roomDetalis({cosiness: 1})
+                .main__impressions
+                    h2.h2 Впечатления от номера
+                    +impressions(
+                      {amazing: 130, cool: 65, bad: 65}
+                    )
+                .main__comment
+                    .main__comment-container
+                        h2.h2 Отзывы посетителей номера
+                        span 2 отзыва
+                        +comment({})
+                        +comment({img: "common.blocks/comment/__avatar/comment__avatar_2.png", author: "Патрисия Стёклышкова", likeButton: 0, timeAgo: 'Неделю назад', commentText: 'Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент'})
+                .main__bullet-list
+                    h2.h2 Правила
+                    +bulletList()
+                .main__cancel
+                    h2.h2 Отмена
+                    p.p Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.
+            .main__card
+                +roomDetalisCard({onlyButtons: false})
+    +footer({})

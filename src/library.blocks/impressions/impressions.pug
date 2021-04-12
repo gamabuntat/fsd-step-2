@@ -1,9 +1,18 @@
-mixin impressions()
-    .impressions
-        .impressions__circle-container
-        .impressions__list
-            ul
-                li.impressions__list-item.impressions__list-item_amazing Великолепно
-                li.impressions__list-item.impressions__list-item_cool Хорошо
-                li.impressions__list-item.impressions__list-item_bad Удовлетворительно
-                li.impressions__list-item.impressions__list-item_veryBad Разочарован
+mixin impressions({amazing = 0, cool = 0, bad = 0, veryBad = 0})
+  .impressions
+    .impressions__circle-container(
+      data-amazing=`${amazing}`
+      data-cool=`${cool}`
+      data-bad=`${bad}`
+      data-very-bad=`${veryBad}`
+    )
+    .impressions__list
+      ul
+        li.impressions__list-item.impressions__list-item_amazing 
+          | Великолепно
+        li.impressions__list-item.impressions__list-item_cool
+          | Хорошо
+        li.impressions__list-item.impressions__list-item_bad 
+          | Удовлетворительно
+        li.impressions__list-item.impressions__list-item_veryBad 
+          | Разочарован
