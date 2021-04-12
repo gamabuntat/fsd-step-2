@@ -1,17 +1,17 @@
 mixin filterDateDropdown(params)
-    - let {shrink = false, title = false, onlyButtons = false} = params
-    .filter-date-dropdown.container.container_direction-column.container_justify-content-space-between
-        if title
-            h3.h3.filter-date-dropdown__sign filter date dropdown
-        else 
-            h3.h3.filter-date-dropdown__sign даты пребывания в отеле
-        button.filter-date-dropdown__button.container.container_justify-content-space-between.container_align-items-center
-            .container
-                span.filter-date-dropdown__date-start 19 авг 
-                |&nbsp; - &nbsp;
-                span.filter-date-dropdown__date-end 23 авг
-            span.filter-date-dropdown__expand-icon
-        if shrink
-            +calendar({shrink: true})
-        else if !onlyButtons
-            +calendar({})
+  - const {shrink = false, title = false, onlyButtons = false} = params
+  .filter-date-dropdown.container.container_direction-column.container_justify-content-space-between
+    if title
+      h3.h3.filter-date-dropdown__sign filter date dropdown
+    else 
+      h3.h3.filter-date-dropdown__sign даты пребывания в отеле
+    button.filter-date-dropdown__button.container.container_justify-content-space-between.container_align-items-center
+      .container
+        span.filter-date-dropdown__date-start 19 авг 
+        |&nbsp; - &nbsp;
+        span.filter-date-dropdown__date-end 23 авг
+      span.filter-date-dropdown__expand-icon
+    if shrink
+      +calendar({shrink: true})
+    else if !onlyButtons
+      +calendar({})

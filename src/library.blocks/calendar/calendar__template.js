@@ -63,4 +63,4 @@ export const CALENDAR_TABLE_TEMPLATE =
     <td><button class='calendar__day-button calendar__day-button_common'></button></td>
     <td><button class='calendar__day-button calendar__day-button_common'></button></td>
 </tr>
-</table>`
+</table>`;

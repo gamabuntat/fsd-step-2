@@ -1,17 +1,33 @@
-const filterDateDropdownNameSpace = { }
+class filterDateDropdown {
+  constructor(root) {
+    this.dropdown = root;
+    this.calendar = this.getElem('.calendar');
+    this.button = this.getElem('.filter-date-dropdown__button');
+    this.icon = this.getElem('.filter-date-dropdown__expand-icon');
+    this.bindListeners();
+  }
 
-filterDateDropdownNameSpace.calendar = document.querySelector('.calendar');
-filterDateDropdownNameSpace.dropdown = document.querySelector('.filter-date-dropdown');
-filterDateDropdownNameSpace.button = document.querySelector('.filter-date-dropdown__button');
-filterDateDropdownNameSpace.expandIcon = filterDateDropdownNameSpace.dropdown.querySelector('.filter-date-dropdown__expand-icon');
+  getElem(selector) {
+    return this.dropdown.querySelector(selector);
+  }
 
-filterDateDropdownNameSpace.button.addEventListener('click', expandCalendar);
-filterDateDropdownNameSpace.dropdown.addEventListener('calendarHide', expandCalendar);
+  bindListeners() {
+    this.button.addEventListener('click', this.expandCalendar.bind(this));
+    this.dropdown.addEventListener(
+      'calendarHide', this.expandCalendar.bind(this)
+    );
+  }
 
-function expandCalendar() {
-  filterDateDropdownNameSpace.expandIcon.classList.toggle('filter-date-dropdown__expand-icon_open');
-  let coordDropdown = filterDateDropdownNameSpace.dropdown.getBoundingClientRect();
-  let coordButton = filterDateDropdownNameSpace.button.getBoundingClientRect();
-  filterDateDropdownNameSpace.calendar.style.top = coordButton.bottom - coordDropdown.y + 5 + 'px';
-  filterDateDropdownNameSpace.calendar.classList.toggle('calendar__open');
+  expandCalendar() {
+    this.icon.classList.toggle('filter-date-dropdown__expand-icon_open');
+    const coordDropdown = this.dropdown.getBoundingClientRect();
+    const coordButton = this.button.getBoundingClientRect();
+    this.calendar.style.top = coordButton.bottom - coordDropdown.y + 5 + 'px';
+    this.calendar.classList.toggle('calendar__open');
+  }
 }
+
+document.querySelectorAll('.filter-date-dropdown').forEach((d) => (
+  new filterDateDropdown(d)
+));
+
