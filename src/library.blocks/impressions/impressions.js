@@ -58,7 +58,7 @@ function drawImpressions(rating) {
 
   function getClasses() {
     nameSpace.classes = [];
-    for (let prop in rating) {
+    for (const prop in rating) {
       if (rating[prop]) nameSpace.classes.push(prop);
     }
   }
@@ -101,7 +101,6 @@ function drawImpressions(rating) {
           stroke=url(#${nameSpace.classes[i]})
           stroke-width="4"
         />`;
-
       nameSpace.elem.insertAdjacentHTML('beforeend', arc);
       startArc += nameSpace.angles[i] + nameSpace.gap;
     }
