@@ -40,7 +40,7 @@ const parseData = (root) => {
 const getNGaps = (rating) => rating.filter((r) => r).length;
 const getFullAngle = (gap) => (nGaps) => 360 - gap * nGaps;
 const getTotalMarks = (rating) => rating.reduce((s, r) => s + r);
-const getAngle = (totalMarks) => (fullAngle) => (rate) => (
+const getAngles = (totalMarks) => (fullAngle) => (rate) => (
   rate / totalMarks * fullAngle
 );
 const getStartAngle = (gap) => (_, idx, angles) => (
@@ -48,55 +48,71 @@ const getStartAngle = (gap) => (_, idx, angles) => (
     .filter((angle) => angle)
     .reduce((acc, angle) => acc + angle + gap, gap / 2)
 );
-const getClass = (idx) => {
-  const map = {
-    0: 'amazing',
-    1: 'cool',
-    2: 'bad',
-    3: 'veryBad'
-  };
-  return map[idx];
-};
+const getClass = (idx) => ( 
+  {0: 'amazing', 1: 'cool', 2: 'bad', 3: 'veryBad'}[idx]
+);
 const getPoint = (r) => (angle) => {
   const angleRad = (angle + 90) * Math.PI / 180;
   const x = r * Math.cos(angleRad) + r;
   const y = Math.abs(r * Math.sin(angleRad) - r);
   return x + ' ' + y;
 };
-const getArc = (gap) => (r) => (getClass) => (getStartAngle) => (getPoint) => 
+const getArc = (gap) => (r) => (getStartAngle) => (getPoint) => 
   (angle, idx, angles) => (
     `<path 
       class=${getClass(idx)}
       d="M${getPoint(getStartAngle(angle, idx, angles))} 
         A${r} ${r} 0 ${angle > 180 ? 1 : 0}
         0 ${getPoint(
-      (getStartAngle(angle, idx + 1, angles) 
-              || 360 + gap / 2) - gap, r
+      (getStartAngle(angle, idx + 1, angles) || 360 + gap / 2) - gap, r
     )}" 
       fill="none"
       stroke=url(#${getClass(idx)})
       stroke-width="4"
      />`
   );
-const ff = (insertArc) => (getArc) => (acc, a, idx, angles) => (
-  a == 0 ? acc : insertArc (acc) (getArc (a, idx, angles))
+const insertSign = (totalMarks) => (templateElem) => (
+  templateElem.insertAdjacentHTML(
+    'beforeend', 
+    `<text 
+      class="impressions__room-number" 
+      text-anchor="middle" 
+      x="60" 
+      y="65" 
+      fill="url(#bad)">${totalMarks}
+    </text>
+    <text 
+      class="impressions__room-votes" 
+      text-anchor="middle" 
+      x="60" 
+      y="81" 
+      fill="url(#bad)">голосов
+    </text>`
+  ), templateElem
 );
-const f = (gap) => (r) => (root) => (rating) => ( 
+const main = (gap) => (r) => (root) => (rating) => (totalMarks) => ( 
   root.insertAdjacentElement(
     'beforeend', 
-    rating.map(
-      getAngle (getTotalMarks (rating)) (getFullAngle (gap) (getNGaps (rating)))
-    ).reduce(
-      ff (insertArc) (
-        getArc (gap) (r) (getClass) (getStartAngle (gap)) (getPoint (r))
-      ),
-      getTemplateElem (template)
+    insertSign (totalMarks) (
+      rating.map(
+        getAngles (totalMarks) (
+          getFullAngle (gap) (getNGaps (rating))
+        )
+      ).reduce((template, a, idx, angles) => (
+        a == 0 ? template : insertArc (template) (
+          getArc (gap) (r) (getStartAngle (gap)) (getPoint (r)) (a, idx, angles)
+        )
+      ), getTemplateElem (template))
     )
   )
 );
-const main = (root) => (
-  f (4) (60) (root) (parseData(root))
-);
+const bind = (main) => (a) => (fn) => {
+  const newA = fn(a);
+  return bind(main(newA)) (newA);
+};
+const init = (root) => (
+  bind (main(4)(60)(root)) (root) (parseData) (getTotalMarks)
+)
 document.querySelectorAll('.impressions__circle-container')
-  .forEach((c) => main(c));
+  .forEach((c) => init(c));
 
