@@ -71,6 +71,11 @@ const getArc = (gap) => (r) => (getStartAngle) => (getPoint) =>
       stroke-width="4"
      />`
   );
+const getCircle = (r) => (rating) => (
+  `<circle cx=${r} cy=${r} r=${r} 
+  stroke=url(#${getClass(rating.findIndex((r) => r))}) 
+  stroke-width="4" fill="none"/>`
+);
 const insertSign = (totalMarks) => (templateElem) => (
   templateElem.insertAdjacentHTML(
     'beforeend', 
@@ -94,15 +99,19 @@ const main = (gap) => (r) => (root) => (rating) => (totalMarks) => (
   root.insertAdjacentElement(
     'beforeend', 
     insertSign (totalMarks) (
-      rating.map(
-        getAngles (totalMarks) (
-          getFullAngle (gap) (getNGaps (rating))
-        )
-      ).reduce((template, a, idx, angles) => (
-        a == 0 ? template : insertArc (template) (
-          getArc (gap) (r) (getStartAngle (gap)) (getPoint (r)) (a, idx, angles)
-        )
-      ), getTemplateElem (template))
+      rating.filter((x) => x).length == 1
+        ? insertArc (getTemplateElem (template)) (getCircle (r) (rating))
+        : rating.map(
+          getAngles (totalMarks) (
+            getFullAngle (gap) (getNGaps (rating))
+          )
+        ).reduce((template, a, idx, angles) => (
+          a == 0 ? template : insertArc (template) (
+            getArc (gap) (r) (getStartAngle (gap)) (getPoint (r)) (
+              a, idx, angles
+            )
+          )
+        ), getTemplateElem (template))
     )
   )
 );
@@ -112,7 +121,7 @@ const bind = (main) => (a) => (fn) => {
 };
 const init = (root) => (
   bind (main(4)(60)(root)) (root) (parseData) (getTotalMarks)
-)
+);
 document.querySelectorAll('.impressions__circle-container')
   .forEach((c) => init(c));
 
