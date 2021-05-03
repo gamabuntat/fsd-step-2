@@ -41,17 +41,15 @@ function changeCalendarButtonsValue() {
     }
   };
   if (!shrink) {
-    startDateButton.innerHTML = 
-    `${formatDate.dd(startRangeButton.innerHTML)}
-      .${formatDate.mm(startDate.month)}.${startDate.year}`
-      .replace(/\s+/, '');
-    endDateButton.innerHTML = 
-    `${formatDate.dd(endRangeButton.innerHTML)}
-      .${formatDate.mm(endDate.month)}.${endDate.year}`.replace(/\s+/, '');
+    startDateButton.innerHTML = `${
+      formatDate.dd(startRangeButton.innerHTML)
+    }.${formatDate.mm(startDate.month)}.${startDate.year}`;
+    endDateButton.innerHTML = `${
+      formatDate.dd(endRangeButton.innerHTML)
+    }.${formatDate.mm(endDate.month)}.${endDate.year}`;
   }
   else {
-    startDateButton.innerHTML = `
-      ${startRangeButton.innerHTML}
+    startDateButton.innerHTML = `${startRangeButton.innerHTML}
        ${formatDate.stringMonth(startDate.month)}`;
     endDateButton.innerHTML = `
       ${endRangeButton.innerHTML} ${formatDate.stringMonth(endDate.month)}
@@ -62,7 +60,7 @@ function changeCalendarButtonsValue() {
 
   function getStartRangeButton() {
     for (const button of changeCalendarButtonsValue.rangeButtons) {
-      if (
+      if(
         !button.classList.contains('calendar__day-button_next-month') 
         && !button.classList.contains('calendar__day-button_prev-month')
       ) { return button; }
@@ -70,12 +68,12 @@ function changeCalendarButtonsValue() {
   }
 
   function getEndRangeButton() {
-    for (const button of changeCalendarButtonsValue.rangeButtons.reverse()) {
-      if (
-        !button.classList.contains('calendar__day-button_next-month') 
-        && !button.classList.contains('calendar__day-button_prev-month')
-      ) { return button; }
-    }
+    const rangeBtnsReverse = (
+      [...changeCalendarButtonsValue.rangeButtons].reverse()
+    );
+    return rangeBtnsReverse.find((b) => (
+      [...b.classList].every((c) => !c.match(/next|prev/))
+    ));
   }
 
   function getCurrentMonth(elem) {

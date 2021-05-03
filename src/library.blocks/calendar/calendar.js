@@ -1,15 +1,13 @@
-import {CALENDAR_TABLE_TEMPLATE} from './calendar__template.js';
-
 export const MONTHS = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-export let collectionOfDates = [];
-export let calendar = document.querySelector('.calendar');
-export let container = document.querySelector('.calendar__container');
-export let firstTable = document.querySelector('.calendar__table_first');
-export let submitButton = calendar.querySelector('.calendar__submit-button');
-export let cancelButton = calendar.querySelector('.calendar__cancel-button');
-export let shrink = calendar.classList.contains('calendar_shrink');
-export let step =  shrink ? 224 : 280;
-let titleMonth = document.querySelector('.calendar__month-name').firstElementChild;
+export const collectionOfDates = [];
+export const calendar = document.querySelector('.calendar');
+export const container = document.querySelector('.calendar__container');
+export const firstTable = document.querySelector('.calendar__table_first');
+export const submitButton = calendar.querySelector('.calendar__submit-button');
+export const cancelButton = calendar.querySelector('.calendar__cancel-button');
+export const shrink = calendar.classList.contains('calendar_shrink');
+export const step =  shrink ? 224 : 280;
+const titleMonth = document.querySelector('.calendar__month-name').firstElementChild;
 
 function init() {
   printCalendar.ordinal = 0;
@@ -59,7 +57,7 @@ export function specifyMonth(ordinalValue) {
     calendarObj = collectionOfDates[ordinalValue - 1];
   }
   else {
-    let index = collectionOfDates.lastIndexOf((date) => !date.isPrint);
+    const index = collectionOfDates.lastIndexOf((date) => !date.isPrint);
     if (~index) calendarObj = collectionOfDates[index];
     else return;
   }
@@ -69,9 +67,9 @@ export function specifyMonth(ordinalValue) {
 
 export function printCalendar() {
   this.isPrint = true;
-  let calendar = this.elem;
-  let weeks = calendar.rows;
-  let lastWeek = weeks[weeks.length - 1];
+  const calendar = this.elem;
+  const weeks = calendar.rows;
+  const lastWeek = weeks[weeks.length - 1];
 
   let day = this.firstDayOfWeek;
   let week = 1;
@@ -114,14 +112,14 @@ export function printCalendar() {
 }
 
 function addTodayClass() {
-  let range = collectionOfDates[0].today + collectionOfDates[0].firstDayOfWeek;
-  let row = Math.ceil(range / 7);
+  const range = collectionOfDates[0].today + collectionOfDates[0].firstDayOfWeek;
+  const row = Math.ceil(range / 7);
   let cell = range % 7;
   cell == 0 ? cell = 6 : --cell;
   collectionOfDates[0].todayY = row;
   collectionOfDates[0].todayX = cell;
   firstTable.rows[row].cells[cell].firstElementChild.classList.add('calendar__day-button_today');
-  let lastWeekOfFirstTable = firstTable.querySelector('.calendar__last-week') ? 5 : 6;
+  const lastWeekOfFirstTable = firstTable.querySelector('.calendar__last-week') ? 5 : 6;
 
   if (row == lastWeekOfFirstTable && firstTable.querySelector('.calendar__day-button_next-month')) {
     container.lastElementChild.rows[1].cells[collectionOfDates[0].todayX].firstElementChild.classList.add('calendar__day-button_today');
