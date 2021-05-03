@@ -3,7 +3,7 @@ export function cancelButton() {
   while (!target.classList.contains('dropdown')) {
     target = target.parentElement;
   }
-  for (let counter of target.querySelectorAll('.dropdown__counter')) {
+  for (const counter of target.querySelectorAll('.dropdown__counter')) {
     counter.innerHTML = 0; 
   }
 }

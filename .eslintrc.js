@@ -12,7 +12,7 @@ module.exports = {
     "prefer-const": "error",
     "prefer-arrow-callback": 'warn',
     "arrow-parens": "error",
-    "max-len": "error",
+    "max-len": "warn",
     "semi": "warn",
     "no-new-wrappers": "error",
     "indent": ["error", 2],

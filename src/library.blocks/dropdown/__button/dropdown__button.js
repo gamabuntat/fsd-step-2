@@ -2,9 +2,11 @@ import {methods} from '../dropdown.js';
 
 export function dropdownButton() {
   //for formElements page
-  if (methods.targetElem.parentElement.classList.contains('dropdown_disabled')) return;
+  if (
+    methods.targetElem.parentElement.classList.contains('dropdown_disabled')
+  ) return;
 
-  let openButton = document.querySelector('.dropdown__button_open');
+  const openButton = document.querySelector('.dropdown__button_open');
 
   document.removeEventListener('click', clickOutsideButton);
 
@@ -20,14 +22,10 @@ export function dropdownButton() {
 }
 
 export function clickOutsideButton(e) {
-  //return;
-  let elementClicked = e.target;
+  const insideDButton = e.target.closest('.dropdown__button');
+  const insideDExpandList = e.target.closest('.dropdown__expand-list');
+  if (insideDButton || insideDExpandList) { return; }
 
-  while (elementClicked != document.body.parentElement) {
-    if (elementClicked.closest('.dropdown__button') || elementClicked.closest('.dropdown__expand-list')) return;
-
-    elementClicked = elementClicked.parentElement;
-  }
   showOrHideExpandlist(document.querySelector('.dropdown__button_open'));
 
   document.removeEventListener('click', clickOutsideButton);
@@ -38,9 +36,9 @@ export function showOrHideExpandlist(button) {
 
   button.classList.toggle('dropdown__button_open');
 
-  let coord = button.parentElement.getBoundingClientRect();
-  let expandList = button.nextElementSibling;
-  let expandIcon = button.lastElementChild;
+  const coord = button.parentElement.getBoundingClientRect();
+  const expandList = button.nextElementSibling;
+  const expandIcon = button.lastElementChild;
 
   expandList.style.left = coord.x + window.pageXOffest + 'px';
   expandList.style.top = coord.height - 1 + 'px';

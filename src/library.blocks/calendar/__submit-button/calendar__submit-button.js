@@ -41,14 +41,13 @@ function changeCalendarButtonsValue() {
     }
   };
   if (!shrink) {
-    startDateButton.innerHTML = `
-      ${formatDate.dd(startRangeButton.innerHTML)}
-      .${formatDate.mm(startDate.month)}.${startDate.year}
-    `;
-    endDateButton.innerHTML = `
-      ${formatDate.dd(endRangeButton.innerHTML)}
-      .${formatDate.mm(endDate.month)}.${endDate.year}
-    `;
+    startDateButton.innerHTML = 
+    `${formatDate.dd(startRangeButton.innerHTML)}
+      .${formatDate.mm(startDate.month)}.${startDate.year}`
+      .replace(/\s+/, '');
+    endDateButton.innerHTML = 
+    `${formatDate.dd(endRangeButton.innerHTML)}
+      .${formatDate.mm(endDate.month)}.${endDate.year}`.replace(/\s+/, '');
   }
   else {
     startDateButton.innerHTML = `

@@ -1,4 +1,4 @@
-let input = document.querySelector('.sub-text-field__container');
+const input = document.querySelector('.sub-text-field__container');
 
 input.addEventListener('focusin', () => {
   input.style.border = '1px solid rgba(31, 32, 65, 0.50)';

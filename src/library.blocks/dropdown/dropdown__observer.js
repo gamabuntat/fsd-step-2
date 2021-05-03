@@ -1,5 +1,5 @@
-let observer = new MutationObserver((mutations) => {
-  for (let mutation of mutations) {
+const observer = new MutationObserver((mutations) => {
+  for (const mutation of mutations) {
     if (mutation.target.classList.contains('dropdown__counter')) {
       makeChangesInDropdown(mutation);
     }
@@ -9,38 +9,41 @@ let observer = new MutationObserver((mutations) => {
     let target = mutation.target;
     let showCancleButton = false;
 
-    if (mutation.removedNodes[0].data == 0 && mutation.addedNodes[0].data == 1) {
-      target.previousElementSibling.classList.remove('dropdown__decrease-button_disabled');
+    if (
+      mutation.removedNodes[0].data == 0 && mutation.addedNodes[0].data == 1
+    ) {
+      target.previousElementSibling.classList.remove(
+        'dropdown__decrease-button_disabled'
+      );
       showCancleButton = true;
 
     } else if (mutation.addedNodes[0].data == 0) {
-      target.previousElementSibling.classList.add('dropdown__decrease-button_disabled');
+      target.previousElementSibling.classList.add(
+        'dropdown__decrease-button_disabled'
+      );
     }
 
-    for (let dropdown of dropdowns) {
+    for (const dropdown of dropdowns) {
       if (dropdown.contains(target)) target = dropdown;
     }
 
-    let counters = Array.from(target.querySelectorAll('.dropdown__counter'));
-
-    let firstSum = +counters[0].innerHTML;
-    let secondSum = +counters[1].innerHTML;
-    let thirdSum = +counters[2].innerHTML;
-
-    let sum = firstSum + secondSum + thirdSum;
-
-    let diff = sum - thirdSum;
-
-    let result;
+    const counters = Array.from(
+      target.querySelectorAll('.dropdown__counter'), 
+      (c) => +c.innerHTML
+    );
+    const [firstSum, secondSum, thirdSum] = counters;
+    const sum = counters.reduce((acc, c) => acc + c);
+    const diff = sum - thirdSum;
+    let result = [];
 
     formString();
 
     function formString() {
 
       if (target.classList.contains('dropdown_narrow')) {
-        let firstString,
-          secondString,
-          thirdString;
+        let firstString;
+        let secondString;
+        let thirdString;
 
         !firstSum ? firstString = '' 
           : firstSum == 1 ? firstString = `${firstSum} спальня`
@@ -57,22 +60,21 @@ let observer = new MutationObserver((mutations) => {
             : thirdSum < 5 ? thirdString = `${thirdSum} ванные комнаты`
               : thirdString = `${thirdSum} ванных комнат`;
 
-        result = [];
-        let temp = [firstString, secondString, thirdString].
-          forEach((i) => i && result.push(i));
+        [firstString, secondString, thirdString]
+          .forEach((i) => i && result.push(i));
         if (result.length == 3) {
           result.pop();
           result = `${result.join(', ')}...`;
+        } else if (result.length == 0) {
+          result = 'Сколько комнат';
+        } else {
+          result = result.join(', ');
         }
-        else if (!result.length) [
-          result = 'Сколько комнат'
-        ];
-        else {result = result.join(', ');}
         return;
       }
 
-      let partOfString,
-        babyString;
+      let partOfString;
+      let babyString;
 
       if (diff == 0) {partOfString = ``;}
       else if (diff == 1) {partOfString = `${diff} гость`;}
@@ -99,16 +101,21 @@ let observer = new MutationObserver((mutations) => {
       }
     }
 
-    target.querySelector('.dropdown__button').firstElementChild.innerHTML = `${result}`;
+    target
+      .querySelector('.dropdown__button')
+      .firstElementChild.innerHTML = `${result}`;
   }
 
   function showOrHideCancelButton(dropdown) {
-    let cancelButton = dropdown.querySelector('.dropdown__cancel-button');
+    const cancelButton = dropdown.querySelector('.dropdown__cancel-button');
     if (!cancelButton) return;
     cancelButton.classList.toggle('dropdown__cancel-button_hidden');
   }
 });
 
-let dropdowns = Array.from(document.querySelectorAll('.dropdown'));
+const dropdowns = document.querySelectorAll('.dropdown');
 
-dropdowns.forEach((dropdown) => observer.observe(dropdown, { childList: true, subtree: true, }));
+dropdowns.forEach((dropdown) => (
+  observer.observe(dropdown, { childList: true, subtree: true, })
+));
+

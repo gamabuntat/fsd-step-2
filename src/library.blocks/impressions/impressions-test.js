@@ -48,7 +48,7 @@ const getStartAngle = (gap) => (_, idx, angles) => (
     .filter((angle) => angle)
     .reduce((acc, angle) => acc + angle + gap, gap / 2)
 );
-const getClass = (idx) => ( 
+const getClass = (idx) => (
   {0: 'amazing', 1: 'cool', 2: 'bad', 3: 'veryBad'}[idx]
 );
 const getPoint = (r) => (angle) => {

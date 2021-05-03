@@ -135,3 +135,4 @@ function insertSign() {
     </text>`;
   nameSpace.elem.insertAdjacentHTML('beforeend', sign);
 }
+

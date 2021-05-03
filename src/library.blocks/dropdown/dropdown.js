@@ -4,18 +4,24 @@ import {increaseButton} from './__increase-button/dropdown__increase-button.js';
 import {submitButton} from './__submit-button/dropdown__submit-button.js';
 import {cancelButton} from './__cancel-button/dropdown__cancel-button.js';
 
-let dropdowns = Array.from(document.querySelectorAll('.dropdown'));
+const dropdowns = [...document.querySelectorAll('.dropdown')];
 
-for (let dropdown of dropdowns) {
-  if (!dropdown.classList.contains('dropdown_disabled')) dropdown.addEventListener('click', defineElement);
+for (const dropdown of dropdowns) {
+  if (!dropdown.classList.contains('dropdown_disabled')) {
+    dropdown.addEventListener('click', defineElement);
+  }
 }
 
 function defineElement() {
-  let prop = methodsProp.find( (prop) => methods.targetElem = event.target.closest(`.${prop}`) );
+  const prop = methodsProp.find((prop) => (
+    methods.targetElem = event.target.closest(`.${prop}`))
+  );
   if (methods.targetElem) methods[prop]();
 }
 
-export let methods = {
+export const methods = {
+  targetElem: null,
+
   dropdown__button() {
     dropdownButton.call(this);
   },
@@ -37,4 +43,4 @@ export let methods = {
   }, 
 };
 
-let methodsProp = Object.keys(methods);
+const methodsProp = Object.keys(methods);

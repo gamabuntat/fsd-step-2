@@ -1,18 +1,31 @@
-let dateDropdownNameSpace = {};
+const calendar = document.querySelector('.calendar');
+const dateDropdown = document.querySelector('.date-dropdown');
+const dateButtons = document.querySelectorAll('.date-dropdown__button');
+const startDateButton = (
+  document.querySelector('.date-dropdown__start-date-button')
+);
+const expandIcons = (
+  dateDropdown.querySelectorAll('.date-dropdown__expand-icon')
+);
 
-dateDropdownNameSpace.calendar = document.querySelector('.calendar');
-dateDropdownNameSpace.dateDropdown = document.querySelector('.date-dropdown');
-dateDropdownNameSpace.dateButtons = document.querySelectorAll('.date-dropdown__button');
-dateDropdownNameSpace.startDateButton = document.querySelector('.date-dropdown__start-date-button');
-dateDropdownNameSpace.expandIcons = dateDropdownNameSpace.dateDropdown.querySelectorAll('.date-dropdown__expand-icon');
+const expandCalendar = (
+  expandIcons, dateDropdown, startDateButton, calendar
+) => () => {
+  expandIcons.forEach((icon) => (
+    icon.classList.toggle('date-dropdown__expand-icon_open'))
+  );
+  const coordDropdown = dateDropdown.getBoundingClientRect();
+  const coordButton = startDateButton.getBoundingClientRect();
+  calendar.style.top = coordButton.bottom - coordDropdown.y + 5 + 'px';
+  calendar.classList.toggle('calendar__open');
+};
 
-dateDropdownNameSpace.dateButtons.forEach((button) => button.addEventListener('click', expandCalendar));
-dateDropdownNameSpace.dateDropdown.addEventListener('calendarHide', expandCalendar);
+const expandCalendarBind = expandCalendar(
+  expandIcons, dateDropdown, startDateButton, calendar
+);
 
-function expandCalendar() {
-  dateDropdownNameSpace.expandIcons.forEach((icon) => icon.classList.toggle('date-dropdown__expand-icon_open'));
-  let coordDropdown = dateDropdownNameSpace.dateDropdown.getBoundingClientRect();
-  let coordButton = dateDropdownNameSpace.startDateButton.getBoundingClientRect();
-  dateDropdownNameSpace.calendar.style.top = coordButton.bottom - coordDropdown.y + 5 + 'px';
-  dateDropdownNameSpace.calendar.classList.toggle('calendar__open');
-}
+dateButtons.forEach((button) => (
+  button.addEventListener('click', expandCalendarBind)
+));
+dateDropdown.addEventListener('calendarHide', expandCalendarBind);
+
