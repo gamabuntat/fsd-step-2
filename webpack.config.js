@@ -14,7 +14,7 @@ module.exports = {
     roomDetails: './src/page/room-details/room-details.js',
     // registration: './src/page/registration/registration.js',
     // signIn: './src/page/signIn/signIn.js',
-    // index: './src/page/index/index.js',
+    index: './src/page/index/index.js',
   },
   output: {
     filename: '[name].js',
@@ -85,17 +85,17 @@ module.exports = {
     //   minify: 'false',
     //   chunks: ['signIn'],
     // }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'index.html',
-    //   template: './src/page/index/index.pug',
-    //   minify: 'false',
-    //   chunks: ['index'],
-    // }),
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      filename: 'room-details.html',
       template: './src/page/room-details/room-details.pug',
       minify: 'false',
       chunks: ['roomDetails'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: './src/page/index/index.pug',
+      minify: 'false',
+      chunks: ['index'],
     }),
   ],
   module: {

@@ -51,15 +51,18 @@
   text-align: left
 
 .cost-table__info
+  position: relative
   display: block
   width: 20px
   height: 20px
   background-image: url(@common/card/_room-details/cost-table__info.svg)
   background-repeat: no-repeat
   vertical-align: top
+  cursor: pointer
 
-.const-table__info_hide
+.cost-table__info_hidden
   background-image: none
+  cursor: unset
 
 .cost-table__price
   min-width: 57px
@@ -68,6 +71,22 @@
 
   &:after
     content: '₽'
+
+.cost-table__hint
+  position: absolute
+  display: none
+  padding: 0.2rem 0.4rem
+  bottom: 24px
+  right: -10px
+  width: max-content
+  background: white
+  border: 1px solid black
+  border-radius: 3px
+  box-sizing: border-box
+  cursor: initial
+
+.cost-table__hint_shown
+  display: block
 
 .total
   margin-top: 30px
