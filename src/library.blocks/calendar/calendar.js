@@ -1,4 +1,17 @@
-export const MONTHS = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+export const MONTHS = [
+  'Январь',
+  'Февраль',
+  'Март',
+  'Апрель',
+  'Май',
+  'Июнь',
+  'Июль',
+  'Август',
+  'Сентябрь',
+  'Октябрь',
+  'Ноябрь',
+  'Декабрь'
+];
 export const collectionOfDates = [];
 export const calendar = document.querySelector('.calendar');
 export const container = document.querySelector('.calendar__container');
@@ -7,12 +20,15 @@ export const submitButton = calendar.querySelector('.calendar__submit-button');
 export const cancelButton = calendar.querySelector('.calendar__cancel-button');
 export const shrink = calendar.classList.contains('calendar_shrink');
 export const step =  shrink ? 224 : 280;
-const titleMonth = document.querySelector('.calendar__month-name').firstElementChild;
+const titleMonth = document.querySelector('.calendar__month-name')
+  .firstElementChild;
 
 function init() {
   printCalendar.ordinal = 0;
-  collectionOfDates.push( new MyDate(new Date()) );
-  collectionOfDates.push( new MyDate(new Date(collectionOfDates[0].year, collectionOfDates[0].month + 1)) );
+  collectionOfDates.push(new MyDate(new Date()));
+  collectionOfDates.push(new MyDate(new Date(
+    collectionOfDates[0].year, collectionOfDates[0].month + 1
+  )));
   collectionOfDates[0].elem = container.firstElementChild;
   collectionOfDates[1].elem = container.lastElementChild;
   specifyMonth(printCalendar.ordinal);
@@ -96,7 +112,8 @@ export function printCalendar() {
   let lastMonthDate = new Date(this.year, this.month, 0).getDate();
   let prevDay = this.firstDayOfWeek - 1;
   for (; prevDay >= 0; prevDay--) {
-    weeks[1].cells[prevDay].firstElementChild.classList.add('calendar__day-button_prev-month');
+    weeks[1].cells[prevDay].firstElementChild
+      .classList.add('calendar__day-button_prev-month');
     weeks[1].cells[prevDay].firstElementChild.innerHTML = lastMonthDate;
     lastMonthDate--;
   }
@@ -105,26 +122,38 @@ export function printCalendar() {
   let nextMonthDate = 1;
   if (week < 5) day = 0;
   for (; day < 7; day++) {
-    weeks[nextMonthWeek].cells[day].firstElementChild.classList.add('calendar__day-button_next-month');
+    weeks[nextMonthWeek].cells[day].firstElementChild
+      .classList.add('calendar__day-button_next-month');
     weeks[nextMonthWeek].cells[day].firstElementChild.innerHTML = nextMonthDate;
     nextMonthDate++;
   }
 }
 
 function addTodayClass() {
-  const range = collectionOfDates[0].today + collectionOfDates[0].firstDayOfWeek;
+  const range = (
+    collectionOfDates[0].today + collectionOfDates[0].firstDayOfWeek
+  );
   const row = Math.ceil(range / 7);
   let cell = range % 7;
   cell == 0 ? cell = 6 : --cell;
   collectionOfDates[0].todayY = row;
   collectionOfDates[0].todayX = cell;
-  firstTable.rows[row].cells[cell].firstElementChild.classList.add('calendar__day-button_today');
-  const lastWeekOfFirstTable = firstTable.querySelector('.calendar__last-week') ? 5 : 6;
+  firstTable.rows[row].cells[cell].firstElementChild.
+    classList.add('calendar__day-button_today');
+  const lastWeekOfFirstTable = firstTable
+    .querySelector('.calendar__last-week') ? 5 : 6;
 
-  if (row == lastWeekOfFirstTable && firstTable.querySelector('.calendar__day-button_next-month')) {
-    container.lastElementChild.rows[1].cells[collectionOfDates[0].todayX].firstElementChild.classList.add('calendar__day-button_today');
+  if (
+    row == lastWeekOfFirstTable 
+      && firstTable.querySelector('.calendar__day-button_next-month')
+  ) {
+    container.lastElementChild.rows[1]
+      .cells[collectionOfDates[0].todayX]
+      .firstElementChild
+      .classList.add('calendar__day-button_today');
     collectionOfDates[1].haveToday = true;
   }
 }
 
 init();
+

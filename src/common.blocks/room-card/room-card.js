@@ -1,8 +1,6 @@
-import {nextImage} from './__next-button/room-card__next-button.js';
-import {prevImage} from './__prev-button/room-card__prev-button.js';
 import './__input/room-card__input.js';
 
-export let nameSpace = {
+export const nameSpace = {
   width: 271,
   number: 4,
   setMaxWidth() {
@@ -20,11 +18,12 @@ export let nameSpace = {
 
   },
   checkInput(elem, x) {
-    let roomCard = this.getRoomCard(elem);
-    let position = this.getPosition(x);
-    let inputs = roomCard.querySelectorAll('input');
+    const roomCard = this.getRoomCard(elem);
+    const position = this.getPosition(x);
+    const inputs = roomCard.querySelectorAll('input');
     inputs[position - 1].checked = true;
   },
 };
 
 nameSpace.setMaxWidth();
+

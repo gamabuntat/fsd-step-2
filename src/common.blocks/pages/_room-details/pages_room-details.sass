@@ -18,6 +18,10 @@
 @use '@library/card/card'
 @use '@common/card/_room-details/card_room-details'
 
+.main 
+  display: flex
+  flex-direction: column
+  flex-grow: 1
 .main__content
   display: grid
   grid-template-columns: repeat(auto-fit, minmax(380px, max-content))
@@ -87,3 +91,12 @@
 
   & > .p
     color: colors.$base-color-75
+
+@media screen and (max-width: 400px)
+  .main__content 
+    grid-template-columns: 1fr
+    padding: 0
+
+  .main__card
+    justify-content: center
+

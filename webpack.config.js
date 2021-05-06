@@ -10,7 +10,7 @@ module.exports = {
     // cards: './src/UI kit/cards/cards.js',
     // headersAndFooters: './src/UI kit/headers-and-footers/headers-and-footers.js',
     // landing: './src/page/landing/landing.js',
-    searchRoom: './src/page/search-room/search-room.js',
+    // searchRoom: './src/page/search-room/search-room.js',
     roomDetails: './src/page/room-details/room-details.js',
     // registration: './src/page/registration/registration.js',
     // signIn: './src/page/signIn/signIn.js',
@@ -32,6 +32,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
+    open: true,
     port: 9000,
   },
   plugins: [
@@ -66,12 +67,12 @@ module.exports = {
     //   minify: 'false',
     //   chunks: ['landing'],
     // }),
-    new HtmlWebpackPlugin({
-      filename: 'search-room.html',
-      template: './src/page/search-room/search-room.pug',
-      minify: 'false',
-      chunks: ['searchRoom'],
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: 'search-room.html',
+    //   template: './src/page/search-room/search-room.pug',
+    //   minify: 'false',
+    //   chunks: ['searchRoom'],
+    // }),
     // new HtmlWebpackPlugin({
     //   filename: 'registration.html',
     //   template: './src/page/registration/registration.pug',
@@ -91,7 +92,7 @@ module.exports = {
     //   chunks: ['index'],
     // }),
     new HtmlWebpackPlugin({
-      filename: 'room-details.html',
+      filename: 'index.html',
       template: './src/page/room-details/room-details.pug',
       minify: 'false',
       chunks: ['roomDetails'],

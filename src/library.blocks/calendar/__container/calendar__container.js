@@ -1,23 +1,34 @@
-import {collectionOfDates, printCalendar, calendar, container, submitButton, cancelButton} from '../calendar.js';
-import {changeCalendarButtonsValue} from '../__submit-button/calendar__submit-button.js';
+import {
+  collectionOfDates, 
+  printCalendar,
+  calendar,
+  container,
+  submitButton,
+  cancelButton
+} from '../calendar.js';
+import {
+  changeCalendarButtonsValue
+} from '../__submit-button/calendar__submit-button.js';
 
-let nextButton = calendar.querySelector('.calendar__next-button');
+const nextButton = calendar.querySelector('.calendar__next-button');
 
 dataPicker.startRange = true;
 dataPicker.startRangeElem = [];
 dataPicker.endRangeElem = [];
 
 export function dataPicker() {
-  let target = event.target;
+  const target = event.target;
   if (!target.classList.contains('calendar__day-button')) return;
-  let targetRow = target.parentElement.parentElement.rowIndex;
-  let targetCell = target.parentElement.cellIndex;
+  const targetRow = target.parentElement.parentElement.rowIndex;
+  const targetCell = target.parentElement.cellIndex;
 
   if (printCalendar.ordinal == 0) {
     if (targetRow < collectionOfDates[0].todayY) return;
-    else if (targetRow == collectionOfDates[0].todayY && targetCell < collectionOfDates[0].todayX) return;
-  }
-  else if (printCalendar.ordinal == 1 && collectionOfDates[1].haveToday) {
+    else if (
+      targetRow == collectionOfDates[0].todayY 
+        && targetCell < collectionOfDates[0].todayX
+    ) return;
+  } else if (printCalendar.ordinal == 1 && collectionOfDates[1].haveToday) {
     if (targetRow == 1 && targetCell < collectionOfDates[0].todayX) return;
   }
 
@@ -26,10 +37,13 @@ export function dataPicker() {
     chooseButton(dataPicker.startRangeElem);
     cancelButton.classList.remove('text-button_hidden');
     dataPicker.startRange = false;
-  }
-  else {
+  } else {
     chooseButton(dataPicker.endRangeElem);
-    if (dataPicker.startRangeElem.find((elem) => elem == dataPicker.endRangeElem[0])) {
+    if (
+      dataPicker.startRangeElem.find((elem) => (
+        elem == dataPicker.endRangeElem[0]
+      ))
+    ) {
       dataPicker.endRangeElem = [];
       return;
     }
@@ -49,17 +63,22 @@ export function dataPicker() {
   }
 
   function chooseAdditionalButton(range) {
-    let rangeWeek = range[0].parentElement.parentElement;
-    if (range[0].rangeY == 1 && range[0].rangeIndex && collectionOfDates[printCalendar.ordinal - 1].elem.querySelector('.calendar__day-button_next-month')) {
-      let prevMonth = collectionOfDates[range[0].rangeIndex - 1].elem;
-      let week = prevMonth.querySelector('.calendar__last-week') ? 5 : 6;
+    const rangeWeek = range[0].parentElement.parentElement;
+    if (
+      range[0].rangeY == 1 
+        && range[0].rangeIndex 
+        && collectionOfDates[printCalendar.ordinal - 1]
+          .elem.querySelector('.calendar__day-button_next-month')
+    ) {
+      const prevMonth = collectionOfDates[range[0].rangeIndex - 1].elem;
+      const week = prevMonth.querySelector('.calendar__last-week') ? 5 : 6;
       range.push(prevMonth.rows[week].cells[range[0].rangeX].firstElementChild);
       range[1].rangeIndex = range[0].rangeIndex - 1;
       range[1].rangeY = week;
       range[1].rangeX = range[0].rangeX;
     }
     else if (rangeWeek.querySelector('.calendar__day-button_next-month')) {
-      let nextMonth = collectionOfDates[range[0].rangeIndex + 1].elem;
+      const nextMonth = collectionOfDates[range[0].rangeIndex + 1].elem;
       range.push(nextMonth.rows[1].cells[range[0].rangeX].firstElementChild);
       range[1].rangeIndex = range[0].rangeIndex + 1;
       range[1].rangeY = 1;
@@ -68,7 +87,7 @@ export function dataPicker() {
   }
 
   function drawRange() {
-    let elems = dataPicker.startRangeElem.concat(dataPicker.endRangeElem);
+    const elems = dataPicker.startRangeElem.concat(dataPicker.endRangeElem);
     elems.sort(compareElems);
     changeCalendarButtonsValue.rangeButtons = elems;
     let nextElemIndex = 0;
@@ -76,19 +95,25 @@ export function dataPicker() {
 
     function drawOneWeek(elem = false) {
       if (!elem) return;
-      let index = elem.rangeIndex;
-      let row = elem.rangeY;
-      let daysOfCurrentWeek = collectionOfDates[index].elem.rows[row].cells;
+      const index = elem.rangeIndex;
+      const row = elem.rangeY;
+      const daysOfCurrentWeek = collectionOfDates[index].elem.rows[row].cells;
       let cell = elem == elems[elems.length - 1] ? 0 : elem.rangeX + 1;
       for (; cell < 7; cell++) {
-        let button = daysOfCurrentWeek[cell].firstElementChild;
+        const button = daysOfCurrentWeek[cell].firstElementChild;
         if (button.classList.contains('calendar__day-button_range')) {
-          if (elems[nextElemIndex + 1] && elem.rangeY == elems[nextElemIndex + 1].rangeY) {
-            elems[nextElemIndex].parentElement.classList.add('calendar__range-start');
-            elems[nextElemIndex + 1].parentElement.classList.add('calendar__range-end');
+          if (
+            elems[nextElemIndex + 1] 
+              && elem.rangeY == elems[nextElemIndex + 1].rangeY
+          ) {
+            elems[nextElemIndex].parentElement
+              .classList.add('calendar__range-start');
+            elems[nextElemIndex + 1].parentElement
+              .classList.add('calendar__range-end');
           }
           else {
-            elems[nextElemIndex].parentElement.classList.add('calendar__range-end');
+            elems[nextElemIndex].parentElement
+              .classList.add('calendar__range-end');
           }
           nextElemIndex += 2;
           drawOneWeek(elems[nextElemIndex]);
@@ -96,10 +121,15 @@ export function dataPicker() {
         }
         button.parentElement.classList.add('calendar__range');
       }
-      let lastWeek = collectionOfDates[index].elem.querySelector('.calendar__last-week') ? 5 : 6;
+      const lastWeek = collectionOfDates[index].elem
+        .querySelector('.calendar__last-week') ? 5 : 6;
       elem.parentElement.classList.add('calendar__range-start');
       nextElemIndex++;
-      if (row == lastWeek && collectionOfDates[index].elem.querySelector('.calendar__day-button_next-month')) {
+      if (
+        row == lastWeek 
+          && collectionOfDates[index].elem
+            .querySelector('.calendar__day-button_next-month')
+      ) {
         drawOneWeek(elems[nextElemIndex]);
       }
       else {
@@ -107,15 +137,22 @@ export function dataPicker() {
       }
 
       function drawMainRange() {
-        for (let nextIndex = index ; nextIndex <= elems[elems.length - 1].rangeIndex; nextIndex++) {
-          let calendar = collectionOfDates[nextIndex].elem;
-          let lastWeek = collectionOfDates[nextIndex].elem.querySelector('.calendar__last-week') ? 5 : 6;
+        for (
+          let nextIndex = index;
+          nextIndex <= elems[elems.length - 1].rangeIndex;
+          nextIndex++
+        ) {
+          const calendar = collectionOfDates[nextIndex].elem;
+          const lastWeek = collectionOfDates[nextIndex].elem
+            .querySelector('.calendar__last-week') ? 5 : 6;
           let nextRow = nextIndex == index ? row + 1 : 1;
           for ( ; nextRow <= lastWeek; nextRow++) {
             for (let cell = 0; cell < 7; cell++) {
-              let button = calendar.rows[nextRow].cells[cell].firstElementChild;
+              const button = calendar
+                .rows[nextRow].cells[cell].firstElementChild;
               if (button.classList.contains('calendar__day-button_range')) {
-                elems[nextElemIndex].parentElement.classList.add('calendar__range-end');
+                elems[nextElemIndex].parentElement
+                  .classList.add('calendar__range-end');
                 nextElemIndex++;
                 drawOneWeek(elems[nextElemIndex]);
                 return;
@@ -129,7 +166,7 @@ export function dataPicker() {
 
     function compareElems(a, b) {
       let result;
-      let coordRelativePosition = [
+      const coordRelativePosition = [
         a.rangeIndex - b.rangeIndex, 
         a.rangeY - b.rangeY,
         a.rangeX - b.rangeX
@@ -149,16 +186,19 @@ export function dataPicker() {
 export function removeRange() {
   cancelButton.classList.add('text-button_hidden');
 
-  for (let button of container.querySelectorAll('.calendar__day-button_range')) {
+  for (
+    const button of container
+      .querySelectorAll('.calendar__day-button_range')
+  ) {
     button.classList.remove('calendar__day-button_range');
   }
-  for (let start of container.querySelectorAll('.calendar__range-start')) {
+  for (const start of container.querySelectorAll('.calendar__range-start')) {
     start.classList.remove('calendar__range-start');
   }
-  for (let end of container.querySelectorAll('.calendar__range-end')) {
+  for (const end of container.querySelectorAll('.calendar__range-end')) {
     end.classList.remove('calendar__range-end');
   }
-  for (let range of container.querySelectorAll('.calendar__range')) {
+  for (const range of container.querySelectorAll('.calendar__range')) {
     range.classList.remove('calendar__range');
   }
   dataPicker.endRangeElem = [];
@@ -169,8 +209,8 @@ export function removeRange() {
 container.addEventListener('click', dataPicker);
 
 container.addEventListener('focus', () => {
-  let calendar = collectionOfDates[printCalendar.ordinal].elem;
-  let row = 5;
+  const calendar = collectionOfDates[printCalendar.ordinal].elem;
+  const row = 5;
 
   if (calendar.querySelector('.calendar__last-week') && 
         event.target == calendar.rows[row].cells[6].firstElementChild) {
@@ -198,3 +238,4 @@ function focusOnNextMonthButton() {
     nextButton.focus();
   }
 }
+

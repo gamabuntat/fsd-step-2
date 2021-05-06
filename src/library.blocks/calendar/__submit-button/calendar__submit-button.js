@@ -60,7 +60,7 @@ function changeCalendarButtonsValue() {
 
   function getStartRangeButton() {
     for (const button of changeCalendarButtonsValue.rangeButtons) {
-      if(
+      if (
         !button.classList.contains('calendar__day-button_next-month') 
         && !button.classList.contains('calendar__day-button_prev-month')
       ) { return button; }
@@ -71,9 +71,13 @@ function changeCalendarButtonsValue() {
     const rangeBtnsReverse = (
       [...changeCalendarButtonsValue.rangeButtons].reverse()
     );
-    return rangeBtnsReverse.find((b) => (
-      [...b.classList].every((c) => !c.match(/next|prev/))
-    ));
+    return rangeBtnsReverse.find((b) => {
+      const cl = b.classList;
+      return cl.contains('calendar__day-button_next-month')
+        || cl.contains('calendar__day-button_prev-month') 
+        ? false
+        : true;
+    });
   }
 
   function getCurrentMonth(elem) {

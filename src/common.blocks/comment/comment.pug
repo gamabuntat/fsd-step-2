@@ -1,10 +1,10 @@
 mixin comment(params)
-    - let {img = "common.blocks/comment/__avatar/comment__avatar_1.png", author = 'Мурад Сарафанов', commentText = "Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.", timeAgo = '5 дней назад', likeButton = 1} = params
-    .comment
-        .comment__avatar-container
-            img.comment__avatar(src=path + img, alt="")
-        .container.container_direction-column
-            span.comment__author #{author}
-            span.comment__time #{timeAgo}
-        +likeButton({like: likeButton})
-        span.comment__content #{commentText}
+  - let {img = "common.blocks/comment/__avatar/comment__avatar_1.png", author = 'Мурад Сарафанов', commentText = "Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.", timeAgo = '5 дней назад', likeButton = 1} = params
+  .comment
+    .comment__avatar-container
+      img.comment__avatar(src=path + img, alt="")
+    .container.container_direction-column
+      span.comment__author #{author}
+      span.comment__time #{timeAgo}
+    +likeButton({like: likeButton})
+    span.comment__content #{commentText}

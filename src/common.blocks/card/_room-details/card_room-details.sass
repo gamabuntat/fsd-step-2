@@ -2,14 +2,16 @@
 @use '@library/html/html'
 
 .card_room-details
-  row-gap: 20px
 
   & > *:first-child
-    align-items: flex-end
-    justify-content: space-between
+    row-gap: 20px
 
-  & > *:first-child > *:first-child
-    text-align: center
+    & > *:first-child
+      align-items: flex-end
+      justify-content: space-between
+
+    & > *:first-child > *:first-child
+      text-align: center
 
 .room__number
   margin-bottom: -4px
@@ -55,6 +57,9 @@
   background-image: url(@common/card/_room-details/cost-table__info.svg)
   background-repeat: no-repeat
   vertical-align: top
+
+.const-table__info_hide
+  background-image: none
 
 .cost-table__price
   min-width: 57px
