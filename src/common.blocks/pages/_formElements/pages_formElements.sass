@@ -25,9 +25,18 @@
 @use '@common/comment/comment'
 
 .pages_formElements
-  padding: 140px 200px
+  margin: 140px auto
+  width: min(1440px, 100%)
+  height: auto
+  justify-content: center
+  // align-items: center
+
+.fe-container
+
+.fe-sub-container
+  margin-left: 141px
   display: grid
-  grid-template-columns: 1fr 1fr 1fr
+  grid-template-columns: repeat(auto-fit, minmax(320px, max-content))
   row-gap: 100px
   column-gap: 126px
 
