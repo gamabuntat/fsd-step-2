@@ -18,37 +18,37 @@ include ../../common.blocks/card/_login/card_login
 
 doctype html
 html.html(lang="ru")
-    head
-        meta(charset="UTF-8")
-        title
-    body.pages.pages_cards
-        img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
-        .container.container_direction-column
-            +primaryCard({calendar: false})
-            +registration({})
-        .container.container_direction-column
-            +roomDetalisCard({onlyButtons: 1})
-            +login({})
-        .container.container_direction-column
-            include ../../common.blocks/calendar/calendar
-            +roomCard({
-            imgPath: [
-              "common.blocks/room-card/__image/room-card__image-1.svg",
-              "common.blocks/room-card/__image/room-card__image-2.svg",
-              "common.blocks/room-card/__image/room-card__image-1.svg",
-              "common.blocks/room-card/__image/room-card__image-2.svg",
-            ],
-            })
-            +roomCard({
-            imgPath: [
-              "common.blocks/room-card/__image/room-card__image-2.svg",
-              "common.blocks/room-card/__image/room-card__image-1.svg",
-              "common.blocks/room-card/__image/room-card__image-2.svg",
-              "common.blocks/room-card/__image/room-card__image-1.svg",
-            ],
-            roomNumber: 840,
-            price: 9900,
-            luxuryStatus: '',
-            rate: 4,
-            reviews: 65,
-            })
+  head
+    meta(charset="UTF-8")
+    title
+  body.pages.pages_cards
+    img.watermark(src=require("@src/library.blocks/watermark/watermark.svg").default, alt="watermark")
+    .container.container_direction-column
+        +primaryCard({calendar: false})
+        +registration({})
+    .container.container_direction-column
+        +roomDetalisCard({onlyButtons: 1})
+        +login({})
+    .container.container_direction-column
+        include ../../common.blocks/calendar/calendar
+        +roomCard({
+        imgPath: [
+          "common.blocks/room-card/__image/room-card__image-1.svg",
+          "common.blocks/room-card/__image/room-card__image-2.svg",
+          "common.blocks/room-card/__image/room-card__image-1.svg",
+          "common.blocks/room-card/__image/room-card__image-2.svg",
+        ],
+        })
+        +roomCard({
+        imgPath: [
+          "common.blocks/room-card/__image/room-card__image-2.svg",
+          "common.blocks/room-card/__image/room-card__image-1.svg",
+          "common.blocks/room-card/__image/room-card__image-2.svg",
+          "common.blocks/room-card/__image/room-card__image-1.svg",
+        ],
+        roomNumber: 840,
+        price: 9900,
+        luxuryStatus: '',
+        rate: 4,
+        reviews: 65,
+        })

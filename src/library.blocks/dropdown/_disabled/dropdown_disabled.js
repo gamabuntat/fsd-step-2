@@ -1,5 +1,5 @@
 // For formELements page
-let dropdowns = document.querySelectorAll('.dropdown'); 
-for (let dropdown of dropdowns) {
+const dropdowns = document.querySelectorAll('.js-dropdown'); 
+for (const dropdown of dropdowns) {
   dropdown.classList.add('dropdown_disabled');
 }

@@ -1,7 +1,4 @@
-let inputMasked = document.querySelectorAll('.input_masked');
-let dd = 31;
-let mm = 12;
-let yyyy = Infinity;
+const inputMasked = document.querySelectorAll('.js-input_masked');
 
 inputMasked.forEach((input) => input.addEventListener('keydown', () => {
   if (event.code == 'Backspace' && input.value.slice(-1) == '.') {
@@ -11,9 +8,9 @@ inputMasked.forEach((input) => input.addEventListener('keydown', () => {
 }));
 
 inputMasked.forEach((input) => input.addEventListener('input', () => {
-  let lastSymb = input.value.slice(-1);
-  let pos = input.value.split('.').length;
-  let lastString = input.value.split('.').pop();
+  const lastSymb = input.value.slice(-1);
+  const pos = input.value.split('.').length;
+  const lastString = input.value.split('.').pop();
 
   if (input.value.length > 10) {
     removeLastSymb();

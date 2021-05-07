@@ -1,11 +1,11 @@
 mixin roomDetalis(params)
-    - const {comfort = true, convenience = true, cosiness = false} = params
-    .room-detalis
-        if comfort
-            include ./room-detalis__comfort
-            .hr
-        if convenience
-            include ./room-detalis__convenience
-            .hr
-        if cosiness
-            include ./room-detalis__cosiness
+  - const {comfort = true, convenience = true, cosiness = false} = params
+  .room-detalis
+    if comfort
+      include ./room-detalis__comfort
+      .hr
+    if convenience
+      include ./room-detalis__convenience
+      .hr
+    if cosiness
+      include ./room-detalis__cosiness

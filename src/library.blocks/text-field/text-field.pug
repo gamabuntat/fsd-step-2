@@ -1,19 +1,17 @@
 mixin textFiled(params)
-    - let {title = false, subTitle, hover, masked, placeholder = 'Email'} = params
+    - const {title = false, subTitle, hover, masked, placeholder = 'Email'} = params
     .container.container_direction-column.text-field
-        if title
-            .text-field__sign-container.container.container_justify-content-space-between
-                h3.h3.text-field__sign #{title}
-                if subTitle
-                    h3.h3.text-field__sub-sign.font.font_montserrat-r #{subTitle}
-                else
-        else
-        if hover
-            form
-                input.input.input_hover(type="text" placeholder="Email" value="This is pretty awesome")
-        else if masked
-            form
-                input.input.input_masked(type="text" placeholder="ДД.ММ.ГГГГ")
-        else
-            form
-                input.input(type="text" placeholder=placeholder)
+      if title
+        .text-field__sign-container.container.container_justify-content-space-between
+          h3.h3.text-field__sign #{title}
+          if subTitle
+            h3.h3.text-field__sub-sign.font.font_montserrat-r #{subTitle}
+      if hover
+        form
+          input.input.input_hover(type="email" placeholder="Email" value="This is pretty awesome")
+      else if masked
+        form
+          input.input.input_masked.js-input_masked(type="text" placeholder="ДД.ММ.ГГГГ")
+      else
+        form
+          input.input(type="text" placeholder=placeholder)

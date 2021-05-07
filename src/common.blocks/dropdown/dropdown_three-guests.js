@@ -1,5 +1,5 @@
 const increaseButtons = (
-  [...document.querySelectorAll('.dropdown')]
+  [...document.querySelectorAll('.js-dropdown')]
     .pop()
     .querySelectorAll('.dropdown__increase-button')
 );
