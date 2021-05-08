@@ -1,12 +1,12 @@
 mixin calendar(params)
-    - let {shrink = false} = params
+    - const {shrink = false} = params
     - let shrinkClass = '';
     if shrink
           - shrinkClass = 'calendar_shrink'
     .calendar.container.container_direction-column(class=shrinkClass)
         .calendar__title.container.container_justify-content-space-between
             button.calendar__prev-button.text-button 
-                img(src=path + "library.blocks/calendar/__prev-button/calendar__prev-button.svg", alt="")
+                img(src=require("@src/library.blocks/calendar/__prev-button/calendar__prev-button.svg").default, alt="calendar prev button")
             span.calendar__month-name 
                 h2.h2
             button.calendar__next-button.text-button
