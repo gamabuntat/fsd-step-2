@@ -38,8 +38,6 @@
   column-gap: 126px
 
 .fe-sub-container_second
-  display: flex
-  flex-wrap: wrap
 
 .box-1-1
   display: grid
@@ -85,9 +83,8 @@
   & .rich-check:last-child .rich-check__sign
     max-width: 234px
 
-.box-4-1 .hr
+.box-4-1
   width: 274px
-  margin-top: 22px
 
 .box-4-2
   grid-column: span 2
@@ -98,5 +95,8 @@
     align-items: center
 
   .fe-sub-container_second
-    width: min-content
+    max-width: 320px
+
+  .box-4-2
+    grid-column: span 1
 
