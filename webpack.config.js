@@ -44,18 +44,18 @@ module.exports = {
     //   minify: 'false',
     //   chunks: ['colorsAndType'],
     // }),
-    new HtmlWebpackPlugin({
-      filename: 'formElements.html',
-      template: './src/UI kit/Form Elements/formElements.pug',
-      minify: 'false',
-      chunks: ['formElements'],
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'cards.html',
-      template: './src/UI kit/cards/cards.pug',
-      minify: 'false',
-      chunks: ['cards'],
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: 'formElements.html',
+    //   template: './src/UI kit/Form Elements/formElements.pug',
+    //   minify: 'false',
+    //   chunks: ['formElements'],
+    // }),
+    // new HtmlWebpackPlugin({
+    //   filename: 'cards.html',
+    //   template: './src/UI kit/cards/cards.pug',
+    //   minify: 'false',
+    //   chunks: ['cards'],
+    // }),
     // new HtmlWebpackPlugin({
     //   filename: 'headers-and-footers.html',
     //   template: './src/UI kit/headers-and-footers/headers-and-footers.pug',
@@ -68,12 +68,12 @@ module.exports = {
     //   minify: 'false',
     //   chunks: ['landing'],
     // }),
-    new HtmlWebpackPlugin({
-      filename: 'search-room.html',
-      template: './src/page/search-room/search-room.pug',
-      minify: 'false',
-      chunks: ['searchRoom'],
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: 'search-room.html',
+    //   template: './src/page/search-room/search-room.pug',
+    //   minify: 'false',
+    //   chunks: ['searchRoom'],
+    // }),
     // new HtmlWebpackPlugin({
     //   filename: 'registration.html',
     //   template: './src/page/registration/registration.pug',
@@ -89,7 +89,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'room-details.html',
       template: './src/page/room-details/room-details.pug',
-      minify: 'false',
+      favicon: './src/favicon/favicon-32x32.png',
+      minify: 'true',
       chunks: ['roomDetails'],
     }),
     new HtmlWebpackPlugin({

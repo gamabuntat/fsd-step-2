@@ -1,8 +1,8 @@
 mixin itemExpandable(params)
-    - let {title = 'Услуги', number = 3, items = []} = params
-    .header__menu-item.header__menu-item_expandable
-        | #{title}
-    ul.header__expandable-content
-        - for (let i = 1; i <= number; i++)
-            li
-                a(href="#") Item of list #{i}
+  - const {title = 'Услуги', number = 3, items = []} = params
+  .header__menu-item.header__menu-item_expandable
+    | #{title}
+  ul.header__expandable-content
+    - for (let i = 1; i <= number; i++)
+      li
+        a(href="#") Item of list #{i}

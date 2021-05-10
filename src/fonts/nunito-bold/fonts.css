@@ -5,5 +5,6 @@
 	src: local('☺'), url('fonts/Nunito-Bold.woff') format('woff'), url('fonts/Nunito-Bold.ttf') format('truetype'), url('fonts/Nunito-Bold.svg') format('svg');
 	font-weight: normal;
 	font-style: normal;
+  font-display: swap;
 }
 
