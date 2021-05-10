@@ -1,10 +1,10 @@
 mixin likeButton(params)
-    - let {like = false, likeCount = 12} = params
-    if like
-        button.like-button.like-button_like.text-button.container.container_align-items-center
-            span.like-button__icon 
-            span.like-button__counter 12
-    else
-        button.like-button.text-button.container.container_align-items-center
-            span.like-button__icon 
-            span.like-button__counter 2
+  - const {like = false, likeCount = 12} = params
+  if like
+    button.like-button.like-button_like.text-button.container.container_align-items-center(aria-label="like button")
+      span.like-button__icon 
+      span.like-button__counter 12
+  else
+    button.like-button.text-button.container.container_align-items-center(aria-label="like button")
+      span.like-button__icon 
+      span.like-button__counter 2

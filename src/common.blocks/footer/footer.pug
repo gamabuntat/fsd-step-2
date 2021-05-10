@@ -5,7 +5,7 @@ mixin footer(params)
       .footer__container
         .footer__main-content
           .container.container_direction-column.container_align-items-flex-start
-            img.logo.footer__logo(src=require("@library/logo/logo.svg").default, alt="")
+            img.logo.footer__logo(src=require("@library/logo/logo.svg").default, alt="logo")
             p.p
               | Бронирование номеров в лучшем
               br
@@ -42,14 +42,32 @@ mixin footer(params)
         .footer__social-content
           p.p Copyright © 2018 Toxin отель. Все права зачищены.
           .footer__social-container
-            a.footer__social-icon.twitter-icon(href="#")
-            a.footer__social-icon.facebook-icon(href="#")
-            a.footer__social-icon.instagram-icon(href="#")
+            a.footer__social-icon.twitter-icon(
+              href="https://twitter.com/" 
+              title="twitter start page"
+            )
+            a.footer__social-icon.facebook-icon(
+              href="https://www.facebook.com/"
+              title="facebook start page"
+            )
+            a.footer__social-icon.instagram-icon(
+              href="https://www.instagram.com/"
+              title="instagram start page"
+            )
   else
     footer.footer.footer_mobile
-      img.logo.footer__logo(src=require("@library/logo/logo.svg").default, alt="")
+      img.logo.footer__logo(src=require("@library/logo/logo.svg").default, alt="logo")
       p.p Copyright © 2018 Toxin отель. Все права зачищены.
       .footer__social-container
-        a.footer__social-icon.twitter-icon(href="#")
-        a.footer__social-icon.facebook-icon(href="#")
-        a.footer__social-icon.instagram-icon(href="#")
+        a.footer__social-icon.twitter-icon(
+          href="https://twitter.com/"
+          title="twitter start page"
+        )
+        a.footer__social-icon.facebook-icon(
+          href="https://www.facebook.com/"
+          title="facebook start page"
+        )
+        a.footer__social-icon.instagram-icon(
+          href="https://www.instagram.com/"
+          title="instagram start page"
+        )

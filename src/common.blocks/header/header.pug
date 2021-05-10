@@ -3,12 +3,15 @@ include ../../common.blocks/header/__menu-item/header__menu-item_expandable
 mixin header({authorized = false})
   header.header
     .header__container
-      button.header__menu-button.js-header__menu-button
+      button.header__menu-button.js-header__menu-button(aria-label="burger menu")
         <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24" aria-hidden="true">
           <path class="header__burger" fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
           </path>
         </svg>
-      a.header__link-logo(href="landing.html")
+      a.header__link-logo(
+        href="landing.html"
+        title="toxin home page"
+      )
         .logo.header__logo
       ul.header__menu.header__menu_hidden
         li
@@ -23,8 +26,8 @@ mixin header({authorized = false})
           +itemExpandable({title: ' Соглашения', number: 2})
       .header__button-container.container
         if !authorized
-          +buttonBorder({sign: 'Войти', header: 1})
-          +bigButton({action: '#', sign: 'зарегистрироваться', header: 1})
+          +buttonBorder({sign: 'Войти', header: true, label: 'login'})
+          +bigButton({action: '#', sign: 'зарегистрироваться', header: true, label: 'registration'})
         else
           .header__v-line
           a.header__menu-item(href="#") Юлий Цезарь
