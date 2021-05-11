@@ -68,12 +68,12 @@ module.exports = {
     //   minify: 'false',
     //   chunks: ['landing'],
     // }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'search-room.html',
-    //   template: './src/page/search-room/search-room.pug',
-    //   minify: 'false',
-    //   chunks: ['searchRoom'],
-    // }),
+    new HtmlWebpackPlugin({
+      filename: 'search-room.html',
+      template: './src/page/search-room/search-room.pug',
+      minify: 'false',
+      chunks: ['searchRoom'],
+    }),
     // new HtmlWebpackPlugin({
     //   filename: 'registration.html',
     //   template: './src/page/registration/registration.pug',

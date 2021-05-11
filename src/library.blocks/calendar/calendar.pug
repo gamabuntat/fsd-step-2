@@ -5,12 +5,10 @@ mixin calendar(params)
       - shrinkClass = 'calendar_shrink'
     .calendar.container.container_direction-column(class=shrinkClass)
       .calendar__title.container.container_justify-content-space-between
-        button.calendar__prev-button.text-button 
-          img(src=require("@src/library.blocks/calendar/__prev-button/calendar__prev-button.svg").default, alt="calendar prev button")
+        button.calendar__prev-button.js-calendar__prev-button.text-button(aria-label="previous month")
         span.calendar__month-name 
           h2.h2
-        button.calendar__next-button.text-button
-          img(src=require("@src/library.blocks/calendar/__next-button/calendar__next-button.svg").default, alt="calendar next button")
+        button.calendar__next-button.js-calendar__next-button.text-button(aria-label="next month")
       .calendar__container.container
         table.calendar__table.calendar__table_first
           tr
