@@ -1,12 +1,12 @@
 const observer = new MutationObserver((mutations) => {
   for (const mutation of mutations) {
-    if (mutation.target.classList.contains('dropdown__counter')) {
+    if (mutation.target.classList.contains('js-dropdown__counter')) {
       makeChangesInDropdown(mutation);
     }
   }
 
   function makeChangesInDropdown(mutation) {
-    let target = mutation.target;
+    const target = mutation.target;
     let showCancleButton = false;
 
     if (
@@ -16,23 +16,19 @@ const observer = new MutationObserver((mutations) => {
         'dropdown__decrease-button_disabled'
       );
       showCancleButton = true;
-
     } else if (mutation.addedNodes[0].data == 0) {
       target.previousElementSibling.classList.add(
         'dropdown__decrease-button_disabled'
       );
     }
 
-    for (const dropdown of dropdowns) {
-      if (dropdown.contains(target)) target = dropdown;
-    }
-
+    const dropdown = target.closest('.js-dropdown');
     const counters = Array.from(
-      target.querySelectorAll('.dropdown__counter'), 
+      dropdown.querySelectorAll('.js-dropdown__counter'), 
       (c) => +c.innerHTML
     );
     const [firstSum, secondSum, thirdSum] = counters;
-    const sum = counters.reduce((acc, c) => acc + c);
+    const sum = firstSum + secondSum + thirdSum;
     const diff = sum - thirdSum;
     let result = [];
 
@@ -40,7 +36,7 @@ const observer = new MutationObserver((mutations) => {
 
     function formString() {
 
-      if (target.classList.contains('dropdown_narrow')) {
+      if (dropdown.classList.contains('dropdown_narrow')) {
         let firstString;
         let secondString;
         let thirdString;
@@ -94,14 +90,14 @@ const observer = new MutationObserver((mutations) => {
 
       if (!sum) {
         result = 'Сколько гостей';
-        showOrHideCancelButton(target);
+        showOrHideCancelButton(dropdown);
       }
       else if (sum == 1) {
-        if (showCancleButton) showOrHideCancelButton(target);
+        if (showCancleButton) showOrHideCancelButton(dropdown);
       }
     }
 
-    target
+    dropdown
       .querySelector('.dropdown__button')
       .firstElementChild.innerHTML = `${result}`;
   }
@@ -113,7 +109,7 @@ const observer = new MutationObserver((mutations) => {
   }
 });
 
-const dropdowns = document.querySelectorAll('.dropdown');
+const dropdowns = [...document.querySelectorAll('.dropdown')];
 
 dropdowns.forEach((dropdown) => (
   observer.observe(dropdown, { childList: true, subtree: true, })

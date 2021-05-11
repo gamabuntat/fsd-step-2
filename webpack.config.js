@@ -44,12 +44,13 @@ module.exports = {
     //   minify: 'false',
     //   chunks: ['colorsAndType'],
     // }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'formElements.html',
-    //   template: './src/UI kit/Form Elements/formElements.pug',
-    //   minify: 'false',
-    //   chunks: ['formElements'],
-    // }),
+    new HtmlWebpackPlugin({
+      filename: 'formElements.html',
+      template: './src/UI kit/Form Elements/formElements.pug',
+      favicon: './src/favicon/favicon-32x32.png',
+      minify: 'false',
+      chunks: ['formElements'],
+    }),
     // new HtmlWebpackPlugin({
     //   filename: 'cards.html',
     //   template: './src/UI kit/cards/cards.pug',
@@ -71,6 +72,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'search-room.html',
       template: './src/page/search-room/search-room.pug',
+      favicon: './src/favicon/favicon-32x32.png',
       minify: 'false',
       chunks: ['searchRoom'],
     }),
@@ -83,6 +85,7 @@ module.exports = {
     // new HtmlWebpackPlugin({
     //   filename: 'signIn.html',
     //   template: './src/page/signIn/signIn.pug',
+      // favicon: './src/favicon/favicon-32x32.png',
     //   minify: 'false',
     //   chunks: ['signIn'],
     // }),
@@ -96,6 +99,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './src/page/index/index.pug',
+      favicon: './src/favicon/favicon-32x32.png',
       minify: 'false',
       chunks: ['index'],
     }),

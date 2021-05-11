@@ -2,9 +2,8 @@ import {methods} from '../dropdown.js';
 
 export function dropdownButton() {
   //for formElements page
-  if (
-    methods.targetElem.parentElement.classList.contains('dropdown_disabled')
-  ) return;
+  if (methods.targetElem.parentElement.
+    classList.contains('dropdown_disabled')) { return; }
 
   const openButton = document.querySelector('.dropdown__button_open');
 
@@ -14,8 +13,7 @@ export function dropdownButton() {
 
   if (!openButton) {
     document.addEventListener('click', clickOutsideButton);
-  }
-  else if (this.targetElem != openButton) {
+  } else if (this.targetElem != openButton) {
     showOrHideExpandlist(openButton);
     document.addEventListener('click', clickOutsideButton);
   }
@@ -33,7 +31,6 @@ export function clickOutsideButton(e) {
 
 
 export function showOrHideExpandlist(button) {
-
   button.classList.toggle('dropdown__button_open');
 
   const coord = button.parentElement.getBoundingClientRect();

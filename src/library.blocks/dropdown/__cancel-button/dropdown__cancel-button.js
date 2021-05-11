@@ -1,9 +1,5 @@
 export function cancelButton() {
-  let target = this.targetElem;
-  while (!target.classList.contains('dropdown')) {
-    target = target.parentElement;
-  }
-  for (const counter of target.querySelectorAll('.dropdown__counter')) {
-    counter.innerHTML = 0; 
-  }
+  event.target.closest('.js-dropdown')
+    .querySelectorAll('.js-dropdown__counter')
+    .forEach((counter) => counter.innerHTML = String(0));
 }

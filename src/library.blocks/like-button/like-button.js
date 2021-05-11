@@ -1,4 +1,4 @@
-const likeButton = document.querySelectorAll('.like-button');
+const likeButton = document.querySelectorAll('.js-like-button');
 likeButton.forEach((button) => button.addEventListener('click', like));
 
 function like() {

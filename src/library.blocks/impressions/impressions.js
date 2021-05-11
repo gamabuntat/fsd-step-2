@@ -1,17 +1,8 @@
-const nameSpace = {
-  r: 60,
-  gap: 4,
-  fullAngle: 360,
-  numberGaps: 0,
-};
-
-nameSpace.width = nameSpace.r * 2;
-nameSpace.height = nameSpace.r * 2;
-const impressions = `
-  <svg 
+const template = (
+  `<svg 
     class="impressions__circle" 
-    width=${nameSpace.width} 
-    height=${nameSpace.width} 
+    width="120"
+    height="120"
     viewBox="-2 0 124 120">
     <defs>
       <linearGradient id="amazing" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -31,100 +22,69 @@ const impressions = `
         <stop offset="100%" style="stop-color:#3D4975;stop-opacity:1" />
       </linearGradient>
     </defs> 
-  </svg>
-`;
-const container = document.querySelector('.impressions__circle-container');
-container.insertAdjacentHTML('afterbegin', impressions);
-nameSpace.elem = document.querySelector('.impressions__circle');
-drawImpressions({...container.dataset});
-insertSign();
-
-function drawImpressions(rating) {
-  const {amazing, cool, bad, veryBad} = rating;
-  const mark = [+amazing, +cool, +bad, +veryBad];
-  nameSpace.numberGaps = calcGaps(mark);
-  getFullAngle();
-  getClasses();
-  calcAngles();
-  nameSpace.angles.length == 1 ? drawCircle() : drawArcs();
-
-  function calcGaps(marks) {
-    return marks.reduce((s, mark) => mark ? s + 1 : s, 0);
-  }
-
-  function getFullAngle() {
-    nameSpace.fullAngle = 360 - nameSpace.gap * nameSpace.numberGaps;
-  }
-
-  function getClasses() {
-    nameSpace.classes = [];
-    for (const prop in rating) {
-      if (rating[prop]) nameSpace.classes.push(prop);
-    }
-  }
-
-  function calcAngles() {
-    nameSpace.angles = [];
-    nameSpace.sum = mark.reduce((sum, current) => sum + current);
-    mark.forEach((i) => (
-      i && nameSpace.angles.push(nameSpace.fullAngle * i / nameSpace.sum))
-    );
-  }
-
-  function drawCircle() {
-    const circle = `
-      <circle 
-        cx=${nameSpace.r} 
-        cy=${nameSpace.r} 
-        r=${nameSpace.r} 
-        stroke="black" 
-        stroke-width="3" 
-        fill="none"
-      />`;
-    nameSpace.elem.insertAdjacentHTML('beforeend', circle);
-  }
-
-  function drawArcs() {
-    let arc;
-    let startArc = nameSpace.gap / 2;
-    let endArc = nameSpace.angles[0] + nameSpace.gap / 2;
-    for (let i = 0; i < nameSpace.angles.length; i++) {
-      const largeArcFlag = nameSpace.angles[i] > 180 ? 1 : 0;
-      if (i > 0) { endArc += nameSpace.angles[i] + nameSpace.gap; }
-      arc = `
-        <path 
-          class=${nameSpace.classes[i]}
-          d="M${getPoint(startArc)} 
-            A${nameSpace.r} ${nameSpace.r} 
-            0 ${largeArcFlag} 0 ${getPoint(endArc)}" 
-          fill="none"
-          stroke=url(#${nameSpace.classes[i]})
-          stroke-width="4"
-        />`;
-      nameSpace.elem.insertAdjacentHTML('beforeend', arc);
-      startArc += nameSpace.angles[i] + nameSpace.gap;
-    }
-  }
-}
-
-function getPoint(angle) {
-  const corrAngle = angle + 90;
-  const angleRad = corrAngle * Math.PI / 180;
-  let x = nameSpace.r * Math.cos(angleRad);
-  let y = nameSpace.r * Math.sin(angleRad);
-  x += nameSpace.r;
-  y = Math.abs(y - nameSpace.r);
+  </svg>`
+);
+const getTemplateElem = (template) => {
+  const temp = document.createElement('div');
+  temp.insertAdjacentHTML('afterbegin', template);
+  return temp.firstChild;
+};
+const insertArc = (templateElem) => (arc) => {
+  templateElem.insertAdjacentHTML('beforeend', arc);
+  return templateElem;
+};
+const parseData = (root) => {
+  const {amazing = 0, cool = 0, bad = 0, veryBad = 0} = root.dataset;
+  return [+amazing, +cool, +bad, +veryBad];
+};
+const getNGaps = (rating) => rating.filter((r) => r).length;
+const getFullAngle = (gap) => (nGaps) => 360 - gap * nGaps;
+const getTotalMarks = (rating) => rating.reduce((s, r) => s + r);
+const getAngles = (totalMarks) => (fullAngle) => (rate) => (
+  rate / totalMarks * fullAngle
+);
+const getStartAngle = (gap) => (_, idx, angles) => (
+  angles.slice(0, idx)
+    .filter((angle) => angle)
+    .reduce((acc, angle) => acc + angle + gap, gap / 2)
+);
+const getClass = (idx) => (
+  {0: 'amazing', 1: 'cool', 2: 'bad', 3: 'veryBad'}[idx]
+);
+const getPoint = (r) => (angle) => {
+  const angleRad = (angle + 90) * Math.PI / 180;
+  const x = r * Math.cos(angleRad) + r;
+  const y = Math.abs(r * Math.sin(angleRad) - r);
   return x + ' ' + y;
-}
-
-function insertSign() {
-  const sign = `
-    <text 
+};
+const getArc = (gap) => (r) => (getStartAngle) => (getPoint) => 
+  (angle, idx, angles) => (
+    `<path 
+      class=${getClass(idx)}
+      d="M${getPoint(getStartAngle(angle, idx, angles))} 
+        A${r} ${r} 0 ${angle > 180 ? 1 : 0}
+        0 ${getPoint(
+      (getStartAngle(angle, idx + 1, angles) || 360 + gap / 2) - gap, r
+    )}" 
+      fill="none"
+      stroke=url(#${getClass(idx)})
+      stroke-width="4"
+     />`
+  );
+const getCircle = (r) => (rating) => (
+  `<circle cx=${r} cy=${r} r=${r} 
+  stroke=url(#${getClass(rating.findIndex((r) => r))}) 
+  stroke-width="4" fill="none"/>`
+);
+const insertSign = (totalMarks) => (templateElem) => (
+  templateElem.insertAdjacentHTML(
+    'beforeend', 
+    `<text 
       class="impressions__room-number" 
       text-anchor="middle" 
       x="60" 
       y="65" 
-      fill="url(#bad)">${nameSpace.sum}
+      fill="url(#bad)">${totalMarks}
     </text>
     <text 
       class="impressions__room-votes" 
@@ -132,7 +92,36 @@ function insertSign() {
       x="60" 
       y="81" 
       fill="url(#bad)">голосов
-    </text>`;
-  nameSpace.elem.insertAdjacentHTML('beforeend', sign);
-}
+    </text>`
+  ), templateElem
+);
+const main = (gap) => (r) => (root) => (rating) => (totalMarks) => ( 
+  root.insertAdjacentElement(
+    'beforeend', 
+    insertSign (totalMarks) (
+      rating.filter((x) => x).length == 1
+        ? insertArc (getTemplateElem (template)) (getCircle (r) (rating))
+        : rating.map(
+          getAngles (totalMarks) (
+            getFullAngle (gap) (getNGaps (rating))
+          )
+        ).reduce((template, a, idx, angles) => (
+          a == 0 ? template : insertArc (template) (
+            getArc (gap) (r) (getStartAngle (gap)) (getPoint (r)) (
+              a, idx, angles
+            )
+          )
+        ), getTemplateElem (template))
+    )
+  )
+);
+const bind = (main) => (a) => (fn) => {
+  const newA = fn(a);
+  return bind(main(newA)) (newA);
+};
+const init = (root) => (
+  bind (main(4)(60)(root)) (root) (parseData) (getTotalMarks)
+);
+document.querySelectorAll('.js-impressions__circle-container')
+  .forEach((c) => init(c));
 
