@@ -10,7 +10,7 @@ import {
   changeCalendarButtonsValue
 } from '../__submit-button/calendar__submit-button.js';
 
-const nextButton = calendar.querySelector('.calendar__next-button');
+const nextButton = calendar.querySelector('.js-calendar__next-button');
 
 dataPicker.startRange = true;
 dataPicker.startRangeElem = [];
@@ -71,7 +71,7 @@ export function dataPicker() {
           .elem.querySelector('.calendar__day-button_next-month')
     ) {
       const prevMonth = collectionOfDates[range[0].rangeIndex - 1].elem;
-      const week = prevMonth.querySelector('.js-calendar__last-week') ? 5 : 6;
+      const week = prevMonth.querySelector('.calendar__last-week') ? 5 : 6;
       range.push(prevMonth.rows[week].cells[range[0].rangeX].firstElementChild);
       range[1].rangeIndex = range[0].rangeIndex - 1;
       range[1].rangeY = week;

@@ -5,16 +5,19 @@ import {dataPicker, removeRange} from '../__container/calendar__container.js';
 
 const mask = 'ДД.ММ.ГГГГ';
 
-cancelButton.addEventListener('click', () => {
+const clearButtonLabels = () => {
   dataPicker.startRange = true;
   removeRange();
   if (calendar.classList.contains('calendar_shrink')) return;
-  const startDateButton = document.querySelector('.date-dropdown__start-date');
-  const endDateButton = document.querySelector('.date-dropdown__end-date');
+  const startDateButton = document
+    .querySelector('.js-date-dropdown__start-date');
+  const endDateButton = document
+    .querySelector('.js-date-dropdown__end-date');
   startDateButton.innerHTML = mask;
   endDateButton.innerHTML = mask;
-});
+};
 
+cancelButton.addEventListener('click', clearButtonLabels);
 cancelButton.addEventListener('focus', focusOnFirstDay);
 
 function focusOnFirstDay() {

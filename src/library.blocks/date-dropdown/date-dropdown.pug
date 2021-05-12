@@ -3,13 +3,15 @@ mixin dateDropdown(params)
   .date-dropdown.container.container_justify-content-space-between
     .date-dropdown__container.container.container_direction-column
       h3.h3.date-dropdown__sign #{firstTitle}
-      button.date-dropdown__button.date-dropdown__start-date-button.container.container_justify-content-space-between.container_align-items-center
-        span.date-dropdown__start-date #{firstDate}
+      button.date-dropdown__button.date-dropdown__start-date-button.container.container_justify-content-space-between.container_align-items-center(aria-label="show or hide calendar")
+        span.date-dropdown__start-date.js-date-dropdown__start-date 
+          | #{firstDate}
         span.date-dropdown__expand-icon
     .date-dropdown__container.container.container_direction-column
       h3.h3.date-dropdown__sign #{secondTitle}
-      button.date-dropdown__button.date-dropdown__end-date-button.container.container_justify-content-space-between.container_align-items-center
-        span.date-dropdown__end-date #{secondDate}
+      button.date-dropdown__button.date-dropdown__end-date-button.container.container_justify-content-space-between.container_align-items-center(aria-label="show or hide calendar")
+        span.date-dropdown__end-date.js-date-dropdown__end-date 
+          | #{secondDate}
         span.date-dropdown__expand-icon
     if !onlyButtons
       +calendar({})
