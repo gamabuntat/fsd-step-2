@@ -21,7 +21,7 @@ export const submitButton = calendar
 export const cancelButton = calendar
   .querySelector('.js-calendar__cancel-button');
 export const shrink = calendar.classList.contains('calendar_shrink');
-export const step =  shrink ? 224 : 280;
+export const step =  shrink ? 230 : 280;
 const titleMonth = document
   .querySelector('.calendar__month-name')
   .firstElementChild;

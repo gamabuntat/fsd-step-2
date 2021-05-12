@@ -9,7 +9,7 @@ import {
 } from '../calendar.js';
 import {CALENDAR_TABLE_TEMPLATE} from '../calendar__template.js';
 
-const nextButton = document.querySelector('.calendar__next-button');
+const nextButton = document.querySelector('.js-calendar__next-button');
 let counter = 0;
 let storedCounter = 0;
 nextButton.addEventListener('click', scrollNextMonth);
@@ -18,12 +18,10 @@ function scrollNextMonth() {
   printCalendar.ordinal++;
 
   collectionOfDates[printCalendar.ordinal].updateTitle();
-  let y = parseInt(firstTable.style.marginLeft);
-  if (!y) y = 0;
+  const y = parseInt(firstTable.style.marginLeft) || 0;
   firstTable.style.marginLeft = y - step + 'px' ;
 
   if (!collectionOfDates[printCalendar.ordinal + 1]) {
-
     collectionOfDates.push(new MyDate(new Date(
       collectionOfDates[printCalendar.ordinal].year,
       collectionOfDates[printCalendar.ordinal].month + 1
