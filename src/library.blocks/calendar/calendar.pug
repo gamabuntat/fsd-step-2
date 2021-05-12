@@ -3,14 +3,14 @@ mixin calendar(params)
   - let shrinkClass = ''
     if shrink
       - shrinkClass = 'calendar_shrink'
-    .calendar.container.container_direction-column(class=shrinkClass)
+    .calendar.js-calendar.container.container_direction-column(class=shrinkClass)
       .calendar__title.container.container_justify-content-space-between
         button.calendar__prev-button.js-calendar__prev-button.text-button(aria-label="previous month")
-        span.calendar__month-name 
+        span.calendar__month-name.js-calendar__month-name 
           h2.h2
         button.calendar__next-button.js-calendar__next-button.text-button(aria-label="next month")
-      .calendar__container.container
-        table.calendar__table.calendar__table_first
+      .calendar__container.js-calendar__container.container
+        table.calendar__table.calendar__table_first.js-calendar__table_first
           tr
             th Пн
             th Вт
@@ -209,7 +209,7 @@ mixin calendar(params)
             td
               button.calendar__day-button.calendar__day-button_common
       .container.container_direction-row-reverse.container_justify-content-space-between
-        button.text-button.calendar__submit-button
+        button.text-button.calendar__submit-button.js-calendar__submit-button
           h3.h3 применить
-        button.text-button.text-button_cancel.text-button_hidden.calendar__cancel-button
+        button.text-button.text-button_cancel.text-button_hidden.calendar__cancel-button.js-calendar__cancel-button
           h3.h3 очистить

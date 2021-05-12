@@ -71,7 +71,7 @@ export function dataPicker() {
           .elem.querySelector('.calendar__day-button_next-month')
     ) {
       const prevMonth = collectionOfDates[range[0].rangeIndex - 1].elem;
-      const week = prevMonth.querySelector('.calendar__last-week') ? 5 : 6;
+      const week = prevMonth.querySelector('.js-calendar__last-week') ? 5 : 6;
       range.push(prevMonth.rows[week].cells[range[0].rangeX].firstElementChild);
       range[1].rangeIndex = range[0].rangeIndex - 1;
       range[1].rangeY = week;

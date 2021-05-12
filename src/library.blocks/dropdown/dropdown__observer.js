@@ -97,8 +97,7 @@ const observer = new MutationObserver((mutations) => {
       }
     }
 
-    dropdown
-      .querySelector('.dropdown__button')
+    dropdown.querySelector('.dropdown__button')
       .firstElementChild.innerHTML = `${result}`;
   }
 
@@ -109,7 +108,7 @@ const observer = new MutationObserver((mutations) => {
   }
 });
 
-const dropdowns = [...document.querySelectorAll('.dropdown')];
+const dropdowns = document.querySelectorAll('.dropdown');
 
 dropdowns.forEach((dropdown) => (
   observer.observe(dropdown, { childList: true, subtree: true, })

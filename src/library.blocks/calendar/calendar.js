@@ -13,14 +13,17 @@ export const MONTHS = [
   'Декабрь'
 ];
 export const collectionOfDates = [];
-export const calendar = document.querySelector('.calendar');
-export const container = document.querySelector('.calendar__container');
-export const firstTable = document.querySelector('.calendar__table_first');
-export const submitButton = calendar.querySelector('.calendar__submit-button');
-export const cancelButton = calendar.querySelector('.calendar__cancel-button');
+export const calendar = document.querySelector('.js-calendar');
+export const container = document.querySelector('.js-calendar__container');
+export const firstTable = document.querySelector('.js-calendar__table_first');
+export const submitButton = calendar
+  .querySelector('.js-calendar__submit-button');
+export const cancelButton = calendar
+  .querySelector('.js-calendar__cancel-button');
 export const shrink = calendar.classList.contains('calendar_shrink');
 export const step =  shrink ? 224 : 280;
-const titleMonth = document.querySelector('.calendar__month-name')
+const titleMonth = document
+  .querySelector('.calendar__month-name')
   .firstElementChild;
 
 function init() {

@@ -4,7 +4,7 @@ import {increaseButton} from './__increase-button/dropdown__increase-button.js';
 import {submitButton} from './__submit-button/dropdown__submit-button.js';
 import {cancelButton} from './__cancel-button/dropdown__cancel-button.js';
 
-const dropdowns = [...document.querySelectorAll('.dropdown')];
+const dropdowns = [...document.querySelectorAll('.js-dropdown')];
 
 for (const dropdown of dropdowns) {
   if (!dropdown.classList.contains('dropdown_disabled')) {
