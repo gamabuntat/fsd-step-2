@@ -1,9 +1,6 @@
-const calendar = document.querySelector('.calendar');
-const dateDropdown = document.querySelector('.date-dropdown');
-const dateButtons = document.querySelectorAll('.date-dropdown__button');
-const startDateButton = (
-  document.querySelector('.date-dropdown__start-date-button')
-);
+const calendar = document.querySelector('.js-calendar');
+const dateDropdown = document.querySelector('.js-date-dropdown');
+const dateButtons = document.querySelectorAll('.js-date-dropdown__button');
 const expandIcons = (
   dateDropdown.querySelectorAll('.date-dropdown__expand-icon')
 );
@@ -21,7 +18,7 @@ const expandCalendar = (
 };
 
 const expandCalendarBind = expandCalendar(
-  expandIcons, dateDropdown, startDateButton, calendar
+  expandIcons, dateDropdown, dateButtons[0], calendar
 );
 
 dateButtons.forEach((button) => (

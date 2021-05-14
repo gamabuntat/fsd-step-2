@@ -20,6 +20,6 @@ import '@src/library.blocks/dropdown/_disabled/dropdown_disabled.js';
 
 import '@src/library.blocks/date-dropdown/__button/date-dropdown__button.js';
 
-import '@src/library.blocks/range-slider/range-slider.js';
-
+// import '@src/library.blocks/range-slider/range-slider.js';
+import '@src/library.blocks/range-slider/s.js';
 import '@/node_modules/normalize.css';

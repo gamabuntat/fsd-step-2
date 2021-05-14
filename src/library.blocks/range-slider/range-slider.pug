@@ -1,14 +1,14 @@
 mixin range(title = 'range slider')
-    .range-slider.container.container_direction-column
-        .container.container_justify-content-space-between
-            h3.h3.range-slider__title #{title}
-            .range-slider__price-range.container
-                span.range-slider__price.range-slider__price_from 5 000
-                span.range-slider__dash &nbsp;-&nbsp;
-                span.range-slider__price.range-slider__price_to 10 000
-        .range-slider__container.container.container_align-items-center
-            .range-slider__body
-                .range-slider__start-range
-                .range-slider__end-range
-            button.range-slider__button.range-slider__button_start-range
-            button.range-slider__button.range-slider__button_end-range
+  .range-slider.container.container_direction-column
+    .container.container_justify-content-space-between
+      h3.h3.range-slider__title #{title}
+      .range-slider__price-range.container
+        span.range-slider__price.range-slider__price_from.js-range-slider__price_from 5 000
+        span.range-slider__dash &nbsp;-&nbsp;
+        span.range-slider__price.range-slider__price_to.js-range-slider__price_to 10 000
+    .range-slider__container.js-range-slider__container.container.container_align-items-center
+      .range-slider__body.js-range-slider__body
+        .range-slider__start-range.js-range-slider__start-range
+        .range-slider__end-range.js-range-slider__end-range
+      button.range-slider__button.range-slider__button_start-range.js-range-slider__button_start-range(aria-label='start range button')
+      button.range-slider__button.range-slider__button_end-range.js-range-slider__button_end-range(aria-label='end range button')

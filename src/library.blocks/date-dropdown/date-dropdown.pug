@@ -1,15 +1,15 @@
 mixin dateDropdown(params)
   - const {firstTitle = "прибытие", secondTitle = "выезд", firstDate = "ДД.ММ.ГГГГ", secondDate = "ДД.ММ.ГГГГ", onlyButtons = false} = params
-  .date-dropdown.container.container_justify-content-space-between
+  .date-dropdown.js-date-dropdown.container.container_justify-content-space-between
     .date-dropdown__container.container.container_direction-column
       h3.h3.date-dropdown__sign #{firstTitle}
-      button.date-dropdown__button.date-dropdown__start-date-button.container.container_justify-content-space-between.container_align-items-center(aria-label="show or hide calendar")
+      button.date-dropdown__button.js-date-dropdown__button.date-dropdown__start-date-button.container.container_justify-content-space-between.container_align-items-center(aria-label="show or hide calendar")
         span.date-dropdown__start-date.js-date-dropdown__start-date 
           | #{firstDate}
         span.date-dropdown__expand-icon
     .date-dropdown__container.container.container_direction-column
       h3.h3.date-dropdown__sign #{secondTitle}
-      button.date-dropdown__button.date-dropdown__end-date-button.container.container_justify-content-space-between.container_align-items-center(aria-label="show or hide calendar")
+      button.date-dropdown__button.js-date-dropdown__button.date-dropdown__end-date-button.container.container_justify-content-space-between.container_align-items-center(aria-label="show or hide calendar")
         span.date-dropdown__end-date.js-date-dropdown__end-date 
           | #{secondDate}
         span.date-dropdown__expand-icon

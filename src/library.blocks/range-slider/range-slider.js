@@ -1,14 +1,12 @@
-const slider = document.querySelector('.range-slider__container');
-const sliderButtonStart = (
-  document.querySelector('.range-slider__button_start-range')
-);
-const sliderButtonEnd = (
-  document.querySelector('.range-slider__button_end-range')
-);
-const startRange = slider.querySelector('.range-slider__start-range');
-const endRange = slider.querySelector('.range-slider__end-range');
-const priceFrom = document.querySelector('.range-slider__price_from');
-const priceTo = document.querySelector('.range-slider__price_to');
+const slider = document.querySelector('.js-range-slider__container');
+const sliderButtonStart = document
+  .querySelector('.js-range-slider__button_start-range');
+const sliderButtonEnd = document
+  .querySelector('.js-range-slider__button_end-range');
+const startRange = slider.querySelector('.js-range-slider__start-range');
+const endRange = slider.querySelector('.js-range-slider__end-range');
+const priceFrom = document.querySelector('.js-range-slider__price_from');
+const priceTo = document.querySelector('.js-range-slider__price_to');
 
 const buttonWidth = sliderButtonStart.getBoundingClientRect().width;
 const sliderWidth = slider.getBoundingClientRect().width;
@@ -97,8 +95,7 @@ function setEndRange() {
     let x = pageX - window.pageXOffset - sliderCoord.x - shift;
     if (x < diff) {
       x = diff;
-    }
-    else if (x + buttonCoord.width >= sliderCoord.width) {
+    } else if (x + buttonCoord.width >= sliderCoord.width) {
       x = sliderCoord.width - buttonCoord.width;
     }
     button.style.left = x + 'px';
