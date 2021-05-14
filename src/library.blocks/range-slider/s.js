@@ -2,32 +2,18 @@ const calcPosition = (x, trackX, shift, trackW) => (
   (x - trackX - shift) / trackW
 );
 
-const handlePointerMoveS = (track) => (state) => (e) => {
+const handlePointerMove = (track) => (state) => (e) => {
   if (!state.getTrigger()) { return; }
   const trackRect = track.getBoundingClientRect();
   const position = Math.min(
-    state.bs().max, 
+    state.b().max, 
     Math.max(
       calcPosition(e.x, trackRect.x, state.getShift(), trackRect.width),
-      state.bs().min
+      state.b().min
     )
   );
   e.target.style.left = `${position * 100}%`;
-  state.setBe(position);
-};
-
-const handlePointerMoveE = (track) => (state) => (e) => {
-  if (!state.getTrigger()) { return; }
-  const trackRect = track.getBoundingClientRect();
-  const position = Math.min(
-    state.be().max,
-    Math.max(
-      calcPosition(e.x, trackRect.x, state.getShift(), trackRect.width),
-      state.be().min
-    )
-  );
-  e.target.style.left = `${position * 100}%`;
-  state.setBs(position);
+  state.setB(position);
 };
 
 const bindPointer = (elem, id) => elem.setPointerCapture(id);
@@ -55,16 +41,28 @@ const newState = (s = {
     s.be.min = getRelBw();
   };
   updateExtrems();
-  return {
-    bw() { return bw; },
-    getTrigger() { return s.isTrigered; },
-    retrigger() { s.isTrigered = !s.isTrigered; },
-    getShift() { return s.shift; },
-    setShift(value) { s.shift = value; },
-    bs() { return s.bs; },
-    be() { return s.be; },
-    setBs(pos) { s.bs.max = pos - getRelBw(); },
-    setBe(pos) { s.be.min = pos + getRelBw(); },
+  return (type = 'bs') => {
+    const extendedI = {
+      getTrigger() { return s.isTrigered; },
+      getShift() { return s.shift; }
+    };
+    const interfaces = {
+      bs: {
+        b() { return s.bs; },
+        setB(pos) { s.be.min = pos + getRelBw(); },
+        ...extendedI
+      },
+      be: {
+        b() { return s.be; },
+        setB(pos) { s.bs.max = pos - getRelBw(); },
+        ...extendedI
+      },
+      t: {
+        retrigger() { s.isTrigered = !s.isTrigered; },
+        setShift(value) { s.shift = value; },
+      },
+    };
+    return interfaces[type];
   };
 };
 
@@ -72,15 +70,17 @@ const bindListeners = (root) => {
   const track = root.querySelector('.js-range-slider__body');
   const bs = root.querySelector('.js-range-slider__button_start-range');
   const be = root.querySelector('.js-range-slider__button_end-range');
-  const state = newState()(
-    bs.getBoundingClientRect().width, track
-  );
+  const state = newState()(bs.getBoundingClientRect().width, track);
   [bs, be].forEach((b) => {
-    b.addEventListener('pointerdown', handlePointerDown(state));
-    b.addEventListener('lostpointercapture', handleLostPointer(state));
+    b.addEventListener('pointerdown', handlePointerDown(state('t')));
+    b.addEventListener('lostpointercapture', handleLostPointer(state('t')));
   });
-  bs.addEventListener('pointermove', handlePointerMoveS(track)(state));
-  be.addEventListener('pointermove', handlePointerMoveE(track)(state));
+  bs.addEventListener(
+    'pointermove', handlePointerMove(track)(state('bs'))
+  );
+  be.addEventListener(
+    'pointermove', handlePointerMove(track)(state('be'))
+  );
 };
 
 document.querySelectorAll('.js-range-slider__container')
