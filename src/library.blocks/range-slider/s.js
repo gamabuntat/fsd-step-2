@@ -7,8 +7,16 @@ const resizeBar = (bar, state) => () => (
   }%`
 );
 
-const changeDisplayValue = (display, min, max) => (position) => (
-  display.innerText = String((max - min) * position + min)
+const calcDisplayValue = (min, max) => (position) => (
+  String(Math.floor((max - min) * position + min))
+);
+
+const formatter = (format = new Intl.NumberFormat("ru")) => (value) => (
+  format.format(value)
+);
+
+const changeDisplayValue = (display) => (value) => (
+  display.innerText = value
 );
 
 const moveButton = (btn, state) => (preposition) => {
@@ -112,13 +120,17 @@ const bindListeners = (root) => {
   const moveHandlerS = pipe(
     calcPosition(container, state('bs')),
     moveButton(bs, state('bs')),
-    changeDisplayValue(ds, minV, maxV),
+    calcDisplayValue(minV, maxV),
+    formatter(),
+    changeDisplayValue(ds),
     resizeBar(pbs, state('pbs'))
   );
   const moveHandlerE = pipe(
     calcPosition(container, state('be')),
     moveButton(be, state('be')),
-    changeDisplayValue(de, minV, maxV),
+    calcDisplayValue(minV, maxV),
+    formatter(),
+    changeDisplayValue(de),
     resizeBar(pbe, state('pbe'))
   );
   pipe(
@@ -131,6 +143,8 @@ const bindListeners = (root) => {
     moveButton(be, state('be')),
     resizeBar(pbe, state('pbe'))
   )(minV, maxV, bep);
+  changeDisplayValue(ds)(formatter()(+bsp));
+  changeDisplayValue(de)(formatter()(+bep));
   [bs, be].forEach((b) => {
     b.addEventListener('pointerdown', handlePointerDown(state('t')));
     b.addEventListener('lostpointercapture', handleLostPointer(state('t')));
