@@ -1,7 +1,61 @@
-@use '@library/range-slider/__body/range-slider__body'
+@use '@library/color/base-color' as colors
+
+$container-width: 266px
+$button-width: 16px
 
 .range-slider__container
   margin: 4px 0
-  position: relative
-  width: range-slider__body.$container-width
+  padding: 0 $button-width
+  width: 100%
+  box-sizing: border-box
 
+.range-slider__sub-container
+  position: relative
+  width: 100%
+  height: 100%
+
+.range-slider__body
+  display: flex
+  justify-content: space-between
+  align-items: center
+  width: 100%
+  height: 6px
+  background: linear-gradient(colors.$base-color-green, #66D2EA)
+  border-radius: 3px
+
+.range-slider__progress-bar
+  height: 100%
+  background-color: white
+  border: 1px solid colors.$base-color-25
+  border-radius: 4px
+  box-sizing: border-box
+
+.range-slider__progress-bar_start
+  border-right: 0
+  border-top-right-radius: 0
+  border-bottom-right-radius: 0
+
+.range-slider__progress-bar_end
+  border-left: 0
+  border-top-left-radius: 0
+  border-bottom-left-radius: 0
+
+.range-slider__button
+  position: absolute
+  margin: auto
+  padding: 0
+  top: 0
+  bottom: 0
+  width: $button-width
+  height: $button-width
+  background: linear-gradient(colors.$base-color-green, rgb(102, 210, 234, 1))
+  border: 2px solid white
+  border-radius: 50%
+  outline: none
+
+.range-slider__button_start-range
+  left: 0
+  transform: translate(-$button-width)
+
+.range-slider__button_end-range
+  left: 100%
