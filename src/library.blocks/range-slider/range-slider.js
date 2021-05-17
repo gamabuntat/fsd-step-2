@@ -1,131 +1,154 @@
-const slider = document.querySelector('.js-range-slider__container');
-const sliderButtonStart = document
-  .querySelector('.js-range-slider__button_start-range');
-const sliderButtonEnd = document
-  .querySelector('.js-range-slider__button_end-range');
-const startRange = slider.querySelector('.js-range-slider__start-range');
-const endRange = slider.querySelector('.js-range-slider__end-range');
-const priceFrom = document.querySelector('.js-range-slider__price_from');
-const priceTo = document.querySelector('.js-range-slider__price_to');
+const iff = (predicate, fn) => (...args) => predicate() && fn(...args);
+const pipe = (...fns) => fns.reduceRight((a, b) => (...args) => a(b(...args)));
 
-const buttonWidth = sliderButtonStart.getBoundingClientRect().width;
-const sliderWidth = slider.getBoundingClientRect().width;
-const priceRange = 15000;
-const priceWeight = priceRange/(sliderWidth - 2*buttonWidth);
+const resizeBar = (bar, state) => () => (
+  bar.style.width = `${
+    (state.pb() + state.getRelBw() / 2) * 100 / state.getRatio() 
+  }%`
+);
 
-function calculateThePrice(x) {
-  return Math.trunc(x * priceWeight / 100) * 100;
-}
+const calcDisplayValue = (min, max) => (position) => (
+  String(Math.floor((max - min) * position + min))
+);
 
-function calculateTheWidth(price) {
-  return price / priceWeight;
-}
+const formatter = (format = new Intl.NumberFormat("ru")) => (value) => (
+  format.format(value)
+);
 
-sliderButtonStart.addEventListener('mousedown', setStartRange);
-sliderButtonEnd.addEventListener('mousedown', setEndRange);
+const changeDisplayValue = (display) => (value) => (
+  display.innerText = value
+);
 
-init();
-
-function init() {
-  const sliderCoord = slider.getBoundingClientRect();
-  sliderButtonStart.style.left = calculateTheWidth(5000) + 'px';
-  sliderButtonEnd.style.left = calculateTheWidth(10000) + buttonWidth + 'px';
-  const startButtonCoord = sliderButtonStart.getBoundingClientRect();
-  const endButtonCoord = sliderButtonEnd.getBoundingClientRect();
-  startRange.style.width = (
-    startButtonCoord.x - sliderCoord.x + startButtonCoord.width/2 + 'px'
-  );
-  endRange.style.width = (
-    sliderCoord.right - endButtonCoord.x - startButtonCoord.width/2 + 'px'
-  );
-}
-
-function setStartRange() {
-  const button = event.target;
-  const buttonCoord = button.getBoundingClientRect();
-  const sliderCoord = slider.getBoundingClientRect();
-  const endButtonCoord = sliderButtonEnd.getBoundingClientRect();
-  const shift = event.clientX - buttonCoord.x;
-  const diff = endButtonCoord.x - sliderCoord.x;
-
-  moveButton(event.pageX);
-
-  function moveButton(pageX) {
-    let x = pageX - window.pageXOffset - sliderCoord.x - shift;
-    if (x < 0) {
-      x = 0;
-    }
-    else if (x + buttonCoord.width >= diff) {
-      x = diff - buttonCoord.width;
-    }
-    button.style.left = x + 'px';
-    startRange.style.width = x + buttonCoord.width/2 + 'px';
-    let price = calculateThePrice(x);
-    if (price >= 1000) {
-      price = Math.trunc(price/1000) + ' ' + (price%1000 || '000');
-    }
-    priceFrom.innerHTML = price;
-  }
-
-  function onMouseMove(event) {
-    moveButton(event.pageX);
-  }
-
-  document.addEventListener('mousemove', onMouseMove);
-
-  document.addEventListener('mouseup', removeListeners);
-
-  function removeListeners() {
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', removeListeners);
-  }
-}
-
-function setEndRange() {
-  const button = event.target;
-  const buttonCoord = button.getBoundingClientRect();
-  const sliderCoord = slider.getBoundingClientRect();
-  const startButtonCoord = sliderButtonStart.getBoundingClientRect();
-  const shift = event.clientX - buttonCoord.x;
-  const diff = startButtonCoord.right - sliderCoord.x;
-
-  moveButton(event.pageX);
-
-  function moveButton(pageX) {
-    let x = pageX - window.pageXOffset - sliderCoord.x - shift;
-    if (x < diff) {
-      x = diff;
-    } else if (x + buttonCoord.width >= sliderCoord.width) {
-      x = sliderCoord.width - buttonCoord.width;
-    }
-    button.style.left = x + 'px';
-    endRange.style.width = sliderCoord.width - x - buttonCoord.width/2 + 'px';
-    let price = calculateThePrice(x - buttonWidth);
-    if (price >= 1000) {
-      price = Math.trunc(price/1000) + ' ' + (price%1000 || '000');
-    }
-    priceTo.innerHTML = price;
-  }
-
-  function onMouseMove(event) {
-    moveButton(event.pageX);
-  }
-
-  document.addEventListener('mousemove', onMouseMove);
-
-  document.addEventListener('mouseup', removeListeners);
-
-  function removeListeners() {
-    document.removeEventListener('mousemove', onMouseMove);
-    document.removeEventListener('mouseup', removeListeners);
-  }
-
-}
-
-sliderButtonStart.ondragstart = function() {
-  return false;
+const calcPosition = (container, state) => (e) => {
+  const rect = container.getBoundingClientRect();
+  return (e.x - rect.x - state.getShift() + state.b().offset) / rect.width;
 };
 
-sliderButtonEnd.ondragstart = function() {
-  return false;
+const reverseCalcPosition = (min, max, bp) => ((bp - min) / (max - min));
+
+const moveButton = (btn, state) => (preposition) => {
+  const position = Math.min(
+    state.b().max, Math.max(preposition, state.b().min)
+  );
+  btn.style.left = `${position * 100}%`;
+  state.setB(position);
+  return position;
 };
+
+const bindPointer = (elem, id) => elem.setPointerCapture(id);
+
+const handlePointerDown = (state) => (e) => {
+  bindPointer(e.target, e.pointerId);
+  state.setShift(e.x - e.target.getBoundingClientRect().x);
+  state.retrigger();
+};
+
+const handleLostPointer = (state) => () => state.retrigger();
+
+const newState = (bw, track) => {
+  const s = {
+    isTrigered: false,
+    shift: 0,
+    stretchRatio: 1,
+    bs: { max: 1, min: 0, offset: bw },
+    be: { max: 1, min: 0, offset: 0 },
+  };
+  const getRelBw = () => bw / track.getBoundingClientRect().width;
+  const setStretchRatio = (relBw) => (s.stretchRatio = 1 + relBw * 2);
+  const transformTrack = (ratio = s.stretchRatio) => (
+    track.style.transform = `scale(${ratio})`
+  );
+  const setTrackStretchRatio = () => (
+    transformTrack(1), setStretchRatio(getRelBw())
+  );
+  setTrackStretchRatio();
+  transformTrack();
+  return (type = 'bs') => {
+    const extendedButtonI = {
+      getTrigger() { return s.isTrigered; },
+      getShift() { return s.shift; }
+    };
+    const extendedPBI = {
+      getRatio() { return s.stretchRatio; },
+      getRelBw() { return getRelBw(); },
+    };
+    return {
+      bs: {
+        b() { return s.bs; },
+        setB(pos) { s.be.min = pos; },
+        ...extendedButtonI
+      },
+      be: {
+        b() { return s.be; },
+        setB(pos) { s.bs.max = pos; },
+        ...extendedButtonI
+      },
+      pbs: {
+        pb() { return s.be.min; },
+        ...extendedPBI
+      },
+      pbe: {
+        pb() { return 1 - s.bs.max; },
+        ...extendedPBI
+      },
+      t: {
+        retrigger() { s.isTrigered = !s.isTrigered; },
+        setShift(value) { s.shift = value; },
+      },
+    }[type];
+  };
+};
+
+const bindListeners = (root) => {
+  const container = root.querySelector('.js-range-slider__sub-container');
+  const track = root.querySelector('.js-range-slider__body');
+  const bs = root.querySelector('.js-range-slider__button_start-range');
+  const be = root.querySelector('.js-range-slider__button_end-range');
+  const pbs = root.querySelector('.js-range-slider__progress-bar_start');
+  const pbe = root.querySelector('.js-range-slider__progress-bar_end');
+  const ds = root.querySelector('.js-range-slider__price_from');
+  const de = root.querySelector('.js-range-slider__price_to');
+  const state = newState(bs.getBoundingClientRect().width, track);
+  const {bsp, bep, minV, maxV} = Object.entries(root.dataset)
+    .reduce((acc, i) => {
+      const o = {};
+      o[i[0]] = Number(i[1]);
+      return {...acc, ...o};
+    }, {});
+  const moveHandlerS = pipe(
+    calcPosition(container, state('bs')),
+    moveButton(bs, state('bs')),
+    calcDisplayValue(minV, maxV),
+    formatter(),
+    changeDisplayValue(ds),
+    resizeBar(pbs, state('pbs'))
+  );
+  const moveHandlerE = pipe(
+    calcPosition(container, state('be')),
+    moveButton(be, state('be')),
+    calcDisplayValue(minV, maxV),
+    formatter(),
+    changeDisplayValue(de),
+    resizeBar(pbe, state('pbe'))
+  );
+  pipe(
+    reverseCalcPosition,
+    moveButton(bs, state('bs')),
+    resizeBar(pbs, state('pbs'))
+  )(minV, maxV, bsp);
+  pipe(
+    reverseCalcPosition, 
+    moveButton(be, state('be')),
+    resizeBar(pbe, state('pbe'))
+  )(minV, maxV, bep);
+  [bs, be].forEach((b) => {
+    b.addEventListener('pointerdown', handlePointerDown(state('t')));
+    b.addEventListener('lostpointercapture', handleLostPointer(state('t')));
+  });
+  bs.addEventListener('pointermove', iff(state().getTrigger, moveHandlerS));
+  be.addEventListener('pointermove', iff(state().getTrigger, moveHandlerE));
+};
+
+document.querySelectorAll('.js-range-slider')
+  .forEach((root) => bindListeners(root));
+

@@ -1,12 +1,12 @@
-mixin primaryCard(params)
-    - let {bigAction = '#', calendar = true} = params
-    .card.card_primary-parameters.container
-        h1.h1 Найдём номера под
-            br
-            | ваши пожелания
-        if calendar
-            +dateDropdown({})
-        else
-            +dateDropdown({onlyButtons: true})
-        +dropdown({})
-        +bigButton({action: bigAction, sign: 'подобрать номер'})
+mixin primaryCard({bigAction = '#', calendar = true})
+  .card.card_primary-parameters.container
+    .container.container_direction-column
+      h1.h1 Найдём номера под
+        br
+        | ваши пожелания
+      if calendar
+        +dateDropdown({})
+      else
+        +dateDropdown({onlyButtons: true})
+      +dropdown({})
+      +bigButton({action: bigAction, sign: 'подобрать номер'})

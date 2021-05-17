@@ -51,12 +51,13 @@ module.exports = {
       minify: 'false',
       chunks: ['formElements'],
     }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'cards.html',
-    //   template: './src/UI kit/cards/cards.pug',
-    //   minify: 'false',
-    //   chunks: ['cards'],
-    // }),
+    new HtmlWebpackPlugin({
+      filename: 'cards.html',
+      template: './src/UI kit/cards/cards.pug',
+      favicon: './src/favicon/favicon-32x32.png',
+      minify: 'false',
+      chunks: ['cards'],
+    }),
     // new HtmlWebpackPlugin({
     //   filename: 'headers-and-footers.html',
     //   template: './src/UI kit/headers-and-footers/headers-and-footers.pug',

@@ -24,22 +24,22 @@ html.html(lang="ru")
   body.pages.pages_cards
     img.watermark(src=require("@src/library.blocks/watermark/watermark.svg").default, alt="watermark")
     .container.container_direction-column
-        +primaryCard({calendar: false})
-        +registration({})
+      +primaryCard({calendar: false})
+      +registration({})
     .container.container_direction-column
-        +roomDetalisCard({onlyButtons: 1})
-        +login({})
+      +roomDetalisCard({onlyButtons: 1})
+      +login({})
     .container.container_direction-column
-        include ../../common.blocks/calendar/calendar
-        +roomCard({
-        imgPath: [
-          "common.blocks/room-card/__image/room-card__image-1.svg",
-          "common.blocks/room-card/__image/room-card__image-2.svg",
-          "common.blocks/room-card/__image/room-card__image-1.svg",
-          "common.blocks/room-card/__image/room-card__image-2.svg",
-        ],
-        })
-        +roomCard({
+      include ../../common.blocks/calendar/calendar
+      +roomCard({
+      imgPath: [
+        "common.blocks/room-card/__image/room-card__image-1.svg",
+        "common.blocks/room-card/__image/room-card__image-2.svg",
+        "common.blocks/room-card/__image/room-card__image-1.svg",
+        "common.blocks/room-card/__image/room-card__image-2.svg",
+      ],
+      })
+      +roomCard({
         imgPath: [
           "common.blocks/room-card/__image/room-card__image-2.svg",
           "common.blocks/room-card/__image/room-card__image-1.svg",
