@@ -25,5 +25,6 @@ import '@src/library.blocks/sub-text-field/sub-text-field.js';
 
 import '@src/common.blocks/room-card/__rate/room-card__rate.js';
 import '@src/common.blocks/room-card/room-card.js';
+import '@common/pages/_search-room/main__show-aside-button.js';
 
 import '@/node_modules/normalize.css';

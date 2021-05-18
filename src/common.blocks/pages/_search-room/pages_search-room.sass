@@ -32,6 +32,7 @@
     box-shadow: none
     
 .main
+  position: relative
   width: min(1440px, 100%)
   padding: 30px 1rem 0
   display: flex
@@ -41,9 +42,20 @@
   flex-grow: 1
   box-sizing: border-box
 
+.main__show-aside-button
+  display: none
+  padding: 0
+  background: white
+  border: none
+  outline: none
+  cursor: pointer
+  background-image: url(@common/pages/_search-room/da.svg)
+
+  &:hover, &:focus
+    background-image: url(@common/pages/_search-room/dah.svg)
+
 .main__content
   width: min(839px, 100%)
-  align-self: center
   display: grid
   grid-template-columns: repeat(auto-fill, minmax(271px, min-content))
   align-self: flex-start
@@ -76,3 +88,27 @@
   margin-top: -19.5px
   font-size: html.rem-size(12)
   color: colors.$base-color-50
+
+@media screen and (max-width: 620px)
+  .main
+    padding-left: 50px
+    padding-right: 0
+
+  .main__show-aside-button
+    position: fixed
+    left: 14px
+    display: unset
+    width: 24px
+    height: 24px
+
+  .aside
+    background: white
+    position: absolute
+    left: -9999px // :))))))))0
+    z-index: 1000
+
+.aside_shown
+  left: 50px
+  width: max(271px, calc(100vw - 70px))
+  height: 100%
+

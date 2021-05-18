@@ -23,7 +23,8 @@ html.html(lang="ru")
   body.pages.pages_search-room
     +header({})
     main.main
-      aside.aside
+      button.main__show-aside-button.js-main__show-aside-button(aria-label='show search parameters of rooms')
+      aside.aside.js-aside
         +filterDateDropdown({shrink: true})
         +dropdown({small: 1})
         +range({title: 'диапазон цены'})
