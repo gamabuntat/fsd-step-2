@@ -46,7 +46,6 @@ export const methods = {
 
 const methodsProp = Object.keys(methods);
 
-// observe
 dropdowns.forEach((dropdown) => (
   observer.observe(dropdown, { childList: true, subtree: true, })
 ));

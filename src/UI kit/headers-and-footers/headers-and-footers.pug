@@ -1,4 +1,3 @@
-- const path = '../../'
 include ../../common.blocks/header/header
 include ../../common.blocks/footer/footer
 include ../../library.blocks/button/_border/button_border
@@ -7,13 +6,13 @@ include ../../library.blocks/sub-text-field/sub-text-field
 
 doctype html
 html.html(lang="ru")
-    head
-        meta(charset="UTF-8")
-        title
-    body.pages.pages_headers-and-footers
-        img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
-        .container.container_direction-column
-            +header({})
-            +header({authorized: 1})
-            +footer({})
-            +footer({mobile: 1})
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title headers and footers
+  body.pages.pages_headers-and-footers
+    img.watermark(src=require("@src/library.blocks/watermark/watermark.svg").default, alt="watermark")
+    +header({})
+    +header({authorized: 1})
+    +footer({})
+    +footer({mobile: 1})

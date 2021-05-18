@@ -1,13 +1,12 @@
 mixin roomCard(params)
-  - const {imgPath, roomNumber = 888, price = 9990, luxuryStatus = 'люкс', rate = 5, period = 'в сутки', reviews = 145} = params
+  - const {imgPath = [1], roomNumber = 888, price = 9990, luxuryStatus = 'люкс', rate = 5, period = 'в сутки', reviews = 145} = params
   - const name = roomNumber
   .room-card
     .room-card__carousel
       .room-card__carousel-container.js-room-card__carousel-container
         - for (let i = 0; i < imgPath.length; i++)
-          - const imageNumber = imgPath[i].match(/\d/g).join('')
           .room-card__image-container
-            img.room-card__image(src=require(`@common/room-card/__image/room-card__image_${imageNumber}.webp`).default, alt="room image")
+            img.room-card__image(src=require(`@common/room-card/__image/room-card__image_${imgPath[i]}.webp`).default, alt="room image")
       .room-card__shadow
       button.text-button.room-card__prev-button.js-room-card__prev-button(aria-label='previous room image')
       button.text-button.room-card__next-button.js-room-card__next-button(aria-label='next room image')

@@ -33,23 +33,13 @@ html.html(lang="ru")
       .container.container_direction-column
         include ../../common.blocks/calendar/calendar
         +roomCard({
-          imgPath: [
-            "common.blocks/room-card/__image/room-card__image-1.svg",
-            "common.blocks/room-card/__image/room-card__image-2.svg",
-            "common.blocks/room-card/__image/room-card__image-1.svg",
-            "common.blocks/room-card/__image/room-card__image-2.svg",
-          ],
+          imgPath: [1, 2, 1, 2],
         })
         +roomCard({
-          imgPath: [
-            "common.blocks/room-card/__image/room-card__image-2.svg",
-            "common.blocks/room-card/__image/room-card__image-1.svg",
-            "common.blocks/room-card/__image/room-card__image-2.svg",
-            "common.blocks/room-card/__image/room-card__image-1.svg",
-          ],
+          imgPath: [2, 1, 2, 1],
           roomNumber: 840,
           price: 9900,
           luxuryStatus: '',
           rate: 4,
           reviews: 65,
-          })
+        })
