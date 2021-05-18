@@ -1,9 +1,9 @@
 mixin login(params)
-  - const {} = params
   .card.card_login.container.container_direction-column
-    h1.h1 Войти
     .container.container_direction-column
-      +textFiled({})
-      +textFiled({placeholder: 'Пароль'})
-    +bigButton({sign: 'Войти'})
-    +haveAcc({login: 1})
+      h1.h1 Войти
+      .container.container_direction-column
+        +textFiled({})
+        +textFiled({placeholder: 'Пароль'})
+      +bigButton({sign: 'Войти'})
+      +haveAcc({login: 1})

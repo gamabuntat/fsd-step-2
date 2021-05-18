@@ -17,14 +17,21 @@
 @use '@common/room-card/room-card'
 
 .pages_cards
-  padding: 140px 0
-  display: grid
+  margin: 140px auto
+  max-width: 1440px
+  display: block
   column-gap: 40px
   row-gap: 40px
-  background: #E5E5E5
+  background: #F4F4F6
+  box-sizing: border-box
+
+.main
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr))
+  column-gap: 40px
+  row-gap: 40px
 
   & > *
-    align-items: center
     row-gap: 40px
 
   & .room-card

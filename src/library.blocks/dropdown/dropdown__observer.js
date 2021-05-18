@@ -108,9 +108,5 @@ const observer = new MutationObserver((mutations) => {
   }
 });
 
-const dropdowns = document.querySelectorAll('.dropdown');
-
-dropdowns.forEach((dropdown) => (
-  observer.observe(dropdown, { childList: true, subtree: true, })
-));
+export {observer};
 

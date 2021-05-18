@@ -10,7 +10,6 @@ import '@src/library.blocks/sub-text-field/sub-text-field.js';
 import '@src/library.blocks/like-button/like-button.js';
 
 import '@src/library.blocks/dropdown/dropdown.js';
-import '@src/library.blocks/dropdown/dropdown__observer.js';
 import '@src/common.blocks/dropdown/dropdown_open-lists.js';
 import '@src/common.blocks/dropdown/dropdown_three-guests.js';
 import '@src/library.blocks/dropdown/_disabled/dropdown_disabled.js';

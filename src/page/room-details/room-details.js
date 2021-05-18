@@ -10,7 +10,6 @@ import '@src/fonts/nunito-bold/fonts.css';
 import '@library/like-button/like-button.js';
 import '@library/impressions/impressions.js';
 import '@src/library.blocks/dropdown/dropdown.js';
-import '@src/library.blocks/dropdown/dropdown__observer.js';
 import '@src/common.blocks/dropdown/dropdown_three-guests.js';
 
 // calendar

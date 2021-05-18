@@ -8,7 +8,6 @@ import '@src/fonts/nunito-bold/fonts.css';
 import '@src/library.blocks/input/_masked/input_masked.js';
 
 import '@src/library.blocks/dropdown/dropdown.js';
-import '@src/library.blocks/dropdown/dropdown__observer.js';
 import '@src/common.blocks/dropdown/dropdown_three-guests.js';
 
 import '@src/common.blocks/room-card/__rate/room-card__rate.js';

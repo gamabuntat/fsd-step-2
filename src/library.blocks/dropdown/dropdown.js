@@ -3,6 +3,7 @@ import {decreaseButton} from './__decrease-button/dropdown__decrease-button.js';
 import {increaseButton} from './__increase-button/dropdown__increase-button.js';
 import {submitButton} from './__submit-button/dropdown__submit-button.js';
 import {cancelButton} from './__cancel-button/dropdown__cancel-button.js';
+import {observer} from './dropdown__observer.js';
 
 const dropdowns = [...document.querySelectorAll('.js-dropdown')];
 
@@ -44,3 +45,9 @@ export const methods = {
 };
 
 const methodsProp = Object.keys(methods);
+
+// observe
+dropdowns.forEach((dropdown) => (
+  observer.observe(dropdown, { childList: true, subtree: true, })
+));
+
