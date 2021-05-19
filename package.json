@@ -4,7 +4,8 @@
   "description": "fsd second step",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve"
+    "start": "webpack serve",
+    "prod": "webpack --mode=production"
   },
   "repository": {
     "type": "git",

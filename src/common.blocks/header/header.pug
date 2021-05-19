@@ -19,15 +19,15 @@ mixin header({authorized = false})
         li
           +itemExpandable({})
         li
-          a.header__menu-item(href="#") Вакансии
+          a.header__menu-item(href="change me") Вакансии
         li
-          a.header__menu-item(href="#") Новости
+          a.header__menu-item(href="change me") Новости
         li
           +itemExpandable({title: ' Соглашения', number: 2})
       .header__button-container.container
         if !authorized
           +buttonBorder({sign: 'Войти', header: true, label: 'login'})
-          +bigButton({action: '#', sign: 'зарегистрироваться', header: true, label: 'registration'})
+          +bigButton({action: 'change me', sign: 'зарегистрироваться', header: true, label: 'registration'})
         else
           .header__v-line
-          a.header__menu-item(href="#") Юлий Цезарь
+          a.header__menu-item(href="change me") Юлий Цезарь

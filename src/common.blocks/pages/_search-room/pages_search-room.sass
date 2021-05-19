@@ -44,15 +44,17 @@
 
 .main__show-aside-button
   display: none
-  padding: 0
+  position: fixed
+  left: 14px
+  width: 23px
+  height: 23px
   background: white
   border: none
   outline: none
   cursor: pointer
-  background-image: url(@common/pages/_search-room/da.svg)
-
-  &:hover, &:focus
-    background-image: url(@common/pages/_search-room/dah.svg)
+  background-image: url(@common/pages/_search-room/main__show-aside-button.svg)
+  background-repeat: no-repeat
+  background-position: center center
 
 .main__content
   width: min(839px, 100%)
@@ -95,11 +97,7 @@
     padding-right: 0
 
   .main__show-aside-button
-    position: fixed
-    left: 14px
     display: unset
-    width: 24px
-    height: 24px
 
   .aside
     background: white

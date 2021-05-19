@@ -6,15 +6,15 @@ module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
   entry: {
-    // colorsAndType: './src/UI kit/Colors & Type/colors&type.js',
+    colorsAndType: './src/UI kit/Colors & Type/colors&type.js',
     formElements: './src/UI kit/Form Elements/formElements.js',
     cards: './src/UI kit/cards/cards.js',
     headersAndFooters: './src/UI kit/headers-and-footers/headers-and-footers.js',
     landing: './src/page/landing/landing.js',
     searchRoom: './src/page/search-room/search-room.js',
     roomDetails: './src/page/room-details/room-details.js',
-    // registration: './src/page/registration/registration.js',
-    // signIn: './src/page/signIn/signIn.js',
+    registration: './src/page/registration/registration.js',
+    signIn: './src/page/signIn/signIn.js',
     index: './src/page/index/index.js',
   },
   output: {
@@ -38,12 +38,13 @@ module.exports = {
   },
   plugins: [
     new ESLintPlugin(),
-    // new HtmlWebpackPlugin({
-    //   filename: 'colorsAndType.html',
-    //   template: './src/UI kit/Colors & Type/colors&type.pug',
-    //   minify: 'false',
-    //   chunks: ['colorsAndType'],
-    // }),
+    new HtmlWebpackPlugin({
+      filename: 'colorsAndType.html',
+      template: './src/UI kit/Colors & Type/colors&type.pug',
+      favicon: './src/favicon/favicon-32x32.png',
+      minify: 'false',
+      chunks: ['colorsAndType'],
+    }),
     new HtmlWebpackPlugin({
       filename: 'formElements.html',
       template: './src/UI kit/Form Elements/formElements.pug',
@@ -79,24 +80,25 @@ module.exports = {
       minify: 'false',
       chunks: ['searchRoom'],
     }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'registration.html',
-    //   template: './src/page/registration/registration.pug',
-    //   minify: 'false',
-    //   chunks: ['registration'],
-    // }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'signIn.html',
-    //   template: './src/page/signIn/signIn.pug',
-      // favicon: './src/favicon/favicon-32x32.png',
-    //   minify: 'false',
-    //   chunks: ['signIn'],
-    // }),
+    new HtmlWebpackPlugin({
+      filename: 'registration.html',
+      template: './src/page/registration/registration.pug',
+      favicon: './src/favicon/favicon-32x32.png',
+      minify: 'false',
+      chunks: ['registration'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'signIn.html',
+      template: './src/page/signIn/signIn.pug',
+      favicon: './src/favicon/favicon-32x32.png',
+      minify: 'false',
+      chunks: ['signIn'],
+    }),
     new HtmlWebpackPlugin({
       filename: 'room-details.html',
       template: './src/page/room-details/room-details.pug',
       favicon: './src/favicon/favicon-32x32.png',
-      minify: 'true',
+      minify: 'false',
       chunks: ['roomDetails'],
     }),
     new HtmlWebpackPlugin({

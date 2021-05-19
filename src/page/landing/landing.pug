@@ -1,4 +1,3 @@
-- const path = '../../'
 include ../../common.blocks/header/header
 include ../../common.blocks/footer/footer
 include ../../library.blocks/button/_border/button_border
@@ -11,20 +10,25 @@ include ../../common.blocks/card/_primary-parameters/card_primary-parameters
 
 doctype html
 html.html(lang="ru")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        title
-    body.pages.pages__landing
-        +header({})
-        main.main
-            .main__img-container.main__img-container_3
-            .main__img-container.main__img-container_2
-            .main__img-container.main__img-container_1
-            .main__content
-                +primaryCard({bigAction: 'search-room.html'})
-                .main__sign
-                    | Лучшие номера для вашей работы,
-                    br
-                    | отдыха и просто вдохновения
-        +footer({})
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(
+      name="description" 
+      content="Toxin landing page. We will find hotel rooms to your liking"
+    )
+    meta(name="keywords" content="toxin hotel rooms")
+    title landing page
+  body.pages.pages__landing
+    +header({})
+    main.main
+      img.main__img-container.main__img-container_3(src=require("@src/page/landing/image-3.webp").default, alt="room image")
+      img.main__img-container.main__img-container_2(src=require("@src/page/landing/image-2.webp").default, alt="room image")
+      img.main__img-container.main__img-container_1(src=require("@src/page/landing/image-1.webp").default, alt="room image")
+      .main__content
+        +primaryCard({bigAction: 'search-room.html'})
+        .main__sign
+          | Лучшие номера для вашей работы,
+          br
+          | отдыха и просто вдохновения
+    +footer({})

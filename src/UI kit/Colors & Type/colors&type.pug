@@ -1,12 +1,11 @@
-- const path = '../../'
-
 doctype html
 html.html(lang="ru")
   head
     meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
     title colors and types
   body.pages.pages_colors-and-type
-    img.watermark(src=path + "library.blocks/watermark/watermark.svg", alt="")
+    img.watermark(src=require("@library/watermark/watermark.svg").default, alt="logo")
     .container.container_justify-content-space-around.page__container
       .container.container_direction-column
         include ../../library.blocks/color/color.pug

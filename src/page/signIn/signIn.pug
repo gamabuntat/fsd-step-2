@@ -1,4 +1,3 @@
-- const path = '../../'
 include ../../common.blocks/header/header
 include ../../common.blocks/footer/footer
 include ../../library.blocks/text-field/text-field
@@ -9,15 +8,20 @@ include ../../common.blocks/have-acc/have-acc
 include ../../common.blocks/card/_login/card_login
 
 doctype html
-html.html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        title
-    body.pages.pages_signIn
-        +header({})
-        main.main
-            .main__img-container.main__img-container_2
-            .main__img-container.main__img-container_1
-            +login({})
-        +footer({})
+html.html(lang="ru")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(
+      name="description" 
+      content="Already have an account for toxin? Then welcome!"
+    )
+    meta(name="keywords" content="toxin hotel rooms signin account")
+    title signin page
+  body.pages.pages_signIn
+    +header({})
+    main.main
+      img.main__img-container.main__img-container_2(src=require("@src/page/signIn/signIn__bg-image-2.webp").default, alt="room photo")
+      img.main__img-container.main__img-container_1(src=require("@src/page/signIn/signIn__bg-image-1.webp").default, alt="room photo")
+      +login({})
+    +footer({})

@@ -19,11 +19,16 @@ html.html(lang="ru")
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(
+      name="description" 
+      content="how about these rooms that we have selected for you?"
+    )
+    meta(name="keywords" content="toxin hotel")
     title search room
   body.pages.pages_search-room
     +header({})
     main.main
-      button.main__show-aside-button.js-main__show-aside-button(aria-label='show search parameters of rooms')
+      button.main__show-aside-button.js-main__show-aside-button(aria-label="show search parameters of rooms")
       aside.aside.js-aside
         +filterDateDropdown({shrink: true})
         +dropdown({small: 1})
