@@ -1,8 +1,9 @@
-mixin haveAcc({login = false})
-  .have-acc.container.container_justify-content-space-between
-    if login
-      span.have-acc__sign Нет аккаунта на Toxin?
-      +buttonBorder({action: 'registration.html', sign: 'создать'})
-    else
-      span.have-acc__sign Уже есть аккаунт на Toxin
-      +buttonBorder({action: 'signIn.html'})
+mixin haveAcc(params)
+    - let {login = false} = params
+    .have-acc.container.container_justify-content-space-between
+        if login
+            span.have-acc__sign Нет аккаунта на Toxin?
+            +buttonBorder({action: 'registration.html', sign: 'создать'})
+        else
+            span.have-acc__sign Уже есть аккаунт на Toxin
+            +buttonBorder({action: 'signIn.html'})
