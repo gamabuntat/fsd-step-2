@@ -1,9 +1,5 @@
-mixin bulletList()
+mixin bullet-list({items = ['Нельзя с питомцами', 'Без вечеринок и мероприятий', 'Время прибытия — после 13:00, а выезд до 12:00']})
   ul.bullet-list
-    li.bullet-list__item
-      span.bullet-list__content Нельзя с питомцами
-    li.bullet-list__item
-      span.bullet-list__content Без вечеринок и мероприятий
-    li.bullet-list__item
-      span.bullet-list__content Время прибытия — после 13:00, 
-        | а выезд до 12:00
+    each i in items
+      li.bullet-list__item
+        .bullet-list__content #{i}
