@@ -20,15 +20,14 @@ include ../../common.blocks/room-detalis/room-detalis
 include ../../common.blocks/checkbox-buttons/checkbox-buttons
 include ../../library.blocks/expandable-checkbox-list/expandable-checkbox-list
 include ../../common.blocks/comment/comment
+include ../../library.blocks/watermark/watermark
+include ../../library.blocks/head/head
 
 doctype html
 html.html(lang="ru")
-  head
-    meta(charset="UTF-8")
-    title form elements
-    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+  +head({title: 'form elements'})
   body.pages.pages_formElements
-    img.watermark(src=require("@src/library.blocks/watermark/watermark.svg").default, alt="watermark")
+    +watermark()
     article.fe-sub-container.fe-sub-container_first
       .box-1-1.container.container_direction-column
         +textFiled({title: 'text field', subTitle: 'default'})
