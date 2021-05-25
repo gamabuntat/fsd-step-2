@@ -1,4 +1,3 @@
-@use '@library/color/base-color' as colors
 @use '@library/html/html'
 
 .card_room-details
@@ -25,25 +24,21 @@
   font-family: 'Conv_Montserrat-Bold'
   font-size: html.rem-size(12)
   text-transform: uppercase
-  color: colors.$base-color-purple
 
 .room__price
   font-family: 'Conv_Montserrat-Bold'
-  color: colors.$base-color-50
 
   &:after
     content: '₽'
 
 .room__billing-period
   padding-left: 0.3em
-  color: colors.$base-color-50
 
 .cost-table
   margin: 0
   padding: 0
   width: 100%
   border-spacing: 0 10px
-  color: colors.$base-color-75
 
 .cost-table__service
   max-width: 200px
@@ -102,4 +97,3 @@
 .total__filling-block
   flex-grow: 1
   height: 1.11em
-  border-bottom: 1px dotted colors.$base-color-50

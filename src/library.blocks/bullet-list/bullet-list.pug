@@ -1,4 +1,13 @@
-mixin bullet-list({items = ['Нельзя с питомцами', 'Без вечеринок и мероприятий', 'Время прибытия — после 13:00, а выезд до 12:00']})
+mixin bullet-list(params)
+  - 
+    const {
+      items = [
+        'Нельзя с питомцами',
+        'Без вечеринок и мероприятий',
+        'Время прибытия — после 13:00, а выезд до 12:00'
+      ]
+    } = params
+
   ul.bullet-list
     each i in items
       li.bullet-list__item

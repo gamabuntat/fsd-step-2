@@ -1,7 +1,15 @@
-@use '__sub-sign/text-field__sub-sign'
-
 .text-field
-  width: 320px
+  font-size: px2rem(14)
+  padding: 13px 15px
+  max-width: 320px
+  height: 44px
+  color: $mainFg
+  border: 1px solid $unclaimedFg
+  border-radius: 4px
+  outline: none
 
-.text-field__sign-container
-  margin-bottom: 5px
+  &:focus, &:hover
+    border: 1px solid $additionalFg
+
+::-webkit-input-placeholder
+  color: $unclaimedFg

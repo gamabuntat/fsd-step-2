@@ -1,18 +1,15 @@
-@use '@library/color/base-color' as colors
-
 .bullet-list
   margin: 0
   padding-left: 18px
   list-style-image: url(@library/bullet-list/bullet-list__icon.svg)
 
-.bullet-list__item
-  margin-bottom: 12px
-  line-height: 23px
+  &__item
+    margin-bottom: 12px
+    line-height: 23px
 
-  &:last-child
-    margin-bottom: 0
+    &:last-child
+      margin-bottom: 0
 
-.bullet-list__content
-  color: colors.$base-color-75
-  max-width: 240px
-  padding-left: 3px
+  &__content
+    max-width: 240px
+    padding-left: 3px

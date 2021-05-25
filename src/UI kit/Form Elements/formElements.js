@@ -1,5 +1,4 @@
-import '@src/common.blocks/common.sass';
-import '@src/common.blocks/pages/_formElements/pages_formElements.sass';
+import '@src/UI kit/Form Elements/formElements.sass';
 //fonts
 import '@src/fonts/montserrat-regular/fonts.css';
 import '@src/fonts/montserrat-bold/fonts.css';

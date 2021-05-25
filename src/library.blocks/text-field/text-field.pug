@@ -1,17 +1,15 @@
-mixin textFiled(params)
-    - const {title = false, subTitle, hover, masked, placeholder = 'Email'} = params
-    .container.container_direction-column.text-field
-      if title
-        .text-field__sign-container.container.container_justify-content-space-between
-          h3.h3.text-field__sign #{title}
-          if subTitle
-            h3.h3.text-field__sub-sign.font.font_montserrat-r #{subTitle}
-      if hover
-        form
-          input.input.input_hover(type="email" placeholder="Email" value="This is pretty awesome")
-      else if masked
-        form
-          input.input.input_masked.js-input_masked(type="text" placeholder="ДД.ММ.ГГГГ")
-      else
-        form
-          input.input(type="text" placeholder=placeholder)
+mixin text-field(params)
+  -
+    const {
+      type = 'text',
+      placeholder = false,
+      value = false,
+      autofocus = false
+    } = params
+
+  input.text-field(
+    type=type 
+    placeholder=placeholder 
+    value=value
+    autofocus=autofocus
+  )

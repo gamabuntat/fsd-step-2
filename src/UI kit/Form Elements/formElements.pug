@@ -30,10 +30,8 @@ html.html(lang="ru")
     +watermark()
     article.fe-sub-container.fe-sub-container_first
       .box-1-1.container.container_direction-column
-        +textFiled({title: 'text field', subTitle: 'default'})
-        +textFiled({title: 'text field', subTitle: 'hover / focus', hover: true})
+        +text-field({type: 'email', placeholder: 'Email'})
         +dropdown({onlyButton: 1, sign: 'dropdown', subSign: 'default'})
-        +textFiled({title: 'masked text field', subTitle: 'default', masked: true})
         +dateDropdown({firstTitle: 'dropdown', secondTitle: 'dropdown', secondDate: '19.08.2019'})
         +filterDateDropdown({title: 1, onlyButtons: 1})
         +subTextField('subscription text field')
@@ -42,19 +40,16 @@ html.html(lang="ru")
         +radio({title: 'radio buttons'})
         include ../../common.blocks/toggle-button/toggle-button
         .container.container_direction-column
-          +title('like button')
           .container
             +likeButton({})
             +likeButton({like: true})
         .container.container_direction-column
-          +title('rate button')
           .container
             +rate(4)
             +rate(5)
       .box-1-3.container.container_direction-column
         +range({})
         .container.container_direction-column
-          +title('buttons')
           .container
             button.button
               h3.h3 click me
@@ -70,7 +65,6 @@ html.html(lang="ru")
               h3.h3 click me
           +bigButton({})
           .container.container_direction-column
-            +title('pagination')
             +pagination()
       .box-2-1.container.container_direction-column
         +dropdown({narrow: true, onlyButton: 1, sign: 'dropdown', subSign: 'default'})
@@ -83,11 +77,9 @@ html.html(lang="ru")
         +checkList({})
         +checkList({expand: true})
       .box-3-2.container.container_direction-column
-        +title('rich Checkbox Buttons')
         +richCheck({title: 'Широкий коридор', sign: 'Ширина коридоров в номере не менее 91 см.'})
         +richCheck({title: 'Помощник для инвалидов', sign: 'На 1 этаже вас встретит специалист  и проводит до номера.'})
       .box-3-3.container.container_direction-column
-        +title('bullet list')
         +bullet-list({})
     .fe-sub-container.fe-sub-container_second
       .box-4-1.container

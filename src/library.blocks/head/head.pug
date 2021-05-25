@@ -1,4 +1,11 @@
-mixin head({descript = "Toxin - hotel search service", keywords = "toxin search hotel rooms", title = "toxin page"})
+mixin head(params)
+  -
+    const {
+      descript = "Toxin - hotel search service",
+      keywords = "toxin search hotel rooms",
+      title = "toxin page"
+    } = params
+
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
@@ -9,7 +16,7 @@ mixin head({descript = "Toxin - hotel search service", keywords = "toxin search 
     meta(name="keywords" content=keywords)
     link(
       rel="mask-icon"
-      href=require("@src/favicon/mask-icon.svg").default 
+      href=require("@src/favicons/mask-icon.svg").default 
       color="#BC9CFF"
     )
     title #{title}
