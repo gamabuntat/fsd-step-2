@@ -16,14 +16,17 @@ inputMasked.forEach((input) => input.addEventListener('input', () => {
     removeLastSymb();
     return;
   }
+
   if (!/[0-9]/.test(input.value.slice(-1))) {
     removeLastSymb();
     return;
   }
+
   if (lastString.length == 2 && pos <= 2) {
     putPoint();
     return;
   }
+
   if (lastString.length > 2 && pos <= 2) {
     removeLastSymb();
     putPoint();
@@ -34,6 +37,7 @@ inputMasked.forEach((input) => input.addEventListener('input', () => {
   function putPoint() {
     input.value += '.';
   }
+
   function removeLastSymb() {
     input.value = input.value.slice(0, -1);
   }

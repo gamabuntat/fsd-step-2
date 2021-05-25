@@ -24,13 +24,15 @@ include ../../library.blocks/watermark/watermark
 include ../../library.blocks/head/head
 
 doctype html
-html.html(lang="ru")
+html(lang="ru")
   +head({title: 'form elements'})
   body.pages.pages_formElements
     +watermark()
     article.fe-sub-container.fe-sub-container_first
       .box-1-1.container.container_direction-column
         +text-field({type: 'email', placeholder: 'Email'})
+        +text-field({value: 'This is pretty awesome', autofocus: true})
+        +text-field({masked: true})
         +dropdown({onlyButton: 1, sign: 'dropdown', subSign: 'default'})
         +dateDropdown({firstTitle: 'dropdown', secondTitle: 'dropdown', secondDate: '19.08.2019'})
         +filterDateDropdown({title: 1, onlyButtons: 1})
