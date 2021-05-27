@@ -25,7 +25,6 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, './'),
       '@src': path.resolve(__dirname, 'src'),
-      '@dist': path.resolve(__dirname, 'dist'),
       '@common': path.resolve(__dirname, 'src/common.style'),
       '@library': path.resolve(__dirname, 'src/library.blocks'),
     },
