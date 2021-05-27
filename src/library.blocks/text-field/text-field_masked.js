@@ -29,17 +29,26 @@ class MaskedTextField {
           ...this.splitString(this.input.value, this.getValueIndex()),
           '.'
         ));
+        return;
       }
-      if (this.input.value.length == this.template.length) {
-        const fullValue = this.input.value;
-        const templateValue = this.getValue(this.template).pop();
-        const inputValue = this.getValue(fullValue).pop();
-        if (+inputValue > +templateValue) {
-          this.setValue(
-            fullValue.slice(0, fullValue.lastIndexOf(inputValue))
-            + templateValue
-          );
-        }
+      const fullValue = this.input.value;
+      const amountPoints = (fullValue.match(/\./g) || []).length;
+      const templateValue = this.getValue(this.template)[amountPoints];
+      const inputValue = this.getValue(fullValue).pop();
+      if (inputValue.length == templateValue.length && +inputValue == 0) {
+        this.setValue(
+          fullValue.slice(0, fullValue.lastIndexOf(inputValue))
+          + inputValue.slice(0, -1)
+          + '1'
+        );
+        return;
+      }
+      if (+inputValue > +templateValue) {
+        this.setValue(
+          fullValue.slice(0, fullValue.lastIndexOf(inputValue))
+          + templateValue
+        );
+        return;
       }
       return;
     }
