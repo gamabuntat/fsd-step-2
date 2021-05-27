@@ -19,4 +19,14 @@ mixin head(params)
       href=require("@src/favicons/mask-icon.svg").default 
       color="#BC9CFF"
     )
+    link(
+      rel="icon"
+      type="image/jpg"
+      href=require("@src/favicons/favicon-16x16.png").default
+    )
+    link(
+      rel="icon"
+      type="image/jpg"
+      href=require("@src/favicons/favicon-32x32.png").default
+    )
     title #{title}

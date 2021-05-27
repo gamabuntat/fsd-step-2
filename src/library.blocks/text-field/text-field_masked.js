@@ -3,6 +3,10 @@ class MaskedTextField {
     this.input = input;
     this.template = '31.12.2099';
     this.index = -1;
+    this.prepValue = '';
+    this.amountPoints = 0;
+    this.templateValue = '';
+    this.inputValue = '';
     this.bindListeners();
   }
 
@@ -19,68 +23,72 @@ class MaskedTextField {
   }
 
   processInput(symb) {
-    if (symb == '.') { 
-      this.handleLastPoint();
-      return;
-    }
+    this.updateValues();
     if (/\d/.test(symb)) { 
-      if (this.template[this.getValueIndex()] == '.') {
-        this.setValue(this.concatString(
-          ...this.splitString(this.input.value, this.getValueIndex()),
-          '.'
-        ));
-        return;
-      }
-      const fullValue = this.input.value;
-      const amountPoints = (fullValue.match(/\./g) || []).length;
-      const templateValue = this.getValue(this.template)[amountPoints];
-      const inputValue = this.getValue(fullValue).pop();
-      if (inputValue.length == templateValue.length && +inputValue == 0) {
-        this.setValue(
-          fullValue.slice(0, fullValue.lastIndexOf(inputValue))
-          + inputValue.slice(0, -1)
-          + '1'
-        );
-        return;
-      }
-      if (+inputValue > +templateValue) {
-        this.setValue(
-          fullValue.slice(0, fullValue.lastIndexOf(inputValue))
-          + templateValue
-        );
-        return;
-      }
-      return;
+      return this.handleDigit();
+    }
+    if (symb == '.') { 
+      return this.handlePoint();
     }
     this.removeLastCharacter();
   }
 
-  handleLastPoint() {
-    const prepString = this.trimEndPoints(this.input.value);
-    const amountPoints = (prepString.match(/\./g) || []).length;
-    const templateValue = this.getValue(this.template)[amountPoints];
-    const inputValue = this.getValue(prepString).pop();
-    if (+inputValue > +templateValue) {
+  handleDigit() {
+    if (this.template[this.getValueIndex()] == '.') {
+      return this.setValue(this.concatString(
+        ...this.splitString(this.input.value, this.getValueIndex()),
+        '.'
+      ));
+    }
+    if (
+      this.inputValue.length == this.templateValue.length 
+      && +this.inputValue == 0
+    ) {
       return this.setValue(
-        prepString.slice(0, -templateValue.length) + templateValue + '.'
+        this.prepValue.slice(0, this.prepValue.lastIndexOf(this.inputValue))
+        + this.inputValue.slice(0, -1)
+        + '1'
       );
     }
-    if (inputValue.length == 0 || templateValue.length == 4) {
-      return this.setValue(prepString);
+    if (+this.inputValue > +this.templateValue) {
+      return this.setValue(
+        this.prepValue.slice(0, this.prepValue.lastIndexOf(this.inputValue))
+        + this.templateValue
+      );
     }
-    if (inputValue.length == 1 && templateValue.length == 2) {
+  }
+
+  handlePoint() {
+    if (+this.inputValue > +this.templateValue) {
+      return this.setValue(
+        this.prepValue.slice(0, -this.templateValue.length) 
+        + this.templateValue 
+        + '.'
+      );
+    }
+    if (this.inputValue.length == 0 || this.templateValue.length == 4) {
+      return this.setValue(this.prepValue);
+    }
+    if (this.inputValue.length == 1 && this.templateValue.length == 2) {
       return this.setValue((
-        inputValue == '0' 
-          ? prepString + '1'
+        this.inputValue == '0' 
+          ? this.prepValue + '1'
           : this.concatString(
-            ...this.splitString(prepString, prepString.length - 1),
+            ...this.splitString(this.prepValue, this.prepValue.length - 1),
             '0'
           ) 
       ) + '.');
     }
-    if (inputValue.length == 2) {
-      return this.setValue(prepString + '.');
+    if (this.inputValue.length == 2) {
+      return this.setValue(this.prepValue + '.');
     }
+  }
+
+  updateValues() {
+    this.prepValue = this.trimEndPoints(this.input.value);
+    this.amountPoints = (this.prepValue.match(/\./g) || []).length;
+    this.templateValue = this.getValue(this.template)[this.amountPoints];
+    this.inputValue = this.getValue(this.prepValue).pop();
   }
 
   getValueIndex() {
