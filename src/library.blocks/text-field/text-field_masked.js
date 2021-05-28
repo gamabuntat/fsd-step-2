@@ -18,7 +18,6 @@ class MaskedTextField {
     const diff = this.getValueIndex() - this.index;
     const lastSymb = this.input.value.slice(-1);
     if (diff > 0) { this.processInput(lastSymb); }
-    if (diff < 0 && lastSymb == '.') { this.removeLastCharacter(); }
     this.index = this.getValueIndex();
   }
 
@@ -94,6 +93,14 @@ class MaskedTextField {
     if (this.inputValue.length == this.templateValue.length) {
       return this.setLastPoint();
     }
+    if (this.templateValue.length == 4 && this.inputValue.length ==2) {
+      if (+this.inputValue <= 21) {
+        return this.yearAutoComplite('20');
+      }
+      if (+this.inputValue > 21) {
+        return this.yearAutoComplite('19');
+      }
+    }
     this.removeLastCharacter();
   }
 
@@ -138,6 +145,15 @@ class MaskedTextField {
 
   getValue(str) {
     return str.match(/[^.]+(?=\.|$)/g) || [''];
+  }
+
+  yearAutoComplite(shortYear) {
+    return this.setValue(this.concatString(
+      ...this.splitString(
+        this.prepValue, this.prepValue.lastIndexOf(this.inputValue)
+      ),
+      shortYear
+    ));
   }
 }
 
