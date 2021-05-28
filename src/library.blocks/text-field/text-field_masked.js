@@ -11,10 +11,10 @@ class MaskedTextField {
   }
 
   bindListeners() {
-    this.input.addEventListener('input', this.handleInputInput.bind(this));
+    this.input.addEventListener('input', this.handleTextFieldInput.bind(this));
   }
 
-  handleInputInput() {
+  handleTextFieldInput() {
     const diff = this.getValueIndex() - this.index;
     const lastSymb = this.input.value.slice(-1);
     if (diff > 0) { this.processInput(lastSymb); }

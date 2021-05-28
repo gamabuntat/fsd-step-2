@@ -1,30 +1,30 @@
 class SubTextField {
   constructor(elem) {
     this.textField = elem;
-    this.input = this.textField.querySelector('.sub-text-field__input');
+    this.input = this.textField.querySelector('.js-sub-text-field__input');
     this.bindListeners();
   }
 
   bindListeners() {
     this.input.addEventListener(
       'focus', 
-      this.handlerSubTextFieldInputFocus.bind(this)
+      this.handleSubTextFieldInputFocus.bind(this)
     );
     this.input.addEventListener(
       'blur',
-      this.handlerSubTextFieldInputBlur.bind(this)
+      this.handleSubTextFieldInputBlur.bind(this)
     );
   }
 
-  handlerSubTextFieldInputFocus() {
+  handleSubTextFieldInputFocus() {
     this.textField.classList.add('sub-text-field_active');
   }
 
-  handlerSubTextFieldInputBlur() {
+  handleSubTextFieldInputBlur() {
     this.textField.classList.remove('sub-text-field_active');
   }
 }
 
-document.querySelectorAll('.sub-text-field')
+document.querySelectorAll('.js-sub-text-field')
   .forEach((i) => new SubTextField(i));
 
