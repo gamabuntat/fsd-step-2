@@ -30,6 +30,9 @@ class MaskedTextField {
     if (symb == '.') { 
       return this.handlePoint();
     }
+    if (symb == ' ') {
+      return this.autocomplete();
+    }
     this.removeLastCharacter();
   }
 
@@ -70,25 +73,43 @@ class MaskedTextField {
       return this.setValue(this.prepValue);
     }
     if (this.inputValue.length == 1 && this.templateValue.length == 2) {
-      return this.setValue((
-        this.inputValue == '0' 
-          ? this.prepValue + '1'
-          : this.concatString(
-            ...this.splitString(this.prepValue, this.prepValue.length - 1),
-            '0'
-          ) 
-      ) + '.');
+      return this.addZero()
     }
     if (this.inputValue.length == 2) {
-      return this.setValue(this.prepValue + '.');
+      this.setLastPoint();
     }
   }
 
+  autocomplete() {
+    if (this.inputValue.length == 1 && this.templateValue.length == 2) {
+      return this.addZero()
+    }
+    if (this.inputValue.length == this.templateValue.length) {
+      return this.setLastPoint();
+    }
+    this.removeLastCharacter();
+  }
+
   updateValues() {
-    this.prepValue = this.trimEndPoints(this.input.value);
+    this.prepValue = this.trimNonDigit(this.input.value);
     this.amountPoints = (this.prepValue.match(/\./g) || []).length;
     this.templateValue = this.getValue(this.template)[this.amountPoints];
     this.inputValue = this.getValue(this.prepValue).pop();
+  }
+
+  setLastPoint() {
+    return this.setValue(this.prepValue + '.');
+  }
+
+  addZero() {
+    return this.setValue((
+      this.inputValue == '0' 
+        ? this.prepValue + '1'
+        : this.concatString(
+          ...this.splitString(this.prepValue, this.prepValue.length - 1),
+          '0'
+        ) 
+    ) + '.');
   }
 
   getValueIndex() {
@@ -107,8 +128,8 @@ class MaskedTextField {
     return start + symbol + end;
   }
 
-  trimEndPoints(str) {
-    return str.replace(/\.+$/, '');
+  trimNonDigit(str) {
+    return str.replace(/[^\d]+$/, '');
   }
 
   removeLastCharacter() {
