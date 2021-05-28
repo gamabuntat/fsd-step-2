@@ -1,7 +1,32 @@
-@use '__sign/sub-text-field__sign'
-@use '__input/sub-text-field__input'
-@use '__container/sub-text-field__container'
-@use '__button/sub-text-field__button'
-
 .sub-text-field
   width: min(266px, 100%)
+  height: 44px
+  display: flex
+  justify-content: space-between
+  border: 1px solid $unclaimed-fg
+  border-radius: 4px
+  pointer-events: none
+
+  &:hover, &_active
+    border: 1px solid $additional-fg
+
+  &__input
+    width: 100%
+    padding: 0
+    color: $main-fg
+    text-indent: 13px
+    border: none
+    outline: none
+    pointer-events: auto
+
+  &__button
+    width: 44px
+    padding: 0
+    border: none
+    outline: none
+    cursor: pointer
+    pointer-events: auto
+    background: no-repeat center url(@library/sub-text-field/sub-text-field__button.svg)
+
+    &:focus, &:hover
+      background: no-repeat center url(@library/sub-text-field/sub-text-field__button_active.svg)

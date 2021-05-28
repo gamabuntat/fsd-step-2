@@ -1,11 +1,4 @@
-mixin subTextField(title)
-  form.sub-text-field.container.container_direction-column
-    if title
-      h3.h3.sub-text-field__sign #{title}
-    else
-    .input.sub-text-field__container
-      input.sub-text-field__input(type="email" placeholder="Email") 
-      button.text-button.sub-text-field__button(
-        type="submit"
-        aria-label="receive news to this email address"
-      )
+mixin sub-text-field(inputAttr = {}, buttonAttr = {})
+  .sub-text-field
+    input.sub-text-field__input&attributes(inputAttr)
+    button.sub-text-field__button&attributes(buttonAttr)

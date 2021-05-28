@@ -1,9 +1,30 @@
-const input = document.querySelector('.sub-text-field__container');
+class SubTextField {
+  constructor(elem) {
+    this.textField = elem;
+    this.input = this.textField.querySelector('.sub-text-field__input');
+    this.bindListeners();
+  }
 
-input.addEventListener('focusin', () => {
-  input.style.border = '1px solid rgba(31, 32, 65, 0.50)';
-});
+  bindListeners() {
+    this.input.addEventListener(
+      'focus', 
+      this.handlerSubTextFieldInputFocus.bind(this)
+    );
+    this.input.addEventListener(
+      'blur',
+      this.handlerSubTextFieldInputBlur.bind(this)
+    );
+  }
 
-input.addEventListener('focusout', () => {
-  input.style.border = '';
-});
+  handlerSubTextFieldInputFocus() {
+    this.textField.classList.add('sub-text-field_active');
+  }
+
+  handlerSubTextFieldInputBlur() {
+    this.textField.classList.remove('sub-text-field_active');
+  }
+}
+
+document.querySelectorAll('.sub-text-field')
+  .forEach((i) => new SubTextField(i));
+

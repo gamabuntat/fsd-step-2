@@ -8,3 +8,4 @@ import '@src/fonts/montserrat-bold/fonts.css';
 
 //js
 import '@library/text-field/text-field_masked.js';
+import '@library/sub-text-field/sub-text-field.js';

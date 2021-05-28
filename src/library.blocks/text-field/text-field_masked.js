@@ -36,6 +36,13 @@ class MaskedTextField {
     this.removeLastCharacter();
   }
 
+  updateValues() {
+    this.prepValue = this.trimNonDigit(this.input.value);
+    this.amountPoints = (this.prepValue.match(/\./g) || []).length;
+    this.templateValue = this.getValue(this.template)[this.amountPoints];
+    this.inputValue = this.getValue(this.prepValue).pop();
+  }
+
   handleDigit() {
     if (this.template[this.getValueIndex()] == '.') {
       return this.setValue(this.concatString(
@@ -73,7 +80,7 @@ class MaskedTextField {
       return this.setValue(this.prepValue);
     }
     if (this.inputValue.length == 1 && this.templateValue.length == 2) {
-      return this.addZero()
+      return this.addZero();
     }
     if (this.inputValue.length == 2) {
       this.setLastPoint();
@@ -82,19 +89,12 @@ class MaskedTextField {
 
   autocomplete() {
     if (this.inputValue.length == 1 && this.templateValue.length == 2) {
-      return this.addZero()
+      return this.addZero();
     }
     if (this.inputValue.length == this.templateValue.length) {
       return this.setLastPoint();
     }
     this.removeLastCharacter();
-  }
-
-  updateValues() {
-    this.prepValue = this.trimNonDigit(this.input.value);
-    this.amountPoints = (this.prepValue.match(/\./g) || []).length;
-    this.templateValue = this.getValue(this.template)[this.amountPoints];
-    this.inputValue = this.getValue(this.prepValue).pop();
   }
 
   setLastPoint() {
