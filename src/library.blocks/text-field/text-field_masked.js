@@ -15,8 +15,10 @@ class MaskedTextField {
   }
 
   handleTextFieldInput() {
+    const diff = this.getValueIndex() - this.index;
     const lastSymb = this.input.value.slice(-1);
-    if (this.getValueIndex() > this.index) { this.processInput(lastSymb); }
+    if (diff > 0) { this.processInput(lastSymb); }
+    if (diff < 0 && !(/\d/).test(lastSymb)) { this.removeLastCharacter(); }
     this.index = this.getValueIndex();
   }
 
