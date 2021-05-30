@@ -1,17 +1,18 @@
 include ../../library.blocks/head/head
+include ../../library.blocks/watermark/watermark
 include ../../library.blocks/text-field/text-field
 include ../../library.blocks/sub-text-field/sub-text-field
-include ../../library.blocks/watermark/watermark
+include ../../library.blocks/dropdown/dropdown
 
 doctype html
 html(lang="ru")
   +head({title: 'form elements'})
-  body.pages.pages_formElements
+  body
     +watermark()
-    article.fe-sub-container.fe-sub-container_first
-      .box-1-1.container.container_direction-column
-        +text-field({type: 'email', placeholder: 'Email'})
-        +text-field({value: 'This is pretty awesome', autofocus: true})
-        +text-field({masked: true})
-        +sub-text-field({placeholder: 'Email'})
+    article
+      +text-field({type: 'email', placeholder: 'Email'})
+      +text-field({value: 'This is pretty awesome', autofocus: true})
+      +dropdown({sectionNames: ['взрослые', 'дети', 'младенцы']})
+      +text-field({masked: true})
+      +sub-text-field({placeholder: 'Email'})
 

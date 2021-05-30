@@ -1,18 +1,113 @@
-@use '__sign/dropdown__sign'
-@use '__button/dropdown__button'
-@use '__button/_open/dropdown__button_open'
-@use '__expand-icon/dropdown__expand-icon'
-@use '__expand-icon/dropdown__expand-icon_open'
-@use '__expand-list/dropdown__expand-list'
-@use '__expand-list/_open/dropdown__expand-list_open'
-@use '__expand-list/_expand/dropdown__expand-list_expand'
-@use '__expand-list/_narrow/dropdown__expand-list_narrow'
-@use '__expand-list/_small/dropdown__expand-list_small'
-@use '__expand-items/dropdown__expand-items'
-@use '__increase-button/dropdown__increase-button'
-@use '__decrease-button/dropdown__decrease-button'
-@use '@library/calendar/calendar'
+@use 'sass:color'
 
+@use '@common/usable/usable'
+
+@mixin container-styles($color-border: rgba(31, 32, 65, .25))
+  display: flex
+  width: min(320px, 100%)
+  background: $color-main-bg
+  border: 1px solid $color-border
+  border-radius: 4px
+  box-sizing: border-box
+
+@mixin font-bold-type()
+  font-family: $font-main-bold
+  font-size: usable.px2rem(12px)
+  color: $color-title-fg
+
+@function change-alpha($color, $value: 0.1)
+  @return color.adjust($color, $alpha: $value)
+
+$color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
+  
 .dropdown
   position: relative
-  width: 320px
+
+  &__expand-button
+    @include container-styles($color-unclaimed-fg)
+    justify-content: space-between
+    text-indent: 13px
+    align-items: center
+    padding: 0
+    color: $color-main-fg
+    height: 44px
+    outline: none
+    cursor: pointer
+
+    &:hover, &:focus
+      border-color: $color-additional-fg
+
+      & .dropdown__expand-icon > *
+        opacity: .75
+
+    &_pressed
+      border-color: $color-additional-fg
+      border-bottom-left-radius: 0
+      border-bottom-right-radius: 0
+
+      & .dropdown__expand-icon > *
+        opacity: .75
+
+  &__signature
+    text-overflow: ellipsis
+    overflow: hidden
+    white-space: nowrap
+
+  &__expand-icon
+    display: flex
+    justify-content: center
+    min-width: 44px
+
+  &__list
+    @include container-styles($color-additional-fg)
+    flex-direction: column
+    row-gap: 7px
+    padding-top: 6px
+    padding-right: 7px
+    height: 159px
+    border-top: none
+    border-top-left-radius: 0
+    border-top-right-radius: 0
+
+  &__list-section
+    display: flex
+    column-gap: 8px
+    width: 100%
+    height: min-content
+
+  &__section-name
+    @include font-bold-type()
+    flex-grow: 1
+    align-self: center
+    text-indent: 13px
+    text-transform: uppercase
+
+  &__decrease-button, &__increase-button
+    width: 30px
+    height: 30px
+    font-size: usable.px2rem(18px)
+    color: $color-additional-fg
+    border: 1px solid $color-unclaimed-fg
+    border-radius: 50%
+    background-color: $color-main-bg
+    cursor: pointer
+    outline: none
+
+    &:hover, &:focus
+      color: change-alpha($color-additional-fg)
+      border: 1px solid change-alpha($color-unclaimed-fg)
+
+    &_disabled
+      color: $color-disabled
+      border: 1px solid $color-disabled
+
+      &:hover, &:focus
+        color: change-alpha($color-disabled)
+        border: 1px solid change-alpha($color-disabled)
+        
+
+  &__counter
+    @include font-bold-type()
+    align-self: center
+
+
