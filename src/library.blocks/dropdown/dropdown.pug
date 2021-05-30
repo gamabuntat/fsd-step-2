@@ -9,12 +9,12 @@ mixin dropdown(params)
       span.dropdown__signature Сколько гостей
       .dropdown__expand-icon
         +svg-expand-icon
-    .dropdown__list
+    .dropdown__list.js-dropdown__list.dropdown__list_hidden
       each name in sectionNames
         .dropdown__list-section
           .dropdown__section-name #{name}
-          button.dropdown__decrease-button.dropdown__decrease-button_disabled
-            | -
+          button.dropdown__decrease-button.js-dropdown__decrease-button(
+            class="dropdown__decrease-button_disabled"
+          ) -
           .dropdown__counter 0
-          button.dropdown__increase-button
-            | +
+          button.dropdown__increase-button.js-dropdown__increase-button +
