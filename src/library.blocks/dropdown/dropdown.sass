@@ -4,6 +4,7 @@
 
 @mixin container-styles($color-border: rgba(31, 32, 65, .25))
   display: flex
+  padding: 0
   width: min(320px, 100%)
   background: $color-main-bg
   border: 1px solid $color-border
@@ -15,20 +16,20 @@
   font-size: usable.px2rem(12px)
   color: $color-title-fg
 
-@function change-alpha($color, $value: 0.1)
-  @return color.adjust($color, $alpha: $value)
+@function change-alpha($color, $diff: 0.1)
+  @return color.adjust($color, $alpha: $diff)
 
 $color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
   
 .dropdown
   position: relative
+  min-width: 210px
 
   &__expand-button
     @include container-styles($color-unclaimed-fg)
     justify-content: space-between
     text-indent: 13px
     align-items: center
-    padding: 0
     color: $color-main-fg
     height: 44px
     outline: none
@@ -62,14 +63,15 @@ $color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
     @include container-styles($color-additional-fg)
     flex-direction: column
     row-gap: 7px
-    position: absolute
+    margin: 0
     padding-top: 6px
     padding-right: 7px
     height: 159px
-    background-color: $color-main-bg
+    position: absolute
     border-top: none
     border-top-left-radius: 0
     border-top-right-radius: 0
+    box-shadow: 0 10px 20px change-alpha($color-main-fg, -0.7)
     z-index: 10
 
     &_hidden
@@ -108,7 +110,6 @@ $color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
       &:hover, &:focus
         color: change-alpha($color-disabled)
         border: 1px solid change-alpha($color-disabled)
-        
 
   &__counter
     @include font-bold-type()

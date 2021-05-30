@@ -30,9 +30,9 @@ class Dropdown {
 
   handleDecreaseButtonClick(e) {
     const value = +e.target.nextElementSibling.innerText;
-    if (value === 0) {
+    if (value === 0) { return; }
+    if (value === 1) { 
       e.target.classList.add('dropdown__decrease-button_disabled');
-      return;
     }
     e.target.nextElementSibling.innerText -= 1;
   }

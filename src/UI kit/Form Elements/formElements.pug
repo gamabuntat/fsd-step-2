@@ -8,11 +8,14 @@ doctype html
 html(lang="ru")
   +head({title: 'form elements'})
   body
-    +watermark()
-    article
+    +watermark
+    article.text-fields
       +text-field({type: 'email', placeholder: 'Email'})
       +text-field({value: 'This is pretty awesome', autofocus: true})
       +dropdown({sectionNames: ['взрослые', 'дети', 'младенцы']})
       +text-field({masked: true})
       +sub-text-field({placeholder: 'Email'})
+
+    article.text-fields
+      +dropdown({sectionNames: ['взрослые', 'дети', 'младенцы']})
 
