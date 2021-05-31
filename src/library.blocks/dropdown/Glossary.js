@@ -1,5 +1,5 @@
 class Glossary {
-  constructor(glossary) {
+  constructor(glossary = {}) {
     this.glossary = glossary;
     this.terms = Object.keys(glossary);
   }
