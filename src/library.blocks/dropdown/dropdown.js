@@ -1,3 +1,5 @@
+import Glossary from './Glossary.js';
+
 class Dropdown {
   constructor(dropdown) {
     this.dropdown = dropdown;
@@ -52,3 +54,9 @@ class Dropdown {
 document.querySelectorAll('.js-dropdown')
   .forEach((d) => new Dropdown(d));
 
+const glossary = new Glossary({
+  'взрослые, дети': ['гость', 'гостя', 'гостей'],
+  'младенцы': ['младенец', 'младенца', 'младенцев']
+});
+
+console.log(glossary.getDefinition('дети', 66)); 
