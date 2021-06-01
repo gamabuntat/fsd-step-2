@@ -23,7 +23,7 @@ class Glossary {
   getDefinition(testWord, value) {
     return (
       this.glossary[this.findTerm(testWord)] || []
-    )[Glossary.fixValue(value)];
+    )[Glossary.fixValue(value)] || testWord;
   }
 }
 

@@ -23,7 +23,40 @@ class Dropdown {
     );
     this.row = 0;
     this.value = 0;
+    this.signatureInterfaces = this.getSignatureInterfaces();
     this.bindListeners();
+  }
+
+  getSignatureInterfaces() {
+    return this.glossary.terms.reduce((funcs, term) => { 
+      const splitedTerm = term.split(', ');
+      return [
+        ...funcs, 
+        {
+          getValue: () => (
+            splitedTerm.reduce((sum, splitedTerm) => (
+              +this.counters[this.sectionNames.indexOf(splitedTerm)]
+                .innerText
+              + sum
+            ), 0)
+          ),
+          getName: () => (
+            this.sectionNames.find((name) => name === splitedTerm[0])
+          )
+        }
+      ];
+    }, []);
+  }
+
+  updateSignature(interfaces = this.signatureInterfaces) {
+    this.signature.innerText = interfaces.reduce((res, i) => {
+      const value = i.getValue();
+      if (value === 0) { return res; }
+      const part = `${value} ${
+        this.glossary.getDefinition(i.getName(), value)
+      }`;
+      return res === '' ? part : `${res}, ${part}`;
+    }, '');
   }
 
   bindListeners() {
@@ -49,22 +82,14 @@ class Dropdown {
     if (this.value === 0) { return; }
     if (this.value === 1) { this.toggleMod(); }
     this.changeCounterValue(-1);
+    this.updateSignature(this.signatureInterfaces);
   }
 
   handleIncreaseButtonClick(e) {
     this.update(e.target);
     if (this.value === 0) { this.toggleMod(); }
-    this.changeButtonSignature(
-      this.value + 1,
-      this.glossary.getDefinition(
-        this.sectionNames[this.row],
-        this.changeCounterValue(1)
-      )
-    );
-  }
-
-  changeButtonSignature(value, word) {
-    return this.signature.innerText = value + ' ' + word;
+    this.changeCounterValue(1);
+    this.updateSignature(this.signatureInterfaces);
   }
 
   changeCounterValue(diff) {
