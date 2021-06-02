@@ -14,12 +14,15 @@ class Dropdown {
       .querySelectorAll('.js-dropdown__decrease-button');
     this.increaseButtons = dropdown
       .querySelectorAll('.js-dropdown__increase-button');
-    this.counters = dropdown
-      .querySelectorAll('.js-dropdown__counter');
+    this.counters = [
+      ...dropdown.querySelectorAll('.js-dropdown__counter')
+    ];
     this.sectionNames = Array.from(
       dropdown.querySelectorAll('.js-dropdown__section-name'),
       (section) => section.innerText
     );
+    this.applyButton = dropdown.querySelector('.js-dropdown__apply-button');
+    this.cancelButton = dropdown.querySelector('.js-dropdown__cancel-button');
     this.row = 0;
     this.value = 0;
     this.signatureInterfaces = this.getSignatureInterfaces();
@@ -58,6 +61,14 @@ class Dropdown {
     this.increaseButtons.forEach((b) => (
       b.addEventListener('click', this.handleIncreaseButtonClick.bind(this))
     ));
+    this.applyButton && this.applyButton.addEventListener(
+      'click', 
+      this.handeApplyButtonClick.bind(this)
+    );
+    this.cancelButton && this.cancelButton.addEventListener(
+      'click',
+      this.handleCancelButtonClick.bind(this)
+    );
   }
 
   handleExpandButtonClick() {
@@ -68,20 +79,63 @@ class Dropdown {
   handleDecreaseButtonClick(e) {
     this.update(e.target);
     if (this.value === 0) { return; }
-    if (this.value === 1) { this.toggleMod(); }
+    if (this.value === 1) { this.toggleDecreaseButtonMod(); }
     this.changeCounterValue(-1);
     this.updateSignature(this.signatureInterfaces);
+    if (this.getCountersSum() === 0) {
+      this.toggleCancelButtonMod();
+    }
   }
 
   handleIncreaseButtonClick(e) {
     this.update(e.target);
-    if (this.value === 0) { this.toggleMod(); }
+    if (this.value === 0) { this.toggleDecreaseButtonMod(); }
     this.changeCounterValue(1);
     this.updateSignature(this.signatureInterfaces);
+    if (this.getCountersSum() === 1) {
+      this.toggleCancelButtonMod();
+    }
+  }
+
+  handeApplyButtonClick() {
+    this.expandButton.classList.toggle('dropdown__expand-button_pressed');
+    this.list.classList.toggle('dropdown__list_hidden');
+  }
+
+  handleCancelButtonClick() {
+    this.resetCounters();
+    this.signature.innerText = this.defaultSignature;
+    this.addDecreseButtonsMod();
+    this.toggleCancelButtonMod();
   }
 
   changeCounterValue(diff) {
     return this.counters[this.row].innerText = this.value + diff;
+  }
+
+  getCountersSum() {
+    return this.counters.reduce((sum, c) => +c.innerText + sum, 0);
+  }
+
+  resetCounters() {
+    this.counters.forEach((c) => c.innerText = 0);
+  }
+
+  toggleDecreaseButtonMod() {
+    this.decreaseButtons[this.row]
+      .classList.toggle('dropdown__decrease-button_disabled');
+  }
+
+  addDecreseButtonsMod() {
+    this.decreaseButtons.forEach((b) => (
+      b.classList.add('dropdown__decrease-button_disabled')
+    ));
+  }
+
+  toggleCancelButtonMod() {
+    if (this.cancelButton) {
+      this.cancelButton.classList.toggle('dropdown__cancel-button_hidden');
+    }
   }
 
   updateSignature(interfaces = this.signatureInterfaces) {
@@ -93,11 +147,6 @@ class Dropdown {
       }`;
       return res === '' ? part : `${res}, ${part}`;
     }, '') || this.defaultSignature;
-  }
-
-  toggleMod() {
-    this.decreaseButtons[this.row]
-      .classList.toggle('dropdown__decrease-button_disabled');
   }
 
   getRow(button) {
@@ -127,13 +176,13 @@ class InitDropdowns {
     return data.filter((d) => terms.indexOf(d) < 0).length == 0;
   }
 
-  create() {
-    this.dropdowns.forEach((d) => new Dropdown(d, this.findGlossary(d)));
-  }
-
   findGlossary(dropdown) {
     const dataGlossary = dropdown.dataset.glossary.split(', ');
     return this.glossarys.find(InitDropdowns.compare.bind(null, dataGlossary));
+  }
+
+  create() {
+    this.dropdowns.forEach((d) => new Dropdown(d, this.findGlossary(d)));
   }
 }
 

@@ -15,10 +15,15 @@
   font-size: usable.px2rem(12px)
   font-weight: bold
   color: $color-title-fg
+  text-transform: uppercase
 
-@function change-alpha($color, $diff: 0.1)
-  @return color.adjust($color, $alpha: $diff)
+@mixin button-default()
+  padding: 0
+  background-color: $color-main-bg
+  cursor: pointer
+  outline: none
 
+$alpha-delta: 0.1
 $color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
   
 .dropdown
@@ -39,16 +44,16 @@ $color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
     outline: none
     cursor: pointer
 
-    &:hover, &:focus
-      border-color: $color-additional-fg
-
-      & .dropdown__expand-icon > *
-        opacity: .75
-
     &_pressed
       border-color: $color-additional-fg
       border-bottom-left-radius: 0
       border-bottom-right-radius: 0
+
+      & .dropdown__expand-icon > *
+        opacity: .75
+
+    &:hover, &:focus
+      border-color: $color-additional-fg
 
       & .dropdown__expand-icon > *
         opacity: .75
@@ -75,7 +80,7 @@ $color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
     border-top: none
     border-top-left-radius: 0
     border-top-right-radius: 0
-    box-shadow: 0 10px 20px change-alpha($color-main-fg, -0.7)
+    box-shadow: 0 10px 20px color.adjust($color-main-fg, $alpha: -0.7)
     z-index: 10
 
     &_hidden
@@ -87,37 +92,53 @@ $color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
     align-items: center
 
   &__section-name
-    @include font-bold-type()
+    @include font-bold-type
     flex-grow: 1
     text-indent: 13px
-    text-transform: uppercase
 
   &__decrease-button, &__increase-button
+    @include button-default
     width: 30px
     height: 30px
     font-size: usable.px2rem(18px)
     color: $color-additional-fg
     border: 1px solid $color-unclaimed-fg
     border-radius: 50%
-    background-color: $color-main-bg
-    cursor: pointer
-    outline: none
 
     &:hover, &:focus
-      color: change-alpha($color-additional-fg)
-      border: 1px solid change-alpha($color-unclaimed-fg)
+      color: color.adjust($color-additional-fg, $alpha: $alpha-delta)
+      border: 1px solid color.adjust($color-unclaimed-fg, $alpha: $alpha-delta)
 
     &_disabled
       color: $color-disabled
       border: 1px solid $color-disabled
 
       &:hover, &:focus
-        color: change-alpha($color-disabled)
-        border: 1px solid change-alpha($color-disabled)
+        color: color.adjust($color-disabled, $alpha: $alpha-delta)
+        border: 1px solid color.adjust($color-disabled, $alpha: $alpha-delta)
 
   &__counter
-    @include font-bold-type()
+    @include font-bold-type
     display: flex
     width: 16px
     justify-content: center
 
+  &__control-buttons-container
+    display: flex
+    flex-direction: row-reverse
+    justify-content: space-between
+    padding-top: 15px
+    padding-left: 13px
+
+  &__apply-button, &__cancel-button
+    @include button-default
+    @include font-bold-type
+    color: $color-primary
+    border: none
+
+    &:hover, &:focus
+      color: color.adjust($color-primary, $red: 45)
+
+    &_hidden
+      display: none
+      
