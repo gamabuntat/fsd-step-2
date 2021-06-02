@@ -5,7 +5,7 @@ include ../../library.blocks/sub-text-field/sub-text-field
 include ../../library.blocks/dropdown/dropdown
 
 doctype html
-html(lang="ru")
+html(lang='ru')
   +head({title: 'form elements'})
   body
     +watermark
@@ -17,5 +17,10 @@ html(lang="ru")
       +sub-text-field({placeholder: 'Email'})
 
     article.text-fields
-      +dropdown({sectionNames: ['взрослые', 'дети', 'младенцы']})
+      +dropdown({
+        sectionNames: ['спальни', 'кровати', 'ванные комнаты'],
+        defaultSignature: 'Параметры номера',
+        narrow: true,
+        glossary: 'спальни, кровати, ванные комнаты'
+      })
 

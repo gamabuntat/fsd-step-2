@@ -1,12 +1,11 @@
-import Glossary from './Glossary.js';
+import Glossary from './glossary/Glossary.js';
+import * as glossarys from './glossary/glossarys.js';
 
 class Dropdown {
-  constructor(dropdown, glossary = {
-    'взрослые, дети': ['гость', 'гостя', 'гостей'],
-    'младенцы': ['младенец', 'младенца', 'младенцев']
-  }) {
+  constructor(dropdown, glossary = {}) {
     this.glossary = new Glossary(glossary);
     this.dropdown = dropdown;
+    console.log(dropdown.dataset.glossary);
     this.expandButton = dropdown.querySelector('.js-dropdown__expand-button');
     this.signature = dropdown.querySelector('.js-dropdown__signature');
     this.defaultSignature = this.signature.innerText;
@@ -28,10 +27,10 @@ class Dropdown {
   }
 
   getSignatureInterfaces() {
-    return this.glossary.terms.reduce((funcs, term) => { 
-      const splitedTerm = term.split(', ');
+    return this.glossary.terms.reduce((interfaces, term) => { 
+      const splitedTerm = term.split('+');
       return [
-        ...funcs, 
+        ...interfaces, 
         {
           getValue: () => (
             splitedTerm.reduce((sum, splitedTerm) => (
@@ -46,17 +45,6 @@ class Dropdown {
         }
       ];
     }, []);
-  }
-
-  updateSignature(interfaces = this.signatureInterfaces) {
-    this.signature.innerText = interfaces.reduce((res, i) => {
-      const value = i.getValue();
-      if (value === 0) { return res; }
-      const part = `${value} ${
-        this.glossary.getDefinition(i.getName(), value)
-      }`;
-      return res === '' ? part : `${res}, ${part}`;
-    }, '');
   }
 
   bindListeners() {
@@ -96,6 +84,17 @@ class Dropdown {
     return this.counters[this.row].innerText = this.value + diff;
   }
 
+  updateSignature(interfaces = this.signatureInterfaces) {
+    this.signature.innerText = interfaces.reduce((res, i) => {
+      const value = i.getValue();
+      if (value === 0) { return res; }
+      const part = `${value} ${
+        this.glossary.getDefinition(i.getName(), value)
+      }`;
+      return res === '' ? part : `${res}, ${part}`;
+    }, '') || this.defaultSignature;
+  }
+
   toggleMod() {
     this.decreaseButtons[this.row]
       .classList.toggle('dropdown__decrease-button_disabled');
@@ -115,6 +114,31 @@ class Dropdown {
   }
 }
 
-document.querySelectorAll('.js-dropdown')
-  .forEach((d) => new Dropdown(d));
+class InitDropdowns {
+  constructor(dropdowns, glossarys) {
+    this.dropdowns = dropdowns;
+    this.glossarys = glossarys;
+    this.create();
+  }
+
+  static compare(data, glossary) {
+    const terms = Object.keys(glossary);
+    if (data.length != terms.length) { return false; }
+    return data.filter((d) => terms.indexOf(d) < 0).length == 0;
+  }
+
+  create() {
+    this.dropdowns.forEach((d) => new Dropdown(d, this.findGlossary(d)));
+  }
+
+  findGlossary(dropdown) {
+    const dataGlossary = dropdown.dataset.glossary.split(', ');
+    return this.glossarys.find(InitDropdowns.compare.bind(null, dataGlossary));
+  }
+}
+
+new InitDropdowns(
+  document.querySelectorAll('.js-dropdown'), 
+  Object.values(glossarys)
+);
 
