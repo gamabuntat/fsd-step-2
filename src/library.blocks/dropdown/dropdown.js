@@ -25,6 +25,7 @@ class Dropdown {
     this.cancelButton = dropdown.querySelector('.js-dropdown__cancel-button');
     this.row = 0;
     this.value = 0;
+    this.countersSum = 0;
     this.signatureInterfaces = this.getSignatureInterfaces();
     this.bindListeners();
   }
@@ -82,7 +83,8 @@ class Dropdown {
     if (this.value === 1) { this.toggleDecreaseButtonMod(); }
     this.changeCounterValue(-1);
     this.updateSignature(this.signatureInterfaces);
-    if (this.getCountersSum() === 0) {
+    this.countersSum -= 1;
+    if (this.countersSum === 0) {
       this.toggleCancelButtonMod();
     }
   }
@@ -92,7 +94,8 @@ class Dropdown {
     if (this.value === 0) { this.toggleDecreaseButtonMod(); }
     this.changeCounterValue(1);
     this.updateSignature(this.signatureInterfaces);
-    if (this.getCountersSum() === 1) {
+    this.countersSum += 1;
+    if (this.countersSum === 1) {
       this.toggleCancelButtonMod();
     }
   }
@@ -104,6 +107,7 @@ class Dropdown {
 
   handleCancelButtonClick() {
     this.resetCounters();
+    this.countersSum = 0;
     this.signature.innerText = this.defaultSignature;
     this.addDecreseButtonsMod();
     this.toggleCancelButtonMod();
@@ -111,10 +115,6 @@ class Dropdown {
 
   changeCounterValue(diff) {
     return this.counters[this.row].innerText = this.value + diff;
-  }
-
-  getCountersSum() {
-    return this.counters.reduce((sum, c) => +c.innerText + sum, 0);
   }
 
   resetCounters() {
