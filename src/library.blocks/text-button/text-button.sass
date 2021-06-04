@@ -1,11 +1,22 @@
+@use 'sass:color'
+
+@use '@common/useless/useless'
+
+$color-disabled-fg: $color-additional-fg
 
 .text-button
-  margin: 0
-  padding: 0.5px
-  border: none
+  @include useless.button-common-styles
+  @include useless.font-bold-type
   background: none
-  cursor: pointer
-  outline: none
+  color: $color-primary
 
-.text-button *
-  color: color.$base-color-purple
+  &:hover, &:focus
+    color: color.adjust($color-primary, $red: 40)
+
+  &_disabled
+    color: $color-disabled-fg
+    pointer-events: none
+
+    &:hover, &:focus
+      color: $color-disabled-fg
+

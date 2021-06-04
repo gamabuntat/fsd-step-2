@@ -1,0 +1,23 @@
+@use 'sass:color'
+
+@use '@common/useless/useless'
+
+.primary-button
+  @include useless.button-common-styles
+  @include useless.font-bold-type
+  width: 99px
+  height: 44px
+  background: $color-primary-gradient
+  color: $color-main-bg
+  border-radius: 22px
+
+  &_disabled
+    opacity: .4
+    pointer-events: none
+
+    &:hover, &:focus
+      opacity: .4
+
+  &:hover, &:focus
+    background: linear-gradient($color-primary, color.adjust($color-primary, $red: 40))
+

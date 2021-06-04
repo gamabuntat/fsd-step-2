@@ -5,7 +5,6 @@ class Dropdown {
   constructor(dropdown, glossary = {}) {
     this.glossary = new Glossary(glossary);
     this.dropdown = dropdown;
-    console.log(dropdown.dataset.glossary);
     this.expandButton = dropdown.querySelector('.js-dropdown__expand-button');
     this.signature = dropdown.querySelector('.js-dropdown__signature');
     this.defaultSignature = this.signature.innerText;

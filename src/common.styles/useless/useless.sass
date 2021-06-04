@@ -1,0 +1,15 @@
+@function px2rem($px, $base: 14px)
+  @return $px / $base * 1rem
+
+@mixin font-bold-type($font-size: 12px)
+  font-size: px2rem($font-size)
+  font-weight: bold
+  text-transform: uppercase
+
+@mixin button-common-styles($color-bg: white)
+  background-color: $color-bg
+  padding: 0
+  border: none
+  outline: none
+  cursor: pointer
+

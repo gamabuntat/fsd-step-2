@@ -1,8 +1,9 @@
 include ../../library.blocks/head/head
 include ../../library.blocks/watermark/watermark
 include ../../library.blocks/text-field/text-field
-include ../../library.blocks/sub-text-field/sub-text-field
+include ../../library.blocks/subscription-text-field/subscription-text-field
 include ../../library.blocks/dropdown/dropdown
+include ../../library.blocks/primary-button/primary-button
 
 doctype html
 html(lang='ru')
@@ -10,11 +11,13 @@ html(lang='ru')
   body
     +watermark
     article.text-fields
+      +primary-button({})
+      +primary-button({disabled: true})
       +text-field({type: 'email', placeholder: 'Email'})
       +text-field({value: 'This is pretty awesome', autofocus: true})
       +dropdown({sectionNames: ['взрослые', 'дети', 'младенцы']})
       +text-field({masked: true})
-      +sub-text-field({placeholder: 'Email'})
+      +subscription-text-field({placeholder: 'Email'})
 
     article.text-fields
       +dropdown({
