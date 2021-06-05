@@ -162,36 +162,18 @@ class Dropdown {
   }
 }
 
-// const compare 
+const getSplitedData = (dropdown) => dropdown.dataset.glossary.split(', ');
+const compare = (data) => (glossary) => { 
+  const terms = Object.keys(glossary);
+  return data.filter((d) => terms.indexOf(d) == -1).length == 0
+};
+const initDropdowns = (dropdowns, glossarys) => (
+  dropdowns.forEach((d) => (
+    new Dropdown(d, glossarys.find((compare(getSplitedData(d)))))
+  ))
+);
 
-// const InitDropdowns = (dropdowns, glossarys) => {
-
-// };
-
-class InitDropdowns {
-  constructor(dropdowns, glossarys) {
-    this.dropdowns = dropdowns;
-    this.glossarys = glossarys;
-    this.create();
-  }
-
-  static compare(data, glossary) {
-    const terms = Object.keys(glossary);
-    if (data.length != terms.length) { return false; }
-    return data.filter((d) => terms.indexOf(d) < 0).length == 0;
-  }
-
-  findGlossary(dropdown) {
-    const dataGlossary = dropdown.dataset.glossary.split(', ');
-    return this.glossarys.find(InitDropdowns.compare.bind(null, dataGlossary));
-  }
-
-  create() {
-    this.dropdowns.forEach((d) => new Dropdown(d, this.findGlossary(d)));
-  }
-}
-
-new InitDropdowns(
+initDropdowns(
   document.querySelectorAll('.js-dropdown'), 
   Object.values(glossarys)
 );
