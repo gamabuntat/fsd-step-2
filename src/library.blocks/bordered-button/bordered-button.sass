@@ -4,14 +4,12 @@
 
 $border-size: 2px
 $border-radius: 22px
-$color-disable-gradient: linear-gradient(color.adjust($color-primary, $alpha: -0.5), color.adjust($color-accent, $alpha: -0.5))
-$color-focus-gradient: linear-gradient($color-primary, color.adjust($color-primary, $red: 40))
 
 .bordered-button
   display: flex
   justify-content: center
   align-items: center
-  background: $color-primary-gradient
+  background: $gradient-primary
   padding: $border-size
   width: 99px
   height: 44px
@@ -20,17 +18,17 @@ $color-focus-gradient: linear-gradient($color-primary, color.adjust($color-prima
   cursor: pointer
 
   &_disabled
-    background: $color-disable-gradient
+    background: linear-gradient(color.adjust($color-primary, $alpha: -0.5), color.adjust($color-accent, $alpha: -0.5))
     pointer-events: none
 
   &_focused
-    background: $color-focus-gradient
+    background: $gradient-focus
 
   &:hover
-    background: $color-focus-gradient
+    background: $gradient-focus
 
     & .bordered-button__button
-      color: color.adjust($color-primary, $red: 40)
+      color: $color-focus
   
   &__button
     @include useless.button-common-styles
@@ -41,5 +39,5 @@ $color-focus-gradient: linear-gradient($color-primary, color.adjust($color-prima
     color: $color-primary
 
     &:hover, &:focus
-      color: color.adjust($color-primary, $red: 40)
+      color: $color-focus
 

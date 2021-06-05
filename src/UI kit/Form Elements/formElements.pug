@@ -5,6 +5,7 @@ include ../../library.blocks/subscription-text-field/subscription-text-field
 include ../../library.blocks/dropdown/dropdown
 include ../../library.blocks/primary-button/primary-button
 include ../../library.blocks/bordered-button/bordered-button
+include ../../library.blocks/big-button/big-button
 
 doctype html
 html(lang='ru')
@@ -12,6 +13,7 @@ html(lang='ru')
   body
     +watermark
     article.text-fields
+      +big-button({})
       +primary-button({})
       +primary-button({disabled: true})
       +bordered-button({})

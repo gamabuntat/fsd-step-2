@@ -1,0 +1,30 @@
+@use '@common/useless/useless'
+
+.big-button
+  @include useless.button-common-styles  
+  @include useless.font-bold-type
+  position: relative
+  background: $gradient-primary
+  color: $color-main-bg
+  height: 44px
+  border-radius: 22px
+
+  &:hover, &:focus
+    background: $gradient-focus
+
+  &__arrow-icon
+    display: flex
+    justify-content: center
+    width: 44px
+    height: min-content
+    margin: auto
+    position: absolute
+    top: 0
+    left: auto
+    bottom: 0
+    right: 0
+
+    & *
+      opacity: 1
+      fill: $color-main-bg
+

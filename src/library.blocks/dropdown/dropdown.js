@@ -165,7 +165,7 @@ class Dropdown {
 const getSplitedData = (dropdown) => dropdown.dataset.glossary.split(', ');
 const compare = (data) => (glossary) => { 
   const terms = Object.keys(glossary);
-  return data.filter((d) => terms.indexOf(d) == -1).length == 0
+  return data.filter((d) => terms.indexOf(d) == -1).length == 0;
 };
 const initDropdowns = (dropdowns, glossarys) => (
   dropdowns.forEach((d) => (

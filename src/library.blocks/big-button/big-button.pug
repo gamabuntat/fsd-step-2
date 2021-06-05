@@ -1,0 +1,7 @@
+include ../svg-forward-arrow/svg-forward-arrow
+
+mixin big-button({text = 'перейти к оплате', attrs})
+  button.big-button&attributes(attrs) #{text}
+    .big-button__arrow-icon
+      +svg-forward-arrow
+  

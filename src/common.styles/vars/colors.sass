@@ -7,7 +7,10 @@ $color-additional-fg: rgba(31, 32, 65, .5)
 $color-unclaimed-fg: rgba(31, 32, 65, .25)
 $color-primary: #BC9CFF
 $color-secondary: #6FCF97
+$color-focus: color.adjust($color-primary, $red: 40)
 $color-accent: color.adjust($color-primary, $red: -49, $green: 8, $blue: -6)
-$color-primary-gradient: linear-gradient($color-primary, $color-accent)
-$color-secondary-gradient: linear-gradient($color-secondary, #66D2EA)
+
+$gradient-primary: linear-gradient($color-primary, $color-accent)
+$gradient-secondary: linear-gradient($color-secondary, #66D2EA)
+$gradient-focus: linear-gradient($color-primary, $color-focus)
 
