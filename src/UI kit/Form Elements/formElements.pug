@@ -4,6 +4,7 @@ include ../../library.blocks/text-field/text-field
 include ../../library.blocks/subscription-text-field/subscription-text-field
 include ../../library.blocks/dropdown/dropdown
 include ../../library.blocks/primary-button/primary-button
+include ../../library.blocks/bordered-button/bordered-button
 
 doctype html
 html(lang='ru')
@@ -13,6 +14,8 @@ html(lang='ru')
     article.text-fields
       +primary-button({})
       +primary-button({disabled: true})
+      +bordered-button({})
+      +bordered-button({disabled: true})
       +text-field({type: 'email', placeholder: 'Email'})
       +text-field({value: 'This is pretty awesome', autofocus: true})
       +dropdown({sectionNames: ['взрослые', 'дети', 'младенцы']})

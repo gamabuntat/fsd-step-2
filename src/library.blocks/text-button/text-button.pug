@@ -1,5 +1,6 @@
 mixin text-button({text, disabled, attrs})
   button.text-button&attributes(attrs)(
-    class=disabled && 'text-button_disabled'
+    class= disabled && 'text-button_disabled'
+    tabindex= disabled && -1
   ) #{text}
 

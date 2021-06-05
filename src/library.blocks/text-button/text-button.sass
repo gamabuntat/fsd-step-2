@@ -2,8 +2,6 @@
 
 @use '@common/useless/useless'
 
-$color-disabled-fg: $color-additional-fg
-
 .text-button
   @include useless.button-common-styles
   @include useless.font-bold-type
@@ -14,9 +12,9 @@ $color-disabled-fg: $color-additional-fg
     color: color.adjust($color-primary, $red: 40)
 
   &_disabled
-    color: $color-disabled-fg
+    color: $color-additional-fg
     pointer-events: none
 
     &:hover, &:focus
-      color: $color-disabled-fg
+      color: initial
 

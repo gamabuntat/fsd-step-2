@@ -1,0 +1,44 @@
+@use 'sass:color'
+
+@use '@common/useless/useless'
+
+$border-size: 2px
+$border-radius: 22px
+
+.bordered-button
+  display: flex
+  justify-content: center
+  align-items: center
+  background: $color-primary-gradient
+  padding: $border-size
+  width: 99px
+  height: 44px
+  border-radius: $border-radius
+  box-sizing: border-box
+  cursor: pointer
+
+  &_disabled
+    background: linear-gradient(color.adjust($color-primary, $alpha: -0.5), color.adjust($color-accent, $alpha: -0.5))
+    pointer-events: none
+
+  &_focused
+    background: linear-gradient($color-primary, color.adjust($color-primary, $red: 40))
+
+  &:hover
+    background: linear-gradient($color-primary, color.adjust($color-primary, $red: 40))
+
+    & .bordered-button__button
+      color: color.adjust($color-primary, $red: 40)
+  
+  &__button
+    @include useless.button-common-styles
+    @include useless.font-bold-type
+    width: 100%
+    height: 100%
+    border-radius: $border-radius - $border-size
+    color: $color-primary
+
+    &:hover, &:focus
+      color: color.adjust($color-primary, $red: 40)
+
+      

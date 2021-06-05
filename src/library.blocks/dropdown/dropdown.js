@@ -162,6 +162,12 @@ class Dropdown {
   }
 }
 
+// const compare 
+
+// const InitDropdowns = (dropdowns, glossarys) => {
+
+// };
+
 class InitDropdowns {
   constructor(dropdowns, glossarys) {
     this.dropdowns = dropdowns;
