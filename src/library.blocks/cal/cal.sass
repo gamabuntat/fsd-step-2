@@ -1,0 +1,41 @@
+@use '@common/useless/useless'
+
+.cal
+  display: flex
+  justify-content: space-between
+  flex-wrap: wrap
+  padding: 20px
+  width: 320px
+  background: $color-main-bg
+  border: 1px solid $color-unclaimed-fg
+  border-radius: 4px
+  box-sizing: border-box
+
+  &__prev-month-btn, &__next-month-btn
+    @include useless.button-common-styles
+    display: flex
+    align-items: center
+
+    & > *
+      opacity: 1
+
+    &:hover *, &:focus *
+      fill: $color-focus
+
+  &__prev-month-btn
+    transform: rotate(.5turn)
+
+  &__month, &__year
+    font-size: useless.px2rem(19px)
+    font-weight: bold
+    align-self: center
+
+  &__year
+    flex-basis: 100%
+    text-align: center
+
+  &__day-week
+    color: $color-primary
+    font-size: useless.px2rem(12px)
+    font-weight: bold
+

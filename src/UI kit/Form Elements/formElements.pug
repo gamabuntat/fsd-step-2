@@ -6,6 +6,7 @@ include ../../library.blocks/dropdown/dropdown
 include ../../library.blocks/primary-button/primary-button
 include ../../library.blocks/bordered-button/bordered-button
 include ../../library.blocks/big-button/big-button
+include ../../library.blocks/cal/cal
 
 doctype html
 html(lang='ru')
@@ -13,6 +14,7 @@ html(lang='ru')
   body
     +watermark
     article.text-fields
+      +cal
       +big-button({})
       +primary-button({})
       +primary-button({disabled: true})

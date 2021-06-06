@@ -1,0 +1,12 @@
+include ../svg-forward-arrow/svg-forward-arrow
+
+mixin cal()
+  .cal
+    button.cal__prev-month-btn
+      +svg-forward-arrow
+    .cal__month.js-cal__month July
+    button.cal__next-month-btn
+      +svg-forward-arrow
+    .cal__year.js-cal__year 1998
+    each day in ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
+      span.cal__day-week #{day}
