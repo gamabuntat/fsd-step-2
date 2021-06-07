@@ -1,10 +1,12 @@
+@use 'sass:color'
+
 @use '@common/useless/useless'
 
 .cal
   display: flex
   justify-content: space-between
   flex-wrap: wrap
-  padding: 20px
+  padding: 19px
   width: 320px
   background: $color-main-bg
   border: 1px solid $color-unclaimed-fg
@@ -13,8 +15,11 @@
 
   &__prev-month-btn, &__next-month-btn
     @include useless.button-common-styles
+    width: 20px
+    height: 20px
     display: flex
     align-items: center
+    justify-content: center
 
     & > *
       opacity: 1
@@ -35,7 +40,33 @@
     text-align: center
 
   &__day-week
+    width: 40px
     color: $color-primary
     font-size: useless.px2rem(12px)
     font-weight: bold
+    text-align: center
+
+  &__main-table
+    border-collapse: collapse
+
+  &__week
+    display: flex
+    box-sizing: border-box
+
+  &__day
+    padding: 0
+
+  &__day-btn
+    padding: 0
+    width: 40px
+    height: 40px
+    border: none
+    background: $color-main-bg
+    border-radius: 50%
+    outline: none
+    cursor: pointer
+    box-sizing: border-box
+
+    &:hover, &:focus
+      background-color: color.adjust($color-unclaimed-fg, $alpha: -0.15)
 
