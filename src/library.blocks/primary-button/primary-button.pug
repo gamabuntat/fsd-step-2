@@ -1,6 +1,3 @@
-mixin primary-button({text = 'click me', disabled, attrs})
-  button.primary-button&attributes(attrs)(
-    class= disabled && 'primary-button_disabled'
-    tabindex= disabled && -1
-  ) #{text}
+mixin primary-button({text = 'click me', attrs})
+  button.primary-button&attributes(attrs) #{text}
 

@@ -5,6 +5,9 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
+  stats: {
+    children: true,
+  },
   entry: {
     // colorsAndType: './src/UI kit/Colors & Type/colors&type.js',
     formElements: './src/UI kit/Form Elements/formElements.js',

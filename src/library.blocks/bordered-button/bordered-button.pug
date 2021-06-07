@@ -1,8 +1,6 @@
-mixin bordered-button({text = 'click me', disabled, attrs})
+mixin bordered-button({text = 'click me', attrs})
   .bordered-button(
-    class= disabled && 'bordered-button_disabled'
+    class= (attrs && attrs.disabled) && 'bordered-button_disabled'
   )
-    button.bordered-button__button&attributes(attrs)(
-      tabindex= disabled && -1
-    ) #{text}
+    button.bordered-button__button&attributes(attrs) #{text}
       
