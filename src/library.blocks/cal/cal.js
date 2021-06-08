@@ -1,14 +1,12 @@
-import {template} from './template.js';
-
 class Cal {
-  constructor(root, template) {
-    this.template = template;
+  constructor(root) {
     this.tableContainer = root.querySelector('.cal__table-container');
     this.firstTable = root.querySelector('.cal__main-table');
+    this.template = this.tableContainer.innerHTML;
     this.prevMonthBtn = root.querySelector('.cal__prev-month-btn');
     this.nextMonthBtn = root.querySelector('.cal__next-month-btn');
     this.tables = root.getElementsByClassName('cal__main-table');
-    this.step = 0;
+    this.step = this.tableContainer.getBoundingClientRect().width;
     this.index = 0;
     this.now = new Date(root.dataset.date);
     this.year = this.now.getFullYear();
@@ -19,6 +17,7 @@ class Cal {
       this.getMonthLastDay(this.year, this.month),
       this.getWeekDay(this.year, this.month)
     );
+    this.addAnotherMonthMod();
   }
 
   bindListeners() {
@@ -35,16 +34,16 @@ class Cal {
   }
 
   handleNextMonthBtnClick() {
-    if (this.step == 0) {
-      this.step = this.getFirstTableWidth();
-    }
-    this.insertTemplate();
     this.index += 1;
-    this.fillTable(
-      this.getMonthLastDay(this.year, this.month + this.index - 1),
-      this.getMonthLastDay(this.year, this.month + this.index),
-      this.getWeekDay(this.year, this.month + this.index)
-    );
+    if (this.index === this.tables.length) {
+      this.insertTemplate();
+      this.fillTable(
+        this.getMonthLastDay(this.year, this.month + this.index - 1),
+        this.getMonthLastDay(this.year, this.month + this.index),
+        this.getWeekDay(this.year, this.month + this.index)
+      );
+      // this.addAnotherMonthMod();
+    }
     this.changeFirstTableMargin();
   }
 
@@ -56,10 +55,6 @@ class Cal {
     this.tableContainer.insertAdjacentHTML('beforeend', this.template);
   }
 
-  getFirstTableWidth() {
-    return this.firstTable.getBoundingClientRect().width;
-  }
-
   getMonthLastDay(year, month) {
     return new Date(year, month + 1, 0).getDate();
   }
@@ -69,29 +64,40 @@ class Cal {
   }
 
   fillTable(prevLastDate, lastDate, weekDay) {
-    const t1 = Array(weekDay - 1)
+    const prevMonth = Array(weekDay - 1)
       .fill(prevLastDate)
       .map((d, idx) => d - idx)
       .reverse();
-    const t2 = [...Array(lastDate).keys()].map((d) => d + 1);
-    const t3 = [...Array(7 - (t1.length + t2.length) % 7).keys()]
-      .map((d) => d + 1);
-    const t = [
-      ...t1,
-      ...t2,
-      ...(t3.length == 7 ? [] : t3)
+    const presentMonth = [...Array(lastDate).keys()].map((d) => d + 1);
+    const nextMonth = [
+      ...Array(7 - (prevMonth.length + presentMonth.length) % 7).keys()
+    ].map((d) => d + 1);
+    const concatMonth = [
+      ...prevMonth,
+      ...presentMonth,
+      ...(nextMonth.length == 7 ? [] : nextMonth)
     ];
     this.tables[this.index].querySelectorAll('.cal__day-btn')
-      .forEach((b, idx) => {
-        const value = t[idx];
-        if (!value) {
-          b.parentElement.innerHTML = '';
-          return;
-        }
-        b.innerText = value;
-      });
+      .forEach((b, idx) => b.innerText = concatMonth[idx]);
+    console.log(
+      [...this.tables[this.index].rows].slice(-(6 - concatMonth.length / 7))
+    );
+    //   .forEach((row) => row.remove());
+  }
+
+  addAnotherMonthMod() {
+    const currentTable = this.tables[this.index];
+    const firstRowBtns = [
+      ...currentTable.rows[0].querySelectorAll('.cal__day-btn')
+    ];
+    firstRowBtns.slice(0, firstRowBtns.findIndex((b) => +b.innerText === 1))
+      .forEach((b) => b.classList.add('cal__day-btn_another-month'));
+    const lastRowBtns = [
+      ...currentTable.rows
+    ];
+    console.log(lastRowBtns);
   }
 }
 
-document.querySelectorAll('.cal').forEach((cal) => new Cal(cal, template));
+document.querySelectorAll('.cal').forEach((cal) => new Cal(cal));
 
