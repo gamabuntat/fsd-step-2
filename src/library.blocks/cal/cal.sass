@@ -46,27 +46,58 @@
     font-weight: bold
     text-align: center
 
+  &__table-container
+    display: flex
+    position: relative
+    width: 280px
+    overflow: hidden
+
+    &:first-child
+
   &__main-table
     border-collapse: collapse
+    transition: all 0.2s
 
   &__week
-    display: flex
     box-sizing: border-box
 
   &__day
+    position: relative
     padding: 0
 
+    &_start-range
+
+      &::after
+        content: ''
+        position: absolute
+        right: 0
+        display: inlene-block
+        width: 50%
+        height: 100%
+        background-color: lightgreen
+
   &__day-btn
+    position: relative
     padding: 0
     width: 40px
     height: 40px
     border: none
     background: $color-main-bg
     border-radius: 50%
+    font-size: useless.px2rem(12px)
+    color: $color-additional-fg
     outline: none
     cursor: pointer
     box-sizing: border-box
+    z-index: 10
 
     &:hover, &:focus
-      background-color: color.adjust($color-unclaimed-fg, $alpha: -0.15)
+      background: color.adjust($color-unclaimed-fg, $alpha: -0.15)
+
+    &_selected
+      background: $gradient-primary
+
+    &_todays
+      background: $gradient-secondary
+
 
