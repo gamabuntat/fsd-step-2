@@ -1,7 +1,7 @@
 include ../svg-forward-arrow/svg-forward-arrow
 
-mixin cal()
-  .cal
+mixin cal(startDate = Date())
+  .cal(data-date=startDate)
     button.cal__prev-month-btn
       +svg-forward-arrow
     .cal__month.js-cal__month July
@@ -18,11 +18,4 @@ mixin cal()
             - for (let i = 0; i < 7; i++)
               td.cal__day.cal__day_start-range
                 button.cal__day-btn z1
-
-      table.cal__main-table
-        - for (let w = 0; w <= 5; w++)
-          tr.cal__week
-            - for (let i = 0; i < 7; i++)
-              td.cal__day.cal__day_start-range
-                button.cal__day-btn z2
 
