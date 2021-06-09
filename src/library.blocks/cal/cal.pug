@@ -2,20 +2,20 @@ include ../svg-forward-arrow/svg-forward-arrow
 
 mixin cal(startDate = Date())
   .cal(data-date=startDate)
-    button.cal__prev-month-btn
+    button.cal__prev-month-btn.js-cal__prev-month-btn
       +svg-forward-arrow
     .cal__month.js-cal__month July
-    button.cal__next-month-btn
+    button.cal__next-month-btn.js-cal__next-month-btn
       +svg-forward-arrow
     .cal__year.js-cal__year 1998
     each day in ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
       span.cal__day-week #{day}
 
-    .cal__table-container
-      table.cal__main-table
+    .cal__table-container.js-cal__table-container
+      table.cal__main-table.js-cal__main-table
         - for (let w = 0; w <= 5; w++)
           tr.cal__week
             - for (let i = 0; i < 7; i++)
               td.cal__day
-                button.cal__day-btn
+                button.cal__day-btn.js-cal__day-btn
 

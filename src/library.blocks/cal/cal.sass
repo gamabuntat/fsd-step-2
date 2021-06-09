@@ -94,15 +94,22 @@
     &:hover, &:focus
       background: color.adjust($color-unclaimed-fg, $alpha: -0.15)
 
-    &_selected
-      color: $color-main-bg
-      background: $gradient-primary
-
     &_todays
       color: $color-main-bg
       background: $gradient-secondary
 
+      &:hover, &:focus
+        color: $color-main-bg
+        background: $gradient-secondary
+
+    &_selected
+      color: $color-main-bg
+      background: $gradient-primary
+
+      &:hover, &:focus
+        color: $color-main-bg
+        background: $gradient-primary
+
     &_prev-month, &_next-month
       color: $color-unclaimed-fg
-
 

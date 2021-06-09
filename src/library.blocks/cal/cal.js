@@ -1,16 +1,18 @@
 class Cal {
   constructor(root) {
-    this.tableContainer = root.querySelector('.cal__table-container');
-    this.firstTable = root.querySelector('.cal__main-table');
+    this.tableContainer = root.querySelector('.js-cal__table-container');
     this.template = this.tableContainer.innerHTML;
-    this.prevMonthBtn = root.querySelector('.cal__prev-month-btn');
-    this.nextMonthBtn = root.querySelector('.cal__next-month-btn');
-    this.tables = root.getElementsByClassName('cal__main-table');
+    this.tables = root.getElementsByClassName('js-cal__main-table');
+    this.firstTable = this.tables[0];
+    this.dayBtns = root.getElementsByClassName('js-cal__day-btn');
+    this.prevMonthBtn = root.querySelector('.js-cal__prev-month-btn');
+    this.nextMonthBtn = root.querySelector('.js-cal__next-month-btn');
     this.step = this.tableContainer.getBoundingClientRect().width;
     this.index = 0;
     this.now = new Date(root.dataset.date);
     this.year = this.now.getFullYear();
     this.month = this.now.getMonth();
+    this.today = this.now.getDate();
     this.bindListeners();
     this.fillTable(
       this.getMonthLastDay(this.year, this.month - 1),
@@ -19,13 +21,24 @@ class Cal {
     );
     this.addPrevMonthMod();
     this.addNextMonthMod();
+    this.setTodayMod();
+    this.todayCoords = [0, 0, 0];
   }
 
   bindListeners() {
+    this.tableContainer
+      .addEventListener('click', this.handleTableContainerClick.bind(this));
     this.prevMonthBtn
       .addEventListener('click', this.handlePrevMonthBtnClick.bind(this));
     this.nextMonthBtn
       .addEventListener('click', this.handleNextMonthBtnClick.bind(this));
+  }
+
+  handleTableContainerClick(e) {
+    const btn = e.target;
+    if (!btn.classList.contains('cal__day-btn')) { return; }
+    const selectedMod = 'cal__day-btn_selected';
+    btn.classList.toggle(selectedMod);
   }
 
   handlePrevMonthBtnClick() {
@@ -112,6 +125,35 @@ class Cal {
 
   searchFirstDateIndex(week) {
     return week.findIndex((day) => +day.innerText === 1);
+  }
+
+  setTodayMod() {
+    const todayPlusPrevMonth = this.getWeekDay(this.year, this.month) 
+      + this.now.getDate() - 1;
+    this.firstTable
+      .rows[Math.ceil(todayPlusPrevMonth / 7) - 1]
+      .cells[todayPlusPrevMonth % 7 - 1]
+      .firstElementChild
+      .classList.add('cal__day-btn_todays');
+  }
+
+  doSomething(start, end, isBtn = true, fn) {
+    for (let table = start[0]; table <= end[0]; table++) {
+      for (
+        let row = (table === start[0] ? start[1] : 0); 
+        row <= (table === end[0] ? end[1] : this.tables[table].rows.length); 
+        row++
+      ) {
+        for (
+          let cell = (table === start[0] ? start[2] : 0);
+          cell <= (table === end[0] && row === end[1] ? end[2] : 6);
+          cell++
+        ) {
+          const elem = this.tables[table].rows[row].cells[cell];
+          fn(isBtn ? elem.firstElementChild : elem);
+        }
+      }
+    }
   }
 }
 
