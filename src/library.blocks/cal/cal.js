@@ -21,8 +21,12 @@ class Cal {
     );
     this.addPrevMonthMod();
     this.addNextMonthMod();
+    this.todayBtn = this.searchTodayBtn();
     this.setTodayMod();
-    this.todayCoords = [0, 0, 0];
+    this.doSomething(
+      [0, 0, 0], this.getElemCoord(this.todayBtn), (e) => e.disabled = true
+    );
+    this.todayBtn.disabled = false;
   }
 
   bindListeners() {
@@ -39,6 +43,7 @@ class Cal {
     if (!btn.classList.contains('cal__day-btn')) { return; }
     const selectedMod = 'cal__day-btn_selected';
     btn.classList.toggle(selectedMod);
+    console.log('hi');
   }
 
   handlePrevMonthBtnClick() {
@@ -127,21 +132,36 @@ class Cal {
     return week.findIndex((day) => +day.innerText === 1);
   }
 
-  setTodayMod() {
+  searchTodayBtn() {
     const todayPlusPrevMonth = this.getWeekDay(this.year, this.month) 
       + this.now.getDate() - 1;
-    this.firstTable
+    return this.firstTable
       .rows[Math.ceil(todayPlusPrevMonth / 7) - 1]
       .cells[todayPlusPrevMonth % 7 - 1]
-      .firstElementChild
-      .classList.add('cal__day-btn_todays');
+      .firstElementChild;
   }
 
-  doSomething(start, end, isBtn = true, fn) {
+  setTodayMod() {
+    this.todayBtn.classList.add('cal__day-btn_todays');
+  }
+
+  getElemCoord(elem) {
+    return [
+      this.index, 
+      elem.closest('.cal__week').rowIndex,
+      elem.closest('.cal__day').cellIndex
+    ];
+  }
+
+  doSomething(start, end, fn, isBtn = true) {
     for (let table = start[0]; table <= end[0]; table++) {
       for (
         let row = (table === start[0] ? start[1] : 0); 
-        row <= (table === end[0] ? end[1] : this.tables[table].rows.length); 
+        row <= (
+          table === end[0] 
+            ? end[1] 
+            : this.tables[table].rows.length - 1
+        ); 
         row++
       ) {
         for (
