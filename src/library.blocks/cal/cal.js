@@ -17,7 +17,8 @@ class Cal {
       this.getMonthLastDay(this.year, this.month),
       this.getWeekDay(this.year, this.month)
     );
-    this.addAnotherMonthMod();
+    this.addPrevMonthMod();
+    this.addNextMonthMod();
   }
 
   bindListeners() {
@@ -42,9 +43,10 @@ class Cal {
         this.getMonthLastDay(this.year, this.month + this.index),
         this.getWeekDay(this.year, this.month + this.index)
       );
-      // this.addAnotherMonthMod();
     }
     this.changeFirstTableMargin();
+    this.addPrevMonthMod();
+    this.addNextMonthMod();
   }
 
   changeFirstTableMargin() {
@@ -79,23 +81,37 @@ class Cal {
     ];
     this.tables[this.index].querySelectorAll('.cal__day-btn')
       .forEach((b, idx) => b.innerText = concatMonth[idx]);
-    console.log(
-      [...this.tables[this.index].rows].slice(-(6 - concatMonth.length / 7))
-    );
-    //   .forEach((row) => row.remove());
+    this.clearTable(concatMonth.length);
   }
 
-  addAnotherMonthMod() {
-    const currentTable = this.tables[this.index];
+  clearTable(nDays) {
+    for (let i = 5; i > nDays / 7 - 1; i--) {
+      this.tables[this.index].rows[i].remove();
+    }
+  }
+
+  addPrevMonthMod() {
     const firstRowBtns = [
-      ...currentTable.rows[0].querySelectorAll('.cal__day-btn')
+      ...this.tables[this.index].rows[0].querySelectorAll('.cal__day-btn')
     ];
-    firstRowBtns.slice(0, firstRowBtns.findIndex((b) => +b.innerText === 1))
-      .forEach((b) => b.classList.add('cal__day-btn_another-month'));
-    const lastRowBtns = [
-      ...currentTable.rows
+    firstRowBtns.slice(0, this.searchFirstDateIndex(firstRowBtns))
+      .forEach((b) => b.classList.add('cal__day-btn_prev-month'));
+  }
+
+  addNextMonthMod() {
+    const lastRowBtbs = [
+      ...[...this.tables[this.index].rows]
+        .pop()
+        .querySelectorAll('.cal__day-btn')
     ];
-    console.log(lastRowBtns);
+    const oneIndex = this.searchFirstDateIndex(lastRowBtbs);
+    if (oneIndex == -1) { return; }
+    lastRowBtbs.slice(-(7 - oneIndex))
+      .forEach((b) => b.classList.add('cal__day-btn_next-month'));
+  }
+
+  searchFirstDateIndex(week) {
+    return week.findIndex((day) => +day.innerText === 1);
   }
 }
 
