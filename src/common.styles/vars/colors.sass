@@ -2,15 +2,17 @@
 
 $color-main-bg: white
 $color-title-fg: #1F2041 
-$color-main-fg: rgba(31, 32, 65, .75)
-$color-additional-fg: rgba(31, 32, 65, .5)
-$color-unclaimed-fg: rgba(31, 32, 65, .25)
+$color-main-fg: color.adjust($color-title-fg, $alpha: -0.25)
+$color-additional-fg: color.adjust($color-title-fg, $alpha: -0.5)
+$color-unclaimed-fg: color.adjust($color-title-fg, $alpha: -0.75)
 $color-primary: #BC9CFF
 $color-secondary: #6FCF97
-$color-focus: color.adjust($color-primary, $red: 40)
 $color-accent: color.adjust($color-primary, $red: -49, $green: 8, $blue: -6)
+$color-secondary-accent: color.adjust($color-secondary, $red: -9, $green: 3, $blue: 83)
+$color-focus: color.adjust($color-primary, $red: 40)
 
 $gradient-primary: linear-gradient($color-primary, $color-accent)
-$gradient-secondary: linear-gradient($color-secondary, #66D2EA)
+$gradient-secondary: linear-gradient($color-secondary, $color-secondary-accent)
 $gradient-focus: linear-gradient($color-primary, $color-focus)
+$gradient-secondary-focus: linear-gradient(color.adjust($color-secondary, $green: 40), $color-secondary-accent)
 

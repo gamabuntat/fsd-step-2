@@ -24,7 +24,7 @@ class Cal {
     this.todayBtn = this.searchTodayBtn();
     this.setTodayMod();
     this.doSomething(
-      [0, 0, 0], this.getElemCoord(this.todayBtn), (e) => e.disabled = true
+      [0, 0, 0], this.getCoords(this.todayBtn), (e) => e.disabled = true
     );
     this.todayBtn.disabled = false;
   }
@@ -43,7 +43,7 @@ class Cal {
     if (!btn.classList.contains('cal__day-btn')) { return; }
     const selectedMod = 'cal__day-btn_selected';
     btn.classList.toggle(selectedMod);
-    console.log('hi');
+    console.log(this.getCoords(btn));
   }
 
   handlePrevMonthBtnClick() {
@@ -145,12 +145,16 @@ class Cal {
     this.todayBtn.classList.add('cal__day-btn_todays');
   }
 
-  getElemCoord(elem) {
+  getCoords(elem) {
     return [
       this.index, 
       elem.closest('.cal__week').rowIndex,
       elem.closest('.cal__day').cellIndex
     ];
+  }
+
+  getCell(coords) {
+    return this.tables[coords[0]].rows[coords[1]].cells[coords[2]];
   }
 
   doSomething(start, end, fn, isBtn = true) {
@@ -169,7 +173,7 @@ class Cal {
           cell <= (table === end[0] && row === end[1] ? end[2] : 6);
           cell++
         ) {
-          const elem = this.tables[table].rows[row].cells[cell];
+          const elem = this.getCell([table, row, cell]);
           fn(isBtn ? elem.firstElementChild : elem);
         }
       }

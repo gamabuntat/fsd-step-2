@@ -5,6 +5,7 @@ include ../../library.blocks/subscription-text-field/subscription-text-field
 include ../../library.blocks/dropdown/dropdown
 include ../../library.blocks/primary-button/primary-button
 include ../../library.blocks/bordered-button/bordered-button
+include ../../library.blocks/text-button/text-button
 include ../../library.blocks/big-button/big-button
 include ../../library.blocks/cal/cal
 
@@ -15,11 +16,16 @@ html(lang='ru')
     +watermark
     article.text-fields
       +cal()
-      +big-button({})
-      +primary-button({})
-      +primary-button({attrs: {disabled: true}})
-      +bordered-button({})
-      +bordered-button({attrs: {disabled: true}})
+      .button-container
+        +primary-button({})
+        +primary-button({attrs: {disabled: true}})
+        +bordered-button({})
+        +bordered-button({attrs: {disabled: true}})
+      .text-button-container
+        +text-button({})
+        +text-button({attrs: {disabled: true}})
+      .big-button-container
+        +big-button({})
       +text-field({type: 'email', placeholder: 'Email'})
       +text-field({value: 'This is pretty awesome', autofocus: true})
       +dropdown({sectionNames: ['взрослые', 'дети', 'младенцы']})
