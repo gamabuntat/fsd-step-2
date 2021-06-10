@@ -1,6 +1,6 @@
 include ../svg-forward-arrow/svg-forward-arrow
 
-mixin cal(startDate = Date())
+mixin cal({startDate = Date()})
   .cal(data-date=startDate)
     button.cal__prev-month-btn.js-cal__prev-month-btn
       +svg-forward-arrow

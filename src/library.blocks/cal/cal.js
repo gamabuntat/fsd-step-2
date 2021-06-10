@@ -17,33 +17,29 @@ class Cal {
   }
 
   init() {
-    this.fillTable(
-      this.getMonthLastDay(this.year, this.month - 1),
-      this.getMonthLastDay(this.year, this.month),
-      this.getWeekDay(this.year, this.month),
-      this.index
-    );
-    this.clearTable(this.index);
-    this.addPrevMonthMod(this.index);
-    this.addNextMonthMod(this.index);
-    this.insertTemplate();
-    this.fillTable(
-      this.getMonthLastDay(this.year, this.month),
-      this.getMonthLastDay(this.year, this.month + 1),
-      this.getWeekDay(this.year, this.month + 1),
-      this.index + 1
-    );
-    this.clearTable(this.index + 1);
-    this.addPrevMonthMod(this.index + 1);
-    this.addNextMonthMod(this.index + 1);
-    this.todayBtn = this.searchTodayBtn();
-    this.todayBtn.classList.add('cal__day-btn_todays');
+    this.simpleDimlePopit(this.index);
+    this.simpleDimlePopit(this.index + 1);
+    const todayBtn = this.searchTodayBtn();
+    todayBtn.classList.add('cal__day-btn_todays');
     this.doSomething(
       [0, 0, 0],
-      this.getCoords(this.todayBtn),
+      this.getCoords(todayBtn),
       (e) => e.disabled = true
     );
-    this.todayBtn.disabled = false;
+    todayBtn.disabled = false;
+  }
+
+  simpleDimlePopit(index) {
+    if (index > this.tables.length - 1) { this.insertTemplate(); }
+    this.fillTable(
+      this.getMonthLastDay(this.month + index - 1),
+      this.getMonthLastDay(this.month + index),
+      this.getWeekDay(this.month + index),
+      index
+    );
+    this.clearTable(index);
+    this.addPrevMonthMod(index);
+    this.addNextMonthMod(index);
   }
 
   bindListeners(root) {
@@ -122,19 +118,10 @@ class Cal {
 
   handleNextMonthBtnClick() {
     this.index += 1;
-    if (this.index + 1 === this.tables.length) {
-      this.insertTemplate();
-      this.fillTable(
-        this.getMonthLastDay(this.year, this.month + this.index),
-        this.getMonthLastDay(this.year, this.month + this.index + 1),
-        this.getWeekDay(this.year, this.month + this.index + 1),
-        this.index + 1
-      );
-      this.clearTable(this.index + 1);
-      this.addPrevMonthMod(this.index + 1);
-      this.addNextMonthMod(this.index + 1);
-    }
     this.changeFirstTableMargin();
+    if (this.index === this.tables.length - 1) {
+      this.simpleDimlePopit(this.index + 1);
+    }
   }
 
   changeFirstTableMargin() {
@@ -145,11 +132,11 @@ class Cal {
     this.tableContainer.insertAdjacentHTML('beforeend', this.template);
   }
 
-  getMonthLastDay(year, month) {
+  getMonthLastDay(month, year = this.year) {
     return new Date(year, month + 1, 0).getDate();
   }
 
-  getWeekDay(year, month, day = 1) {
+  getWeekDay(month, year = this.year, day = 1) {
     return new Date(year, month, day).getDay() || 7;
   }
 
@@ -172,8 +159,8 @@ class Cal {
   }
 
   clearTable(index) {
-    const presentDays = this.getMonthLastDay(this.year, this.month + index);
-    const prevDays = this.getWeekDay(this.year, this.month + index) - 1;
+    const presentDays = this.getMonthLastDay(this.month + index);
+    const prevDays = this.getWeekDay(this.month + index) - 1;
     const filledRows = Math.ceil((presentDays + prevDays) / 7) - 1;
     for (let i = 5; i > filledRows; i--) {
       this.getTail(this.tables[index].rows).remove();
@@ -205,7 +192,8 @@ class Cal {
   }
 
   searchTodayBtn() {
-    const todayPlusPrevMonth = this.getWeekDay(this.year, this.month) 
+    console.log(this.getWeekDay())
+    const todayPlusPrevMonth = this.getWeekDay(this.month) 
       + this.now.getDate() - 1;
     return this.firstTable
       .rows[Math.ceil(todayPlusPrevMonth / 7) - 1]
