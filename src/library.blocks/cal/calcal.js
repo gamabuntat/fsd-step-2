@@ -9,6 +9,7 @@ class Cal {
     const now = new Date(root.dataset.date);
     this.year = now.getFullYear();
     this.month = now.getMonth();
+    this.fillTable(this.index);
   }
 
   static getTail(list) {
@@ -50,6 +51,58 @@ class Cal {
       yield currentCoord;
       currentCoord = Cal.increaseCoord(currentCoord, 1);
     }
+  }
+
+  static getMonthLastDay(year, month) {
+    return new Date(year, month + 1, 0).getDate();
+  }
+
+  static getWeekDay(year, month, day = 1) {
+    return new Date(year, month, day).getDay() || 7;
+  }
+
+  static getPrevMonthDay(prevLastDate, weekDay) {
+    return Array(weekDay - 1)
+      .fill(prevLastDate)
+      .map((d, idx) => d - idx)
+      .reverse();
+  }
+
+  static getPresentDay(lastDate) {
+    return [...Array(lastDate).keys()].map((d) => d + 1);
+  }
+
+  static getNextMonthDay(weekDay) {
+    return Array(7 - weekDay).fill(1).map((d, idx) => d + idx);
+  }
+
+  getCell(coord) {
+    return this.tables[coord[0]].rows[coord[1]].cells[coord[2]];
+  }
+
+  fillTable(index) {
+    const gen = Cal.genCoordsInOrder([index, 0, 0], [index, 5, 6]);
+    Cal.getPrevMonthDay(
+      Cal.getMonthLastDay(this.year, this.month + index - 1),
+      Cal.getWeekDay(this.year, this.month + index)
+    ).forEach((day) => {
+      const btn = this.getCell(gen.next().value).firstElementChild;
+      btn.innerText = day;
+      btn.classList.add('cal__day-btn_prev-month');
+    });
+    Cal.getPresentDay(Cal.getMonthLastDay(this.year, this.month + index))
+      .forEach((day) => (
+        this.getCell(gen.next().value).firstElementChild.innerText = day
+      ))
+    Cal.getNextMonthDay(Cal.getWeekDay(
+      this.year, 
+      this.month + index, 
+      Cal.getMonthLastDay(this.year, this.month + index)
+    )).forEach((day) => {
+      const btn = this.getCell(gen.next().value).firstElementChild;
+      btn.innerText = day;
+      btn.classList.add('cal__day-btn_next-month');
+    });
   }
 }
 
