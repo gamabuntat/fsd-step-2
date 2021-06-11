@@ -9,7 +9,6 @@ class Cal {
     this.now = new Date(root.dataset.date);
     this.year = this.now.getFullYear();
     this.month = this.now.getMonth();
-    this.today = this.now.getDate();
     this.bindListeners(root);
     this.startRange = [];
     this.endRange = [];
@@ -192,7 +191,7 @@ class Cal {
   }
 
   searchTodayBtn() {
-    console.log(this.getWeekDay())
+    console.log(this.getWeekDay());
     const todayPlusPrevMonth = this.getWeekDay(this.month) 
       + this.now.getDate() - 1;
     return this.firstTable
