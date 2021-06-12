@@ -8,15 +8,13 @@ class Cal {
     const now = new Date(root.dataset.date);
     this.year = now.getFullYear();
     this.month = now.getMonth();
-    this.fillTable(this.index);
-    this.clearTable(this.index);
   }
 
   static getTail(list) {
     return [...list].pop();
   }
 
-  static getNTail(number) {
+  static getNumericTail(number) {
     return +Cal.getTail(String(number));
   }
 
@@ -26,31 +24,6 @@ class Cal {
 
   static isCoordLessOrEqual(coord, reference) {
     return Cal.makeNumerical(coord) <= Cal.makeNumerical(reference);
-  }
-
-  static increaseAny(any, notation, n) {
-    return Number(
-      String(Math.floor((any + n) / notation)) 
-      + String((any + n) % notation)
-    );
-  }
-
-  static increaseCoord(coord, n) {
-    const c = Cal.increaseAny(coord[2], 7, n);
-    const r = Cal.increaseAny(coord[1], 6, Math.floor(c / 10));
-    return [
-      Math.floor(r / 10) + coord[0], 
-      Cal.getNTail(r), 
-      Cal.getNTail(c)
-    ];
-  }
-
-  static * genCoordsInOrder(coord, reference) {
-    let currentCoord = coord;
-    while (Cal.isCoordLessOrEqual(currentCoord, reference)) {
-      yield currentCoord;
-      currentCoord = Cal.increaseCoord(currentCoord, 1);
-    }
   }
 
   static getMonthLastDay(year, month) {
@@ -76,6 +49,34 @@ class Cal {
     return Array(nextMonthNDay).fill(1).map((d, idx) => d + idx);
   }
 
+  static getCoord(index, nCell) {
+    return [
+      index,
+      Math.floor((nCell - 1) / 7),
+      (nCell - 1) % 7
+    ];
+  }
+
+  getCell(coord) {
+    return this.tables[coord[0]]?.rows[coord[1]]?.cells[coord[2]];
+  }
+
+  getNextCoord(coord) {
+    return coord[2] < 6 
+      ? [coord[0], coord[1], coord[2] + 1] 
+      : this.getCell([coord[0], coord[1] + 1, 0]) 
+        ? [coord[0], coord[1] + 1, 0] 
+        : [coord[0] + 1, 0, 0];
+  }
+
+  * genCoordsInOrder(coord, reference) {
+    let currentCoord = coord;
+    while (Cal.isCoordLessOrEqual(currentCoord, reference)) {
+      yield currentCoord;
+      currentCoord = this.getNextCoord(currentCoord);
+    }
+  }
+
   getPrevMonthNDay(index) {
     return Cal.getWeekDay(this.year, this.month + index) - 1;
   }
@@ -92,12 +93,17 @@ class Cal {
     );
   }
 
-  getCell(coord) {
-    return this.tables[coord[0]].rows[coord[1]].cells[coord[2]];
+  clearTable(index) {
+    const nFilledRows = Math.ceil(
+      (this.getPrevMonthNDay(index) + this.getPresentNDay(index)) / 7
+    );
+    for (let row = 5; row >= nFilledRows; row--) {
+      this.tables[index].rows[row].remove();
+    }
   }
 
   fillTable(index) {
-    const gen = Cal.genCoordsInOrder([index, 0, 0], [index, 5, 6]);
+    const gen = this.genCoordsInOrder([index, 0, 0], [index, 5, 6]);
     Cal.getPrevMonthDay(
       Cal.getMonthLastDay(this.year, this.month + index - 1),
       this.getPrevMonthNDay(index)
@@ -114,15 +120,6 @@ class Cal {
       btn.innerText = day;
       btn.classList.add('cal__day-btn_next-month');
     });
-  }
-
-  clearTable(index) {
-    const nFilledRows = Math.ceil(
-      (this.getPrevMonthNDay(index) + this.getPresentNDay(index)) / 7
-    );
-    for (let row = 5; row >= nFilledRows; row--) {
-      this.tables[index].rows[row].remove();
-    }
   }
 }
 
