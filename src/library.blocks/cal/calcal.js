@@ -5,11 +5,20 @@ class Cal {
     this.tables = root.getElementsByClassName('js-cal__main-table');
     this.step = this.tableContainer.getBoundingClientRect().width;
     this.index = 0;
+    this.rangeCounter = 0;
+    this.range = [];
     const now = new Date(root.dataset.date);
     this.year = now.getFullYear();
     this.month = now.getMonth();
+    this.init(now, root);
+  }
+
+  init(now, root) {
     this.modifyTodaysBtn(now);
     this.disableBtsn(now);
+    this.fillTable(this.index);
+    this.clearTable(this.index);
+    this.insertFillClearTable(this.index + 1);
     this.bindListeners(root);
   }
 
@@ -24,12 +33,18 @@ class Cal {
   disableBtsn(now) {
     [...this.genCoordsInOrder(
       [0, 0, 0],
-      Cal.getCoord( 0, this.getPrevMonthNDay(0) + now.getDate()),
-      Cal.isCoordLess
+      Cal.isCoordLess,
+      Cal.getCoord( 0, this.getPrevMonthNDay(0) + now.getDate())
     )]
       .forEach((coord) => (
         this.getCell(coord).firstElementChild.disabled = true
       ));
+  }
+
+  insertFillClearTable(index) {
+    this.insertTemplate();
+    this.fillTable(index);
+    this.clearTable(index);
   }
 
   bindListeners(root) {
@@ -42,7 +57,34 @@ class Cal {
   }
 
   handleTableContainerClick(e) {
-    console.log(e);
+    const btn = e.target;
+    if (!btn.classList.contains('cal__day-btn')) { return; }
+    const isSelected = btn.classList.toggle('cal__day-btn_selected');
+    if (isSelected === false) {
+      this.clearRange();
+      console.log(this.rangeCounter);
+      return;
+    }
+    if (this.rangeCounter === 2) { this.clearRange(); }
+    this.rangeCounter += 1;
+    const btnCoord = this.getElemCoord(btn);
+    this.addCoordInRange(btnCoord);
+    if (btn.classList.contains('cal__day-btn_prev-month')) {
+      this.addCoordInRange([
+        btnCoord[0] - 1,
+        this.getLastWeekIndex(btnCoord[0] - 1),
+        btnCoord[2]
+      ]);
+      this.selectLastRangeBtn();
+    }
+    if (btn.classList.contains('cal__day-btn_next-month')) {
+      this.addCoordInRange([
+        btnCoord[0] + 1,
+        0,
+        btnCoord[2]
+      ]);
+      this.selectLastRangeBtn();
+    }
   }
 
   handlePrevMonthBtnClick() {
@@ -55,8 +97,23 @@ class Cal {
     this.index += 1;
     this.changeFirstTableMargin();
     if (this.index === this.tables.length - 1) {
-      console.log(this.index);
+      this.insertFillClearTable(this.index + 1);
     }
+  }
+
+  clearRange() {
+    this.rangeCounter = 0;
+    this.range = [];
+  }
+
+  addCoordInRange(coord) {
+    this.range.push(coord);
+  }
+
+  selectLastRangeBtn() {
+    this.getCell(this.range.pop())
+      .firstElementChild
+      .classList.add('cal__day-btn_selected');
   }
 
   changeFirstTableMargin() {
@@ -64,9 +121,7 @@ class Cal {
   }
 
   fillTable(index) {
-    const gen = this.genCoordsInOrder(
-      [index, 0, 0], [index, 5, 6], Cal.isCoordLessOrEqual
-    );
+    const gen = this.genCoordsInOrder([index, 0, 0]);
     Cal.getPrevMonthDay(
       Cal.getMonthLastDay(this.year, this.month + index - 1),
       this.getPrevMonthNDay(index)
@@ -98,6 +153,14 @@ class Cal {
     this.tableContainer.insertAdjacentHTML('beforeend', this.template);
   }
 
+  getLastWeekIndex(index) {
+    return this.getNWeeks(index) - 1;
+  }
+
+  getNWeeks(index) {
+    return this.tables[index].rows.length;
+  }
+
   getNextMonthNDay(index) {
     return 7 - Cal.getWeekDay(
       this.year, 
@@ -114,7 +177,7 @@ class Cal {
     return Cal.getWeekDay(this.year, this.month + index) - 1;
   }
 
-  * genCoordsInOrder(coord, reference, compareFunc) {
+  * genCoordsInOrder(coord, compareFunc = () => true, reference = [3e2, 0, 0]) {
     let currentCoord = coord;
     while (compareFunc(currentCoord, reference)) {
       yield currentCoord;
