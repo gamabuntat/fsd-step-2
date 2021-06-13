@@ -68,6 +68,12 @@
     &_selected
       background: color.adjust($color-primary, $alpha: -0.55)
 
+      & > .cal__day-btn
+        background: color.adjust($color-primary, $alpha: -1)
+
+        &:hover, &:focus
+          background: color.adjust($color-primary, $alpha: -1)
+
     &_start-range
 
       &::after

@@ -83,7 +83,7 @@ class Cal {
       this.clearRange();
       return;
     }
-    if (this.rangeCounter === 2) { this.clearRange(); }
+    if (this.isEndRange()) { this.clearRange(); }
     this.rangeCounter += 1;
     const btnCoord = this.getElemCoord(btn);
     const firstRowBtn = this.getButton([btnCoord[0], btnCoord[1], 0]);
@@ -104,44 +104,68 @@ class Cal {
     this.selectLastRangeBtn();
     if (this.isEndRange()) {
       this.orderRange();
-      this.drawRange();
+      this.drawRange(this.range[0]);
     }
   }
 
-  drawRange() {
-    if (this.range[0][1] === this.getLastRowIndex(this.range[0][0])) {
+  drawRange(coord) {
+    const ccc = Cal.isCoordEqual(coord ,Cal.getLastItem(this.range)) 
+      ? [Cal.getLastItem(this.range)[0], 0, 0] 
+      : coord;
+    const nextCoord = this.searchNextRangeCoord(
       this.drawPartOfRange(
-        this.getNextCoord(this.range[0]),
-        Cal.getMinCoord(
-          this.range[1], 
-          this.getLastCellCoord(this.range[0][0])
+        this.genCoordsInOrder(
+          ccc,
+          (
+            ccc[1] === this.getLastRowIndex(ccc[0]) 
+              ? ((lastCoord) => (coord) => (
+                Cal.isCoordLessOrEqual(coord, lastCoord)
+              ))(Cal.getMinCoord(
+                this.getLastCellCoord(ccc[0]),
+                this.range[1]
+              ))
+              : Cal.isCoordLessOrEqual
+          ),
+          this.searchNextRangeCoord(ccc)
         )
-      );
-    }
+      )
+    );
+    if (nextCoord) { this.drawRange(nextCoord); }
   }
 
-  drawPartOfRange(start, end) {
-    [...this.genCoordsInOrder(start, Cal.isCoordLessOrEqual, end)]
-      .forEach((coord) => (
-        this.getCell(coord).classList.add(this.selectedMod))
-      );
+  searchNextRangeCoord(coord) {
+    return this.range.find((c) => Cal.isCoordMoreOrEqual(c, coord));
+  }
+
+  drawPartOfRange(generator) {
+    const coords = [...generator];
+    coords.forEach((coord) => (
+      this.getCell(coord).classList.add(this.selectedMod)
+    ));
+    return Cal.getLastItem(coords);
   }
 
   clearRange() {
-    this.range.forEach((coord) => (
-      this.getButton(coord)
-        .classList.remove(this.selectedBtnMod)
-    ));
-    [...this.genCoordsInOrder(
-      this.range[0], Cal.isCoordLess, Cal.getLastItem(this.range)
-    )]
-      .forEach((coord) => (
-        this.getCell(coord).classList.remove(this.selectedMod)
+    if (this.range.length !== 0) {
+      this.range.forEach((coord) => (
+        this.getButton(coord)
+          .classList.remove(this.selectedBtnMod)
       ));
+      [...this.genCoordsInOrder(
+        this.range[0], Cal.isCoordLessOrEqual, Cal.getLastItem(this.range)
+      )]
+        .forEach((coord) => (
+          this.getCell(coord).classList.remove(this.selectedMod)
+        ));
+    }
     this.rangeCounter = 0;
     this.range = [];
     this.startRange = [];
     this.endRange = [];
+  }
+
+  clearAnythingElse() {
+
   }
 
   addCoordInRange(coord) {
@@ -323,6 +347,14 @@ class Cal {
 
   static compareCoord(coordA, coordB) {
     return Cal.makeNumerical(coordA) - Cal.makeNumerical(coordB);
+  }
+
+  static isCoordEqual(coord, reference) {
+    return Cal.makeNumerical(coord) === Cal.makeNumerical(reference);
+  }
+
+  static isCoordMoreOrEqual(coord, reference) {
+    return Cal.makeNumerical(coord) > Cal.makeNumerical(reference);
   }
 
   static isCoordLess(coord, reference) {
