@@ -109,28 +109,31 @@ class Cal {
   }
 
   drawRange(coord) {
-    const ccc = Cal.isCoordEqual(coord ,Cal.getLastItem(this.range)) 
-      ? [Cal.getLastItem(this.range)[0], 0, 0] 
-      : coord;
     const nextCoord = this.searchNextRangeCoord(
       this.drawPartOfRange(
         this.genCoordsInOrder(
-          ccc,
+          coord,
           (
-            ccc[1] === this.getLastRowIndex(ccc[0]) 
+            coord[1] === this.getLastRowIndex(coord[0]) 
               ? ((lastCoord) => (coord) => (
                 Cal.isCoordLessOrEqual(coord, lastCoord)
               ))(Cal.getMinCoord(
-                this.getLastCellCoord(ccc[0]),
+                this.getLastCellCoord(coord[0]),
                 this.range[1]
               ))
               : Cal.isCoordLessOrEqual
           ),
-          this.searchNextRangeCoord(ccc)
+          this.searchNextRangeCoord(coord)
         )
       )
     );
-    if (nextCoord) { this.drawRange(nextCoord); }
+    if (nextCoord) { 
+      this.drawRange(
+        Cal.isCoordEqual(nextCoord ,Cal.getLastItem(this.range)) 
+          ? [Cal.getLastItem(this.range)[0], 0, 0] 
+          : nextCoord
+      ); 
+    }
   }
 
   searchNextRangeCoord(coord) {
