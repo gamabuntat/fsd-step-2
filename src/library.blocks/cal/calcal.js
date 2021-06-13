@@ -7,6 +7,12 @@ class Cal {
     this.index = 0;
     this.rangeCounter = 0;
     this.range = [];
+    this.startRange = [];
+    this.endRange = [];
+    this.selectedBtnMod = 'cal__day-btn_selected';
+    this.nextMonthBtnMod = 'cal__day-btn_next-month';
+    this.prevMonthBtnMod = 'cal__day-btn_prev-month';
+    this.selectedMod = 'cal__day_selected';
     const now = new Date(root.dataset.date);
     this.year = now.getFullYear();
     this.month = now.getMonth();
@@ -23,10 +29,9 @@ class Cal {
   }
 
   modifyTodaysBtn(now) {
-    this.getCell(
+    this.getButton(
       Cal.getCoord( 0, this.getPrevMonthNDay(0) + now.getDate())
     )
-      .firstElementChild
       .classList.add('cal__day-btn_todays');
   }
 
@@ -37,7 +42,7 @@ class Cal {
       Cal.getCoord( 0, this.getPrevMonthNDay(0) + now.getDate())
     )]
       .forEach((coord) => (
-        this.getCell(coord).firstElementChild.disabled = true
+        this.getButton(coord).disabled = true
       ));
   }
 
@@ -48,43 +53,12 @@ class Cal {
   }
 
   bindListeners(root) {
-    this.tableContainer
-      .addEventListener('click', this.handleTableContainerClick.bind(this));
     root.querySelector('.js-cal__prev-month-btn')
       .addEventListener('click', this.handlePrevMonthBtnClick.bind(this));
     root.querySelector('.js-cal__next-month-btn')
       .addEventListener('click', this.handleNextMonthBtnClick.bind(this));
-  }
-
-  handleTableContainerClick(e) {
-    const btn = e.target;
-    if (!btn.classList.contains('cal__day-btn')) { return; }
-    const isSelected = btn.classList.toggle('cal__day-btn_selected');
-    if (isSelected === false) {
-      this.clearRange();
-      console.log(this.rangeCounter);
-      return;
-    }
-    if (this.rangeCounter === 2) { this.clearRange(); }
-    this.rangeCounter += 1;
-    const btnCoord = this.getElemCoord(btn);
-    this.addCoordInRange(btnCoord);
-    if (btn.classList.contains('cal__day-btn_prev-month')) {
-      this.addCoordInRange([
-        btnCoord[0] - 1,
-        this.getLastWeekIndex(btnCoord[0] - 1),
-        btnCoord[2]
-      ]);
-      this.selectLastRangeBtn();
-    }
-    if (btn.classList.contains('cal__day-btn_next-month')) {
-      this.addCoordInRange([
-        btnCoord[0] + 1,
-        0,
-        btnCoord[2]
-      ]);
-      this.selectLastRangeBtn();
-    }
+    this.tableContainer
+      .addEventListener('click', this.handleTableContainerClick.bind(this));
   }
 
   handlePrevMonthBtnClick() {
@@ -101,19 +75,98 @@ class Cal {
     }
   }
 
+  handleTableContainerClick(e) {
+    const btn = e.target;
+    if (!btn.classList.contains('cal__day-btn')) { return; }
+    const isSelected = btn.classList.toggle(this.selectedBtnMod);
+    if (isSelected === false) {
+      this.clearRange();
+      return;
+    }
+    if (this.rangeCounter === 2) { this.clearRange(); }
+    this.rangeCounter += 1;
+    const btnCoord = this.getElemCoord(btn);
+    const firstRowBtn = this.getButton([btnCoord[0], btnCoord[1], 0]);
+    const lastRowBtn = this.getButton([btnCoord[0], btnCoord[1], 6]);
+    this.addCoordInRange(btnCoord);
+    const isPrevMonthbtn = btn.classList.contains(this.prevMonthBtnMod);
+    const isNextMonthBtn = btn.classList.contains(this.nextMonthBtnMod);
+    const shouldSelectedPrevMonth = firstRowBtn
+      .classList.contains(this.prevMonthBtnMod);
+    const shouldSelectedNextMonth = lastRowBtn
+      .classList.contains(this.nextMonthBtnMod);
+    if (isPrevMonthbtn || shouldSelectedPrevMonth) {
+      this.addCoordInRange(this.getCoordsAgo(btnCoord, 7));
+    }
+    if (isNextMonthBtn || shouldSelectedNextMonth) {
+      this.addCoordInRange(this.getCoordsForward(btnCoord, 7));
+    }
+    this.selectLastRangeBtn();
+    if (this.isEndRange()) {
+      this.orderRange();
+      this.drawRange();
+    }
+  }
+
+  drawRange() {
+    if (this.range[0][1] === this.getLastRowIndex(this.range[0][0])) {
+      this.drawPartOfRange(
+        this.getNextCoord(this.range[0]),
+        Cal.getMinCoord(
+          this.range[1], 
+          this.getLastCellCoord(this.range[0][0])
+        )
+      );
+    }
+  }
+
+  drawPartOfRange(start, end) {
+    [...this.genCoordsInOrder(start, Cal.isCoordLessOrEqual, end)]
+      .forEach((coord) => (
+        this.getCell(coord).classList.add(this.selectedMod))
+      );
+  }
+
   clearRange() {
+    this.range.forEach((coord) => (
+      this.getButton(coord)
+        .classList.remove(this.selectedBtnMod)
+    ));
+    [...this.genCoordsInOrder(
+      this.range[0], Cal.isCoordLess, Cal.getLastItem(this.range)
+    )]
+      .forEach((coord) => (
+        this.getCell(coord).classList.remove(this.selectedMod)
+      ));
     this.rangeCounter = 0;
     this.range = [];
+    this.startRange = [];
+    this.endRange = [];
   }
 
   addCoordInRange(coord) {
-    this.range.push(coord);
+    this.getLastRange().push(coord);
   }
 
   selectLastRangeBtn() {
-    this.getCell(this.range.pop())
-      .firstElementChild
-      .classList.add('cal__day-btn_selected');
+    this.getButton(Cal.getLastItem(this.getLastRange()))
+      .classList.add(this.selectedBtnMod);
+  }
+
+  getLastRange() {
+    return this.isStartRange() ? this.startRange : this.endRange;
+  }
+
+  isStartRange() {
+    return this.rangeCounter === 1;
+  }
+
+  isEndRange() {
+    return this.rangeCounter === 2;
+  }
+
+  orderRange() {
+    this.range = [...this.startRange, ...this.endRange].sort(Cal.compareCoord);
   }
 
   changeFirstTableMargin() {
@@ -126,17 +179,17 @@ class Cal {
       Cal.getMonthLastDay(this.year, this.month + index - 1),
       this.getPrevMonthNDay(index)
     ).forEach((day) => {
-      const btn = this.getCell(gen.next().value).firstElementChild;
+      const btn = this.getButton(gen.next().value);
       btn.innerText = day;
-      btn.classList.add('cal__day-btn_prev-month');
+      btn.classList.add(this.prevMonthBtnMod);
     });
     Cal.getPresentDay(this.getPresentNDay(index)).forEach((day) => (
-      this.getCell(gen.next().value).firstElementChild.innerText = day
+      this.getButton(gen.next().value).innerText = day
     ));
     Cal.getNextMonthDay(this.getNextMonthNDay(index)).forEach((day) => {
-      const btn = this.getCell(gen.next().value).firstElementChild;
+      const btn = this.getButton(gen.next().value);
       btn.innerText = day;
-      btn.classList.add('cal__day-btn_next-month');
+      btn.classList.add(this.nextMonthBtnMod);
     });
   }
 
@@ -153,11 +206,15 @@ class Cal {
     this.tableContainer.insertAdjacentHTML('beforeend', this.template);
   }
 
-  getLastWeekIndex(index) {
-    return this.getNWeeks(index) - 1;
+  getLastCellCoord(index) {
+    return [index, this.getLastRowIndex(index), 6];
   }
 
-  getNWeeks(index) {
+  getLastRowIndex(index) {
+    return this.getNRows(index) - 1;
+  }
+
+  getNRows(index) {
     return this.tables[index].rows.length;
   }
 
@@ -185,12 +242,34 @@ class Cal {
     }
   }
 
+  getCoordsForward(coord, n) {
+    if (n === 0) { return coord; }
+    return this.getCoordsForward(this.getNextCoord(coord), --n);
+  }
+
+  getCoordsAgo(coord, n) {
+    if (n === 0) { return coord; }
+    return this.getCoordsAgo(this.getPrevCoord(coord), --n);
+  }
+
   getNextCoord(coord) {
     return coord[2] < 6 
       ? [coord[0], coord[1], coord[2] + 1] 
       : this.getCell([coord[0], coord[1] + 1, 0]) 
         ? [coord[0], coord[1] + 1, 0] 
         : [coord[0] + 1, 0, 0];
+  }
+
+  getPrevCoord(coord) {
+    return coord[2] > 0 
+      ? [coord[0], coord[1], coord[2] - 1] 
+      : this.getCell([coord[0]], coord[1] - 1, 6) 
+        ? [coord[0], coord[1] - 1, 6] 
+        : [coord[0] - 1, this.getLastRowIndex(coord[0] - 1), 6];
+  }
+
+  getButton(coord) {
+    return this.getCell(coord).firstElementChild;
   }
 
   getCell(coord) {
@@ -236,6 +315,16 @@ class Cal {
     return new Date(year, month + 1, 0).getDate();
   }
 
+  static getMinCoord(coordA, coordB) {
+    return Cal.makeUnnumerical(
+      Math.min(Cal.makeNumerical(coordA), Cal.makeNumerical(coordB))
+    );
+  }
+
+  static compareCoord(coordA, coordB) {
+    return Cal.makeNumerical(coordA) - Cal.makeNumerical(coordB);
+  }
+
   static isCoordLess(coord, reference) {
     return Cal.makeNumerical(coord) < Cal.makeNumerical(reference);
   }
@@ -244,16 +333,21 @@ class Cal {
     return Cal.makeNumerical(coord) <= Cal.makeNumerical(reference);
   }
 
+  static makeUnnumerical(numericalCoord) {
+    return Cal.fillCoord(String(numericalCoord).split('').map(Number));
+  }
+
+  static fillCoord(coord, length = coord.length) {
+    if (length >= 3) { return coord; }
+    return Cal.fillCoord([0, ...coord], ++length);
+  }
+
   static makeNumerical(coord) {
     return +coord.reduce((res, dimension) => res + dimension, '');
   }
 
-  static getNumericTail(number) {
-    return +Cal.getTail(String(number));
-  }
-
-  static getTail(list) {
-    return [...list].pop();
+  static getLastItem(list) {
+    return list[list.length - 1];
   }
 }
 
