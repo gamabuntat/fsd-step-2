@@ -105,6 +105,8 @@ class Cal {
     if (this.isEndRange()) {
       this.orderRange();
       this.drawRange(this.range[0]);
+      this.fixOrderRange();
+      this.modifyRangeCells();
     }
   }
 
@@ -123,13 +125,13 @@ class Cal {
               ))
               : Cal.isCoordLessOrEqual
           ),
-          this.searchNextRangeCoord(coord)
+          this.searchNextRangeCoord(coord) || Cal.getLastItem(this.range)
         )
       )
     );
     if (nextCoord) { 
       this.drawRange(
-        Cal.isCoordEqual(nextCoord ,Cal.getLastItem(this.range)) 
+        Cal.isCoordEqual(nextCoord, Cal.getLastItem(this.range)) 
           ? [Cal.getLastItem(this.range)[0], 0, 0] 
           : nextCoord
       ); 
@@ -137,7 +139,7 @@ class Cal {
   }
 
   searchNextRangeCoord(coord) {
-    return this.range.find((c) => Cal.isCoordMoreOrEqual(c, coord));
+    return this.range.find((c) => Cal.isCoordMore(c, coord));
   }
 
   drawPartOfRange(generator) {
@@ -146,6 +148,21 @@ class Cal {
       this.getCell(coord).classList.add(this.selectedMod)
     ));
     return Cal.getLastItem(coords);
+  }
+
+  fixOrderRange() {
+    this.startRange.sort(Cal.compareCoord);
+    this.endRange.sort(Cal.compareCoord);
+    const buffer = this.startRange;
+    if (Cal.isCoordLess(this.startRange[0], this.endRange[0])) { return; }
+    this.startRange = this.endRange;
+    this.endRange = buffer;
+  }
+
+  modifyRangeCells() {
+    this.startRange.forEach((coord) => (
+      this.getCell(coord).classList.remove(this.selectedMod)
+    ));
   }
 
   clearRange() {
@@ -165,10 +182,6 @@ class Cal {
     this.range = [];
     this.startRange = [];
     this.endRange = [];
-  }
-
-  clearAnythingElse() {
-
   }
 
   addCoordInRange(coord) {
@@ -290,7 +303,7 @@ class Cal {
   getPrevCoord(coord) {
     return coord[2] > 0 
       ? [coord[0], coord[1], coord[2] - 1] 
-      : this.getCell([coord[0]], coord[1] - 1, 6) 
+      : coord[1] > 0
         ? [coord[0], coord[1] - 1, 6] 
         : [coord[0] - 1, this.getLastRowIndex(coord[0] - 1), 6];
   }
@@ -356,7 +369,7 @@ class Cal {
     return Cal.makeNumerical(coord) === Cal.makeNumerical(reference);
   }
 
-  static isCoordMoreOrEqual(coord, reference) {
+  static isCoordMore(coord, reference) {
     return Cal.makeNumerical(coord) > Cal.makeNumerical(reference);
   }
 
