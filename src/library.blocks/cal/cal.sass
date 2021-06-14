@@ -2,6 +2,8 @@
 
 @use '@common/useless/useless'
 
+$color-selected-day: color.adjust($color-primary, $alpha: -0.55)
+
 .cal
   display: flex
   justify-content: space-between
@@ -52,8 +54,6 @@
     width: 280px
     overflow: hidden
 
-    &:first-child
-
   &__main-table
     border-collapse: collapse
     transition: all 0.2s
@@ -66,13 +66,13 @@
     padding: 0
 
     &_selected
-      background: color.adjust($color-primary, $alpha: -0.55)
+      background: $color-selected-day
 
       & > .cal__day-btn
-        background: color.adjust($color-primary, $alpha: -1)
+        background: color.adjust($color-selected-day, $alpha: -1)
 
         &:hover, &:focus
-          background: color.adjust($color-primary, $alpha: -1)
+          background: color.adjust($color-selected-day, $alpha: -1)
 
     &_start-range
 
@@ -83,7 +83,18 @@
         display: inlene-block
         width: 50%
         height: 100%
-        background-color: lightgreen
+        background-color: $color-selected-day
+
+    &_end-range
+
+      &::before
+        content: ''
+        position: absolute
+        left: 0
+        display: inlene-block
+        width: 50%
+        height: 100%
+        background-color: $color-selected-day
 
   &__day-btn
     position: relative

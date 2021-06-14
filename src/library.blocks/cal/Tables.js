@@ -2,7 +2,7 @@ class Tables {
   constructor(tables) {
     this.tables = tables;
     this.index = 0;
-    this.rowSize = this.tables[0].rows[0].length;
+    this.rowSize = this.tables[0].rows[0].cells.length;
     this.lastCellIndex = this.rowSize - 1;
   }
 
@@ -52,6 +52,10 @@ class Tables {
           this.getLastRowIndex(coord[0] - 1),
           this.lastCellIndex
         ];
+  }
+
+  getLastCellCoord(index) {
+    return [index, this.getLastRowIndex(index), 6];
   }
 
   getLastRowIndex(index) {
