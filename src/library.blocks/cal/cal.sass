@@ -2,7 +2,7 @@
 
 @use '@common/useless/useless'
 
-$color-selected-day: color.adjust($color-primary, $alpha: -0.55)
+$color-selected-day: color.adjust($color-primary, $alpha: -0.80)
 
 .cal
   display: flex
@@ -70,9 +70,10 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.55)
 
       & > .cal__day-btn
         background: color.adjust($color-selected-day, $alpha: -1)
+        border-radius: 0
 
         &:hover, &:focus
-          background: color.adjust($color-selected-day, $alpha: -1)
+          background: color.adjust($color-selected-day, $blue: 100)
 
     &_start-range
 

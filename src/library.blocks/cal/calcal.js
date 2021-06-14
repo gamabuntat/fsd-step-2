@@ -3,8 +3,11 @@ import {Tables} from './Tables.js';
 class Cal extends Tables {
   constructor(root) {
     super(root.getElementsByClassName('js-cal__main-table'));
+    this.monthFormater = new Intl.DateTimeFormat('ru', { month: 'long' });
     this.tableContainer = root.querySelector('.js-cal__table-container');
     this.template = this.tableContainer.innerHTML;
+    this.monthDisplay = root.querySelector('.js-cal__month');
+    this.yearDisplay = root.querySelector('.js-cal__year');
     this.step = this.tableContainer.getBoundingClientRect().width;
     this.rangeCounter = 0;
     this.range = [];
@@ -16,6 +19,7 @@ class Cal extends Tables {
     this.selectedBtnMod = 'cal__day-btn_selected';
     this.nextMonthBtnMod = 'cal__day-btn_next-month';
     this.prevMonthBtnMod = 'cal__day-btn_prev-month';
+    this.todayBtnMod = 'cal__day-btn_todays';
     const now = new Date(root.dataset.date || Date());
     this.year = now.getFullYear();
     this.month = now.getMonth();
@@ -27,7 +31,7 @@ class Cal extends Tables {
     this.disableBtsn(now);
     this.fillTable(this.index);
     this.clearTable(this.index);
-    this.insertFillClearTable(this.index + 1);
+    this.insertFillClearUpdateTable(this.index + 1);
     this.bindListeners(root);
   }
 
@@ -35,7 +39,7 @@ class Cal extends Tables {
     this.getButton(
       this.getCoord( 0, this.getPrevMonthNDay(0) + now.getDate())
     )
-      .classList.add('cal__day-btn_todays');
+      .classList.add(this.todayBtnMod);
   }
 
   disableBtsn(now) {
@@ -49,10 +53,24 @@ class Cal extends Tables {
       ));
   }
 
-  insertFillClearTable(index) {
+  insertFillClearUpdateTable(index) {
     this.insertTemplate();
     this.fillTable(index);
     this.clearTable(index);
+    this.updateMonthDisplayValue();
+    this.updateYearDisplayValue();
+  }
+
+  updateMonthDisplayValue() {
+    this.monthDisplay.innerText = this.monthFormater
+      .format(new Date(this.year, this.month + this.index))
+      .replace(/^./, (s) => s.toUpperCase());
+  }
+
+  updateYearDisplayValue() {
+    this.yearDisplay.innerText = new Date(
+      this.year, this.month + this.index
+    ).getFullYear();
   }
 
   bindListeners(root) {
@@ -66,15 +84,17 @@ class Cal extends Tables {
 
   handlePrevMonthBtnClick() {
     if (this.index == 0) { return; }
-    this.index -= 1;
+    this.decreaseIndex();
     this.changeDisplayedMonth();
+    this.updateMonthDisplayValue();
+    this.updateYearDisplayValue();
   }
 
   handleNextMonthBtnClick() {
-    this.index += 1;
+    this.increaseIndex();
     this.changeDisplayedMonth();
     if (this.index === this.tables.length - 1) {
-      this.insertFillClearTable(this.index + 1);
+      this.insertFillClearUpdateTable(this.index + 1);
     }
   }
 
