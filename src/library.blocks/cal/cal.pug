@@ -1,7 +1,14 @@
 include ../svg-forward-arrow/svg-forward-arrow
 
-mixin cal({startDate = ''})
-  .cal.js-cal(data-date=startDate)
+mixin cal({initDate, startDate, endDate})
+  - 
+    const rootAttrs = {
+      'data-date': initDate,
+      'data-start-date': '2021-07-17',
+      'data-end-date': endDate
+    }
+
+  .cal.js-cal&attributes(rootAttrs)
     button.cal__prev-month-btn.js-cal__prev-month-btn
       +svg-forward-arrow
     .cal__month.js-cal__month July
@@ -10,12 +17,11 @@ mixin cal({startDate = ''})
     .cal__year.js-cal__year 1998
     each day in ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
       span.cal__day-week #{day}
-
     .cal__table-container.js-cal__table-container
       table.cal__main-table.js-cal__main-table
         - for (let w = 0; w <= 5; w++)
           tr.cal__week
             - for (let i = 0; i < 7; i++)
               td.cal__day
-                button.cal__day-btn.js-cal__day-btn
+                button.cal__day-btn
 

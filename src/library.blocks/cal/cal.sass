@@ -57,6 +57,7 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
   &__main-table
     border-collapse: collapse
     transition: all 0.2s
+    height: min-content
 
   &__week
     box-sizing: border-box
@@ -81,7 +82,8 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
         content: ''
         position: absolute
         right: 0
-        display: inlene-block
+        top: 0
+        display: inline-block
         width: 50%
         height: 100%
         background-color: $color-selected-day
@@ -92,6 +94,7 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
         content: ''
         position: absolute
         left: 0
+        top: 0
         display: inlene-block
         width: 50%
         height: 100%

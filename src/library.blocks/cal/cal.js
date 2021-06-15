@@ -1,244 +1,337 @@
-class Cal {
+import {Tables} from './Tables.js';
+
+class Cal extends Tables {
   constructor(root) {
+    super(root.getElementsByClassName('js-cal__main-table'));
+    this.monthFormater = new Intl.DateTimeFormat('ru', { month: 'long' });
     this.tableContainer = root.querySelector('.js-cal__table-container');
     this.template = this.tableContainer.innerHTML;
-    this.tables = root.getElementsByClassName('js-cal__main-table');
-    this.firstTable = this.tables[0];
+    this.monthDisplay = root.querySelector('.js-cal__month');
+    this.yearDisplay = root.querySelector('.js-cal__year');
     this.step = this.tableContainer.getBoundingClientRect().width;
-    this.index = 0;
-    this.now = new Date(root.dataset.date);
-    this.year = this.now.getFullYear();
-    this.month = this.now.getMonth();
-    this.bindListeners(root);
+    this.rangeCounter = 0;
+    this.range = [];
     this.startRange = [];
     this.endRange = [];
-    this.init();
+    this.selectedMod = 'cal__day_selected';
+    this.startRangeMod = 'cal__day_start-range';
+    this.endRangeMod = 'cal__day_end-range';
+    this.selectedBtnMod = 'cal__day-btn_selected';
+    this.nextMonthBtnMod = 'cal__day-btn_next-month';
+    this.prevMonthBtnMod = 'cal__day-btn_prev-month';
+    this.todayBtnMod = 'cal__day-btn_todays';
+    const now = new Date(root.dataset.date || Date());
+    this.year = now.getFullYear();
+    this.month = now.getMonth();
+    this.init(now, root);
+    this.getButton(this.getLastCellCoord(this.index)).click();
+    this.getButton([0, 2, 3]).click();
   }
 
-  init() {
-    this.simpleDimlePopit(this.index);
-    this.simpleDimlePopit(this.index + 1);
-    const todayBtn = this.searchTodayBtn();
-    todayBtn.classList.add('cal__day-btn_todays');
-    this.doSomething(
+  init(now, root) {
+    this.modifyTodaysBtn(now);
+    this.disableBtsn(now);
+    this.fillTable(this.index);
+    this.clearTable(this.index);
+    this.insertFillClearTable(this.index + 1);
+    this.updateMonthDisplayValue();
+    this.updateYearDisplayValue();
+    this.bindListeners(root);
+  }
+
+  modifyTodaysBtn(now) {
+    this.getButton(
+      this.getCoord( 0, this.getPrevMonthNDay(0) + now.getDate())
+    )
+      .classList.add(this.todayBtnMod);
+  }
+
+  disableBtsn(now) {
+    [...this.genCoordsInOrder(
       [0, 0, 0],
-      this.getCoords(todayBtn),
-      (e) => e.disabled = true
-    );
-    todayBtn.disabled = false;
+      this.getCoord( 0, this.getPrevMonthNDay(0) + now.getDate()),
+      Tables.isCoordLess,
+    )]
+      .forEach((coord) => (
+        this.getButton(coord).disabled = true
+      ));
   }
 
-  simpleDimlePopit(index) {
-    if (index > this.tables.length - 1) { this.insertTemplate(); }
-    this.fillTable(
-      this.getMonthLastDay(this.month + index - 1),
-      this.getMonthLastDay(this.month + index),
-      this.getWeekDay(this.month + index),
-      index
-    );
+  insertFillClearTable(index) {
+    this.insertTemplate();
+    this.fillTable(index);
     this.clearTable(index);
-    this.addPrevMonthMod(index);
-    this.addNextMonthMod(index);
+  }
+
+  updateMonthDisplayValue() {
+    this.monthDisplay.innerText = this.monthFormater
+      .format(new Date(this.year, this.month + this.index))
+      .replace(/^./, (s) => s.toUpperCase());
+  }
+
+  updateYearDisplayValue() {
+    this.yearDisplay.innerText = new Date(
+      this.year, this.month + this.index
+    ).getFullYear();
   }
 
   bindListeners(root) {
-    this.tableContainer
-      .addEventListener('click', this.handleTableContainerClick.bind(this));
     root.querySelector('.js-cal__prev-month-btn')
       .addEventListener('click', this.handlePrevMonthBtnClick.bind(this));
     root.querySelector('.js-cal__next-month-btn')
       .addEventListener('click', this.handleNextMonthBtnClick.bind(this));
+    this.tableContainer
+      .addEventListener('click', this.handleTableContainerClick.bind(this));
+  }
+
+  handlePrevMonthBtnClick() {
+    if (this.index == 0) { return; }
+    this.decreaseIndex();
+    this.changeDisplayedMonth();
+    this.updateMonthDisplayValue();
+    this.updateYearDisplayValue();
+  }
+
+  handleNextMonthBtnClick() {
+    this.increaseIndex();
+    this.changeDisplayedMonth();
+    this.updateMonthDisplayValue();
+    this.updateYearDisplayValue();
+    if (this.index === this.tables.length - 1) {
+      this.insertFillClearTable(this.index + 1);
+    }
   }
 
   handleTableContainerClick(e) {
     const btn = e.target;
     if (!btn.classList.contains('cal__day-btn')) { return; }
-    const isSelected = btn.classList.toggle( 'cal__day-btn_selected');
+    const isSelected = btn.classList.toggle(this.selectedBtnMod);
     if (isSelected === false) {
       this.clearRange();
       return;
     }
-    this.defineRange(btn);
-    if (btn.classList.contains('cal__day-btn_next-month')) {
-      this.defineNextRange(btn);
+    if (this.isEndRange()) { this.clearRange(); }
+    this.rangeCounter += 1;
+    const btnCoord = this.getElemCoord(btn);
+    const firstRowBtn = this.getButton([btnCoord[0], btnCoord[1], 0]);
+    const lastRowBtn = this.getButton([btnCoord[0], btnCoord[1], 6]);
+    this.addCoordInRange(btnCoord);
+    const isPrevMonthbtn = btn.classList.contains(this.prevMonthBtnMod);
+    const isNextMonthBtn = btn.classList.contains(this.nextMonthBtnMod);
+    const shouldSelectedPrevMonth = firstRowBtn
+      .classList.contains(this.prevMonthBtnMod);
+    const shouldSelectedNextMonth = lastRowBtn
+      .classList.contains(this.nextMonthBtnMod);
+    if (isPrevMonthbtn || shouldSelectedPrevMonth) {
+      this.addCoordInRange(this.getCoordsAgo(btnCoord, 7));
     }
-    if (btn.classList.contains('cal__day-btn_prev-month')) {
-      this.definePrevRange(btn);
+    if (isNextMonthBtn || shouldSelectedNextMonth) {
+      this.addCoordInRange(this.getCoordsForward(btnCoord, 7));
     }
-    console.log(this.startRange, this.endRange);
+    this.selectLastRangeBtn();
+    if (this.isEndRange()) {
+      this.orderRange();
+      this.drawRange(this.range[0]);
+      this.fixOrderRange();
+      this.modifyRangeCells();
+    }
   }
 
-  defineRange(btn) {
-    const btnCoords = this.getCoords(btn);
-    const startSize = this.startRange.length;
-    const endSize = this.endRange.length;
-    const isStart = startSize == 0;
-    const isEnd = startSize !== 0 && endSize == 0;
-    if (isStart) {
-      this.startRange.push(btnCoords);
-      return;
+  drawRange(coord) {
+    const nextCoord = this.searchNextRangeCoord(
+      this.drawPartOfRange(
+        this.genCoordsInOrder(
+          coord,
+          this.searchNextRangeCoord(coord) || Tables.getLastItem(this.range),
+          (
+            this.getButton([coord[0], coord[1], 6])
+              .classList.contains(this.nextMonthBtnMod)
+              ? ((lastCoord) => (coord) => (
+                Tables.isCoordLessOrEqual(coord, lastCoord)
+              ))(Tables.getMinCoord(
+                this.getLastCellCoord(coord[0]),
+                this.range[1]
+              ))
+              : Tables.isCoordLessOrEqual
+          ),
+        )
+      )
+    );
+    if (nextCoord) { 
+      this.drawRange(
+        Tables.isCoordEqual(nextCoord, Tables.getLastItem(this.range)) 
+          ? [Tables.getLastItem(this.range)[0], 0, 0] 
+          : nextCoord
+      ); 
     }
-    if (isEnd) {
-      this.endRange.push(btnCoords);
-      return;
-    }
-    this.clearRange();
-    this.startRange.push(btnCoords);
   }
 
-  defineNextRange() {
-    const preCoords = this.endRange.pop() || this.startRange.pop();
-    this.getCell([preCoords[0] + 1, 0, preCoords[2]])
-      .firstElementChild
-      .classList.add('cal__day-btn_selected');
+  searchNextRangeCoord(coord) {
+    return this.range.find((c) => Tables.isCoordMore(c, coord));
   }
 
-  definePrevRange() {
-    return;
+  drawPartOfRange(generator) {
+    const coords = [...generator];
+    coords.forEach((coord) => (
+      this.getCell(coord).classList.add(this.selectedMod)
+    ));
+    return Tables.getLastItem(coords);
+  }
+
+  fixOrderRange() {
+    this.startRange.sort(Tables.compareCoord);
+    this.endRange.sort(Tables.compareCoord);
+    const buffer = this.startRange;
+    if (Tables.isCoordLess(this.startRange[0], this.endRange[0])) { return; }
+    this.startRange = this.endRange;
+    this.endRange = buffer;
+  }
+
+  modifyRangeCells() {
+    this.startRange.forEach((coord) => {
+      const cell = this.getCell(coord);
+      cell.classList.remove(this.selectedMod);
+      cell.classList.add(this.startRangeMod);
+    });
+    this.endRange.forEach((coord) => {
+      const cell = this.getCell(coord);
+      cell.classList.remove(this.selectedMod);
+      cell.classList.add(this.endRangeMod);
+    });
   }
 
   clearRange() {
-    [...this.startRange, ...this.endRange].forEach(
-      (coords) => this.doSomething(
-        coords, 
-        coords, 
-        (b) => b.classList.remove('cal__day-btn_selected')
-      )
-    );
+    if (this.range.length !== 0) {
+      this.range.forEach((coord) => {
+        const cell = this.getCell(coord);
+        cell.classList.remove(this.startRangeMod);
+        cell.classList.remove(this.endRangeMod);
+        this.getButton(coord).classList.remove(this.selectedBtnMod);
+      });
+      [...this.genCoordsInOrder(
+        this.range[0], 
+        Tables.getLastItem(this.range),
+        Tables.isCoordLessOrEqual,
+      )]
+        .forEach((coord) => (
+          this.getCell(coord).classList.remove(this.selectedMod)
+        ));
+    }
+    this.rangeCounter = 0;
+    this.range = [];
     this.startRange = [];
     this.endRange = [];
   }
 
-  handlePrevMonthBtnClick() {
-    if (this.index == 0) { return; }
-    this.index -= 1;
-    this.changeFirstTableMargin();
+  addCoordInRange(coord) {
+    this.getLastRange().push(coord);
   }
 
-  handleNextMonthBtnClick() {
-    this.index += 1;
-    this.changeFirstTableMargin();
-    if (this.index === this.tables.length - 1) {
-      this.simpleDimlePopit(this.index + 1);
+  selectLastRangeBtn() {
+    this.getButton(Tables.getLastItem(this.getLastRange()))
+      .classList.add(this.selectedBtnMod);
+  }
+
+  getLastRange() {
+    return this.isStartRange() ? this.startRange : this.endRange;
+  }
+
+  isStartRange() {
+    return this.rangeCounter === 1;
+  }
+
+  isEndRange() {
+    return this.rangeCounter === 2;
+  }
+
+  orderRange() {
+    this.range = [...this.startRange, ...this.endRange]
+      .sort(Tables.compareCoord);
+  }
+
+  changeDisplayedMonth() {
+    this.tables[0].style.marginLeft = `${-this.index * this.step}px`;
+  }
+
+  fillTable(index) {
+    const gen = this.genCoordsInOrder(
+      [index, 0, 0], 
+      [index, this.getLastRowIndex(index), 6]
+    );
+    Cal.getPrevMonthDay(
+      Cal.getMonthLastDay(this.year, this.month + index - 1),
+      this.getPrevMonthNDay(index)
+    ).forEach((day) => {
+      const btn = this.getButton(gen.next().value);
+      btn.innerText = day;
+      btn.classList.add(this.prevMonthBtnMod);
+    });
+    Cal.getPresentDay(this.getPresentNDay(index)).forEach((day) => (
+      this.getButton(gen.next().value).innerText = day
+    ));
+    Cal.getNextMonthDay(this.getNextMonthNDay(index)).forEach((day) => {
+      const btn = this.getButton(gen.next().value);
+      btn.innerText = day;
+      btn.classList.add(this.nextMonthBtnMod);
+    });
+  }
+
+  clearTable(index) {
+    const nFilledRows = Math.ceil(
+      (this.getPrevMonthNDay(index) + this.getPresentNDay(index)) / 7
+    );
+    for (let row = 5; row >= nFilledRows; row--) {
+      this.tables[index].rows[row].remove();
     }
-  }
-
-  changeFirstTableMargin() {
-    this.firstTable.style.marginLeft = `${-this.index * this.step}px`;
   }
 
   insertTemplate() {
     this.tableContainer.insertAdjacentHTML('beforeend', this.template);
   }
 
-  getMonthLastDay(month, year = this.year) {
-    return new Date(year, month + 1, 0).getDate();
+  getNextMonthNDay(index) {
+    return 7 - Cal.getWeekDay(
+      this.year, 
+      this.month + index,
+      Cal.getMonthLastDay(this.year, this.month + index)
+    );
   }
 
-  getWeekDay(month, year = this.year, day = 1) {
-    return new Date(year, month, day).getDay() || 7;
+  getPresentNDay(index) {
+    return Cal.getMonthLastDay(this.year, this.month + index);
   }
 
-  fillTable(prevLastDate, lastDate, weekDay, index) {
-    const prevMonth = Array(weekDay - 1)
+  getPrevMonthNDay(index) {
+    return Cal.getWeekDay(this.year, this.month + index) - 1;
+  }
+
+  getButton(coord) {
+    return this.getCell(coord).firstElementChild;
+  }
+
+  static getNextMonthDay(nextMonthNDay) {
+    return Array(nextMonthNDay).fill(1).map((d, idx) => d + idx);
+  }
+
+  static getPresentDay(presentMonthNDay) {
+    return [...Array(presentMonthNDay).keys()].map((d) => d + 1);
+  }
+
+  static getPrevMonthDay(prevLastDate, prevMonthNDay) {
+    return Array(prevMonthNDay)
       .fill(prevLastDate)
       .map((d, idx) => d - idx)
       .reverse();
-    const presentMonth = [...Array(lastDate).keys()].map((d) => d + 1);
-    const nextMonth = [
-      ...Array(7 - (prevMonth.length + presentMonth.length) % 7).keys()
-    ].map((d) => d + 1);
-    const concatMonth = [
-      ...prevMonth,
-      ...presentMonth,
-      ...(nextMonth.length == 7 ? [] : nextMonth)
-    ];
-    this.tables[index].querySelectorAll('.cal__day-btn')
-      .forEach((b, idx) => b.innerText = concatMonth[idx] || '');
   }
 
-  clearTable(index) {
-    const presentDays = this.getMonthLastDay(this.month + index);
-    const prevDays = this.getWeekDay(this.month + index) - 1;
-    const filledRows = Math.ceil((presentDays + prevDays) / 7) - 1;
-    for (let i = 5; i > filledRows; i--) {
-      this.getTail(this.tables[index].rows).remove();
-    }
+  static getWeekDay(year, month, day = 1) {
+    return new Date(year, month, day).getDay() || 7;
   }
 
-  addPrevMonthMod(index) {
-    const firstRowBtns = [
-      ...this.tables[index].rows[0].querySelectorAll('.cal__day-btn')
-    ];
-    firstRowBtns.slice(0, this.searchFirstDateIndex(firstRowBtns))
-      .forEach((b) => b.classList.add('cal__day-btn_prev-month'));
-  }
-
-  addNextMonthMod(index) {
-    const lastRowBtbs = [
-      ...[...this.tables[index].rows]
-        .pop()
-        .querySelectorAll('.cal__day-btn')
-    ];
-    const oneIndex = this.searchFirstDateIndex(lastRowBtbs);
-    if (oneIndex == -1) { return; }
-    lastRowBtbs.slice(-(7 - oneIndex))
-      .forEach((b) => b.classList.add('cal__day-btn_next-month'));
-  }
-
-  searchFirstDateIndex(week) {
-    return week.findIndex((day) => +day.innerText === 1);
-  }
-
-  searchTodayBtn() {
-    console.log(this.getWeekDay());
-    const todayPlusPrevMonth = this.getWeekDay(this.month) 
-      + this.now.getDate() - 1;
-    return this.firstTable
-      .rows[Math.ceil(todayPlusPrevMonth / 7) - 1]
-      .cells[todayPlusPrevMonth % 7 - 1]
-      .firstElementChild;
-  }
-
-  getCoords(elem) {
-    return [
-      this.index, 
-      elem.closest('.cal__week').rowIndex,
-      elem.closest('.cal__day').cellIndex
-    ];
-  }
-
-  getCell(coords) {
-    return this.tables[coords[0]].rows[coords[1]].cells[coords[2]];
-  }
-
-  doSomething(start, end, fn, isBtn = true) {
-    for (let table = start[0]; table <= end[0]; table++) {
-      for (
-        let row = (table === start[0] ? start[1] : 0); 
-        row <= (
-          table === end[0] 
-            ? end[1] 
-            : this.tables[table].rows.length - 1
-        ); 
-        row++
-      ) {
-        for (
-          let cell = (table === start[0] ? start[2] : 0);
-          cell <= (table === end[0] && row === end[1] ? end[2] : 6);
-          cell++
-        ) {
-          const elem = this.getCell([table, row, cell]);
-          fn(isBtn ? elem.firstElementChild : elem);
-        }
-      }
-    }
-  }
-
-  getTail(list) {
-    return [...list].pop();
+  static getMonthLastDay(year, month) {
+    return new Date(year, month + 1, 0).getDate();
   }
 }
 
-document.querySelectorAll('.cal').forEach((cal) => new Cal(cal));
+document.querySelectorAll('.js-cal').forEach((cal) => new Cal(cal));
 
