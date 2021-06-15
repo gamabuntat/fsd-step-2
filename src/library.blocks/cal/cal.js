@@ -35,9 +35,14 @@ class Cal extends Tables {
     this.updateMonthDisplayValue();
     this.updateYearDisplayValue();
     this.bindListeners(root);
-    if (root.dataset.startDate) {
-      this.setInitialRange(root);
+    if (new Date(root.dataset.startDate).toString() === 'Invalid Date') {
+      return; 
     }
+    this.setInitialRange(new Date(root.dataset.startDate));
+    if (new Date(root.dataset.endDate).toString() === 'Invalid Date') {
+      return; 
+    }
+    this.setInitialRange(new Date(root.dataset.endDate));
   }
 
   modifyTodaysBtn(now) {
@@ -58,23 +63,17 @@ class Cal extends Tables {
       ));
   }
 
-  setInitialRange(root) {
-    const startRangeDate = new Date(root.dataset.startDate);
-    const endRangeDate = new Date(root.dataset.endDate);
-    const startRangeIndex = this.getIndex(startRangeDate);
-    const endRangeIndex = this.getIndex(endRangeDate);
-    this.insertFillClearTableNthTimes(startRangeIndex);
-    this.insertFillClearTableNthTimes(endRangeIndex);
-    const startCoord = this.getCoord(
-      startRangeIndex, 
-      this.getPrevMonthNDay(startRangeIndex) 
-      + this.getPresentNDay(startRangeIndex)
+  setInitialRange(btnDate) {
+    const index = this.getIndex(btnDate);
+    this.insertFillClearTableNthTimes(index);
+    const coord = this.getCoord(
+      index, 
+      this.getPrevMonthNDay(index) + btnDate.getDate()
     );
-    const startBtn = this.getButton(startCoord);
-    this.index = startRangeIndex;
-    startBtn.click();
+    const btn = this.getButton(coord);
+    this.index = index;
+    btn.click();
     this.index = 0;
-    console.log(startBtn);
   }
 
   getIndex(rangeDate) {
