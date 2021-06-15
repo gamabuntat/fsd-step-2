@@ -4,7 +4,7 @@ mixin cal({initDate, startDate, endDate})
   - 
     const rootAttrs = {
       'data-date': initDate,
-      'data-start-date': '2021-07-17',
+      'data-start-date': startDate,
       'data-end-date': endDate
     }
 
@@ -15,8 +15,9 @@ mixin cal({initDate, startDate, endDate})
     button.cal__next-month-btn.js-cal__next-month-btn
       +svg-forward-arrow
     .cal__year.js-cal__year 1998
-    each day in ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
-      span.cal__day-week #{day}
+    .cal__day-week-container
+      each day in ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
+        span.cal__day-week #{day}
     .cal__table-container.js-cal__table-container
       table.cal__main-table.js-cal__main-table
         - for (let w = 0; w <= 5; w++)

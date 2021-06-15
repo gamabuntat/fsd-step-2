@@ -24,8 +24,6 @@ class Cal extends Tables {
     this.year = now.getFullYear();
     this.month = now.getMonth();
     this.init(now, root);
-    this.getButton(this.getLastCellCoord(this.index)).click();
-    this.getButton([0, 2, 3]).click();
   }
 
   init(now, root) {
@@ -37,6 +35,9 @@ class Cal extends Tables {
     this.updateMonthDisplayValue();
     this.updateYearDisplayValue();
     this.bindListeners(root);
+    if (root.dataset.startDate) {
+      this.setInitialRange(root);
+    }
   }
 
   modifyTodaysBtn(now) {
@@ -55,6 +56,37 @@ class Cal extends Tables {
       .forEach((coord) => (
         this.getButton(coord).disabled = true
       ));
+  }
+
+  setInitialRange(root) {
+    const startRangeDate = new Date(root.dataset.startDate);
+    const endRangeDate = new Date(root.dataset.endDate);
+    const startRangeIndex = this.getIndex(startRangeDate);
+    const endRangeIndex = this.getIndex(endRangeDate);
+    this.insertFillClearTableNthTimes(startRangeIndex);
+    this.insertFillClearTableNthTimes(endRangeIndex);
+    const startCoord = this.getCoord(
+      startRangeIndex, 
+      this.getPrevMonthNDay(startRangeIndex) 
+      + this.getPresentNDay(startRangeIndex)
+    );
+    const startBtn = this.getButton(startCoord);
+    this.index = startRangeIndex;
+    startBtn.click();
+    this.index = 0;
+    console.log(startBtn);
+  }
+
+  getIndex(rangeDate) {
+    return (rangeDate.getFullYear() - this.year) * 12 
+      - this.month + rangeDate.getMonth();
+  }
+
+  insertFillClearTableNthTimes(n) {
+    if (!n) { return; }
+    while (this.tables.length != n + 2) {
+      this.insertFillClearTable(this.tables.length);
+    }
   }
 
   insertFillClearTable(index) {
@@ -201,7 +233,7 @@ class Cal extends Tables {
   }
 
   clearRange() {
-    if (this.range.length !== 0) {
+    if (this.rangeCounter === 2) {
       this.range.forEach((coord) => {
         const cell = this.getCell(coord);
         cell.classList.remove(this.startRangeMod);

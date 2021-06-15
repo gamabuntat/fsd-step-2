@@ -41,6 +41,9 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
     flex-basis: 100%
     text-align: center
 
+  &__day-week-container
+    display: flex
+
   &__day-week
     width: 40px
     color: $color-primary
@@ -83,7 +86,6 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
         position: absolute
         right: 0
         top: 0
-        display: inline-block
         width: 50%
         height: 100%
         background-color: $color-selected-day
@@ -95,7 +97,6 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
         position: absolute
         left: 0
         top: 0
-        display: inlene-block
         width: 50%
         height: 100%
         background-color: $color-selected-day
