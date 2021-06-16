@@ -11,7 +11,8 @@ mixin dropdown(params)
 
     const attrs = {
       class: narrow && 'dropdown_narrow',
-      'data-glossary': params.glossary || 'взрослые+дети, младенцы'
+      'data-glossary': params.glossary || 'взрослые+дети, младенцы',
+      'data-counter-values': params.counterValues
     }
 
   .dropdown.js-dropdown&attributes(attrs)

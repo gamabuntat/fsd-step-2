@@ -27,6 +27,9 @@ class Dropdown {
     this.countersSum = 0;
     this.signatureInterfaces = this.getSignatureInterfaces();
     this.bindListeners();
+    if (this.dropdown.dataset.counterValues) {
+      this.setCounterValues();
+    }
   }
 
   getSignatureInterfaces() {
@@ -110,6 +113,18 @@ class Dropdown {
     this.signature.innerText = this.defaultSignature;
     this.addDecreseButtonsMod();
     this.toggleCancelButtonMod();
+  }
+
+  setCounterValues() {
+    this.dropdown.dataset.counterValues.match(/\d+/g).forEach((v, idx) => (
+      this.clickOnButtonNthTimes(+v, this.increaseButtons[idx])
+    ));
+  }
+
+  clickOnButtonNthTimes(n, button) {
+    if (n <= 0) { return; }
+    button.click();
+    this.clickOnButtonNthTimes(--n, button);
   }
 
   changeCounterValue(diff) {
