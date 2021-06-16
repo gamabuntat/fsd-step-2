@@ -51,6 +51,9 @@ class Cal extends Tables {
       return; 
     }
     this.setInitialRange(new Date(this.root.dataset.endDate));
+    if (this.isEndRange()) {
+      this.root.dispatchEvent(this.readyDateEvent);
+    }
   }
 
   modifyTodaysBtn(now) {
@@ -442,5 +445,4 @@ class Cal extends Tables {
 }
 
 document.querySelectorAll('.js-cal').forEach((cal) => new Cal(cal));
-document.addEventListener('ready-date', (e) => console.log(e));
 
