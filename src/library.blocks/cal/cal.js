@@ -5,6 +5,13 @@ class Cal extends Tables {
     super(root.getElementsByClassName('js-cal__main-table'));
     this.root = root;
     this.monthFormater = new Intl.DateTimeFormat('ru', { month: 'long' });
+    this.readyDateEvent = new CustomEvent(
+      'ready-date',
+      { 
+        bubbles: true, 
+        detail: 'date range is ready (start and end range data filled)'
+      }
+    );
     this.tableContainer = this.root.querySelector('.js-cal__table-container');
     this.template = this.tableContainer.innerHTML;
     this.monthDisplay = this.root.querySelector('.js-cal__month');
@@ -112,6 +119,10 @@ class Cal extends Tables {
       .addEventListener('click', this.handlePrevMonthBtnClick.bind(this));
     this.root.querySelector('.js-cal__next-month-btn')
       .addEventListener('click', this.handleNextMonthBtnClick.bind(this));
+    this.root.querySelector('.js-cal__cancle-btn')
+      .addEventListener('click', this.handleCancleBtnClick.bind(this));
+    this.root.querySelector('.js-cal__apply-btn')
+      .addEventListener('click', this.handleApplyBtnClick.bind(this));
     this.tableContainer
       .addEventListener('click', this.handleTableContainerClick.bind(this));
   }
@@ -131,6 +142,17 @@ class Cal extends Tables {
     this.updateYearDisplayValue();
     if (this.index === this.tables.length - 1) {
       this.insertFillClearTable(this.index + 1);
+    }
+  }
+
+  handleCancleBtnClick() {
+    this.clearRange();
+    this.clearRangeData();
+  }
+
+  handleApplyBtnClick() {
+    if (this.isEndRange()) {
+      this.root.dispatchEvent(this.readyDateEvent);
     }
   }
 
@@ -165,11 +187,13 @@ class Cal extends Tables {
       this.addCoordInRange(this.getCoordsForward(btnCoord, 7));
     }
     this.selectLastRangeBtn();
+    this.removeDataIsReady();
     if (this.isEndRange()) {
       this.orderRange();
       this.drawRange(this.range[0]);
       this.fixOrderRange();
       this.modifyRangeCells();
+      this.setDataIsReady();
     }
     this.setRangeData();
   }
@@ -278,6 +302,14 @@ class Cal extends Tables {
   clearRangeData() {
     this.root.dataset.startDate = '';
     this.root.dataset.endDate = '';
+  }
+
+  setDataIsReady() {
+    this.root.setAttribute('data-date-is-ready', '');
+  }
+
+  removeDataIsReady() {
+    this.root.removeAttribute('data-date-is-ready');
   }
 
   isPresentDayBtn(coord) {
@@ -410,4 +442,5 @@ class Cal extends Tables {
 }
 
 document.querySelectorAll('.js-cal').forEach((cal) => new Cal(cal));
+document.addEventListener('ready-date', (e) => console.log(e));
 

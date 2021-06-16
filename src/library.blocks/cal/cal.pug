@@ -1,11 +1,13 @@
 include ../svg-forward-arrow/svg-forward-arrow
+include ../text-button/text-button
 
 mixin cal({initDate, startDate, endDate})
   - 
     const rootAttrs = {
       'data-date': initDate,
       'data-start-date': startDate,
-      'data-end-date': endDate
+      'data-end-date': endDate,
+      'data-date-is-ready': !!(startDate && endDate)
     }
 
   .cal.js-cal&attributes(rootAttrs)
@@ -25,4 +27,7 @@ mixin cal({initDate, startDate, endDate})
             - for (let i = 0; i < 7; i++)
               td.cal__day
                 button.cal__day-btn
-
+    .cal__cancle-btn.js-cal__cancle-btn
+      +text-button({text: 'отмена'})
+    .cal__apply-btn.js-cal__apply-btn
+      +text-button({text: 'применить'})
