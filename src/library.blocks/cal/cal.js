@@ -3,15 +3,12 @@ import {Tables} from './Tables.js';
 class Cal extends Tables {
   constructor(root) {
     super(root.getElementsByClassName('js-cal__main-table'));
+    this.root = root;
     this.monthFormater = new Intl.DateTimeFormat('ru', { month: 'long' });
-    this.dateFormater = new Intl.DateTimeFormat(
-      'ru', {formatMatcher: 'basic'}
-    );
-    console.log(this.dateFormater.format(new Date()));
-    this.tableContainer = root.querySelector('.js-cal__table-container');
+    this.tableContainer = this.root.querySelector('.js-cal__table-container');
     this.template = this.tableContainer.innerHTML;
-    this.monthDisplay = root.querySelector('.js-cal__month');
-    this.yearDisplay = root.querySelector('.js-cal__year');
+    this.monthDisplay = this.root.querySelector('.js-cal__month');
+    this.yearDisplay = this.root.querySelector('.js-cal__year');
     this.step = this.tableContainer.getBoundingClientRect().width;
     this.rangeCounter = 0;
     this.range = [];
@@ -24,13 +21,13 @@ class Cal extends Tables {
     this.nextMonthBtnMod = 'cal__day-btn_next-month';
     this.prevMonthBtnMod = 'cal__day-btn_prev-month';
     this.todayBtnMod = 'cal__day-btn_todays';
-    const now = new Date(root.dataset.date || Date());
+    const now = new Date(this.root.dataset.date || Date());
     this.year = now.getFullYear();
     this.month = now.getMonth();
-    this.init(now, root);
+    this.init(now);
   }
 
-  init(now, root) {
+  init(now) {
     this.modifyTodaysBtn(now);
     this.disableBtsn(now);
     this.fillTable(this.index);
@@ -38,15 +35,15 @@ class Cal extends Tables {
     this.insertFillClearTable(this.index + 1);
     this.updateMonthDisplayValue();
     this.updateYearDisplayValue();
-    this.bindListeners(root);
-    if (new Date(root.dataset.startDate).toString() === 'Invalid Date') {
+    this.bindListeners();
+    if (new Date(this.root.dataset.startDate).toString() === 'Invalid Date') {
       return; 
     }
-    this.setInitialRange(new Date(root.dataset.startDate));
-    if (new Date(root.dataset.endDate).toString() === 'Invalid Date') {
+    this.setInitialRange(new Date(this.root.dataset.startDate));
+    if (new Date(this.root.dataset.endDate).toString() === 'Invalid Date') {
       return; 
     }
-    this.setInitialRange(new Date(root.dataset.endDate));
+    this.setInitialRange(new Date(this.root.dataset.endDate));
   }
 
   modifyTodaysBtn(now) {
@@ -110,10 +107,10 @@ class Cal extends Tables {
     ).getFullYear();
   }
 
-  bindListeners(root) {
-    root.querySelector('.js-cal__prev-month-btn')
+  bindListeners() {
+    this.root.querySelector('.js-cal__prev-month-btn')
       .addEventListener('click', this.handlePrevMonthBtnClick.bind(this));
-    root.querySelector('.js-cal__next-month-btn')
+    this.root.querySelector('.js-cal__next-month-btn')
       .addEventListener('click', this.handleNextMonthBtnClick.bind(this));
     this.tableContainer
       .addEventListener('click', this.handleTableContainerClick.bind(this));
@@ -169,6 +166,7 @@ class Cal extends Tables {
       this.drawRange(this.range[0]);
       this.fixOrderRange();
       this.modifyRangeCells();
+      this.setRangeDateInData();
     }
   }
 
@@ -258,6 +256,26 @@ class Cal extends Tables {
     this.endRange = [];
   }
 
+  setRangeDateInData() {
+    this.root.dataset.startDate = (
+      Cal.formatDate(this.getDateFromCoord(
+        this.startRange.find(this.isPresentDayBtn.bind(this))
+      ))
+    );
+    this.root.dataset.endDate = (
+      Cal.formatDate(this.getDateFromCoord(
+        this.endRange.find(this.isPresentDayBtn.bind(this))
+      ))
+    );
+  }
+
+  isPresentDayBtn(coord) {
+    const button = this.getButton(coord);
+    const isNext = button.classList.contains(this.nextMonthBtnMod);
+    const isPrev = button.classList.contains(this.prevMonthBtnMod);
+    return !(isNext || isPrev);
+  }
+
   addCoordInRange(coord) {
     this.getLastRange().push(coord);
   }
@@ -344,6 +362,14 @@ class Cal extends Tables {
     return this.getCell(coord).firstElementChild;
   }
 
+  getDateFromCoord(coord) {
+    return new Date(
+      this.year,
+      this.month + coord[0], 
+      coord[1] * 7 + coord[2] + 1 - this.getPrevMonthNDay(coord[0])
+    );
+  }
+
   static getNextMonthDay(nextMonthNDay) {
     return Array(nextMonthNDay).fill(1).map((d, idx) => d + idx);
   }
@@ -365,6 +391,10 @@ class Cal extends Tables {
 
   static getMonthLastDay(year, month) {
     return new Date(year, month + 1, 0).getDate();
+  }
+
+  static formatDate(date) {
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   }
 }
 
