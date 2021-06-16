@@ -4,6 +4,10 @@ class Cal extends Tables {
   constructor(root) {
     super(root.getElementsByClassName('js-cal__main-table'));
     this.monthFormater = new Intl.DateTimeFormat('ru', { month: 'long' });
+    this.dateFormater = new Intl.DateTimeFormat(
+      'ru', {formatMatcher: 'basic'}
+    );
+    console.log(this.dateFormater.format(new Date()));
     this.tableContainer = root.querySelector('.js-cal__table-container');
     this.template = this.tableContainer.innerHTML;
     this.monthDisplay = root.querySelector('.js-cal__month');
