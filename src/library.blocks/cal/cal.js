@@ -140,9 +140,13 @@ class Cal extends Tables {
     const isSelected = btn.classList.toggle(this.selectedBtnMod);
     if (isSelected === false) {
       this.clearRange();
+      this.clearRangeData();
       return;
     }
-    if (this.isEndRange()) { this.clearRange(); }
+    if (this.isEndRange()) { 
+      this.clearRange(); 
+      this.clearRangeData();
+    }
     this.rangeCounter += 1;
     const btnCoord = this.getElemCoord(btn);
     const firstRowBtn = this.getButton([btnCoord[0], btnCoord[1], 0]);
@@ -166,8 +170,8 @@ class Cal extends Tables {
       this.drawRange(this.range[0]);
       this.fixOrderRange();
       this.modifyRangeCells();
-      this.setRangeDateInData();
     }
+    this.setRangeData();
   }
 
   drawRange(coord) {
@@ -256,17 +260,24 @@ class Cal extends Tables {
     this.endRange = [];
   }
 
-  setRangeDateInData() {
+  setRangeData() {
     this.root.dataset.startDate = (
       Cal.formatDate(this.getDateFromCoord(
         this.startRange.find(this.isPresentDayBtn.bind(this))
       ))
     );
-    this.root.dataset.endDate = (
-      Cal.formatDate(this.getDateFromCoord(
-        this.endRange.find(this.isPresentDayBtn.bind(this))
-      ))
-    );
+    if (this.endRange.length != 0) {
+      this.root.dataset.endDate = (
+        Cal.formatDate(this.getDateFromCoord(
+          this.endRange.find(this.isPresentDayBtn.bind(this))
+        ))
+      );
+    }
+  }
+
+  clearRangeData() {
+    this.root.dataset.startDate = '';
+    this.root.dataset.endDate = '';
   }
 
   isPresentDayBtn(coord) {
