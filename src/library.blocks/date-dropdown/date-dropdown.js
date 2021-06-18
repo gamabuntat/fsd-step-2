@@ -9,25 +9,40 @@ class DateDropdown {
       .querySelector('.js-date-dropdown__date-signature');
     this.endSignature = this.endBtn
       .querySelector('.js-date-dropdown__date-signature');
+    this.mask = this.startSignature.innerText;
     this.observer = new MutationObserver(
       this.handleCalAttrsChanges.bind(this)
     );
-    this.observer.observe(
-      this.calWrapper, {subtree: true, attributes: true}
-    );
+    this.observer.observe(this.cal, {attributes: true});
     this.bindListeners();
     this.handleBtnClick();
+    this.handleCalStartAttrsChanges();
+    this.handleCalEndAttrsChanges();
   }
 
-  handleCalAttrsChanges(recs) {
-    if (
-      recs.find((rec) => rec.attributeName === 'data-start-date')
-    ) {
-      this.changeStartDateSignatyre(
-        this.formateDate((new Date(this.getStartDate())))
-      );
-    }
-    recs.find((rec) => rec.attributeName === 'data-end-date');
+  handleCalAttrsChanges() {
+    this.handleCalStartAttrsChanges();
+    this.handleCalEndAttrsChanges();
+  }
+
+  handleCalStartAttrsChanges() {
+    this.updateStartSignature(new Date(this.getStartDate()));
+  }
+
+  handleCalEndAttrsChanges() {
+    this.updateEndSignature(new Date(this.getEndDate()));
+  }
+
+  updateStartSignature(date) {
+    this.checkDate(date) 
+      ? this.changeStartDateSignatyre(this.mask) 
+      : this.changeStartDateSignatyre(this.formateDate(date));
+  }
+
+  updateEndSignature(date) {
+    this.checkDate(date) 
+      ? this.changeEndDateSignatyre(this.mask) 
+      : this.changeEndDateSignatyre(this.formateDate(date));
   }
 
   getStartDate() {
