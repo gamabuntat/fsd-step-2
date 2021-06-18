@@ -16,7 +16,7 @@ html(lang='ru')
   body
     +watermark
     article.text-fields
-      +date-dropdown({})
+      +date-dropdown({calAttrs: {startDate: '2021-07-13'}})
       +dropdown({
         sectionNames: ['взрослые', 'дети', 'младенцы'],
         counterValues: '0 2 2'

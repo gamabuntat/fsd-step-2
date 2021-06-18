@@ -18,7 +18,7 @@ class Cal extends Tables {
     this.template = this.tableContainer.innerHTML;
     this.monthDisplay = this.root.querySelector('.js-cal__month');
     this.yearDisplay = this.root.querySelector('.js-cal__year');
-    this.step = this.tableContainer.getBoundingClientRect().width;
+    this.step = parseInt(getComputedStyle(this.tableContainer).width);
     this.rangeCounter = 0;
     this.range = [];
     this.startRange = [];

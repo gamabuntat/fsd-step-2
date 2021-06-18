@@ -7,7 +7,7 @@ mixin date-dropdown-btn(mask, attrs = {})
     .date-dropdown__expand-icon.js-date-dropdown__expand-icon
       +svg-expand-icon
 
-mixin date-dropdown({mask = 'ДД.ММ.ГГГГ', endMask = mask})
+mixin date-dropdown({mask = 'ДД.ММ.ГГГГ', endMask = mask, calAttrs = {}})
   .date-dropdown.js-date-dropdown
     .date-dropdown__btn-container
       +date-dropdown-btn(
@@ -19,6 +19,6 @@ mixin date-dropdown({mask = 'ДД.ММ.ГГГГ', endMask = mask})
         {class: 'date-dropdown__end-btn js-date-dropdown__end-btn'}
       )
     .date-dropdown__cal-container
-      .date-dropdown__cal-wrapper.js-date-dropdown__cal-wrapper
-        +cal({startDate: '2021-07-17', endDate: '2021-08-13'})
+      .date-dropdown__cal-wrapper.js-date-dropdown__cal-wrapper.date-dropdown__cal-wrapper_hidden
+        +cal(calAttrs)
 
