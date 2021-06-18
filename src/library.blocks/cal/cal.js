@@ -213,6 +213,7 @@ class Cal extends Tables {
     if (isSelected === false) {
       this.clearRange();
       this.clearRangeData();
+      this.removeDataIsReady();
       return;
     }
     if (this.isEndRange()) { 

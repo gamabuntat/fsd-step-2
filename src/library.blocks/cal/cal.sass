@@ -23,7 +23,8 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
     align-items: center
     justify-content: center
 
-    & > *
+    & *
+      fill: $color-primary
       opacity: 1
 
     &:hover *, &:focus *
@@ -118,7 +119,7 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
     outline: none
     cursor: pointer
     box-sizing: border-box
-    z-index: 10
+    z-index: 1
 
     &:hover, &:focus
       background: color.adjust($color-main-bg, $red: -17, $green: -17, $blue: -8)

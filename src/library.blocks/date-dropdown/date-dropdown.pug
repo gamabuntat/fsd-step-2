@@ -1,17 +1,24 @@
-mixin dateDropdown(params)
-  - const {firstTitle = "прибытие", secondTitle = "выезд", firstDate = "ДД.ММ.ГГГГ", secondDate = "ДД.ММ.ГГГГ", onlyButtons = false} = params
-  .date-dropdown.js-date-dropdown.container.container_justify-content-space-between
-    .date-dropdown__container.container.container_direction-column
-      h3.h3.date-dropdown__sign #{firstTitle}
-      button.date-dropdown__button.js-date-dropdown__button.date-dropdown__start-date-button.container.container_justify-content-space-between.container_align-items-center(aria-label="show or hide calendar")
-        span.date-dropdown__start-date.js-date-dropdown__start-date 
-          | #{firstDate}
-        span.date-dropdown__expand-icon
-    .date-dropdown__container.container.container_direction-column
-      h3.h3.date-dropdown__sign #{secondTitle}
-      button.date-dropdown__button.js-date-dropdown__button.date-dropdown__end-date-button.container.container_justify-content-space-between.container_align-items-center(aria-label="show or hide calendar")
-        span.date-dropdown__end-date.js-date-dropdown__end-date 
-          | #{secondDate}
-        span.date-dropdown__expand-icon
-    if !onlyButtons
-      +calendar({})
+include ../svg-expand-icon/svg-expand-icon
+include ../cal/cal
+
+mixin date-dropdown-btn(mask, attrs = {}) 
+  button&attributes(attrs) 
+    .date-dropdown__date-signature.js-date-dropdown__date-signature #{mask}
+    .date-dropdown__expand-icon.js-date-dropdown__expand-icon
+      +svg-expand-icon
+
+mixin date-dropdown({mask = 'ДД.ММ.ГГГГ', endMask = mask})
+  .date-dropdown.js-date-dropdown
+    .date-dropdown__btn-container
+      +date-dropdown-btn(
+        mask, 
+        {class: 'date-dropdown__start-btn js-date-dropdown__start-btn'}
+      )
+      +date-dropdown-btn(
+        endMask,
+        {class: 'date-dropdown__end-btn js-date-dropdown__end-btn'}
+      )
+    .date-dropdown__cal-container
+      .date-dropdown__cal-wrapper.js-date-dropdown__cal-wrapper
+        +cal({})
+

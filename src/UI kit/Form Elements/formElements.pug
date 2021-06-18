@@ -8,6 +8,7 @@ include ../../library.blocks/bordered-button/bordered-button
 include ../../library.blocks/text-button/text-button
 include ../../library.blocks/big-button/big-button
 include ../../library.blocks/cal/cal
+include ../../library.blocks/date-dropdown/date-dropdown
 
 doctype html
 html(lang='ru')
@@ -15,6 +16,11 @@ html(lang='ru')
   body
     +watermark
     article.text-fields
+      +date-dropdown({})
+      +dropdown({
+        sectionNames: ['взрослые', 'дети', 'младенцы'],
+        counterValues: '0 2 2'
+      })
       +cal({
         initDate: '2019-08-08',
         startDate: '2019-8-19',
@@ -32,10 +38,6 @@ html(lang='ru')
         +big-button({})
       +text-field({type: 'email', placeholder: 'Email'})
       +text-field({value: 'This is pretty awesome', autofocus: true})
-      +dropdown({
-        sectionNames: ['взрослые', 'дети', 'младенцы'],
-        counterValues: '0 2 2'
-      })
       +text-field({masked: true})
       +subscription-text-field({placeholder: 'Email'})
 

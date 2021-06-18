@@ -1,9 +1,50 @@
-@use '__sign/date-dropdown__sign'
-@use '__expand-icon/date-dropdown__expand-icon'
-@use '__expand-icon/date-dropdown__expand-icon_open'
-@use '__start-date-button/date-dropdown__start-date-button'
-@use '__button/date-dropdown__button'
+@use '@common/useless/useless'
 
 .date-dropdown
   position: relative
+  display: flex
+  flex-direction: column
+  row-gap: 6px
   width: 320px
+
+  &__btn-container
+    display: flex
+    justify-content: space-between
+
+  &__start-btn, &__end-btn
+    @include useless.button-common-styles
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 150px
+    height: 44px
+    border: 1px solid $color-unclaimed-fg
+    border-radius: 4px
+    box-sizing: border-box
+
+    &:focus, &:hover
+      border-color: $color-additional-fg
+
+      & .date-dropdown__expand-icon > *
+        opacity: .75
+        
+  &__date-signature
+    color: $color-main-fg
+    text-indent: 15px
+
+  &__expand-icon
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 40px
+    height: 40px
+
+  &__cal-container
+    position: relative
+
+  &__cal-wrapper
+    position: absolute
+    z-index: 100
+
+    &_hidden
+      display: none

@@ -1,0 +1,14 @@
+include ../svg-expand-icon/svg-expand-icon
+
+mixin hhh(text)
+  p= text
+
+
+mixin some-btn(mode = 'hi')
+  - 
+    const s = {
+      hi: +svg-expand-icon()
+    }
+
+  .hhhh #{s.hi}
+
