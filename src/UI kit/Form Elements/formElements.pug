@@ -15,7 +15,11 @@ html(lang='ru')
   body
     +watermark
     article.text-fields
-      +cal({startDate: '2021-7-17', endDate: '2021-08-31'})
+      +cal({
+        initDate: '2019-08-08',
+        startDate: '2019-8-19',
+        endDate: '2019-8-23'
+      })
       .button-container
         +primary-button({})
         +primary-button({attrs: {disabled: true}})
@@ -28,7 +32,10 @@ html(lang='ru')
         +big-button({})
       +text-field({type: 'email', placeholder: 'Email'})
       +text-field({value: 'This is pretty awesome', autofocus: true})
-      +dropdown({sectionNames: ['взрослые', 'дети', 'младенцы']})
+      +dropdown({
+        sectionNames: ['взрослые', 'дети', 'младенцы'],
+        counterValues: '0 2 2'
+      })
       +text-field({masked: true})
       +subscription-text-field({placeholder: 'Email'})
 

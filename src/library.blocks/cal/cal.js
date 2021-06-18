@@ -12,6 +12,8 @@ class Cal extends Tables {
         detail: 'date range is ready (start and end range data filled)'
       }
     );
+    this.nextMonthBtn = this.root.querySelector('.js-cal__next-month-btn');
+    this.cancleBtn = this.root.querySelector('.js-cal__cancle-btn');
     this.tableContainer = this.root.querySelector('.js-cal__table-container');
     this.template = this.tableContainer.innerHTML;
     this.monthDisplay = this.root.querySelector('.js-cal__month');
@@ -39,6 +41,7 @@ class Cal extends Tables {
     this.disableBtsn(now);
     this.fillTable(this.index);
     this.clearTable(this.index);
+    this.bindListenerOnLastBtn(this.index);
     this.insertFillClearTable(this.index + 1);
     this.updateMonthDisplayValue();
     this.updateYearDisplayValue();
@@ -103,6 +106,8 @@ class Cal extends Tables {
     this.insertTemplate();
     this.fillTable(index);
     this.clearTable(index);
+    this.bindListenerOnLastBtn(index);
+    this.bindListenerOnFirstBtn(index);
   }
 
   updateMonthDisplayValue() {
@@ -120,14 +125,28 @@ class Cal extends Tables {
   bindListeners() {
     this.root.querySelector('.js-cal__prev-month-btn')
       .addEventListener('click', this.handlePrevMonthBtnClick.bind(this));
-    this.root.querySelector('.js-cal__next-month-btn')
+    this.nextMonthBtn
       .addEventListener('click', this.handleNextMonthBtnClick.bind(this));
-    this.root.querySelector('.js-cal__cancle-btn')
+    this.nextMonthBtn
+      .addEventListener('keydown', this.focusOnFirstBtn.bind(this));
+    this.cancleBtn
       .addEventListener('click', this.handleCancleBtnClick.bind(this));
+    this.cancleBtn
+      .addEventListener('keydown', this.focusOnLastBtn.bind(this));
     this.root.querySelector('.js-cal__apply-btn')
       .addEventListener('click', this.handleApplyBtnClick.bind(this));
     this.tableContainer
       .addEventListener('click', this.handleTableContainerClick.bind(this));
+  }
+
+  bindListenerOnLastBtn(index) {
+    this.getButton(this.getLastCellCoord(index))
+      .addEventListener('keydown', this.focusOnCancleBtn.bind(this));
+  }
+
+  bindListenerOnFirstBtn(index) {
+    this.getButton([index, 0, 0])
+      .addEventListener('keydown', this.focusOnNextMonthBtn.bind(this));
   }
 
   handlePrevMonthBtnClick() {
@@ -156,6 +175,34 @@ class Cal extends Tables {
   handleApplyBtnClick() {
     if (this.isEndRange()) {
       this.root.dispatchEvent(this.readyDateEvent);
+    }
+  }
+
+  focusOnCancleBtn(e) {
+    if (e.code === 'Tab' && !e.shiftKey) {
+      e.preventDefault();
+      this.cancleBtn.firstElementChild.focus();
+    }
+  }
+
+  focusOnLastBtn(e) {
+    if (e.code === 'Tab' && e.shiftKey) {
+      e.preventDefault();
+      this.getButton(this.getLastCellCoord(this.index)).focus();
+    }
+  }
+
+  focusOnFirstBtn(e) {
+    if (e.code === 'Tab' && !e.shiftKey && this.index !== 0) { 
+      e.preventDefault();
+      this.getButton([this.index, 0, 0]).focus();
+    }
+  }
+
+  focusOnNextMonthBtn(e) {
+    if (e.code === 'Tab' && e.shiftKey) {
+      e.preventDefault();
+      this.nextMonthBtn.focus();
     }
   }
 
@@ -266,12 +313,6 @@ class Cal extends Tables {
 
   clearRange() {
     if (this.rangeCounter === 2) {
-      this.range.forEach((coord) => {
-        const cell = this.getCell(coord);
-        cell.classList.remove(this.startRangeMod);
-        cell.classList.remove(this.endRangeMod);
-        this.getButton(coord).classList.remove(this.selectedBtnMod);
-      });
       [...this.genCoordsInOrder(
         this.range[0], 
         Tables.getLastItem(this.range),
@@ -281,6 +322,13 @@ class Cal extends Tables {
           this.getCell(coord).classList.remove(this.selectedMod)
         ));
     }
+    [...this.startRange, ...this.endRange].forEach((coord) => {
+      const cell = this.getCell(coord);
+      cell.classList.remove(this.startRangeMod);
+      cell.classList.remove(this.endRangeMod);
+      this.getButton(coord).classList.remove(this.selectedBtnMod);
+    });
+
     this.rangeCounter = 0;
     this.range = [];
     this.startRange = [];
