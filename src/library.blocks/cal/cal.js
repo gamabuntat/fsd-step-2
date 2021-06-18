@@ -128,11 +128,11 @@ class Cal extends Tables {
     this.nextMonthBtn
       .addEventListener('click', this.handleNextMonthBtnClick.bind(this));
     this.nextMonthBtn
-      .addEventListener('keydown', this.focusOnFirstBtn.bind(this));
+      .addEventListener('keydown', this.handleNextMonthBtnKeydown.bind(this));
     this.cancleBtn
       .addEventListener('click', this.handleCancleBtnClick.bind(this));
     this.cancleBtn
-      .addEventListener('keydown', this.focusOnLastBtn.bind(this));
+      .addEventListener('keydown', this.handleCancleBtnKeydown.bind(this));
     this.root.querySelector('.js-cal__apply-btn')
       .addEventListener('click', this.handleApplyBtnClick.bind(this));
     this.tableContainer
@@ -141,12 +141,12 @@ class Cal extends Tables {
 
   bindListenerOnLastBtn(index) {
     this.getButton(this.getLastCellCoord(index))
-      .addEventListener('keydown', this.focusOnCancleBtn.bind(this));
+      .addEventListener('keydown', this.handleLastDayBtnKeydown.bind(this));
   }
 
   bindListenerOnFirstBtn(index) {
     this.getButton([index, 0, 0])
-      .addEventListener('keydown', this.focusOnNextMonthBtn.bind(this));
+      .addEventListener('keydown', this.handleFirstDayBtnKeydown.bind(this));
   }
 
   handlePrevMonthBtnClick() {
@@ -178,31 +178,31 @@ class Cal extends Tables {
     }
   }
 
-  focusOnCancleBtn(e) {
+  handleLastDayBtnKeydown(e) {
     if (e.code === 'Tab' && !e.shiftKey) {
       e.preventDefault();
       this.cancleBtn.firstElementChild.focus();
     }
   }
 
-  focusOnLastBtn(e) {
+  handleFirstDayBtnKeydown(e) {
+    if (e.code === 'Tab' && e.shiftKey) {
+      e.preventDefault();
+      this.nextMonthBtn.focus();
+    }
+  }
+
+  handleCancleBtnKeydown(e) {
     if (e.code === 'Tab' && e.shiftKey) {
       e.preventDefault();
       this.getButton(this.getLastCellCoord(this.index)).focus();
     }
   }
 
-  focusOnFirstBtn(e) {
+  handleNextMonthBtnKeydown(e) {
     if (e.code === 'Tab' && !e.shiftKey && this.index !== 0) { 
       e.preventDefault();
       this.getButton([this.index, 0, 0]).focus();
-    }
-  }
-
-  focusOnNextMonthBtn(e) {
-    if (e.code === 'Tab' && e.shiftKey) {
-      e.preventDefault();
-      this.nextMonthBtn.focus();
     }
   }
 
