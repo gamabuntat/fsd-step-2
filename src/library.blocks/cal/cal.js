@@ -16,6 +16,8 @@ class Cal extends Tables {
     this.cancleBtn = this.root.querySelector('.js-cal__cancle-btn');
     this.tableContainer = this.root.querySelector('.js-cal__table-container');
     this.error = this.root.querySelector('.js-cal__error');
+    this.errorMessage = this.error.innerText;
+    this.error.innerText = '';
     this.template = this.tableContainer.innerHTML;
     this.monthDisplay = this.root.querySelector('.js-cal__month');
     this.yearDisplay = this.root.querySelector('.js-cal__year');
@@ -186,10 +188,10 @@ class Cal extends Tables {
 
   handleApplyBtnClick() {
     this.setSessStorDate();
-    this.error.classList.remove('cal__error_hidden');
+    this.error.innerText = this.errorMessage;
     if (this.isEndRange()) {
       this.root.dispatchEvent(this.readyDateEvent);
-      this.error.classList.add('cal__error_hidden');
+      this.error.innerText = '';
     }
   }
 
