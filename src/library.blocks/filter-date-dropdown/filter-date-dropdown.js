@@ -11,6 +11,7 @@ class FilterDateDropdown {
     this.observer = new MutationObserver(this.handleCalAttrsChanges.bind(this));
     this.observer.observe(this.cal, {attributes: true});
     this.bindListeners();
+    this.handleCalAttrsChanges();
   }
 
   handleCalAttrsChanges() {

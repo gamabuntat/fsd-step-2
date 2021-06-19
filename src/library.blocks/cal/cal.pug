@@ -29,6 +29,7 @@ mixin cal({initDate, startDate, endDate, hash, narrow})
             - for (let i = 0; i < 7; i++)
               td.cal__day
                 button.cal__day-btn
+    .cal__error.js-cal__error.cal__error_hidden Please select range!
     .cal__cancle-btn.js-cal__cancle-btn
       +text-button({text: 'очистить'})
     .cal__apply-btn.js-cal__apply-btn

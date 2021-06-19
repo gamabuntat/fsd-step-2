@@ -165,3 +165,11 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
       &:hover, &:focus
         background: $color-main-bg
 
+  &__error
+    @include useless.font-bold-type
+    margin-bottom: 3px
+    flex-basis: 100%
+    color: tomato
+
+    &_hidden
+      display: none
