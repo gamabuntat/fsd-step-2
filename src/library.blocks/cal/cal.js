@@ -31,10 +31,23 @@ class Cal extends Tables {
     this.prevMonthBtnMod = 'cal__day-btn_prev-month';
     this.todayBtnMod = 'cal__day-btn_todays';
     this.hash = this.root.dataset.hash || 'cal0';
-    const now = new Date(this.root.dataset.date || Date());
+    this.initDates = this.getInitDates();
+    const now = new Date(this.initDates.date || Date());
     this.year = now.getFullYear();
     this.month = now.getMonth();
     this.init(now);
+  }
+
+  getInitDates() {
+    const data = this.root.dataset;
+    const source = data.date || data.startDate 
+      ? data 
+      : JSON.parse(sessionStorage.getItem(this.hash));
+    return {
+      date: source.date,
+      startDate: source.startDate,
+      endDate: source.endDate
+    };
   }
 
   init(now) {
@@ -47,14 +60,10 @@ class Cal extends Tables {
     this.updateMonthDisplayValue();
     this.updateYearDisplayValue();
     this.bindListeners();
-    if (new Date(this.root.dataset.startDate).toString() === 'Invalid Date') {
-      return; 
-    }
-    this.setInitialRange(new Date(this.root.dataset.startDate));
-    if (new Date(this.root.dataset.endDate).toString() === 'Invalid Date') {
-      return; 
-    }
-    this.setInitialRange(new Date(this.root.dataset.endDate));
+    if (Cal.checkDateIsValid(this.initDates.startDate)) { return; }
+    this.setInitialRange(this.initDates.startDate);
+    if (Cal.checkDateIsValid(this.initDates.endDate)) { return; }
+    this.setInitialRange(this.initDates.endDate);
     if (this.isEndRange()) {
       this.root.dispatchEvent(this.readyDateEvent);
     }
@@ -78,7 +87,8 @@ class Cal extends Tables {
       ));
   }
 
-  setInitialRange(btnDate) {
+  setInitialRange(dateStr) {
+    const btnDate = new Date(dateStr);
     const index = this.getIndex(btnDate);
     this.insertFillClearTableNthTimes(index);
     const coord = this.getCoord(
@@ -184,7 +194,7 @@ class Cal extends Tables {
     sessionStorage.setItem(
       this.hash, 
       JSON.stringify({
-        initDate: this.root.dataset.date,
+        date: this.root.dataset.date,
         startDate: this.root.dataset.startDate,
         endDate: this.root.dataset.endDate
       })
@@ -476,6 +486,10 @@ class Cal extends Tables {
       this.month + coord[0], 
       coord[1] * 7 + coord[2] + 1 - this.getPrevMonthNDay(coord[0])
     );
+  }
+
+  static checkDateIsValid(dateStr) {
+    return new Date(dateStr).toString() === 'Invalid Date';
   }
 
   static getNextMonthDay(nextMonthNDay) {
