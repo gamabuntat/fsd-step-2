@@ -15,6 +15,18 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
   border-radius: 4px
   box-sizing: border-box
 
+  &_narrow
+    padding: 12px
+    width: 266px
+
+    & .cal__table-container
+      width: 240px
+
+    & .cal__day-btn
+      width: 34px
+      height: 34px
+      font-size: useless.px2rem(10px)
+
   &__prev-month-btn, &__next-month-btn
     @include useless.button-common-styles
     width: 20px
@@ -45,10 +57,11 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
 
   &__day-week-container
     display: flex
+    width: 100%
+    justify-content: space-around
     padding-top: 21px
 
   &__day-week
-    width: 40px
     color: $color-primary
     font-size: useless.px2rem(12px)
     font-weight: bold

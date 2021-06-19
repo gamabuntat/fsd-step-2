@@ -16,7 +16,10 @@ html(lang='ru')
   body
     +watermark
     article.text-fields
-      +date-dropdown({calAttrs: {startDate: '2021-07-13'}})
+      .dd-sign-container
+        span.dd-sign date-dropdown
+        span.dd-sign date-dropdown
+      +date-dropdown({calAttrs: {startDate: '2021-07-13', hash: 'calcal322'}})
       +dropdown({
         sectionNames: ['взрослые', 'дети', 'младенцы'],
         counterValues: '0 2 2'
@@ -24,7 +27,8 @@ html(lang='ru')
       +cal({
         initDate: '2019-08-08',
         startDate: '2019-8-19',
-        endDate: '2019-8-23'
+        endDate: '2019-8-23',
+        narrow: true
       })
       .button-container
         +primary-button({})

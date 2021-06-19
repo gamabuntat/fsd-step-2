@@ -1,13 +1,15 @@
 include ../svg-forward-arrow/svg-forward-arrow
 include ../text-button/text-button
 
-mixin cal({initDate, startDate, endDate})
+mixin cal({initDate, startDate, endDate, hash, narrow = false})
   - 
     const rootAttrs = {
       'data-date': initDate,
       'data-start-date': startDate,
       'data-end-date': endDate,
-      'data-date-is-ready': !!(startDate && endDate)
+      'data-date-is-ready': !!(startDate && endDate),
+      'data-hash': hash,
+      class: narrow && 'cal_narrow'
     }
 
   .cal.js-cal&attributes(rootAttrs)

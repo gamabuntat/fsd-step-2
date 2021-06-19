@@ -15,8 +15,7 @@ class DateDropdown {
     );
     this.observer.observe(this.cal, {attributes: true});
     this.bindListeners();
-    this.handleCalStartAttrsChanges();
-    this.handleCalEndAttrsChanges();
+    this.handleCalAttrsChanges();
   }
 
   handleCalAttrsChanges() {
@@ -71,6 +70,8 @@ class DateDropdown {
   bindListeners() {
     this.startBtn.addEventListener('click', this.handleBtnClick.bind(this));
     this.endBtn.addEventListener('click', this.handleBtnClick.bind(this));
+    this.calWrapper
+      .addEventListener('ready-date', this.handleBtnClick.bind(this));
   }
 
   handleBtnClick() {

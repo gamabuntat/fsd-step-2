@@ -30,6 +30,7 @@ class Cal extends Tables {
     this.nextMonthBtnMod = 'cal__day-btn_next-month';
     this.prevMonthBtnMod = 'cal__day-btn_prev-month';
     this.todayBtnMod = 'cal__day-btn_todays';
+    this.hash = this.root.dataset.hash || 'cal0';
     const now = new Date(this.root.dataset.date || Date());
     this.year = now.getFullYear();
     this.month = now.getMonth();
@@ -176,6 +177,18 @@ class Cal extends Tables {
     if (this.isEndRange()) {
       this.root.dispatchEvent(this.readyDateEvent);
     }
+    this.setSessStorDate();
+  }
+
+  setSessStorDate() {
+    sessionStorage.setItem(
+      this.hash, 
+      JSON.stringify({
+        initDate: this.root.dataset.date,
+        startDate: this.root.dataset.startDate,
+        endDate: this.root.dataset.endDate
+      })
+    );
   }
 
   handleLastDayBtnKeydown(e) {
