@@ -27,9 +27,8 @@ class Dropdown {
     this.countersSum = 0;
     this.signatureInterfaces = this.getSignatureInterfaces();
     this.bindListeners();
-    if (this.dropdown.dataset.counterValues) {
-      this.setCounterValues();
-    }
+    this.hash = this.dropdown.dataset.hash;
+    this.setCounterValues(this.getInitValues());
   }
 
   getSignatureInterfaces() {
@@ -51,6 +50,12 @@ class Dropdown {
         }
       ];
     }, []);
+  }
+
+  getInitValues() {
+    return this.dropdown.dataset.counterValues 
+      || sessionStorage.getItem(this.hash)
+      || '';
   }
 
   bindListeners() {
@@ -105,6 +110,10 @@ class Dropdown {
   handeApplyButtonClick() {
     this.expandButton.classList.toggle('dropdown__expand-button_pressed');
     this.list.classList.toggle('dropdown__list_hidden');
+    this.hash && sessionStorage.setItem(
+      this.hash, 
+      this.counters.reduce((res, c) => `${res} ${c.innerText}`, '')
+    );
   }
 
   handleCancelButtonClick() {
@@ -115,8 +124,8 @@ class Dropdown {
     this.toggleCancelButtonMod();
   }
 
-  setCounterValues() {
-    this.dropdown.dataset.counterValues.match(/\d+/g).forEach((v, idx) => (
+  setCounterValues(values) {
+    (values.match(/\d+/g) || []).forEach((v, idx) => (
       this.clickOnButtonNthTimes(+v, this.increaseButtons[idx])
     ));
   }

@@ -1,17 +1,13 @@
-mixin filterDateDropdown(params)
-  - const {shrink = false, title = false, onlyButtons = false} = params
-  .filter-date-dropdown.container.container_direction-column.container_justify-content-space-between
-    if title
-      h3.h3.filter-date-dropdown__sign filter date dropdown
-    else 
-      h3.h3.filter-date-dropdown__sign даты пребывания в отеле
-    button.filter-date-dropdown__button.container.container_justify-content-space-between.container_align-items-center(aria-label="show or hide calendar")
-      .container
-        span.filter-date-dropdown__date-start 19 авг 
-        |&nbsp; - &nbsp;
-        span.filter-date-dropdown__date-end 23 авг
-      span.filter-date-dropdown__expand-icon
-    if shrink
-      +calendar({shrink: true})
-    else if !onlyButtons
-      +calendar({})
+include ../svg-expand-icon/svg-expand-icon
+include ../cal/cal
+
+mixin filter-date-dropdown({calAttrs})
+  article.filter-date-dropdown.js-filter-date-dropdown
+    button.filter-date-dropdown__btn.js-filter-date-dropdown__btn
+      .filter-date-dropdown__sign Set any range
+      .filter-date-dropdown__expand-icon
+        +svg-expand-icon()
+    .filter-date-dropdown__cal-container
+      .filter-date-dropdown__cal-wrapper.filter-date-dropdown__cal-wrapper_hidden
+        +cal({narrow: true, ...calAttrs})
+

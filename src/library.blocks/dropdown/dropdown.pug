@@ -6,13 +6,15 @@ mixin dropdown(params)
     const {
       sectionNames = ['взрослые', 'дети', 'младенцы'],
       defaultSignature = 'Сколько гостей',
-      narrow = false,
+      narrow,
+      hash
     } = params
 
     const attrs = {
       class: narrow && 'dropdown_narrow',
       'data-glossary': params.glossary || 'взрослые+дети, младенцы',
-      'data-counter-values': params.counterValues
+      'data-counter-values': params.counterValues,
+      'data-hash': hash
     }
 
   .dropdown.js-dropdown&attributes(attrs)

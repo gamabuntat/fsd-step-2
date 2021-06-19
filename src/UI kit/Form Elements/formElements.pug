@@ -9,6 +9,7 @@ include ../../library.blocks/text-button/text-button
 include ../../library.blocks/big-button/big-button
 include ../../library.blocks/cal/cal
 include ../../library.blocks/date-dropdown/date-dropdown
+include ../../library.blocks/filter-date-dropdown/filter-date-dropdown
 
 doctype html
 html(lang='ru')
@@ -22,15 +23,22 @@ html(lang='ru')
       +date-dropdown({calAttrs: {startDate: '2021-07-13', hash: 'calcal322'}})
       +dropdown({
         sectionNames: ['взрослые', 'дети', 'младенцы'],
-        counterValues: '0 2 2'
+        counterValues: '0 2 2',
+        hash: 'drpdwn1'
       })
+      +dropdown({
+        sectionNames: ['взрослые', 'дети', 'младенцы'],
+        hash: 'drpdwn1',
+        narrow: true
+      })
+      +filter-date-dropdown({})
       +cal({
         initDate: '2019-08-08',
         startDate: '2019-8-19',
         endDate: '2019-8-23',
         narrow: true
       })
-      +cal({hash: 'calcal322'})
+      +cal({})
       .button-container
         +primary-button({})
         +primary-button({attrs: {disabled: true}})

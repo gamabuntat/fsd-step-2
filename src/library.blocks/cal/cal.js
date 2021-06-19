@@ -44,9 +44,9 @@ class Cal extends Tables {
       ? data 
       : JSON.parse(sessionStorage.getItem(this.hash));
     return {
-      date: source.date,
-      startDate: source.startDate,
-      endDate: source.endDate
+      date: source?.date,
+      startDate: source?.startDate,
+      endDate: source?.endDate
     };
   }
 

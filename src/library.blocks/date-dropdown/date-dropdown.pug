@@ -5,7 +5,7 @@ mixin date-dropdown-btn(mask, attrs = {})
   button&attributes(attrs) 
     .date-dropdown__date-signature.js-date-dropdown__date-signature #{mask}
     .date-dropdown__expand-icon.js-date-dropdown__expand-icon
-      +svg-expand-icon
+      +svg-expand-icon()
 
 mixin date-dropdown({mask = 'ДД.ММ.ГГГГ', endMask = mask, calAttrs = {}})
   .date-dropdown.js-date-dropdown
