@@ -1,4 +1,66 @@
-@use '__box/check__box'
-@use '__input/check__input'
-@use '__sign/check__sign'
+.check
+  max-width: 222px
+  display: flex
+  column-gap: 10px
+  line-height: 18px
+  cursor: pointer
+  
+  &__input
+    position: absolute
+    -webkit-appearance: none
+    appearance: none
+
+    &:focus + .check__box 
+
+      & .svg-check-box__square
+        stroke: $color-focus
+
+      & .svg-check-box__mark
+        fill: url(#gradient_focus)
+
+    &:not(.check__input:checked) 
+      
+      & + .check__box
+      
+        & .svg-check-box__square
+          stroke: $color-unclaimed-fg
+
+        & .svg-check-box__mark
+          fill: none
+
+      &:focus 
+
+        & + .check__box
+
+          & .svg-check-box__square
+            stroke: $color-additional-fg
+
+    &:disabled
+      
+      & ~ .check__sign
+        color: $color-unclaimed-fg
+
+      & + .check__box
+        
+        & .svg-check-box__square
+          stroke: #bfbfbf
+
+        & .svg-check-box__mark
+          fill: #ccc
+
+      &:not(.check__input:checked)
+
+        & + .check__box
+
+          & .svg-check-box__square
+            stroke: #bfbfbf
+        
+    
+
+  &__box
+    height: 20px
+
+  &__sign
+    align-self: center
+    color: $color-additional-fg
 
