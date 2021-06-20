@@ -35,6 +35,7 @@ class Cal extends Tables {
     this.todayBtnMod = 'cal__day-btn_todays';
     this.hash = this.root.dataset.hash || 'cal0';
     this.initDates = this.getInitDates();
+    this.root.dataset.date = this.initDates.date || '';
     const now = new Date(this.initDates.date || Date());
     this.year = now.getFullYear();
     this.month = now.getMonth();

@@ -17,6 +17,7 @@ class FilterDateDropdown {
   handleCalAttrsChanges() {
     if (this.cal.hasAttribute('data-date-is-ready')) {
       const data = this.cal.dataset;
+      if (data.startDate === '') { return; }
       this.sign.innerText = `${this.formateDate(new Date(data.startDate))} - ${
         this.formateDate(new Date(data.endDate))
       }`;
