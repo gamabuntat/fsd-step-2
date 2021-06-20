@@ -11,6 +11,8 @@ include ../../library.blocks/cal/cal
 include ../../library.blocks/date-dropdown/date-dropdown
 include ../../library.blocks/filter-date-dropdown/filter-date-dropdown
 include ../../library.blocks/check/check
+include ../../library.blocks/radio/radio
+include ../../library.blocks/toggle/toggle
 
 doctype html
 html(lang='ru')
@@ -18,6 +20,9 @@ html(lang='ru')
   body
     +watermark
     article.text-fields
+      +toggle({})
+      +radio({attrs: {name: 'sex'}, text: 'hi'})
+      +radio({attrs: {name: 'sex'}, text: 'bye'})
       +check({text: 'Можно курить'})
       +check({text: 'Можно с питомцами', attrs: {checked: true}})
       +check({attrs: {checked: true, disabled: true}})

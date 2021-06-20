@@ -1,7 +1,54 @@
-@use 'radio__content'
-@use 'radio__input'
-@use 'radio__button'
-@use 'radio__sign'
+.radio
+  display: inline-flex
+  align-items: center
+  column-gap: 10px
+  cursor: pointer
 
-.radio__title
-  margin-bottom: 16px
+  &__btn
+    position: absolute
+    -webkit-appearance: none
+    appearance: none
+
+    &:focus
+      
+      & + .radio__box
+        border-color: $color-additional-fg
+
+    &:checked
+      
+      & + .radio__box
+        border-color: $color-primary
+
+        &::before
+          background: $gradient-primary
+
+      & ~ .radio__sign
+        color: $color-main-fg
+
+      &:focus
+
+        & + .radio__box
+          
+          &::before
+            background: $gradient-focus
+
+  &__box
+    display: inline-flex
+    justify-content: center
+    align-items: center
+    width: 20px
+    height: 20px
+    border: 1px solid $color-unclaimed-fg
+    border-radius: 50%
+    background-color: #fff
+    box-sizing: border-box
+
+    &::before
+      content: ''
+      width: 12px
+      height: 12px
+      border-radius: 50%
+      background: none
+
+  &__sign
+    color: $color-additional-fg
