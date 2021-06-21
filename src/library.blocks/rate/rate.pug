@@ -1,5 +1,3 @@
-include ../svg-star/svg-star
-
 -
   function hashIt() {
     return 'rate' + Math.round(Math.random() * 1e2)
@@ -16,5 +14,3 @@ mixin rate({checked = 1, name = hashIt(), attrs})
         checked: isChecked,
         ...attrs
       })
-      span.rate__star
-        +svg-star()

@@ -4,22 +4,21 @@
   width: 120px
   height: 24px
   background-image: url(@library/rate/rate.svg)
+  cursor: pointer
 
   &__input
-    position: absolute
+    display: inline-flex
+    justify-content: space-between
+    width: 24px
+    height: 24px
     -webkit-appearance: none
     appearance: none
+    background-image: url(@library/rate/rate__star.svg)
+    background-position: center center
+    background-repeat: no-repeat
 
-    &:checked
-
-      & ~ .rate__star
-        display: none
-
-      & + .rate__star
-        display: unset
-
-    &:focus + .rate__star .svg-star__body
-      fill: url(#gradient_focus)
+    &:checked ~ &
+      background: none
 
   &__star
     display: inline-flex
