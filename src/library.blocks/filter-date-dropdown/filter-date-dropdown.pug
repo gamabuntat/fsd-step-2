@@ -3,11 +3,11 @@ include ../cal/cal
 
 mixin filter-date-dropdown({calAttrs})
   article.filter-date-dropdown.js-filter-date-dropdown
-    button.filter-date-dropdown__btn.js-filter-date-dropdown__btn
-      .filter-date-dropdown__sign Set any range
+    button.filter-date-dropdown__btn.js-filter-date-dropdown__btn.js-filter-date-dropdown__btn
+      .filter-date-dropdown__sign.js-filter-date-dropdown__sign Set any range
       .filter-date-dropdown__expand-icon
         +svg-expand-icon()
     .filter-date-dropdown__cal-container
-      .filter-date-dropdown__cal-wrapper.filter-date-dropdown__cal-wrapper_hidden
+      .filter-date-dropdown__cal-wrapper.js-filter-date-dropdown__cal-wrapper.filter-date-dropdown__cal-wrapper_hidden
         +cal({narrow: true, ...calAttrs})
 

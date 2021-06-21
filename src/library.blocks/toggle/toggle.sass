@@ -8,6 +8,11 @@
     -webkit-appearance: none
     appearance: none
 
+    &:focus
+
+      & + .toggle__box
+        border-color: $color-additional-fg
+
     &:checked
       
       & + .toggle__box
@@ -24,11 +29,6 @@
 
           & > .toggle__circle
             background: $gradient-focus
-
-    &:focus
-
-      & + .toggle__box
-        border-color: $color-additional-fg
 
   &__box
     display: flex

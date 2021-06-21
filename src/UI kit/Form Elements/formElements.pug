@@ -13,6 +13,7 @@ include ../../library.blocks/filter-date-dropdown/filter-date-dropdown
 include ../../library.blocks/check/check
 include ../../library.blocks/radio/radio
 include ../../library.blocks/toggle/toggle
+include ../../library.blocks/like/like
 
 doctype html
 html(lang='ru')
@@ -20,6 +21,7 @@ html(lang='ru')
   body
     +watermark
     article.text-fields
+      +like({})
       +toggle({})
       +radio({attrs: {name: 'sex'}, text: 'hi'})
       +radio({attrs: {name: 'sex'}, text: 'bye'})

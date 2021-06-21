@@ -1,0 +1,9 @@
+include ../svg-heart-icon/svg-heart-icon
+
+mixin like({counterValue = 0, attrs})
+  .like.js-like
+    button.like__btn.js-like__btn&attributes(attrs)
+      span.like__heart
+        +svg-heart-icon()
+      span.like__counter.js-like__counter #{counterValue}
+

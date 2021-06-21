@@ -1,9 +1,10 @@
 class FilterDateDropdown {
   constructor(root) {
-    this.calWrapper = root.querySelector('.filter-date-dropdown__cal-wrapper');
+    this.calWrapper = root
+      .querySelector('.js-filter-date-dropdown__cal-wrapper');
     this.cal = this.calWrapper.firstElementChild;
-    this.btn = root.querySelector('.filter-date-dropdown__btn');
-    this.sign = root.querySelector('.filter-date-dropdown__sign');
+    this.btn = root.querySelector('.js-filter-date-dropdown__btn');
+    this.sign = root.querySelector('.js-filter-date-dropdown__sign');
     this.dateFormater = new Intl.DateTimeFormat(
       'ru', 
       {day: 'numeric', month: 'short'}
