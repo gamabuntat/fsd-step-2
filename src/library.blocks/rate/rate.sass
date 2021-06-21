@@ -5,39 +5,24 @@
   height: 24px
   background-image: url(@library/rate/rate.svg)
 
-.rate__star
-  position: absolute
-  margin: 0
-  top: 0
-  left: 0
-  height: 24px
-  background-repeat: repeat-x
-  appearance: none
-  -moz-appearance: none
-  -webkit-appearance: none
+  &__input
+    position: absolute
+    -webkit-appearance: none
+    appearance: none
 
-.rate__star:focus
-  outline: none
+    &:checked
 
-.rate__star:checked
-  background-image: url(@library/rate/rate__star.svg)
+      & ~ .rate__star
+        display: none
 
-.rate__star:nth-of-type(1)
-  z-index: 5
-  width: 24px
+      & + .rate__star
+        display: unset
 
-.rate__star:nth-of-type(2)
-  z-index: 4
-  width: 48px
+    &:focus + .rate__star .svg-star__body
+      fill: url(#gradient_focus)
 
-.rate__star:nth-of-type(3)
-  z-index: 3
-  width: 72px
+  &__star
+    display: inline-flex
+    width: 24px
+    height: 24px
 
-.rate__star:nth-of-type(4)
-  z-index: 2
-  width: 96px
-
-.rate__star:nth-of-type(5)
-  z-index: 1
-  width: 120px

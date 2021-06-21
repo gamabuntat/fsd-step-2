@@ -1,9 +1,9 @@
-include ../svg-heart-icon/svg-heart-icon
+include ../svg-heart/svg-heart
 
 mixin like({counterValue = 0, attrs, pressed})
   .like.js-like(class=pressed && 'like_pressed')
     button.like__btn.js-like__btn&attributes(attrs)
       span.like__heart
-        +svg-heart-icon()
+        +svg-heart()
       span.like__counter.js-like__counter #{counterValue}
 
