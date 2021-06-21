@@ -11,6 +11,8 @@
   border-radius: 10px
   box-sizing: border-box
 
+  &:focus
+    
   &_pressed
     background: $gradient-primary
 
@@ -22,6 +24,12 @@
 
     & .like__counter
       color: $color-primary
+
+  &_focused
+    background-color: $color-additional-fg
+
+  &_focused-pressed
+    background: $gradient-focus
 
   &__btn
     @include useless.button-common-styles()
