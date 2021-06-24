@@ -10,6 +10,7 @@ class DateDropdown {
     this.endSignature = this.endBtn
       .querySelector('.js-date-dropdown__date-signature');
     this.mask = this.startSignature.innerText;
+    this.endMask = this.endSignature.innerText;
     this.observer = new MutationObserver(
       this.handleCalAttrsChanges.bind(this)
     );
@@ -39,7 +40,7 @@ class DateDropdown {
 
   updateEndSignature(date) {
     this.checkDate(date) 
-      ? this.changeEndDateSignatyre(this.mask) 
+      ? this.changeEndDateSignatyre(this.endMask) 
       : this.changeEndDateSignatyre(this.formateDate(date));
   }
 

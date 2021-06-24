@@ -1,3 +1,5 @@
+@use '@common/useless/useless'
+
 //fonts
 @import '@src/fonts/montserrat-regular/fonts.css'
 @import '@src/fonts/montserrat-bold/fonts.css'
@@ -29,34 +31,51 @@ body
   display: flex
   flex-wrap: wrap
   gap: 20px
+  column-gap: 130px
   box-sizing: border-box
 
-.text-fields
+.fe-title
+  display: flex
+  justify-content: space-between
+  margin-bottom: 16px
+
+  &__topheading
+    @include useless.font-bold-type
+    color: $color-title-fg
+
+  &__subtitle
+    font-size: useless.px2rem(12px)
+    text-transform: uppercase
+    color: $color-additional-fg
+
+.fe-container
+  display: flex
+  flex-direction: column
+
+  &_small-indent
+    gap: 10px
+
+  &_large-indent
+    gap: 20px
+
+  &_horizontal
+    flex-direction: row
+
+.group
   width: 320px
   display: flex
   flex-direction: column
-  row-gap: 20px
-  box-sizing: border-box
+  row-gap: 40px
 
-.button-container
-  display: grid
-  grid-template-columns: repeat(2, 99px)
-  grid-template-rows: repeat(2, 44px)
-  column-gap: 19px
-  row-gap: 30px
+  &_first
+    row-gap: 20px
 
-.text-button-container
-  display: flex
-  column-gap: 20px
+    & > .fe-container:nth-child(n + 4)
+      margin-bottom: 20px
 
-.big-button-container
-  height: 44px
+    & > .fe-container:last-child
+      margin-bottom: 0
 
-.dd-sign-container
-  width: 320px
-  display: flex
-  justify-content: space-between
-  column-gap: 10px
+    & .fe-title
+      margin-bottom: 5px
 
-.dd-sign
-  flex-basis: 150px

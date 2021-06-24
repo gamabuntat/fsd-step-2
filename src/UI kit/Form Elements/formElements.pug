@@ -16,67 +16,76 @@ include ../../library.blocks/toggle/toggle
 include ../../library.blocks/like/like
 include ../../library.blocks/rate/rate
 include ../../library.blocks/pagination/pagination
+include ../../library.blocks/range-slider/range-slider
+
+mixin fe-title(title = '', subTitle = '')
+  .fe-title
+    span.fe-title__topheading #{title}
+    span.fe-title__subtitle #{subTitle}
 
 doctype html
 html(lang='ru')
   +head({title: 'form elements'})
   body
     +watermark
-    article.text-fields
-      +pagination(3)
-      +rate({checked: 2})
-      +rate({name: 'hihe'})
-      +like({counterValue: 12})
-      +toggle({})
-      +radio({attrs: {name: 'sex'}, text: 'hi'})
-      +radio({attrs: {name: 'sex'}, text: 'bye'})
-      +check({text: 'Можно курить'})
-      +check({text: 'Можно с питомцами', attrs: {checked: true}})
-      +check({attrs: {checked: true, disabled: true}})
-      +check({attrs: {disabled: true}})
-      // .dd-sign-container
-      //   span.dd-sign date-dropdown
-      //   span.dd-sign date-dropdown
-      // +date-dropdown({calAttrs: {startDate: '2021-07-13', hash: 'calcal322'}})
-      // +dropdown({
-      //   sectionNames: ['взрослые', 'дети', 'младенцы'],
-      //   counterValues: '0 2 2',
-      //   hash: 'drpdwn1'
-      // })
-      // +dropdown({
-      //   sectionNames: ['взрослые', 'дети', 'младенцы'],
-      //   hash: 'drpdwn1',
-      //   narrow: true
-      // })
-      // +filter-date-dropdown({})
-      // +cal({
-      //   initDate: '2019-08-08',
-      //   startDate: '2019-8-19',
-      //   endDate: '2019-8-23',
-      //   narrow: true
-      // })
-      // +cal({})
-      // .button-container
-      //   +primary-button({})
-      //   +primary-button({attrs: {disabled: true}})
-      //   +bordered-button({})
-      //   +bordered-button({attrs: {disabled: true}})
-      // .text-button-container
-      //   +text-button({})
-      //   +text-button({attrs: {disabled: true}})
-      // .big-button-container
-      //   +big-button({})
-      // +text-field({type: 'email', placeholder: 'Email'})
-      // +text-field({value: 'This is pretty awesome', autofocus: true})
-      // +text-field({masked: true})
-      // +subscription-text-field({placeholder: 'Email'})
+    article.group.group_first
+      .fe-container
+        +fe-title('text field', 'default')
+        +text-field({type: 'email', placeholder: 'Email'})
+      .fe-container
+        +fe-title('text field', 'hover/focus')
+        +text-field({value: 'This is pretty awesome', autofocus: true})
+      .fe-container
+        +fe-title('dropdown')
+        +dropdown({})
+      .fe-container
+        +fe-title('masked text field')
+        +text-field({masked: true})
+      .fe-container
+        +fe-title('date dropdown')
+        +date-dropdown({endMask: '19.08.2019', calAttrs: {hash: 'fecal1'}})
+      .fe-container
+        +fe-title('filter date dropdown')
+        +filter-date-dropdown({
+          calAttrs: {
+            hash: 'fecal2',
+            startDate: '2021-08-19',
+            endDate: '2021-08-23'
+          }
+        })
+      .fe-container
+        +fe-title('subscription text field')
+        +subscription-text-field({placeholder: 'Email'})
 
-    // article.text-fields
-      // +dropdown({
-      //   sectionNames: ['спальни', 'кровати', 'ванные комнаты'],
-      //   defaultSignature: 'параметры номера',
-      //   narrow: true,
-      //   glossary: 'спальни, кровати, ванные комнаты',
-      //   counterValues: '1, 2, 33'
-      // })
+    article.group
+      .fe-container
+        +fe-title('checkbox buttons')
+        .fe-container.fe-container_small-indent
+          +check({text: 'Можно курить'})
+          +check({text: 'Можно с питомцами', attrs: {checked: true}})
+          +check({attrs: {checked: true}})
+      .fe-container
+        +fe-title('radio buttons')
+        .fe-container.fe-container_large-indent.fe-container_horizontal
+          +radio({attrs: {name: 'sex', checked: true}, text: 'Мужчина'})
+          +radio({attrs: {name: 'sex'}, text: 'Женщина'})
+      .fe-container
+        +fe-title('toggle')
+        .fe-container.fe-container_small-indent
+          +toggle({attrs: {checked: true}})
+          +toggle({})
+      .fe-container
+        +fe-title('like button')
+        .fe-container.fe-container_small-indent.fe-container_horizontal
+          +like({value: 2})
+          +like({value: 12, pressed: true})
+      .fe-container
+        +fe-title('rate button')
+        .fe-container.fe-container_large-indent.fe-container_horizontal
+          +rate({checked: 4})
+          +rate({checked: 5})
+
+    article.group
+      +range-slider({})
+
 
