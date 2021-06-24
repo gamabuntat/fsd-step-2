@@ -1,13 +1,14 @@
-mixin pagination()
-  .pagination.container.container_direction-column
-    .container.container_align-items-center.container_justify-content-space-between
-      a.container.pagination__link.pagination__link_current(href='change me') 1
-      a.container.pagination__link(href='change me') 2
-      a.container.pagination__link(href='change me') 3
-      span.pagination__three-dots ...
-      a.container.pagination__link.pagination__last-page(href='change me') 15
-      form(action='change me')
-        button.pagination__next-button.text-button.container.container_align-items-center.container_justify-content-center(aria-label='the next page of the rooms we have selected for you')
-          span.pagination__arrow
-    .container.pagination__description
-      span 1 – 12 из 100+ вариантов аренды
+include ../svg-forward-arrow/svg-forward-arrow
+
+mixin pagination(current, last = 15)
+  .pagination
+    - for (let i = current; i < current + 3; i++)
+      a(href="change me").pagination__item(
+        class= i === current && 'pagination__item_active'
+      ) #{i}
+    | ...
+    a(href="change me").pagination__item #{last}
+    button.pagination__next-item 
+      +svg-forward-arrow()
+    span.pagination__sign 1 – 12 из 100+ вариантов аренды
+

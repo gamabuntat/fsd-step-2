@@ -1,11 +1,57 @@
-@use '__link/pagination__link'
-@use '__link/pagination__link_current'
-@use '__next-button/pagination__next-button'
-@use '__arrow/pagination__arrow'
-@use '__description/pagination__description'
+@use 'sass:color'
+
+@use '@common/useless/useless'
 
 .pagination
-  width: 241px
+  display: flex
+  justify-content: space-between
+  align-items: center
+  flex-wrap: wrap
+  row-gap: 10px
+  color: $color-additional-fg
 
-.pagination__three-dots
-  color: colors.$base-color-50
+  &__item
+    display: inline-flex
+    justify-content: center
+    align-items: center
+    width: 40px
+    height: 40px
+    background-color: $color-main-bg
+    color: $color-additional-fg
+    border-radius: 50%
+    text-decoration: none
+    outline: none
+
+    &:hover, &:focus
+      background-color: color.adjust($color-main-bg, $lightness: -7%)
+
+    &_active
+      background: $gradient-primary
+      color: white
+
+      &:focus
+        background: $gradient-focus
+
+  &__next-item
+    @include useless.button-common-styles()
+    display: inline-flex
+    justify-content: center
+    align-items: center
+    border-radius: 50%
+    width: 40px
+    height: 40px
+    background: $gradient-secondary
+
+    & *
+      opacity: 1
+      fill: white
+
+    &:hover, &:focus
+      background: $gradient-secondary-focus
+
+  &__sign
+    display: inline-flex
+    flex-basis: 100%
+    justify-content: center
+    color: $color-main-fg
+

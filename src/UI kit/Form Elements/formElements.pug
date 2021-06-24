@@ -15,6 +15,7 @@ include ../../library.blocks/radio/radio
 include ../../library.blocks/toggle/toggle
 include ../../library.blocks/like/like
 include ../../library.blocks/rate/rate
+include ../../library.blocks/pagination/pagination
 
 doctype html
 html(lang='ru')
@@ -22,6 +23,7 @@ html(lang='ru')
   body
     +watermark
     article.text-fields
+      +pagination(3)
       +rate({checked: 2})
       +rate({name: 'hihe'})
       +like({counterValue: 12})
