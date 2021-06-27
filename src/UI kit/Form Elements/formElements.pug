@@ -19,10 +19,11 @@ include ../../library.blocks/pagination/pagination
 include ../../library.blocks/range-slider/range-slider
 include ../../library.blocks/range-label/range-label
 
-mixin fe-title(title = '', subTitle = '')
+mixin fe-title(title = '', subTitle)
   .fe-title
     span.fe-title__topheading #{title}
-    span.fe-title__subtitle #{subTitle}
+    if subtitle
+      span.fe-title__subtitle #{subTitle}
 
 doctype html
 html(lang='ru')
@@ -30,8 +31,6 @@ html(lang='ru')
   body
     +watermark
     article.group.group_first
-      +range-label({sliderID: 'feslider', step: 100})
-      +range-slider({bsp: 0.33, bep: 0.66, id: 'feslider'})
       .fe-container
         +fe-title('text field', 'default')
         +text-field({type: 'email', placeholder: 'Email'})
@@ -89,4 +88,28 @@ html(lang='ru')
           +rate({checked: 5})
 
     article.group
+      .fe-slider-container
+        +fe-title('range slider')
+        +range-label({sliderID: 'feslider', step: 100})
+        +range-slider({bsp: 0.333, bep: 0.666, id: 'feslider'})
+      .fe-container
+        +fe-title('buttons')
+        .fe-button-container
+          .fe-button
+            +primary-button({})
+          .fe-button
+            +primary-button({attrs: {disabled: true}})
+          .fe-button
+            +bordered-button({})
+          .fe-button
+            +bordered-button({attrs: {disabled: true}})
+          .fe-container.fe-container_horizontal.fe-container_large-indent
+            +text-button({})
+            +text-button({attrs: {disabled: true}})
+          .fe-big-button
+            +big-button({})
+      .fe-container
+        +fe-title('pagination')
+        .fe-pagination
+          +pagination()
 

@@ -4,6 +4,12 @@ mixin range-slider({bsp = 0, bep = 1, id})
       .range-slider__body.js-range-slider__body
         .range-slider__progress-bar.range-slider__progress-bar_start.js-range-slider__progress-bar_start
         .range-slider__progress-bar.range-slider__progress-bar_end.js-range-slider__progress-bar_end
-      button.range-slider__button.range-slider__button_start-range.js-range-slider__button_start-range(aria-label='start range button')
-      button.range-slider__button.range-slider__button_end-range.js-range-slider__button_end-range(aria-label='end range button')
+      button.range-slider__button.range-slider__button_start-range.js-range-slider__button_start-range(
+        aria-label='start range button'
+        tabindex='-1'
+      )
+      button.range-slider__button.range-slider__button_end-range.js-range-slider__button_end-range(
+        aria-label='end range button'
+        tabindex='-1'
+      )
 

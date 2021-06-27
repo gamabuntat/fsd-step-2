@@ -51,7 +51,7 @@ class RangeLable {
   }
 
   format(preValue) {
-    return this.formater.format(preValue);
+    return this.formater.format(preValue).replace(/\s(?!\d)/, '');
   }
 
   calcValue(pos) {
