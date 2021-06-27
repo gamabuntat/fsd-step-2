@@ -7,24 +7,10 @@ const resizeBar = (bar, state) => () => (
   }%`
 );
 
-const calcDisplayValue = (min, max) => (position) => (
-  String(Math.floor((max - min) * position + min))
-);
-
-const formatter = (format = new Intl.NumberFormat("ru")) => (value) => (
-  format.format(value)
-);
-
-const changeDisplayValue = (display) => (value) => (
-  display.innerText = value
-);
-
 const calcPosition = (container, state) => (e) => {
   const rect = container.getBoundingClientRect();
   return (e.x - rect.x - state.getShift() + state.b().offset) / rect.width;
 };
-
-const reverseCalcPosition = (min, max, bp) => ((bp - min) / (max - min));
 
 const moveButton = (btn, state) => (preposition) => {
   const position = Math.min(
@@ -58,10 +44,8 @@ const newState = (bw, track) => {
   const transformTrack = (ratio = s.stretchRatio) => (
     track.style.transform = `scale(${ratio})`
   );
-  const setTrackStretchRatio = () => (
-    transformTrack(1), setStretchRatio(getRelBw())
-  );
-  setTrackStretchRatio();
+  transformTrack(1); 
+  setStretchRatio(getRelBw());
   transformTrack();
   return (type = 'bs') => {
     const extendedButtonI = {
@@ -100,47 +84,28 @@ const newState = (bw, track) => {
 };
 
 const bindListeners = (root) => {
-  const container = root.querySelector('.js-range-slider__sub-container');
+  const container = root.querySelector('.js-range-slider__container');
   const track = root.querySelector('.js-range-slider__body');
   const bs = root.querySelector('.js-range-slider__button_start-range');
   const be = root.querySelector('.js-range-slider__button_end-range');
   const pbs = root.querySelector('.js-range-slider__progress-bar_start');
   const pbe = root.querySelector('.js-range-slider__progress-bar_end');
-  const ds = root.querySelector('.js-range-slider__price_from');
-  const de = root.querySelector('.js-range-slider__price_to');
   const state = newState(bs.getBoundingClientRect().width, track);
-  const {bsp, bep, minV, maxV} = Object.entries(root.dataset)
-    .reduce((acc, i) => {
-      const o = {};
-      o[i[0]] = Number(i[1]);
-      return {...acc, ...o};
-    }, {});
+  const {bsp, bep} = root.dataset;
   const moveHandlerS = pipe(
     calcPosition(container, state('bs')),
     moveButton(bs, state('bs')),
-    calcDisplayValue(minV, maxV),
-    formatter(),
-    changeDisplayValue(ds),
+    (pos) => root.dataset.bsp = pos,
     resizeBar(pbs, state('pbs'))
   );
   const moveHandlerE = pipe(
     calcPosition(container, state('be')),
     moveButton(be, state('be')),
-    calcDisplayValue(minV, maxV),
-    formatter(),
-    changeDisplayValue(de),
+    (pos) => root.dataset.bep = pos,
     resizeBar(pbe, state('pbe'))
   );
-  pipe(
-    reverseCalcPosition,
-    moveButton(bs, state('bs')),
-    resizeBar(pbs, state('pbs'))
-  )(minV, maxV, bsp);
-  pipe(
-    reverseCalcPosition, 
-    moveButton(be, state('be')),
-    resizeBar(pbe, state('pbe'))
-  )(minV, maxV, bep);
+  pipe(moveButton(bs, state('bs')), resizeBar(pbs, state('pbs')))(bsp);
+  pipe(moveButton(be, state('be')), resizeBar(pbe, state('pbe')))(bep);
   [bs, be].forEach((b) => {
     b.addEventListener('pointerdown', handlePointerDown(state('t')));
     b.addEventListener('lostpointercapture', handleLostPointer(state('t')));

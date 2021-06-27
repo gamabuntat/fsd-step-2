@@ -17,6 +17,7 @@ include ../../library.blocks/like/like
 include ../../library.blocks/rate/rate
 include ../../library.blocks/pagination/pagination
 include ../../library.blocks/range-slider/range-slider
+include ../../library.blocks/range-label/range-label
 
 mixin fe-title(title = '', subTitle = '')
   .fe-title
@@ -29,6 +30,8 @@ html(lang='ru')
   body
     +watermark
     article.group.group_first
+      +range-label()
+      +range-slider()
       .fe-container
         +fe-title('text field', 'default')
         +text-field({type: 'email', placeholder: 'Email'})
@@ -86,6 +89,4 @@ html(lang='ru')
           +rate({checked: 5})
 
     article.group
-      +range-slider({})
-
 

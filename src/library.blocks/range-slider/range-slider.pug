@@ -1,22 +1,9 @@
-mixin range-slider({title = 'range slider', maxValue = 15000, minValue = 0, bsp = 5000, bep = 10000})
-  - const formatter = new Intl.NumberFormat("ru")
-  .range-slider.js-range-slider.container.container_direction-column(
-    data-min-v=`${minValue}`
-    data-max-v=`${maxValue}`
-    data-bsp=`${bsp}`
-    data-bep=`${bep}`
-  )
-    .container.container_justify-content-space-between
-      h3.h3.range-slider__title #{title}
-      .range-slider__price-range.container
-        span.range-slider__price.range-slider__price_from.js-range-slider__price_from #{formatter.format(bsp)}
-        span.range-slider__dash &nbsp;-&nbsp;
-        span.range-slider__price.range-slider__price_to.js-range-slider__price_to #{formatter.format(bep)}
-    .range-slider__container.js-range-slider__container.container.container_align-items-center
-      .range-slider__sub-container.js-range-slider__sub-container
-        .range-slider__body.js-range-slider__body
-          .range-slider__progress-bar.range-slider__progress-bar_start.js-range-slider__progress-bar_start
-          .range-slider__progress-bar.range-slider__progress-bar_end.js-range-slider__progress-bar_end
-        button.range-slider__button.range-slider__button_start-range.js-range-slider__button_start-range(aria-label='start range button')
-        button.range-slider__button.range-slider__button_end-range.js-range-slider__button_end-range(aria-label='end range button')
+mixin range-slider(bsp = 0, bep = 1)
+  .range-slider.js-range-slider(data-bsp=bsp data-bep=bep)
+    .range-slider__container.js-range-slider__container
+      .range-slider__body.js-range-slider__body
+        .range-slider__progress-bar.range-slider__progress-bar_start.js-range-slider__progress-bar_start
+        .range-slider__progress-bar.range-slider__progress-bar_end.js-range-slider__progress-bar_end
+      button.range-slider__button.range-slider__button_start-range.js-range-slider__button_start-range(aria-label='start range button')
+      button.range-slider__button.range-slider__button_end-range.js-range-slider__button_end-range(aria-label='end range button')
 

@@ -1,12 +1,62 @@
-@use 'range-slider__price'
-@use '__price-range/range-slider__price-range'
-@use '__button/range-slider__button'
-@use '__container/range-slider__container'
-@use '__button/range-slider__button_start-range'
-@use '__button/range-slider__button_end-range'
+$container-width: 266px
+$button-width: 16px
 
 .range-slider
-  width: range-slider__container.$container-width
+  display: flex
+  align-items: center
+  margin: 4px 0
+  padding: 0 $button-width
+  width: 100%
+  box-sizing: border-box
 
-.range-slider > *:first-child
-  margin-bottom: 17px
+  &__container
+    position: relative
+    width: 100%
+    height: 100%
+
+  &__body
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 100%
+    height: 6px
+    background: $gradient-secondary
+    border-radius: 3px
+
+  &__progress-bar
+    height: 100%
+    background-color: white
+    border: 1px solid $color-unclaimed-fg
+    border-radius: 4px
+
+  &__progress-bar_start
+    border-right: 0
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
+
+  &__progress-bar_end
+    border-left: 0
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
+
+  &__button
+    position: absolute
+    margin: auto
+    padding: 0
+    top: 0
+    bottom: 0
+    width: $button-width
+    height: $button-width
+    background: $gradient-secondary
+    border: 2px solid white
+    border-radius: 50%
+    outline: none
+    cursor: pointer
+    touch-action: none
+
+  &__button_start-range
+    left: 0
+    transform: translate(-$button-width)
+
+  &__button_end-range
+    left: 100%
