@@ -3,7 +3,8 @@ include ../svg-forward-arrow/svg-forward-arrow
 mixin pagination(current, last = 15)
   .pagination
     - for (let i = current; i < current + 3; i++)
-      a(href="change me").pagination__item(
+      a.pagination__item(
+        href="change me"
         class= i === current && 'pagination__item_active'
       ) #{i}
     | ...

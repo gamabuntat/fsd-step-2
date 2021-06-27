@@ -17,16 +17,29 @@ class RangeLable {
             style: 'currency',
             currency: 'RUB',
           },
-        maximumFractionDigits: RangeLable.calcDecimalPlaces(+root.dataset.step)
+        maximumFractionDigits: RangeLable.calcDecimalPlaces(+root.dataset.step),
+        minimumFractionDigits: 0
       }
     );
-    this.valueOfDivision = root.dataset.max
+    const data = root.dataset;
+    this.max = +data.max;
+    this.min = +data.min;
+    this.step = +data.step;
     this.handleSliderChangeAttrs();
   }
 
   handleSliderChangeAttrs() {
-    this.updateStartValue(this.format(this.slider.dataset.bsp));
-    this.updateEndValue(this.format(this.slider.dataset.bep));
+    console.log(this.slider.dataset.bsp);
+    this.updateStartValue(
+      this.format(
+        this.calcValue(this.slider.dataset.bsp)
+      )
+    );
+    this.updateEndValue(
+      this.format(
+        this.calcValue(this.slider.dataset.bep)
+      )
+    );
   }
 
   updateStartValue(value) {
@@ -41,9 +54,13 @@ class RangeLable {
     return this.formater.format(preValue);
   }
 
-  // calcValue(pos) {
-  //   return 
-  // }
+  calcValue(pos) {
+    return Math.min(
+      this.max,
+      Math.floor(pos * (this.max - this.min + this.step) / this.step) 
+      * this.step + this.min
+    );
+  }
 
   static calcDecimalPlaces(n) {
     const sn = String(n);
