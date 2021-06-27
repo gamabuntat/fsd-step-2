@@ -30,8 +30,8 @@ html(lang='ru')
   body
     +watermark
     article.group.group_first
-      +range-label()
-      +range-slider()
+      +range-label({sliderID: 'feslider', step: 0.0001})
+      +range-slider({bsp: 0.33, bep: 0.66, id: 'feslider'})
       .fe-container
         +fe-title('text field', 'default')
         +text-field({type: 'email', placeholder: 'Email'})

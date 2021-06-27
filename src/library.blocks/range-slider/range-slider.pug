@@ -1,5 +1,5 @@
-mixin range-slider(bsp = 0, bep = 1)
-  .range-slider.js-range-slider(data-bsp=bsp data-bep=bep)
+mixin range-slider({bsp = 0, bep = 1, id})
+  .range-slider.js-range-slider(id=id, data-bsp=bsp data-bep=bep)
     .range-slider__container.js-range-slider__container
       .range-slider__body.js-range-slider__body
         .range-slider__progress-bar.range-slider__progress-bar_start.js-range-slider__progress-bar_start

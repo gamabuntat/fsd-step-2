@@ -11,4 +11,5 @@ import '@library/date-dropdown/date-dropdown.js';
 import '@library/filter-date-dropdown/filter-date-dropdown.js';
 import '@library/like/like.js';
 import '@library/range-slider/range-slider.js';
+import '@library/range-label/range-label.js';
 
