@@ -1,6 +1,11 @@
+@use '@common/useless/useless'
+
 .rich-check
   display: grid
   grid-template-columns: min-content auto
+  align-items: center
+  column-gap: 10px
+  row-gap: 4px
   cursor: pointer
 
   &__input
@@ -53,6 +58,16 @@
           & .svg-check-box__square
             stroke: #bfbfbf
 
+  &__box     
+    display: flex
+
+  &__title
+    color: $color-main-fg
+    font-weight: bold
+
   &__text
     grid-column-start: 2
+    width: 232px
+    color: $color-additional-fg
+    font-size: useless.px2rem(12px)
 

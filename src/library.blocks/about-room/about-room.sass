@@ -1,0 +1,44 @@
+@use 'sass:color'
+
+.about-room
+  display: flex
+  flex-direction: column
+  row-gap: 17px
+
+  &_comfort &__icon
+    background-image: url(@library/about-room/about-room_comfort.svg)
+
+  &_convenience &__icon
+    background-image: url(@library/about-room/about-room_convenience.svg)
+
+  &_coziness &__icon
+    background-image: url(@library/about-room/about-room_coziness.svg)
+
+  &__container
+    display: flex
+    column-gap: 10px
+
+  &__sub-container
+    align-self: stretch
+    display: flex
+    flex-direction: column
+    justify-content: space-around
+
+  &__icon
+    width: 48px
+    height: 48px
+    background-repeat: no-repeat
+    background-position: center center
+
+  &__title
+    font-weight: bold
+    color: $color-main-fg
+
+  &__description
+    color: $color-main-fg
+
+  &__separator
+    width: 280px
+    height: 1px
+    background-color: color.adjust($color-title-fg, $alpha: -0.9)
+

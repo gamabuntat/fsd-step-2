@@ -1,0 +1,28 @@
+mixin about-room(mod, isLast)
+  - 
+    const mods = {
+      comfort: {
+        title: 'Комфорт',
+        description: 'Шумопоглощающие стены',
+      },
+      convenience: {
+        title: 'Удобство',
+        description: 'Окно в каждой из спален'
+      },
+      coziness: {
+        title: 'Уют',
+        description: 'Номер оснащён камином',
+      },
+    }
+
+    const mood = mods[mod]
+
+  .about-room(class=mood && 'about-room_' + mod)
+    .about-room__container
+      .about-room__icon
+      .about-room__sub-container
+        .about-room__title #{mood.title}
+        .about-room__description #{mood.description}
+    unless isLast
+    .about-room__separator
+

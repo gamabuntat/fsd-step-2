@@ -20,6 +20,8 @@ include ../../library.blocks/range-slider/range-slider
 include ../../library.blocks/range-label/range-label
 include ../../library.blocks/check-list/check-list
 include ../../library.blocks/rich-check/rich-check
+include ../../library.blocks/bullet-list/bullet-list
+include ../../library.blocks/about-room/about-room
 
 - 
   const narrowDropdownParams = {
@@ -159,5 +161,24 @@ html(lang='ru')
           })
 
     article.group
-      +rich-check({text: 'hihe', title: 'heheehheeh'})
+      .fe-container.fe-container_small-indent
+        +fe-title('rich Checkbox Buttons')
+        +rich-check({
+          title: 'Широкий коридор',
+          text: 'Ширина коридоров в номере не менее 91 см.'
+        })
+        +rich-check({
+          title: 'Помощник для инвалидов',
+          text: 'На 1 этаже вас встретит специалист и проводит до номера.'
+        })
+
+    article.group
+      .fe-container
+        +fe-title('bullet list')
+        +bullet-list({})
+
+    article.group
+      .fe-container.fe-container_large-indent
+        +about-room('comfort')
+        +about-room('convenience')
 
