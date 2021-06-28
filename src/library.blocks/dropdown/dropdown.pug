@@ -7,14 +7,15 @@ mixin dropdown(params)
       sectionNames = ['взрослые', 'дети', 'младенцы'],
       defaultSignature = 'Сколько гостей',
       narrow,
-      hash
+      hash,
     } = params
 
     const attrs = {
       class: narrow && 'dropdown_narrow',
       'data-glossary': params.glossary || 'взрослые+дети, младенцы',
       'data-counter-values': params.counterValues,
-      'data-hash': hash
+      'data-hash': hash,
+      'data-open': params.isOpen
     }
 
   .dropdown.js-dropdown&attributes(attrs)
@@ -29,18 +30,13 @@ mixin dropdown(params)
       each name in sectionNames
         li.dropdown__list-section
           .dropdown__section-name.js-dropdown__section-name #{name}
-          button.dropdown__decrease-button.js-dropdown__decrease-button(
-          ).dropdown__decrease-button_disabled&attributes(
-            params.decreaseButtonAttrs
-          ) -
+          button.dropdown__decrease-button.js-dropdown__decrease-button.dropdown__decrease-button_disabled&attributes(params.decreaseButtonAttrs) -
           .dropdown__counter.js-dropdown__counter 0
-          button.dropdown__increase-button.js-dropdown__increase-button(
-          )&attributes(params.increaseButtonAttrs) +
+          button.dropdown__increase-button.js-dropdown__increase-button&attributes(params.increaseButtonAttrs) +
       unless narrow
         li.dropdown__control-buttons-container
           .dropdown__apply-button.js-dropdown__apply-button
             +text-button({text: 'применить'})
-          .dropdown__cancel-button.js-dropdown__cancel-button(
-          ).dropdown__cancel-button_hidden
+          .dropdown__cancel-button.js-dropdown__cancel-button.dropdown__cancel-button_hidden
             +text-button({text: 'очистить'})
 

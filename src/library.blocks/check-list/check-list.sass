@@ -1,0 +1,33 @@
+@use '@common/useless/useless'
+
+.check-list
+  display: flex
+  flex-direction: column
+
+  &:hover 
+
+    & .check-list__expand-list
+      display: flex
+
+    & .check-list__button-expand-icon
+      transform: rotate(0.5turn)
+
+  &__button
+    @include useless.button-common-styles
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+  &__button-label
+    @include useless.font-bold-type
+
+  &__button-expand-icon
+    transition: all .2s
+
+  &__expand-list
+    display: none
+    flex-direction: column
+    row-gap: 11px
+    padding-top: 17px
+    box-sizing: border-box
+

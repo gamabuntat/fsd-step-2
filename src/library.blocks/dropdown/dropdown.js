@@ -29,6 +29,9 @@ class Dropdown {
     this.bindListeners();
     this.hash = this.dropdown.dataset.hash;
     this.setCounterValues(this.getInitValues());
+    if (this.dropdown.hasAttribute('data-open')) {
+      this.expandButton.click(); 
+    }
   }
 
   getSignatureInterfaces() {

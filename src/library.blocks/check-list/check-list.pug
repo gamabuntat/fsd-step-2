@@ -1,0 +1,13 @@
+include ../check/check
+include ../svg-expand-icon/svg-expand-icon
+
+mixin check-list({checkParams, label = 'expandable checkbox list'})
+  .check-list
+    button.check-list__button
+      span.check-list__button-label #{label}
+      span.check-list__button-expand-icon
+        +svg-expand-icon()
+    .check-list__expand-list
+      each params in checkParams
+        +check(params)
+

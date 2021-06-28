@@ -5,4 +5,5 @@ mixin check({attrs, text = 'Можно пригласить гостей (до 1
     input.check__input&attributes(attrs)(type='checkbox')
     .check__box
       +svg-check-box()
-    span.check__sign #{text}
+    span.check__sign #{text[0].toUpperCase() + text.slice(1)}
+

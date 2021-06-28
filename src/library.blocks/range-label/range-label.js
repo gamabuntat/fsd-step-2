@@ -11,14 +11,14 @@ class RangeLable {
     this.formater = new Intl.NumberFormat(
       root.dataset.formaterLang, 
       {
+        maximumFractionDigits: RangeLable.calcDecimalPlaces(+root.dataset.step),
+        minimumFractionDigits: 0,
         ...root.dataset.formaterOpt 
           ? JSON.parse(root.dataset.formaterOpt) 
           : {
             style: 'currency',
             currency: 'RUB',
-          },
-        maximumFractionDigits: RangeLable.calcDecimalPlaces(+root.dataset.step),
-        minimumFractionDigits: 0
+          }
       }
     );
     const data = root.dataset;
@@ -29,7 +29,6 @@ class RangeLable {
   }
 
   handleSliderChangeAttrs() {
-    console.log(this.slider.dataset.bsp);
     this.updateStartValue(
       this.format(
         this.calcValue(this.slider.dataset.bsp)
@@ -65,7 +64,6 @@ class RangeLable {
   static calcDecimalPlaces(n) {
     const sn = String(n);
     const pointIndex = sn.indexOf('.');
-    console.log(pointIndex);
     return pointIndex === -1 ? 0 : sn.slice(pointIndex + 1).length;
   }
 }

@@ -24,22 +24,26 @@
 @import '@library/pagination/pagination'
 @import '@library/range-slider/range-slider'
 @import '@library/range-label/range-label'
+@import '@library/check-list/check-list'
 
 html
   background: paleturquoise
 
 body
   padding-top: 140px
-  display: flex
-  flex-wrap: wrap
-  gap: 20px
-  column-gap: 130px
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(320px, min-content))
+  column-gap: 100px
+  row-gap: 180px
   box-sizing: border-box
 
 .fe-title
   display: flex
   justify-content: space-between
   margin-bottom: 16px
+
+  &_narrow
+    width: 266px
 
   &__topheading
     @include useless.font-bold-type
@@ -49,6 +53,7 @@ body
     font-size: useless.px2rem(12px)
     text-transform: uppercase
     color: $color-additional-fg
+
 
 .fe-container
   display: flex
@@ -64,12 +69,11 @@ body
     flex-direction: row
 
 .group
-  width: 320px
   display: flex
   flex-direction: column
   row-gap: 40px
 
-  &_first
+  &_huppa
     row-gap: 20px
 
     & > .fe-container:nth-child(n + 4)
@@ -82,6 +86,7 @@ body
       margin-bottom: 5px
 
 .fe-slider-container
+  width: 266px
   display: flex
   flex-wrap: wrap
   justify-content: space-between
@@ -98,7 +103,7 @@ body
   height: 44px
 
 .fe-big-button
-  width: 100%
+  width: 320px
   height: 44px
 
 .fe-pagination

@@ -18,11 +18,21 @@ include ../../library.blocks/rate/rate
 include ../../library.blocks/pagination/pagination
 include ../../library.blocks/range-slider/range-slider
 include ../../library.blocks/range-label/range-label
+include ../../library.blocks/check-list/check-list
 
-mixin fe-title(title = '', subTitle)
-  .fe-title
+- 
+  const narrowDropdownParams = {
+    narrow: true,
+    sectionNames: ['спальни', 'кровати','ванные комнаты'],
+    glossary: 'спальни, кровати, ванные комнаты',
+    defaultSignature: 'Выберите удобства',
+    counterValues: '2 2 0',
+  }
+
+mixin fe-title(title = '', subTitle, isNarrow)
+  .fe-title(class=isNarrow && 'fe-title_narrow')
     span.fe-title__topheading #{title}
-    if subtitle
+    if subTitle
       span.fe-title__subtitle #{subTitle}
 
 doctype html
@@ -30,7 +40,7 @@ html(lang='ru')
   +head({title: 'form elements'})
   body
     +watermark
-    article.group.group_first
+    article.group.group_huppa
       .fe-container
         +fe-title('text field', 'default')
         +text-field({type: 'email', placeholder: 'Email'})
@@ -112,4 +122,36 @@ html(lang='ru')
         +fe-title('pagination')
         .fe-pagination
           +pagination()
+
+    article.group.group_huppa
+      .fe-container
+        +fe-title('dropdown', 'default', true)
+        +dropdown(narrowDropdownParams) 
+      .fe-container
+        +fe-title('dropdown', 'expanded', true)
+        +dropdown({...narrowDropdownParams, isOpen: true}) 
+
+    article.group.group_huppa
+      .fe-container
+        +fe-title('dropdown')
+        +dropdown({isOpen: true})
+
+    article.group.group_huppa
+      .fe-container
+        +fe-title('dropdown')
+        +dropdown({isOpen: true, counterValues: '2 1 0'})
+
+    article.group
+      .fe-container
+        +fe-title
+        +check-list({
+          checkParams: [
+            {text: 'завтрак'},
+            {text: 'письменный стол', attrs: {checked: true}},
+            {text: 'Стул для кормления', attrs: {checked: true}},
+            {text: 'Кроватка', attrs: {checked: true}},
+            {text: 'Телевизор'},
+            {text: 'Шампунь'},
+          ]
+        })
 
