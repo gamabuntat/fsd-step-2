@@ -19,6 +19,7 @@ include ../../library.blocks/pagination/pagination
 include ../../library.blocks/range-slider/range-slider
 include ../../library.blocks/range-label/range-label
 include ../../library.blocks/check-list/check-list
+include ../../library.blocks/rich-check/rich-check
 
 - 
   const narrowDropdownParams = {
@@ -143,16 +144,20 @@ html(lang='ru')
 
     article.group
       .fe-container
-        +fe-title
-        +check-list({
-          checkParams: [
-            {text: 'завтрак'},
-            {text: 'письменный стол', attrs: {checked: true}},
-            {text: 'Стул для кормления', attrs: {checked: true}},
-            {text: 'Кроватка', attrs: {checked: true}},
-            {text: 'Телевизор'},
-            {text: 'Шампунь'},
-          ],
-          isOpen: true,
-        })
+        .fe-container.fe-container_large-indent
+          +check-list({})
+          +check-list({
+            checkParams: [
+              {text: 'завтрак'},
+              {text: 'письменный стол', attrs: {checked: true}},
+              {text: 'Стул для кормления', attrs: {checked: true}},
+              {text: 'Кроватка', attrs: {checked: true}},
+              {text: 'Телевизор'},
+              {text: 'Шампунь'},
+            ],
+            isOpen: true,
+          })
+
+    article.group
+      +rich-check({text: 'hihe', title: 'heheehheeh'})
 

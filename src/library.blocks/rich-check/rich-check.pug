@@ -1,8 +1,10 @@
-mixin richCheck(params)
-    - let {title = '', sign = ''} = params
-    label.check.rich-check
-        .container.container_align-items-center
-            input.check__input(type="checkbox")
-            span.check__box
-            span.rich-check__title.container.container_align-items-center #{title}
-        span.check__sign.rich-check__sign.container #{sign}
+include ../svg-check-box/svg-check-box
+
+mixin rich-check({title, text, attrs})
+  label.rich-check
+    input.rich-check__input&attributes({...attrs, type: 'checkbox'})
+    span.rich-check__box
+      +svg-check-box()
+    span.rich-check__title #{title}
+    span.rich-check__text #{text}
+

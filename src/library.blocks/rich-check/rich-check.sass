@@ -1,10 +1,58 @@
-@use '@library/html/html'
+.rich-check
+  display: grid
+  grid-template-columns: min-content auto
+  cursor: pointer
 
-.rich-check__title
-  font-family: 'Conv_Montserrat-Bold'
-  color: colors.$base-color-75
+  &__input
+    position: absolute
+    -webkit-appearance: none
+    appearance: none
 
-.rich-check__sign
-  margin-top: 5px
-  font-size: html.rem-size(12)
-  padding-left: 30px
+    &:focus + .rich-check__box
+
+      & .svg-check-box__square
+        stroke: $color-focus
+
+      & .svg-check-box__mark
+        fill: url(#gradient_focus)
+
+    &:not(.rich-check__input:checked) 
+      
+      & + .rich-check__box
+      
+        & .svg-check-box__square
+          stroke: $color-unclaimed-fg
+
+        & .svg-check-box__mark
+          fill: none
+
+      &:focus 
+
+        & + .rich-check__box
+
+          & .svg-check-box__square
+            stroke: $color-additional-fg
+
+    &:disabled
+      
+      & ~ .rich-check__sign
+        color: $color-unclaimed-fg
+
+      & + .rich-check__box
+        
+        & .svg-check-box__square
+          stroke: #bfbfbf
+
+        & .svg-check-box__mark
+          fill: #ccc
+
+      &:not(.rich-check__input:checked)
+
+        & + .rich-check__box
+
+          & .svg-check-box__square
+            stroke: #bfbfbf
+
+  &__text
+    grid-column-start: 2
+
