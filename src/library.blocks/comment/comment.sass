@@ -15,12 +15,14 @@
     $avatar-size: 48px
     width: $avatar-size
     height: $avatar-size
-
-  &__avatar
-    width: 100%
     border: 2px solid white
     border-radius: 50%
     box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.9)
+    overflow: hidden
+    box-sizing: border-box
+
+  &__avatar
+    width: 110%
     box-sizing: border-box
 
   &__container
