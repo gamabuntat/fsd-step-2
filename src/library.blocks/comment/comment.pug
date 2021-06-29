@@ -11,10 +11,11 @@ mixin comment(params)
     } = params
 
   .comment
-    img.comment__avatar(
-      src=require(`@library/comment/img/${avatar}`).default,
-      alt="avatar"
-    )
+    .comment__avatar-container
+      img.comment__avatar(
+        src=require(`@library/comment/img/${avatar}`).default,
+        alt="avatar"
+      )
     .comment__container
       span.comment__name #{name}
       span.comment__last-visited #{lastVisited}

@@ -1,18 +1,27 @@
 @use 'sass:color'
 
+@import '@common/vars/colors'
+
 .comment
   display: grid
   grid-template-columns: min-content auto
   row-gap: 9px
   column-gap: 10px
 
-  &__avatar
+  &__avatar-container
+    display: flex
+    justify-content: center
+    align-items: center
     $avatar-size: 48px
     width: $avatar-size
     height: $avatar-size
+
+  &__avatar
+    width: 100%
     border: 2px solid white
     border-radius: 50%
     box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.9)
+    box-sizing: border-box
 
   &__container
     display: flex
@@ -35,5 +44,4 @@
     max-width: 653px
     line-height: 24px
     color: $color-main-fg
-
 
