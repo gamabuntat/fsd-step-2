@@ -10,7 +10,7 @@ module.exports = {
   },
   entry: {
     // colorsAndType: './src/UI kit/Colors & Type/colors&type.js',
-    formElements: './src/UI kit/Form Elements/formElements.js',
+    'form-elements': './src/pages/ui-kit/form-elements/form-elements.js',
     // cards: './src/UI kit/cards/cards.js',
     // headersAndFooters: './src/UI kit/headers-and-footers/headers-and-footers.js',
     // landing: './src/page/landing/landing.js',
@@ -46,9 +46,9 @@ module.exports = {
     //   chunks: ['colorsAndType'],
     // }),
     new HtmlWebpackPlugin({
-      filename: 'formElements.html',
-      template: './src/UI kit/Form Elements/formElements.pug',
-      chunks: ['formElements'],
+      filename: 'form-elements.html',
+      template: './src/pages/ui-kit/form-elements/form-elements.pug',
+      chunks: ['form-elements'],
     }),
     // new HtmlWebpackPlugin({
     //   filename: 'cards.html',

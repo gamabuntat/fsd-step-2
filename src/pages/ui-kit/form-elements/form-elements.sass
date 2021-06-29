@@ -30,15 +30,15 @@
 @import '@library/about-room/about-room'
 @import '@library/comment/comment'
 
-html
-  background: paleturquoise
-
 body
-  max-width: 1440px
-  margin: 0 auto
   padding: 140px 0
+  box-sizing: border-box
+
+.fe-main
+  margin: 0 auto
   display: grid
   grid-template-columns: repeat(auto-fit, minmax(320px, min-content))
+  max-width: 1440px
   column-gap: 100px
   row-gap: 180px
   box-sizing: border-box
@@ -122,4 +122,3 @@ body
   .group:last-child
     grid-column-end: auto
   
-

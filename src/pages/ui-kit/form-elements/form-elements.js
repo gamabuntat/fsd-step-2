@@ -1,5 +1,5 @@
 //styles
-import '@src/UI kit/Form Elements/formElements.sass';
+import '@src/pages/ui-kit/form-elements/form-elements.sass';
 
 //js
 import '@library/text-field/text-field_masked.js';

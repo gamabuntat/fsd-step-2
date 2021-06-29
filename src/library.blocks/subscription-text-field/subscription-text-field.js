@@ -3,6 +3,8 @@ class SubscriptionTextField {
     this.textField = elem;
     this.input = this.textField
       .querySelector('.js-subscription-text-field__input');
+    this.button = this.textField
+      .querySelector('.js-subscription-text-field__button');
     this.bindListeners();
   }
 
@@ -12,6 +14,14 @@ class SubscriptionTextField {
       this.handleSubscriptionTextFieldInputFocus.bind(this)
     );
     this.input.addEventListener(
+      'blur',
+      this.handleSubscriptionTextFieldInputBlur.bind(this)
+    );
+    this.button.addEventListener(
+      'focus',
+      this.handleSubscriptionTextFieldInputFocus.bind(this)
+    );
+    this.button.addEventListener(
       'blur',
       this.handleSubscriptionTextFieldInputBlur.bind(this)
     );
