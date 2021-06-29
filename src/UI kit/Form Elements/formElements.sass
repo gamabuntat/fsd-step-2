@@ -28,12 +28,15 @@
 @import '@library/rich-check/rich-check'
 @import '@library/bullet-list/bullet-list'
 @import '@library/about-room/about-room'
+@import '@library/comment/comment'
 
 html
   background: paleturquoise
 
 body
-  padding-top: 140px
+  max-width: 1440px
+  margin: 0 auto
+  padding: 140px 0
   display: grid
   grid-template-columns: repeat(auto-fit, minmax(320px, min-content))
   column-gap: 100px
@@ -88,6 +91,9 @@ body
     & .fe-title
       margin-bottom: 5px
 
+  &:last-child
+    grid-column-end: span 2
+
 .fe-slider-container
   width: 266px
   display: flex
@@ -111,4 +117,9 @@ body
 
 .fe-pagination
   width: 241px
+
+@media (max-width: 760px)
+  .group:last-child
+    grid-column-end: auto
+  
 

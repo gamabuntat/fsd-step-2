@@ -22,6 +22,7 @@ include ../../library.blocks/check-list/check-list
 include ../../library.blocks/rich-check/rich-check
 include ../../library.blocks/bullet-list/bullet-list
 include ../../library.blocks/about-room/about-room
+include ../../library.blocks/comment/comment
 
 - 
   const narrowDropdownParams = {
@@ -181,4 +182,8 @@ html(lang='ru')
       .fe-container.fe-container_large-indent
         +about-room('comfort')
         +about-room('convenience')
+
+    article.group
+      +comment({})
+      +comment({avatar: 'avatar2.webp'})
 
