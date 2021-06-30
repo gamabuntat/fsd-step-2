@@ -1,7 +1,9 @@
 import '@src/pages/ui-kit/form-elements/form-elements.sass';
 
 const importAll = (r) => {
-  r.keys().filter((k) => !k.includes('like')).forEach((k) => r(k));
+  r.keys()
+    .filter((k) => !k.includes('impressions'))
+    .forEach((k) => r(k));
 };
 
 /* eslint-disable */

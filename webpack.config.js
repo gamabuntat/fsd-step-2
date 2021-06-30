@@ -130,6 +130,9 @@ module.exports = {
         use: 
         {
           loader: 'pug3-loader',
+          options: {
+            root: path.resolve(__dirname, 'src/library.blocks')
+          },
         }
       }
     ]
