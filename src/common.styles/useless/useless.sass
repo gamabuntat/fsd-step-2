@@ -1,5 +1,7 @@
+@use 'sass:math'
+
 @function px2rem($px, $base: 14px)
-  @return $px / $base * 1rem
+  @return math.div($px, $base) * 1rem
 
 @mixin font-bold-type($font-size: 12px)
   font-size: px2rem($font-size)

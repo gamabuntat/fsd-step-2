@@ -114,8 +114,6 @@ const bindListeners = (root) => {
   be.addEventListener('pointermove', iff(state().getTrigger, moveHandlerE));
 };
 
-window.addEventListener('load', () => (
-  document.querySelectorAll('.js-range-slider')
-    .forEach((root) => bindListeners(root))
-));
+document.querySelectorAll('.js-range-slider')
+  .forEach((root) => bindListeners(root));
 
