@@ -68,9 +68,6 @@ class Cal extends Tables {
     this.setInitialRange(this.initDates.startDate);
     if (Cal.checkDateIsValid(this.initDates.endDate)) { return; }
     this.setInitialRange(this.initDates.endDate);
-    if (this.isEndRange()) {
-      this.root.dispatchEvent(this.readyDateEvent);
-    }
   }
 
   modifyTodaysBtn(now) {
@@ -526,5 +523,7 @@ class Cal extends Tables {
   }
 }
 
-document.querySelectorAll('.js-cal').forEach((cal) => new Cal(cal));
+window.addEventListener('load', () => {
+  document.querySelectorAll('.js-cal').forEach((cal) => new Cal(cal));
+});
 

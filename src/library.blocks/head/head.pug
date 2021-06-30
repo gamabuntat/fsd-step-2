@@ -1,16 +1,5 @@
--
-  function hihe() {
-    const path = require('path');
-    const fs = require('fs');
-    const any = require('@library/any.json');
-    if (JSON.parse(any)) {
-      fs.writeFile('./src/library.blocks/any.json', 'hi', (err) => (err));
-    }
-  }
-
 mixin head(params)
   -
-    hihe()
     const {
       descript = "Toxin - hotel search service",
       keywords = "toxin search hotel rooms",

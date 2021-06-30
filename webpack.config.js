@@ -103,7 +103,10 @@ module.exports = {
       },
       {
         test: /\.(svg|png|jpe?g|gif|webp)$/i,
-        exclude: [path.resolve(__dirname, 'src/fonts')],
+        exclude: [
+          path.resolve(__dirname, 'src/fonts'),
+          path.resolve(__dirname, 'src/favicons')
+        ],
         use: 
           {
             loader: 'file-loader',
@@ -114,8 +117,20 @@ module.exports = {
           },
       },
       {
+        test: /\.(svg|png|ico)$/i,
+        include: path.resolve(__dirname, 'src/favicons'),
+        use: 
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'favicons',
+            }
+          },
+      },
+      {
         test: /\.(svg|ttf|otf|eot|woff)$/i,
-        include: [path.resolve(__dirname, 'src/fonts')],
+        include: path.resolve(__dirname, 'src/fonts'),
         use:
           {
             loader: 'file-loader',
