@@ -10,16 +10,8 @@ module.exports = {
     children: true,
   },
   entry: {
-    // colorsAndType: './src/UI kit/Colors & Type/colors&type.js',
+    'index': './src/pages/index/index.js',
     'form-elements': './src/pages/ui-kit/form-elements/form-elements.js',
-    // cards: './src/UI kit/cards/cards.js',
-    // headersAndFooters: './src/UI kit/headers-and-footers/headers-and-footers.js',
-    // landing: './src/page/landing/landing.js',
-    // searchRoom: './src/page/search-room/search-room.js',
-    // roomDetails: './src/page/room-details/room-details.js',
-    // registration: './src/page/registration/registration.js',
-    // signIn: './src/page/signIn/signIn.js',
-    // index: './src/page/index/index.js',
   },
   output: {
     filename: '[name].js',
@@ -34,75 +26,52 @@ module.exports = {
     },
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    noInfo: true,
     compress: true,
     open: true,
     port: 9000,
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'all',
+        },
+        default: {
+          test: /.*/,
+          chunks: 'all',
+          reuseExistingChunk: true,
+          name: 'test',
+        },
+      }
+    },
+  },
   plugins: [
     new ESLintPlugin(),
     new MiniCssExtractPlugin(),
-    // new HtmlWebpackPlugin({
-    //   filename: 'colorsAndType.html',
-    //   template: './src/UI kit/Colors & Type/colors&type.pug',
-    //   chunks: ['colorsAndType'],
-    // }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: './src/pages/index/index.pug',
+      chunks: ['index'],
+      inject: 'body'
+    }),
     new HtmlWebpackPlugin({
       filename: 'form-elements.html',
       template: './src/pages/ui-kit/form-elements/form-elements.pug',
       chunks: ['form-elements'],
       inject: 'body'
     }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'cards.html',
-    //   template: './src/UI kit/cards/cards.pug',
-    //   chunks: ['cards'],
-    // }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'headers-and-footers.html',
-    //   template: './src/UI kit/headers-and-footers/headers-and-footers.pug',
-    //   chunks: ['headersAndFooters'],
-    // }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'landing.html',
-    //   template: './src/page/landing/landing.pug',
-    //   chunks: ['landing'],
-    // }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'search-room.html',
-    //   template: './src/page/search-room/search-room.pug',
-    //   chunks: ['searchRoom'],
-    // }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'registration.html',
-    //   template: './src/page/registration/registration.pug',
-    //   chunks: ['registration'],
-    // }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'signIn.html',
-    //   template: './src/page/signIn/signIn.pug',
-    //   chunks: ['signIn'],
-    // }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'room-details.html',
-    //   template: './src/page/room-details/room-details.pug',
-    //   chunks: ['roomDetails'],
-    // }),
-    // new HtmlWebpackPlugin({
-    //   filename: 'index.html',
-    //   template: './src/page/index/index.pug',
-    //   chunks: ['index'],
-    // }),
   ],
   module: {
     rules: [
       {
         test: /\.s[ac]ss$/i,
-        use: [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-      },
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [
+           MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
+        ],
       },
       {
         test: /\.(svg|png|jpe?g|gif|webp)$/i,

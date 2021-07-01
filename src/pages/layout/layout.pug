@@ -10,6 +10,7 @@ html(lang="ru")
       content=descript
     )
     meta(name="keywords" content=keywords)
+    title #{title}
     link(
       rel="mask-icon"
       href=require("@src/favicons/mask-icon.svg").default 
@@ -25,7 +26,6 @@ html(lang="ru")
       type="image/jpg"
       href=require("@src/favicons/favicon-32x32.png").default
     )
-    title #{title}
 
   body
     block main
