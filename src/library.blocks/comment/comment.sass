@@ -1,6 +1,6 @@
 @use 'sass:color'
 
-@import '@common/vars/colors'
+@import '@styles/vars/colors'
 
 .comment
   display: grid
@@ -9,9 +9,6 @@
   column-gap: 10px
 
   &__avatar-container
-    display: flex
-    justify-content: center
-    align-items: center
     $avatar-size: 48px
     width: $avatar-size
     height: $avatar-size
@@ -22,8 +19,8 @@
     box-sizing: border-box
 
   &__avatar
+    object-fit: cover
     width: 110%
-    box-sizing: border-box
 
   &__container
     display: flex

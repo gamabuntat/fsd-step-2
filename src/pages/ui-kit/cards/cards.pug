@@ -1,0 +1,13 @@
+extends ../../layout/layout
+
+block vars
+  include /watermark/watermark
+  include /card-search-room/card-search-room
+
+  - 
+    const title = 'cards'
+
+block main
+  +watermark({})
+  +card-search-room({})
+

@@ -258,7 +258,9 @@ class Cal extends Tables {
     const shouldSelectedNextMonth = lastRowBtn
       .classList.contains(this.nextMonthBtnMod);
     if (isPrevMonthbtn || shouldSelectedPrevMonth) {
-      this.addCoordInRange(this.getCoordsAgo(btnCoord, 7));
+      if (this.index > 0) {
+        this.addCoordInRange(this.getCoordsAgo(btnCoord, 7));
+      }
     }
     if (isNextMonthBtn || shouldSelectedNextMonth) {
       this.addCoordInRange(this.getCoordsForward(btnCoord, 7));
@@ -523,5 +525,7 @@ class Cal extends Tables {
   }
 }
 
-document.querySelectorAll('.js-cal').forEach((cal) => new Cal(cal));
+window.addEventListener('load', () => (
+  document.querySelectorAll('.js-cal').forEach((cal) => new Cal(cal))
+));
 

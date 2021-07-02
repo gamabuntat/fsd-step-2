@@ -1,0 +1,30 @@
+@use '@styles/useless/useless'
+@import '@styles/vars/colors'
+
+.card-search-room
+  display: flex
+  justify-content: center
+  max-width: 380px
+  padding: 40px 0 30px
+  background-color: $color-main-bg
+  border-radius: 4px
+  box-sizing: border-box
+
+  &__container
+    display: flex
+    flex-direction: column
+    width: 320px
+
+  &__title
+    margin: 0
+    color: $color-title-fg
+    font-size: useless.px2rem(24px)
+
+  &__date-title-container
+    display: flex
+    column-gap: 20px
+
+  &__date-title
+    @include useless.font-bold-type()
+    color: $color-title-fg
+    flex-basis: 50%

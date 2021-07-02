@@ -10,7 +10,7 @@ html(lang="ru")
       content=descript
     )
     meta(name="keywords" content=keywords)
-    title #{title}
+    title= title || 'toxin'
     link(
       rel="mask-icon"
       href=require("@src/favicons/mask-icon.svg").default 

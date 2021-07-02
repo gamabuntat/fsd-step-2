@@ -1,0 +1,12 @@
+include /date-dropdown/date-dropdown
+
+mixin card-search-room(params)
+  .card-search-room
+    .card-search-room__container
+      h1.card-search-room__title Найдём номера под ваши пожелания
+      .card-search-room__date-title-container
+        span.card-search-room__date-title прибытие 
+        span.card-search-room__date-title выезд
+      .card-search-room__dd
+        +date-dropdown({})
+

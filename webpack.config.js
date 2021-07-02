@@ -12,6 +12,7 @@ module.exports = {
   entry: {
     'index': './src/pages/index/index.js',
     'form-elements': './src/pages/ui-kit/form-elements/form-elements.js',
+    'cards': './src/pages/ui-kit/cards/cards.js',
   },
   output: {
     filename: '[name].js',
@@ -21,14 +22,15 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, './'),
       '@src': path.resolve(__dirname, 'src'),
-      '@common': path.resolve(__dirname, 'src/common.styles'),
+      '@styles': path.resolve(__dirname, 'src/common.styles'),
+      '@scripts': path.resolve(__dirname, 'src/common.scripts'),
       '@library': path.resolve(__dirname, 'src/library.blocks'),
     },
   },
   devServer: {
     noInfo: true,
     compress: true,
-    open: true,
+    open: false,
     port: 9000,
   },
   optimization: {
@@ -38,12 +40,11 @@ module.exports = {
           test: /[\\/]node_modules[\\/]/,
           chunks: 'all',
         },
-        default: {
-          test: /.*/,
+        commonStyles: {
+          test: /(library\.blocks|layout|node_modules|fonts).*\.(sass|css)$/,
           chunks: 'all',
-          reuseExistingChunk: true,
-          name: 'test',
-        },
+          name: 'common-styles'
+        }
       }
     },
   },
@@ -62,6 +63,12 @@ module.exports = {
       chunks: ['form-elements'],
       inject: 'body'
     }),
+    new HtmlWebpackPlugin({
+      filename: 'cards.html',
+      template: './src/pages/ui-kit/cards/cards.pug',
+      chunks: ['cards'],
+      inject: 'body'
+    }),
   ],
   module: {
     rules: [
@@ -72,6 +79,13 @@ module.exports = {
           'css-loader',
           'sass-loader'
         ],
+      },
+      {
+        test: /\.css$/i,
+        use: [
+           MiniCssExtractPlugin.loader,
+          'css-loader',
+        ]
       },
       {
         test: /\.(svg|png|jpe?g|gif|webp)$/i,
