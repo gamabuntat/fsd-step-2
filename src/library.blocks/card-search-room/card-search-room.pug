@@ -7,7 +7,7 @@ mixin card-search-room(params)
     const {
       dateDropdownParams = {},
       dropdownParams = {},
-      bigBtnParams = {text: 'подобрать номер'},
+      bigBtnParams = {},
     } = params
 
   .card-search-room
@@ -21,5 +21,10 @@ mixin card-search-room(params)
       .card-search-room__dropdown
         .card-search-room__dropdown-title гости
         +dropdown(dropdownParams)
-      form.card-search-room__big-button
-        +big-button(bigBtnParams)
+      form.card-search-room__big-button(action='index.html')
+        +big-button({
+          text: 'подобрать номер',
+          attrs: {type: 'submit'},
+          ...bigBtnParams
+        })
+
