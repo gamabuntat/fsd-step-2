@@ -3,19 +3,19 @@ const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { getElementsByTagName } = require('domutils');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
 
-const getEntry = (path) => {
-  return fs.readdirSync(path).reduce((entrys, name) => {
-    entrys[name] = `${path}/${name}/${name}.js`;
+const getEntry = (p) => {
+  return fs.readdirSync(p).reduce((entrys, name) => {
+    entrys[name] = `${p}${path.sep}${name}${path.sep}${name}.js`;
     return entrys;
   }, {})
 };
 
 const entry = {
-  ...getEntry('./src/pages/ui-kit'),
-  ...getEntry('./src/pages/pages')
+  ...getEntry(path.resolve(__dirname, 'src/pages/ui-kit')),
+  ...getEntry(path.resolve(__dirname, './src/pages/pages')),
 };
 
 const HTMLPlugins = Object.entries(entry).map((entr) => (
@@ -29,7 +29,7 @@ const HTMLPlugins = Object.entries(entry).map((entr) => (
 
 module.exports = {
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: isDev ? 'inline-source-map' : false,
   stats: {
     children: true,
   },
@@ -72,6 +72,20 @@ module.exports = {
         }
       }
     },
+    minimize: true,
+    minimizer: [
+      `...`,
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            'default',
+            {
+              discardComments: { removeAll: true },
+            },
+          ],
+        },
+      }),
+    ]
   },
   plugins: [
     new ESLintPlugin(),
