@@ -18,7 +18,7 @@ const entry = {
   ...getEntry(path.resolve(__dirname, './src/pages/pages')),
 };
 
-const HTMLPlugins = Object.entries(entry).map((entr) => (
+const htmlPlugins = Object.entries(entry).map((entr) => (
   new HtmlWebpackPlugin({
     filename: `${entr[0]}.html`,
     template: entr[1].replace(/(?<=\.)\w+$/, 'pug'),
@@ -90,7 +90,7 @@ module.exports = {
   plugins: [
     new ESLintPlugin(),
     new MiniCssExtractPlugin(),
-    ...HTMLPlugins,
+    ...htmlPlugins,
   ],
   module: {
     rules: [
@@ -161,3 +161,4 @@ module.exports = {
     ]
   }
 }
+
