@@ -1,0 +1,24 @@
+@use '@styles/useless/useless'
+@import '@styles/vars/colors'
+
+.card-reg
+  @include useless.card-common
+
+  &__masked-text-field
+    display: flex
+    flex-direction: column
+    row-gap: 5px
+
+  &__email-container
+    display: flex
+    flex-direction: column
+    row-gap: 5px
+
+  &__bordered-button
+    width: 99px
+    height: 44px
+
+  & > &__container > &__container:last-child
+    justify-content: space-between
+    align-items: center
+

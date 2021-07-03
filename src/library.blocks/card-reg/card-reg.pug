@@ -1,0 +1,49 @@
+include /text-field/text-field
+include /radio/radio
+include /toggle/toggle
+include /big-button/big-button
+include /bordered-button/bordered-button
+
+mixin card-reg(params)
+  -
+    const {
+      action = 'fill me please',
+      bigButtonAction,
+      buttonAction
+    } = params
+
+  .card-reg
+    form.card-reg__container(action=action)
+      h1.card-reg__title Регистрация аккаунта
+      .card-reg__container.card-reg__container_with-small-gap
+        +text-field({placeholder: 'Имя'})
+        +text-field({placeholder: 'Фамилия'})
+        .card-reg__container.card-reg__container_vertical
+          +radio({
+            attrs: {name: 'sex', checked: true, value: 'female'},
+            text: 'Женщина'
+          })
+          +radio({attrs: {name: 'sex', value: 'male'}, text: 'Мужчина'})
+      .card-reg__masked-text-field
+        span.card-reg__sub-title дата рождения
+        +text-field({masked: true})
+      .card-reg__container
+        .card-reg__container.card-reg__container_with-small-gap
+          .card-reg__email-container
+            .card-reg__sub-title данные для входа в сервис
+            +text-field({placeholder: 'Email', type: 'email'})
+          +text-field({placeholder: 'Пароль', type: 'password'})
+          +toggle({})
+        .card-reg__big-button
+          +big-button({attrs: {
+            type: 'submit',
+            formaction: bigButtonAction
+          }})
+      .card-reg__container.card-reg__container_vertical
+        span.card-reg__acc-caption Уже есть аккаунт на Toxin
+        .card-reg__bordered-button
+          +bordered-button({attrs: {
+            type: buttonAction ? 'submit' : 'button',
+            buttonAction: buttonAction
+          }})
+

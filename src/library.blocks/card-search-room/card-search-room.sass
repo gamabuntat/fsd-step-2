@@ -2,46 +2,17 @@
 @import '@styles/vars/colors'
 
 .card-search-room
-  display: flex
-  justify-content: center
-  max-width: 380px
-  padding: 40px 0 30px
-  background-color: $color-main-bg
-  border-radius: 4px
-  border: 1px solid rgba(0, 0, 0, .12)
-  box-shadow: 0 0 25px 0 rgba(0, 0, 0, .20)
-  box-sizing: border-box
-
-  &__container
-    display: flex
-    flex-direction: column
-    row-gap: 20px
-    width: 320px
-
-  &__title
-    margin: 0
-    color: $color-title-fg
-    font-size: useless.px2rem(24px)
+  @include useless.card-common
 
   &__date-dropdown, &__dropdown
     display: flex
     flex-direction: column
     row-gap: 5px
 
-  &__dropdown
-    margin-bottom: 10px
-
   &__date-title-container
     display: flex
     column-gap: 20px
 
-  &__date-title, &__dropdown-title
-    @include useless.font-bold-type()
-    color: $color-title-fg
+    & > *
+      flex-basis: 50%
 
-  &__date-title
-    flex-basis: 50%
-
-  &__big-button
-    height: 44px
-  

@@ -15,11 +15,11 @@ mixin card-search-room(params)
       h1.card-search-room__title Найдём номера под ваши пожелания
       .card-search-room__date-dropdown
         .card-search-room__date-title-container
-          span.card-search-room__date-title прибытие 
-          span.card-search-room__date-title выезд
+          span.card-search-room__sub-title прибытие 
+          span.card-search-room__sub-title выезд
         +date-dropdown(dateDropdownParams)
       .card-search-room__dropdown
-        .card-search-room__dropdown-title гости
+        .card-search-room__sub-title гости
         +dropdown(dropdownParams)
       form.card-search-room__big-button(action='index.html')
         +big-button({

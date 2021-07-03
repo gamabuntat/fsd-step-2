@@ -3,6 +3,8 @@ extends ../../layout/layout
 block vars
   include /watermark/watermark
   include /card-search-room/card-search-room
+  include /card-reg/card-reg
+  include /cal/cal
 
   - 
     const title = 'cards'
@@ -10,4 +12,6 @@ block vars
 block main
   +watermark({})
   +card-search-room({})
+  +card-reg({})
+  +cal({})
 
