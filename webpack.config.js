@@ -1,7 +1,31 @@
 const path = require('path');
+const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { getElementsByTagName } = require('domutils');
+const isDev = process.env.NODE_ENV === 'development';
+
+const getEntry = (path) => {
+  return fs.readdirSync(path).reduce((entrys, name) => {
+    entrys[name] = `${path}/${name}/${name}.js`;
+    return entrys;
+  }, {})
+};
+
+const entry = {
+  ...getEntry('./src/pages/ui-kit'),
+  ...getEntry('./src/pages/pages')
+};
+
+const HTMLPlugins = Object.entries(entry).map((entr) => (
+  new HtmlWebpackPlugin({
+    filename: `${entr[0]}.html`,
+    template: entr[1].replace(/(?<=\.)\w+$/, 'pug'),
+    chunks: [entr[0]],
+    inject: 'body'
+  })
+));
 
 module.exports = {
   mode: 'development',
@@ -9,11 +33,7 @@ module.exports = {
   stats: {
     children: true,
   },
-  entry: {
-    'index': './src/pages/index/index.js',
-    'form-elements': './src/pages/ui-kit/form-elements/form-elements.js',
-    'cards': './src/pages/ui-kit/cards/cards.js',
-  },
+  entry,
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'docs'),
@@ -44,6 +64,11 @@ module.exports = {
           test: /(library\.blocks|layout|node_modules|fonts).*\.(sass|css)$/,
           chunks: 'all',
           name: 'common-styles'
+        },
+        commonScripts: {
+          test: /library\.blocks.*\.js$/,
+          chunks: 'all',
+          name: 'common-scripts'
         }
       }
     },
@@ -51,24 +76,7 @@ module.exports = {
   plugins: [
     new ESLintPlugin(),
     new MiniCssExtractPlugin(),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: './src/pages/index/index.pug',
-      chunks: ['index'],
-      inject: 'body'
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'form-elements.html',
-      template: './src/pages/ui-kit/form-elements/form-elements.pug',
-      chunks: ['form-elements'],
-      inject: 'body'
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'cards.html',
-      template: './src/pages/ui-kit/cards/cards.pug',
-      chunks: ['cards'],
-      inject: 'body'
-    }),
+    ...HTMLPlugins,
   ],
   module: {
     rules: [
