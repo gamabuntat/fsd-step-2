@@ -1,0 +1,22 @@
+include /date-dropdown/date-dropdown
+
+mixin card-room-details(params)
+  - 
+    const {
+      roomNumber = 888,
+      isLuxury = true, 
+      cost = 9990,
+      sale = 2179
+    } = params
+
+  .card-room-details.js-card-room-details
+    .card-room-details__container
+      .card-room-details__heading
+        h1.card-room-details__room-number.js-card-room-details__room-number
+          | #{roomNumber}
+        .card-room-details__cost.js-card-room-details__cost #{cost}
+      .card-room-details__date-dropdown
+        +date-dropdown({})
+      .card-room-details__days.js-card-room-details__days
+        | 0 суток
+

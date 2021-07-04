@@ -5,13 +5,15 @@ block vars
   include /card-search-room/card-search-room
   include /card-reg/card-reg
   include /cal/cal
+  include /card-room-details/card-room-details
 
   - 
     const title = 'cards'
 
 block main
   +watermark({})
-  +card-search-room({})
+  +card-search-room({dropdownParams: {hash: 'carddd_021'}})
   +card-reg({})
+  +card-room-details({})
   +cal({})
-
+  

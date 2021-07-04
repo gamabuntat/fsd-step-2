@@ -27,15 +27,11 @@ const htmlPlugins = Object.entries(entry).map((entr) => (
 ));
 
 module.exports = (env, argv) => {
-  const prodaction = argv.mode === 'production';
+  const isProd = argv.mode === 'production';
   return {
-    mode: prodaction ? 'prodaction' : 'development',
-    devtool: prodaction 
-    ? false
-    : 'inline-source-map',
-    stats: {
-      children: true,
-    },
+    mode: 'development',
+    devtool: isProd ? false : 'inline-source-map',
+    stats: { children: true, },
     entry,
     output: {
       filename: '[name].js',
