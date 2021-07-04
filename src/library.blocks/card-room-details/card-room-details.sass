@@ -1,8 +1,52 @@
 @use '@styles/useless/useless'
+@import '@styles/vars/colors'
 
 .card-room-details
   @include useless.card-common
 
+  &__heading
+    display: flex
+    align-items: flex-end
+    justify-content: space-between
+
   &__room-number
     margin: 0
+    font-size: useless.px2rem(24px)
+    justify-content: flex-end
+    color: $color-title-fg
+    vertical-align: bottom
+
+    &::before
+      content: '№ '
+      font-size: useless.px2rem(14px)
+
+    &_deluxe 
+
+      &::after
+        content: 'люкс'
+        @include useless.font-bold-type
+        color: $color-primary
+        margin-left: 8px
+
+  &__cost
+    font-weight: bold
+    color: $color-additional-fg
+    align-self: center
+
+    &::after
+      content: ' в сутки'
+      font-weight: normal
+
+  &__dropdown, &__date-dropdown
+    display: flex
+    flex-direction: column
+    row-gap: 5px
+
+  &__date-dropdown-title-container
+    display: flex
+    column-gap: 20px
+
+    & > *
+      flex-basis: 50%
     
+

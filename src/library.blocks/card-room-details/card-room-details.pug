@@ -1,4 +1,5 @@
 include /date-dropdown/date-dropdown
+include /dropdown/dropdown
 
 mixin card-room-details(params)
   - 
@@ -12,11 +13,20 @@ mixin card-room-details(params)
   .card-room-details.js-card-room-details
     .card-room-details__container
       .card-room-details__heading
-        h1.card-room-details__room-number.js-card-room-details__room-number
+        h1.card-room-details__room-number.js-card-room-details__room-number(
+          class=isLuxury && 'card-room-details__room-number_deluxe'
+        )
           | #{roomNumber}
-        .card-room-details__cost.js-card-room-details__cost #{cost}
+        span.card-room-details__cost.js-card-room-details__cost #{cost}
       .card-room-details__date-dropdown
+        .card-room-details__date-dropdown-title-container
+          .card-room-details__sub-title прибытие
+          .card-room-details__sub-title выезд
         +date-dropdown({})
+      .card-room-details__dropdown
+        .card-room-details__sub-title гости
+        +dropdown({})
+      table.card-room-details__cost-table
       .card-room-details__days.js-card-room-details__days
         | 0 суток
 

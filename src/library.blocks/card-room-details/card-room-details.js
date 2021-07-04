@@ -11,9 +11,10 @@ class CardRoomDetails {
   }
 
   init() {
+    const initData = JSON.parse(sessionStorage.getItem('roomDetails') || '{}');
     this.observer.observe(this.cal, { attributes: true });
-    this.fillNumber();
-    this.fillCost();
+    initData?.number && this.fillNumber(initData.number);
+    initData?.cost && this.fillCost(initData.cost);
   }
 
   handleCalAttrsChanges() {
@@ -31,18 +32,12 @@ class CardRoomDetails {
       - new Date(this.cal.dataset.startDate)) / 1000 / 60 / 60 / 24 + 1;
   }
 
-  fillNumber() {
-    const storedNumber = sessionStorage.getItem('roomNumber');
-    if (storedNumber) { 
-      this.roomNumber.innerText = storedNumber;
-    }
+  fillNumber(number) {
+    this.roomNumber.innerText = number;
   }
 
-  fillCost() {
-    const storedCost = sessionStorage.getItem('roomCost');
-    if (storedCost) {
-      this.cost.innerText = storedCost;
-    }
+  fillCost(cost) {
+    this.cost.innerText = cost;
   }
 }
 
