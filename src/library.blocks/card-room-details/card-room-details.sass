@@ -26,12 +26,11 @@
         content: 'люкс'
         @include useless.font-bold-type
         color: $color-primary
-        margin-left: 8px
+        margin-left: 1px
 
   &__cost
     font-weight: bold
     color: $color-additional-fg
-    align-self: center
 
     &::after
       content: ' в сутки'
@@ -48,5 +47,38 @@
 
     & > *
       flex-basis: 50%
+
+  &__cost-table
+    border-collapse: separate
+    border-spacing: 5px 10px
+
+  &__service-description
+    vertical-align: top
+    width: 214px
+
+  &__service-info
+    vertical-align: top
+
+  &__service-cost, &__service-additional-cost
+    text-align: right
+    vertical-align: top
+
+  &__total
+    margin-top: 10px
+    display: flex
+    column-gap: 4px
+
+  &__total-caption, &__total-cost
+    font-weight: bold
+    color: $color-title-fg
+    font-size: useless.px2rem(19px)
     
+  &__total-dashed-line
+    width: 100%
+    border-bottom: 1px dotted $color-unclaimed-fg
+    height: 80%
+    box-sizing: border-box
+
+  & > &__container > *:last-child
+    margin-top: 0
 
