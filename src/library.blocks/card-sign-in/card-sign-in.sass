@@ -1,0 +1,9 @@
+@use '@styles/useless/useless'
+@import '@styles/vars/colors'
+
+.card-sign-in
+  @include useless.card-common
+
+  & > &__container > &__container:last-child
+    justify-content: space-between
+

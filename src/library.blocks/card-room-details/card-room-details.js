@@ -48,9 +48,6 @@ class CardRoomDetails {
   }
 
   updateTotalCost() {
-    console.log(this.totalCost);
-    console.log(this.serviceAdditionalCost.innerText);
-    console.log(CardRoomDetails.unFormate(this.serviceSale.innerText));
     this.totalCost.innerText = this.formate(
       CardRoomDetails.unFormate(this.serviceCost.innerText) 
       - CardRoomDetails.unFormate(this.serviceSale.innerText)

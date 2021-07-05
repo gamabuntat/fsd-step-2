@@ -38,8 +38,8 @@ mixin card-reg(params)
           +big-button({ attrs: { type: 'submit', ...bigButtonAttrs } })
       .card-reg__container.card-reg__container_vertical
         span.card-reg__acc-caption Уже есть аккаунт на Toxin
-        .card-reg__bordered-button
-          +bordered-button({attrs: {
+        .card-reg__button
+          +bordered-button({text: 'войти', attrs: {
             type: 'button',
             ...buttonAttrs
           }})

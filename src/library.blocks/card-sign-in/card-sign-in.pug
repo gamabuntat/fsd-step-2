@@ -1,0 +1,30 @@
+include /text-field/text-field
+include /big-button/big-button
+include /bordered-button/bordered-button
+
+mixin card-sign-in(params)
+  -
+    const {
+      formAttrs = { action: 'fill me please' },
+      bigButtonAttrs = {},
+      buttonAttrs = {}
+    } = params
+
+  .card-sign-in
+    form.card-sign-in__container&attributes(formAttrs)
+      h1.card-sign-in__title Войти
+      .card-sign-in__container.card-sign-in__container_with-small-gap
+        +text-field({placeholder: 'Email', type: 'email'})
+        +text-field({placeholder: 'Пароль', type: 'password'})
+      .card-sign-in__big-button
+        +big-button({text: 'войти', attrs: {
+          type: 'submit', ...bigButtonAttrs 
+        } })
+      .card-sign-in__container.card-sign-in__container_vertical
+        span.card-reg__acc-caption Нет аккаунта на Toxin?
+        .card-sign-in__button
+          +bordered-button({text: 'создать', attrs: {
+          type: 'button',
+          ...buttonAttrs
+        }})
+
