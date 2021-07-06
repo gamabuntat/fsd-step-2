@@ -63,4 +63,38 @@
 
   & > &__container > *:last-child
     margin-top: 10px
+
+@mixin card-heading()
+  &__heading
+    display: flex
+    align-items: flex-end
+    justify-content: space-between
+
+  &__room-number
+    margin: 0
+    font-size:px2rem(24px)
+    justify-content: flex-end
+    color: $color-title-fg
+    vertical-align: bottom
+
+    &::before
+      content: '№ '
+      font-size: px2rem(14px)
+
+    &_deluxe 
+
+      &::after
+        content: 'люкс'
+        @include font-bold-type
+        color: $color-primary
+        margin-left: 1px
+
+  &__cost
+    font-weight: bold
+    color: $color-additional-fg
+
+    &::after
+      content: ' в сутки'
+      font-weight: normal
+      font-size: px2rem(12px)
   

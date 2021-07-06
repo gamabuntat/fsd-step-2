@@ -30,7 +30,9 @@ mixin card-room-details(params)
       roomNumber = 888,
       isLuxury = true, 
       cost = 9990,
-      sale = 2179
+      sale = 2179,
+      formAttrs = {},
+      bigButtonAttrs = {}
     } = params
 
     const formater = new Intl.NumberFormat('ru', {
@@ -44,7 +46,7 @@ mixin card-room-details(params)
     }
 
   .card-room-details.js-card-room-details
-    .card-room-details__container
+    form.card-room-details__container&attributes(formAttrs)
       .card-room-details__heading
         h1.card-room-details__room-number.js-card-room-details__room-number(
           class=isLuxury && 'card-room-details__room-number_deluxe'
@@ -89,5 +91,7 @@ mixin card-room-details(params)
         span.card-room-details__total-cost.js-card-room-details__total-cost= format(0)
 
       .card-room-details__big-button
-        +big-button({text: 'забронировать'})
+        +big-button({text: 'забронировать', attrs: {
+          type: 'submit', ...bigButtonAttrs
+        }})
 

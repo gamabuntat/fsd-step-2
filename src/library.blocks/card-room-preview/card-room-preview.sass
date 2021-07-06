@@ -1,0 +1,43 @@
+@use 'sass:color'
+
+@use '@styles/useless/useless'
+@import '@styles/vars/colors'
+
+.card-room-preview
+  display: flex
+  flex-direction: column
+  width: 270px
+  background-color: white
+  border: 1px solid white
+  border-radius: 4px
+  color: $color-additional-fg
+  box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.95)
+
+  &__footer
+    padding: 20px
+    display: flex
+    flex-direction: column
+    row-gap: 10px
+
+  @include useless.card-heading
+
+  &__room-number
+    font-size: useless.px2rem(19px)
+    font-weight: bold
+
+  &__line
+    height: 1px
+    background-color: color.adjust($color-title-fg, $alpha: -0.9)
+
+  &__summary
+    display: flex
+    justify-content: space-between
+
+  &__reviews-container
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+  &__n-reviews
+    font-weight: bold
+

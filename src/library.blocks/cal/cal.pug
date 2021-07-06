@@ -13,10 +13,10 @@ mixin cal({initDate, startDate, endDate, hash, narrow})
     }
 
   .cal.js-cal&attributes(rootAttrs)
-    button.cal__prev-month-btn.js-cal__prev-month-btn
+    button.cal__prev-month-btn.js-cal__prev-month-btn(type='button')
       +svg-forward-arrow
     .cal__month.js-cal__month July
-    button.cal__next-month-btn.js-cal__next-month-btn
+    button.cal__next-month-btn.js-cal__next-month-btn(type='button')
       +svg-forward-arrow
     .cal__year.js-cal__year 1998
     .cal__day-week-container
@@ -28,7 +28,7 @@ mixin cal({initDate, startDate, endDate, hash, narrow})
           tr.cal__week
             - for (let i = 0; i < 7; i++)
               td.cal__day
-                button.cal__day-btn
+                button.cal__day-btn(type='button')
     .cal__error.js-cal__error Please select range!
     .cal__cancle-btn.js-cal__cancle-btn
       +text-button({text: 'очистить'})
