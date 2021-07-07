@@ -8,10 +8,30 @@
   flex-direction: column
   width: 270px
   background-color: white
-  border: 1px solid white
   border-radius: 4px
-  color: $color-additional-fg
   box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.95)
+  overflow: hidden
+
+  &__wrapper
+    @include useless.button-common-styles
+    color: $color-additional-fg
+
+  &__carousel
+    width: 270px
+    height: 151px
+    border-radius: 4px
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+
+  &__room-img-container
+    white-space: nowrap
+    overflow: hidden
+
+  &__room-img
+    display: inline-block
+    width: 270px
+    height: 151px
+    object-fit: cover
 
   &__footer
     padding: 20px

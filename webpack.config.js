@@ -3,6 +3,8 @@ const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin")
+  .default;
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const getEntry = (p) => {
@@ -22,7 +24,8 @@ const htmlPlugins = Object.entries(entry).map((entr) => (
     filename: `${entr[0]}.html`,
     template: entr[1].replace(/(?<=\.)\w+$/, 'pug'),
     chunks: [entr[0]],
-    inject: 'body'
+    inject: 'body',
+    mobile: true
   })
 ));
 
@@ -88,6 +91,11 @@ module.exports = (env, argv) => {
     plugins: [
       new ESLintPlugin(),
       new MiniCssExtractPlugin(),
+      new HTMLInlineCSSWebpackPlugin({
+        filter(fn) {
+          return !fn.includes('commn');
+        },
+      }),
       ...htmlPlugins,
     ],
     module: {
@@ -103,7 +111,7 @@ module.exports = (env, argv) => {
         {
           test: /\.css$/i,
           use: [
-            isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+            MiniCssExtractPlugin.loader,
             'css-loader',
           ]
         },

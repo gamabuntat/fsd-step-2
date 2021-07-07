@@ -8,12 +8,13 @@ mixin dropdown(params)
       defaultSignature = 'Сколько гостей',
       narrow,
       hash,
+      counterValues,
     } = params
 
     const attrs = {
       class: narrow && 'dropdown_narrow',
       'data-glossary': params.glossary || 'взрослые+дети, младенцы',
-      'data-counter-values': params.counterValues,
+      'data-counter-values': counterValues,
       'data-hash': hash,
       'data-open': params.isOpen
     }

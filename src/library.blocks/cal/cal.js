@@ -41,6 +41,7 @@ class Cal extends Tables {
     this.year = now.getFullYear();
     this.month = now.getMonth();
     this.init(now);
+    this.setSessStorDate();
   }
 
   getInitDates() {

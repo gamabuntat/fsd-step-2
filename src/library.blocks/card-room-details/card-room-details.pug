@@ -32,7 +32,9 @@ mixin card-room-details(params)
       cost = 9990,
       sale = 2179,
       formAttrs = {},
-      bigButtonAttrs = {}
+      bigButtonAttrs = {},
+      dateDroppdownParams,
+      dropdownParams,
     } = params
 
     const formater = new Intl.NumberFormat('ru', {
@@ -56,10 +58,10 @@ mixin card-room-details(params)
         .card-room-details__date-dropdown-title-container
           .card-room-details__sub-title прибытие
           .card-room-details__sub-title выезд
-        +date-dropdown({})
+        +date-dropdown(dateDroppdownParams)
       .card-room-details__dropdown
         .card-room-details__sub-title гости
-        +dropdown({})
+        +dropdown(dropdownParams)
       table.card-room-details__cost-table
         tr.card-room-details__cost-table-row
           td.card-room-details__service-description 

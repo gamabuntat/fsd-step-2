@@ -16,7 +16,16 @@ block main
   +watermark({})
   +card-search-room({dropdownParams: {hash: 'carddd_021'}})
   +card-reg({})
-  +card-room-details({})
+  +card-room-details({
+    dateDroppdownParams: {
+      calAttrs: {
+        initDate: '2019-08-08', 
+        startDate: '2019-08-19',
+        endDate: '2019-08-23'
+      }
+    }, 
+    dropdownParams: {counterValues: '3'}
+  })
   +card-sign-in({})
   +cal({})
   +card-room-preview({}) 

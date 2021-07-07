@@ -61,7 +61,7 @@ class CardRoomDetails {
 
   getDays() {
     return (new Date(this.cal.dataset.endDate) 
-      - new Date(this.cal.dataset.startDate)) / 1000 / 60 / 60 / 24 + 1;
+      - new Date(this.cal.dataset.startDate)) / 1000 / 60 / 60 / 24;
   }
 
   fillNumber(number = this.roomNumber.innerText) {
