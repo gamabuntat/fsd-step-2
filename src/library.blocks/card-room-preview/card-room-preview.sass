@@ -17,15 +17,73 @@
     color: $color-additional-fg
 
   &__carousel
+    position: relative
     width: 270px
     height: 151px
     border-radius: 4px
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0
 
+    &:hover 
+
+      .card-room-preview__next-button, .card-room-preview__prev-button
+        display: block
+
+  &__next-button, &__prev-button
+    @include useless.button-common-styles
+    position: absolute
+    display: none
+    width: 44px
+    height: 100%
+
+  &__next-button
+    right: 0
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)),
+
+    & > .svg-expand-icon
+      transform: rotate(-90deg)
+
+  &__prev-button
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0)),
+
+    & > .svg-expand-icon
+      transform: rotate(90deg)
+
+  &__radio-container
+    display: flex
+    column-gap: 3.75px
+    position: absolute
+    bottom: 15px
+    right: 15px
+
+  &__radio-label
+    display: flex
+
+  &__radio-input
+    position: absolute
+    -webkit-appearance: none
+    appearance: none
+
+    &:checked
+
+      & + .card-room-preview__radio-box
+        background-color: white
+
+  &__radio-box
+    $border-size: 1px
+    $size: calc(7.5px - 2 * #{$border-size})
+    display: inline-block
+    width: $size
+    height: $size
+    border: $border-size solid white
+    border-radius: 50%
+    box-shadow: 0 5px 5px 0 color.adjust($color-title-fg, $alpha: -0.7)
+    cursor: pointer
+
   &__room-img-container
     white-space: nowrap
     overflow: hidden
+    height: 100%
 
   &__room-img
     display: inline-block

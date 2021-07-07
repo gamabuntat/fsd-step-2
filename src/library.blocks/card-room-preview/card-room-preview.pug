@@ -1,4 +1,5 @@
 include /rate/rate
+include /svg-expand-icon/svg-expand-icon
 
 mixin card-room-preview(params)
   -
@@ -9,6 +10,7 @@ mixin card-room-preview(params)
       isLuxury = true, 
       cost = 9990,
       nReviews = 145,
+      imgNames = ['crp-1.webp', 'crp-1.webp', 'crp-1.webp', 'crp-1.webp'],
     } = params
 
     const formater = new Intl.NumberFormat('ru', {
@@ -21,19 +23,34 @@ mixin card-room-preview(params)
       return formater.format(str).replace(/\s(?=.$)/, '')
     }
 
-  form.card-room-preview.js-card-room-preview&attributes(
-    Object.assign({action: 'room-details.html'}, formAttrs)
-  )
-    button.card-room-preview__wrapper&attributes(
-      Object.assign({type: 'submit'}, mainButtonAttrs
-    ))
-      .card-room-preview__carousel
-        .card-room-preview__room-img-container
-          - for (let i = 0; i < 3; i++) 
-            img.card-room-preview__room-img(
-              src=require('@library/card-room-preview/img/crp-1.webp').default
-              alt='room preview'
+  form.card-room-preview.js-card-room-preview(
+    action='room-details.html'
+  )&attributes(formAttrs)
+    .card-room-preview__carousel
+      button.card-room-preview__prev-button(type='button')
+        +svg-expand-icon('white', 1)
+      button.card-room-preview__next-button(type='button')
+        +svg-expand-icon('white', 1)
+      .card-room-preview__radio-container
+        - const name = 'crp' + Math.round(Math.random() * 1e3)
+        - for (let i = 0; i < imgNames.length; i++) 
+          - 
+            const attrs = {
+              name,
+              checked: i == 0
+            }
+          label.card-room-preview__radio-label
+            input.card-room-preview__radio-input&attributes(attrs)(
+              type='radio'
             )
+            span.card-room-preview__radio-box
+      .card-room-preview__room-img-container
+        each i of imgNames
+          img.card-room-preview__room-img(
+            src=require(`@library/card-room-preview/img/${i}`).default
+            alt='room preview'
+          )
+    button.card-room-preview__wrapper&attributes(mainButtonAttrs)
       .card-room-preview__footer
         .card-room-preview__heading
           span.card-room-preview__room-number.js-card-room-preview__room-number(
