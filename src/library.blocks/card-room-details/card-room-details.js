@@ -8,6 +8,8 @@ class CardRoomDetails {
       .querySelector(`${this.c}__service-cost-per-day`);
     this.serviceCost = this.root.querySelector(`${this.c}__service-cost`);
     this.serviceNDays = this.root.querySelector(`${this.c}__service-n-days`);
+    this.serviceDaysDeath = this.root
+      .querySelector(`${this.c}__service-days-death`);
     this.totalCost = this.root.querySelector(`${this.c}__total-cost`);
     this.serviceSale = this.root.querySelector(`${this.c}__service-sale`);
     this.serviceAdditionalCost = this.root
@@ -35,6 +37,7 @@ class CardRoomDetails {
   shortHandUpdate() {
     if (this.cal.hasAttribute('data-date-is-ready')) {
       this.setDays();
+      this.updateServiceDaysDeath();
       this.updateServiceCost();
       this.updateTotalCost();
     }
@@ -62,6 +65,11 @@ class CardRoomDetails {
   getDays() {
     return (new Date(this.cal.dataset.endDate) 
       - new Date(this.cal.dataset.startDate)) / 1000 / 60 / 60 / 24;
+  }
+  
+  updateServiceDaysDeath() {
+    this.serviceDaysDeath.innerText = this.serviceNDays.innerText === '1' 
+      ? ' сутки' : ' суток';
   }
 
   fillNumber(number = this.roomNumber.innerText) {

@@ -93,7 +93,7 @@ module.exports = (env, argv) => {
       new MiniCssExtractPlugin(),
       new HTMLInlineCSSWebpackPlugin({
         filter(fn) {
-          return !fn.includes('commn');
+          return !fn.includes('common');
         },
       }),
       ...htmlPlugins,
