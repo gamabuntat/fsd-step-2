@@ -14,6 +14,7 @@
 
   &__wrapper
     @include useless.button-common-styles
+    outline: revert
     color: $color-additional-fg
 
   &__carousel
@@ -23,6 +24,8 @@
     border-radius: 4px
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0
+    white-space: nowrap
+    overflow: hidden
 
     &:hover 
 
@@ -31,6 +34,7 @@
 
   &__next-button, &__prev-button
     @include useless.button-common-styles
+    outline: revert
     position: absolute
     display: none
     width: 44px
@@ -68,6 +72,11 @@
 
       & + .card-room-preview__radio-box
         background-color: white
+        
+    &:focus
+
+      & + .card-room-preview__radio-box
+        outline: 1px dashed black
 
   &__radio-box
     $border-size: 1px
@@ -79,11 +88,6 @@
     border-radius: 50%
     box-shadow: 0 5px 5px 0 color.adjust($color-title-fg, $alpha: -0.7)
     cursor: pointer
-
-  &__room-img-container
-    white-space: nowrap
-    overflow: hidden
-    height: 100%
 
   &__room-img
     display: inline-block

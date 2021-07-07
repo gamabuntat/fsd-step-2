@@ -10,7 +10,8 @@ mixin card-room-preview(params)
       isLuxury = true, 
       cost = 9990,
       nReviews = 145,
-      imgNames = ['crp-1.webp', 'crp-1.webp', 'crp-1.webp', 'crp-1.webp'],
+      imgNames = Array(4).fill('crp-1.webp'),
+      rate = 5,
     } = params
 
     const formater = new Intl.NumberFormat('ru', {
@@ -26,13 +27,14 @@ mixin card-room-preview(params)
   form.card-room-preview.js-card-room-preview(
     action='room-details.html'
   )&attributes(formAttrs)
+
     .card-room-preview__carousel
       button.card-room-preview__prev-button.js-card-room-preview__prev-button(type='button')
         +svg-expand-icon('white', 1)
       button.card-room-preview__next-button.js-card-room-preview__next-button(type='button')
         +svg-expand-icon('white', 1)
       .card-room-preview__radio-container
-        - const name = 'crp' + Math.round(Math.random() * 1e3)
+        - const name = 'crp' + Math.round(Math.random() * 1e5)
         - for (let i = 0; i < imgNames.length; i++) 
           - 
             const attrs = {
@@ -43,13 +45,15 @@ mixin card-room-preview(params)
           label.card-room-preview__radio-label
             input.card-room-preview__radio-input.js-card-room-preview__radio-input&attributes(attrs)(type='radio')
             span.card-room-preview__radio-box
-      .card-room-preview__room-img-container
-        each i of imgNames
-          img.card-room-preview__room-img.js-card-room-preview__room-img(
-            src=require(`@library/card-room-preview/img/${i}`).default
-            alt='room preview'
-          )
-    button.card-room-preview__wrapper&attributes(mainButtonAttrs)
+      each i of imgNames
+        img.card-room-preview__room-img.js-card-room-preview__room-img(
+          src=require(`@library/card-room-preview/img/${i}`).default
+          alt='room preview'
+        )
+
+    button.card-room-preview__wrapper.js-card-room-preview__wrapper&attributes(
+      mainButtonAttrs
+    )
       .card-room-preview__footer
         .card-room-preview__heading
           span.card-room-preview__room-number.js-card-room-preview__room-number(
@@ -58,7 +62,7 @@ mixin card-room-preview(params)
           span.card-room-preview__cost.js-card-room-preview__cost= format(cost)
         .card-room-preview__line
         .card-room-preview__summary
-          +rate({checked: 5, attrs: {disabled: true}})
+          +rate({checked: rate, attrs: {disabled: true}})
           .card-room-preview__reviews-container
             span.card-room-preview__n-reviews #{nReviews} 
             | &nbsp;

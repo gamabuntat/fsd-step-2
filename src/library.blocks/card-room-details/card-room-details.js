@@ -27,7 +27,7 @@ class CardRoomDetails {
   init() {
     const initData = JSON.parse(sessionStorage.getItem('roomDetails') || '{}');
     this.observer.observe(this.cal, { attributes: true });
-    this.fillNumber(initData.number);
+    this.fillNumber(initData.roomNumber);
     this.serviceCostPerDay.innerText = (this.fillCost(initData.cost));
     this.processLuxury(initData.isLuxury);
     this.updateServiceCost();

@@ -9,6 +9,12 @@ class CardRoomPreview {
     this.radioInputs = this.root.querySelectorAll(this.getClass('radio-input'));
     this.nextButton = this.getElem('next-button');
     this.prevButton = this.getElem('prev-button');
+    this.wrapper = this.getElem('wrapper');
+    const roomNumberElem = this.getElem('room-number');
+    this.roomNumber = +roomNumberElem.innerText;
+    this.isLuxury = roomNumberElem
+      .classList.contains('card-room-preview__room-number_deluxe');
+    this.cost = +this.getElem('cost').innerText.replace(/\D/g, '');
     this.bindListeners();
   }
 
@@ -28,6 +34,7 @@ class CardRoomPreview {
     this.radioInputs.forEach((ri) => (
       ri.addEventListener('change', (e) => this.handleRadioInputChange(e))
     ));
+    this.wrapper.addEventListener('click', () => this.handleWrapperClick());
   }
 
   hadleNextButtonClick() {
@@ -55,6 +62,14 @@ class CardRoomPreview {
   handleRadioInputChange(e) {
     this.counter = +e.target.dataset.index;
     this.flipImg();
+  }
+
+  handleWrapperClick() {
+    sessionStorage.setItem('roomDetails', JSON.stringify({
+      roomNumber: this.roomNumber,
+      cost: this.cost,
+      isLuxury: this.isLuxury
+    }));
   }
 }
 

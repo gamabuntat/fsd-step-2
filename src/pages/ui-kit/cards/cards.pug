@@ -29,4 +29,14 @@ block main
   +card-sign-in({})
   +cal({})
   +card-room-preview({}) 
+  - 
+    const cardRoomParams = {
+      imgNames: Array(4).fill('crp-2.webp'),
+      roomNumber: 840,
+      cost: 9900,
+      isLuxury: false,
+      nReviews: 65,
+      rate: 4
+    }
+  +card-room-preview(cardRoomParams)
 
