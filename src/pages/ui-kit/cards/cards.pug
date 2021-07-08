@@ -14,29 +14,36 @@ block vars
 
 block main
   +watermark({})
-  +card-search-room({dropdownParams: {hash: 'carddd_021'}})
-  +card-reg({})
-  +card-room-details({
-    dateDroppdownParams: {
-      calAttrs: {
-        initDate: '2019-08-08', 
-        startDate: '2019-08-19',
-        endDate: '2019-08-23'
-      }
-    }, 
-    dropdownParams: {counterValues: '3'}
-  })
-  +card-sign-in({})
-  +cal({})
-  +card-room-preview({}) 
-  - 
-    const cardRoomParams = {
-      imgNames: Array(4).fill('crp-2.webp'),
-      roomNumber: 840,
-      cost: 9900,
-      isLuxury: false,
-      nReviews: 65,
-      rate: 4
-    }
-  +card-room-preview(cardRoomParams)
+  .c-main
+    .c-column
+      +card-search-room({
+        dropdownParams: {hash: 'cardd_021'},
+        dateDropdownParams: {calAttrs: {initDate: '2022'}}
+      })
+      +card-reg({})
+    .c-column
+      +card-room-details({
+        dateDroppdownParams: {
+          calAttrs: {
+            initDate: '2019-08-08', 
+            startDate: '2019-08-19',
+            endDate: '2019-08-23'
+          }
+        }, 
+        dropdownParams: {counterValues: '3'}
+      })
+      +card-sign-in({})
+    .c-column.c-column_narrow
+      +cal({})
+      +card-room-preview({}) 
+      - 
+        const cardRoomParams = {
+          imgNames: Array(4).fill('crp-2.webp'),
+          roomNumber: 840,
+          cost: 9900,
+          isLuxury: false,
+          nReviews: 65,
+          rate: 4
+        }
+      +card-room-preview(cardRoomParams)
 
