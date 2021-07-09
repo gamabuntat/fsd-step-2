@@ -1,0 +1,68 @@
+@use 'sass:color'
+
+@use '@styles/useless/useless'
+@import '@styles/vars/colors'
+
+.header
+  display: flex
+  justify-content: center
+  align-items: center
+  background-color: white
+  padding: 0 10px
+  height: 70px
+  color: $color-additional-fg
+
+  &__container
+    display: flex
+    width: min(1440px, 100%)
+    align-items: center
+
+  &__logo
+    display: flex
+
+  &__menu
+    display: flex
+    gap: 20px
+    list-style: none
+
+  &__menu-item
+    min-width: max-content
+
+  &__menu-expandable-item
+    position: relative
+
+  &__menu-button
+    @include useless.button-common-styles
+    color: $color-additional-fg
+
+    &_pressed 
+
+      & ~ .header__menu-container
+        display: flex
+
+    &:focus
+      outline: revert
+
+  &__menu-container
+    position: absolute
+    display: none
+    min-width: 100%
+    width: max-content
+    flex-direction: column
+    background-color: $color-unclaimed-fg
+    z-index: 1
+    box-shadow: 1px 2px 1px 1px color.adjust($color-title-fg, $alpha: -0.95)
+
+    & .header__menu-link
+      outline: none
+      padding: 5px
+
+      &:hover, &:focus
+        background-color: color.adjust($color-title-fg, $lightness: 74%)
+
+  &__menu-link
+    text-decoration: none
+    background-color: #fff
+    color: $color-additional-fg 
+    box-sizing: border-box
+

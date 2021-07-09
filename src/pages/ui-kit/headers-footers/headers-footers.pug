@@ -2,9 +2,10 @@ extends ../../layout/layout
 
 block vars
   include /watermark/watermark
+  include /header/header
 
 block main
   +watermark({})
   .hf-main
-    p hehieh
+    +header({})
 

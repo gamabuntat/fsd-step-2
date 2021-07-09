@@ -1,0 +1,26 @@
+include /svg-logo/svg-logo
+include /bordered-button/bordered-button
+include /primary-button/primary-button
+
+mixin expandable-item({text = 'Услуги', href = Array(4).fill('change me')})
+  li.header__menu-expandable-item.js-header__menu-expandable-item
+    button.header__menu-button.js-header__menu-button= text
+    .header__menu-container
+      each i in href
+        a.header__menu-link.js-header__menu-link(href=i) hihe
+
+mixin header() 
+  .header.js-header
+    .header__container 
+      a.header__logo(href='landing.html' title='toxin home page')
+        +svg-logo()
+      ul.header__menu
+        li.header__menu-item
+          a.header__menu-link(href="cards.html") О нас
+        +expandable-item({})
+        +expandable-item({})
+        li.header__menu-item
+          a.header__menu-link(href="change me") Вакансии
+        li.header__menu-item
+          a.header__menu-link(href="change me") Новости
+
