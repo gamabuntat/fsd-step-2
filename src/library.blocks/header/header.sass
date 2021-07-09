@@ -14,8 +14,9 @@
 
   &__container
     display: flex
-    width: min(1440px, 100%)
     align-items: center
+    column-gap: 20px
+    width: min(1440px, 100%)
 
   &__logo
     display: flex
@@ -23,9 +24,12 @@
   &__menu
     display: flex
     gap: 20px
+    margin-left: auto
     list-style: none
 
   &__menu-item
+    display: flex
+    align-items: center
     min-width: max-content
 
   &__menu-expandable-item
@@ -34,6 +38,10 @@
   &__menu-button
     @include useless.button-common-styles
     color: $color-additional-fg
+    display: flex
+    column-gap: 5px
+    align-items: stretch
+    border: 1px solid rgba(0, 0, 0, 0)
 
     &_pressed 
 
@@ -42,6 +50,18 @@
 
     &:focus
       outline: revert
+    
+    &:hover
+
+      & .header__menu-button-caption
+        color: $color-main-fg
+
+      & .header__menu-button-icon .svg-expand-icon
+        opacity: .75
+
+  &__menu-button-icon
+    display: flex
+    align-items: center
 
   &__menu-container
     position: absolute
@@ -66,4 +86,22 @@
     background-color: #fff
     color: $color-additional-fg 
     box-sizing: border-box
+
+    &:hover
+      color: $color-main-fg
+
+    &_important
+      font-weight: bold
+      color: $color-main-fg
+
+      &:hover
+        color: $color-title-fg
+
+  &__sign-in-button
+    min-width: 87px
+    height: 34px
+
+  &__reg-button
+    min-width: 196px
+    height: 34px
 

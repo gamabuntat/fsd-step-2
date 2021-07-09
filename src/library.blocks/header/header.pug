@@ -1,4 +1,5 @@
 include /svg-logo/svg-logo
+include /svg-expand-icon/svg-expand-icon
 include /bordered-button/bordered-button
 include /primary-button/primary-button
 
@@ -11,23 +12,38 @@ mixin expandable-item(params)
     } = params
 
   li.header__menu-expandable-item.js-header__menu-expandable-item
-    button.header__menu-button.js-header__menu-button= text
+    button.header__menu-button.js-header__menu-button(title=text)
+      span.header__menu-button-caption= text
+      .header__menu-button-icon
+        +svg-expand-icon()
     .header__menu-container
-      - for (let i = 0; i < href.length; i++)
+      - for (let i = 0; i < Math.min(href.length, itemTexts.length); i++)
         a.header__menu-link.js-header__menu-link(href=href[i])= itemTexts[i]
 
-mixin header() 
+mixin header(params) 
+  - 
+    const {
+      href = [],
+      itemTexts = []
+    } = params
+
   .header.js-header
     .header__container 
       a.header__logo(href='landing.html' title='toxin home page')
         +svg-logo()
       ul.header__menu
         li.header__menu-item
-          a.header__menu-link(href="cards.html") О нас
-        +expandable-item({})
-        +expandable-item({})
+          a.header__menu-link.header__menu-link_important(
+            href='cards.html' title='about us'
+          ) О нас
+        +expandable-item({href: href[0], itemTexts: itemTexts[0]})
+        +expandable-item({href: href[1], itemTexts: ['hihe', 'hihe']})
         li.header__menu-item
-          a.header__menu-link(href="change me") Вакансии
+          a.header__menu-link(href='change me') Вакансии
         li.header__menu-item
-          a.header__menu-link(href="change me") Новости
+          a.header__menu-link(href='change me') Новости
+      .header__sign-in-button
+        +bordered-button({text: 'войти'})
+      .header__reg-button
+        +primary-button({text: 'зарегистрироваться'})
 

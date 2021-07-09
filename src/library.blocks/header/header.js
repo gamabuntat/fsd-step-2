@@ -5,6 +5,7 @@ class EventEmmiter {
   
   on(handler) {
     this.handler = handler;
+    return this;
   }
 
   emmit(...args) {
@@ -13,10 +14,9 @@ class EventEmmiter {
 }
 
 class MenuButton extends EventEmmiter {
-  constructor(button, idx) {
+  constructor(button) {
     super();
     this.menuButton = button;
-    this.idx = idx;
     this.trigger = false;
     this.bindListeners();
   }
@@ -29,7 +29,7 @@ class MenuButton extends EventEmmiter {
   handleMenuButtonClick() {
     this.toggleTrigger();
     this.menuButton.classList.toggle('header__menu-button_pressed');
-    this.trigger && this.emmit(this.idx);
+    this.trigger && this.emmit();
   }
 
   closeMenu() {
@@ -46,16 +46,14 @@ class Header {
   constructor(root) {
     this.menuButtons = Array.from(
       root.querySelectorAll('.js-header__menu-button'),
-      (b, idx) => {
-        const c = new MenuButton(b, idx);
-        c.on((args) => this.openMenuHandler(args));
-        return c;
-      }
+      (b, idx) => (
+        new MenuButton(b).on((this.openMenuHandler.bind(this, idx)))
+      )
     );
     this.prevOpenIdx = 0;
   }
 
-  openMenuHandler([idx]) {
+  openMenuHandler(idx) {
     if (this.prevOpenIdx === idx) { return; }
     this.menuButtons[this.prevOpenIdx].closeMenu();
     this.prevOpenIdx = idx;
