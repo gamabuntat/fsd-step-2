@@ -2,12 +2,19 @@ include /svg-logo/svg-logo
 include /bordered-button/bordered-button
 include /primary-button/primary-button
 
-mixin expandable-item({text = 'Услуги', href = Array(4).fill('change me')})
+mixin expandable-item(params)
+  - 
+    const {
+      text = 'Услуги', 
+      href = Array(4).fill('change me'),
+      itemTexts = Array(4).fill('heawheahweh')
+    } = params
+
   li.header__menu-expandable-item.js-header__menu-expandable-item
     button.header__menu-button.js-header__menu-button= text
     .header__menu-container
-      each i in href
-        a.header__menu-link.js-header__menu-link(href=i) hihe
+      - for (let i = 0; i < href.length; i++)
+        a.header__menu-link.js-header__menu-link(href=href[i])= itemTexts[i]
 
 mixin header() 
   .header.js-header
