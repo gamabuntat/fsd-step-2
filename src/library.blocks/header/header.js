@@ -42,18 +42,35 @@ class MenuButton extends EventEmmiter {
   }
 }
 
+class Burger extends EventEmmiter {
+  constructor(button) {
+    super();
+    this.burger = button;
+    this.bindListeners();
+  }
+
+  bindListeners() {
+    this.burger.addEventListener('click', () => this.handleBurgerClick());
+  }
+
+  handleBurgerClick() {
+    this.burger.classList.toggle('header__burger_pressed');
+  }
+}
+
 class Header {
   constructor(root) {
     this.menuButtons = Array.from(
       root.querySelectorAll('.js-header__menu-button'),
       (b, idx) => (
-        new MenuButton(b).on((this.openMenuHandler.bind(this, idx)))
+        new MenuButton(b).on((this.handleOpenSubMenu.bind(this, idx)))
       )
     );
     this.prevOpenIdx = 0;
+    new Burger(root.querySelector('.js-header__burger'));
   }
 
-  openMenuHandler(idx) {
+  handleOpenSubMenu(idx) {
     if (this.prevOpenIdx === idx) { return; }
     this.menuButtons[this.prevOpenIdx].closeMenu();
     this.prevOpenIdx = idx;

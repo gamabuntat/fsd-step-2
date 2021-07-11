@@ -1,9 +1,19 @@
+include /svg-burger/svg-burger
 include /svg-logo/svg-logo
+include /svg-toxin/svg-toxin
 include /svg-expand-icon/svg-expand-icon
 include /bordered-button/bordered-button
 include /primary-button/primary-button
 
-mixin expandable-item(params)
+mixin menu-item({text = 'Вакансии', href = 'change me', importatn})
+  li.header__menu-item
+    a.header__menu-link(
+      href=href
+      title=text
+      class=importatn && 'header__menu-link_important'
+    )= text
+
+mixin expandable-menu-item(params)
   - 
     const {
       text = 'Услуги', 
@@ -16,32 +26,48 @@ mixin expandable-item(params)
       span.header__menu-button-caption= text
       .header__menu-button-icon
         +svg-expand-icon()
-    .header__menu-container
+    ul.header__sub-menu
       - for (let i = 0; i < Math.min(href.length, itemTexts.length); i++)
-        a.header__menu-link.js-header__menu-link(href=href[i])= itemTexts[i]
+        +menu-item({href: href[i], text: itemTexts[i]})
 
 mixin header(params) 
   - 
     const {
-      href = [],
-      itemTexts = []
+      content = [
+        {
+          text: 'О нас',
+          importatn: true,
+        },
+        {
+          type: 'expandableItem',
+        },
+        {},
+        {
+          text: 'Новости',
+        },
+        {
+          type: 'expandableItem',
+          text: 'Соглашения',
+          itemTexts: Array(4).fill('hieh')
+        }
+      ]
     } = params
 
   .header.js-header
     .header__container 
+      button.header__burger.js-header__burger
+        +svg-burger()
       a.header__logo(href='landing.html' title='toxin home page')
-        +svg-logo()
+        .header__main-logo
+          +svg-logo()
+        .header__toxin
+          +svg-toxin()
       ul.header__menu
-        li.header__menu-item
-          a.header__menu-link.header__menu-link_important(
-            href='cards.html' title='about us'
-          ) О нас
-        +expandable-item({href: href[0], itemTexts: itemTexts[0]})
-        +expandable-item({href: href[1], itemTexts: ['hihe', 'hihe']})
-        li.header__menu-item
-          a.header__menu-link(href='change me') Вакансии
-        li.header__menu-item
-          a.header__menu-link(href='change me') Новости
+        each i in content
+          if i.type === 'expandableItem'
+            +expandable-menu-item(i)
+          else
+            +menu-item(i)
       .header__sign-in-button
         +bordered-button({text: 'войти'})
       .header__reg-button
