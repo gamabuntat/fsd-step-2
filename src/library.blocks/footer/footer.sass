@@ -29,6 +29,15 @@
     display: flex
     gap: 12.5px
     align-items: center
+    outline: none
+
+    &:hover, &:focus
+
+      & .svg-logo__circle, & .svg-logo__left-petal
+        fill: url(#gradient_focus)
+
+      & .svg-logo__right-petal
+        fill: url(#secondary_gradient_focus)
 
   &__hype
     margin: 0
@@ -68,14 +77,50 @@
       @extend .footer__list-title
 
     &-caption
+      max-width: 260px
       line-height: 24px
       margin: 0
       color: $color-main-fg
 
-  &__copyrating-bar
-    width: 100%
+  &__copyrating
+    display: flex
+    align-items: center
+    justify-content: space-between
     padding: 0 10px
+    width: 100%
     height: 70px
     border-top: 1px solid color.adjust($color-title-fg, $alpha: -0.9)
     box-sizing: border-box
+
+    &-caption
+      color: $color-main-fg
+    
+  &__social
+    display: flex
+    gap: 20px
+
+    & > *
+      display: flex
+      outline: none
+
+      &:hover *, &:focus *
+        fill: url(#gradient_focus)
+
+@media (max-width: 1000px)
+  .footer
+    
+    &__container
+      display: flex
+      justify-content: center
+      padding: 100px 0 20px
+
+    &__list, &__subscription, &__hype
+      display: none
+
+    &__copyrating
+      flex-direction: column
+      gap: 25px
+      border-top: none
+      padding-bottom: 120px
+      height: auto
 
