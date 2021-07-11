@@ -11,9 +11,24 @@
   padding: 0 10px
   color: $color-additional-fg
 
+  &_for-authorized-user
+
+    & .header__container
+      grid-template-columns: min-content 1fr auto max-content
+    
+
+    & .header__sign-in-button, & .header__reg-button
+      display: none
+
+    & .header__separator
+      display: initial
+
+    & .header__user-name
+      display: initial
+
   &__container
     display: grid
-    grid-template-columns: min-content 2fr 87px 196px
+    grid-template-columns: min-content 1fr 87px 196px
     align-items: center
     column-gap: 20px
     width: min(1440px, 100%)
@@ -126,8 +141,38 @@
   &__sign-in-button, &__reg-button
     height: 34px
 
+  &__separator
+    display: none
+    width: 1px
+    height: 30px
+    background-color: color.adjust($color-title-fg, $alpha: -0.9)
+
+  &__user-name
+    display: none
+    text-decoration: none
+    color: $color-additional-fg
+    outline: none
+
+    &:hover, &:focus
+      color: $color-main-fg
+
 @media (max-width: 1000px)
   .header
+
+    &_for-authorized-user
+      
+      & .header__container
+        grid-template-columns: auto 1fr max-content
+
+      & .header__sign-in-button
+        display: none
+
+      & .header__separator
+        display: none
+
+      & .header__user-name
+        grid-row: 1
+        grid-column: -2
 
     &__container
       grid-template-columns: auto 1fr 87px

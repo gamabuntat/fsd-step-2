@@ -50,10 +50,12 @@ mixin header(params)
           text: 'Соглашения',
           itemTexts: Array(4).fill('hieh')
         }
-      ]
+      ],
+      authorized = false,
+      userName = 'Юлий Цезарь',
     } = params
 
-  .header.js-header
+  .header.js-header(class=authorized && 'header_for-authorized-user')
     .header__container 
       button.header__burger.js-header__burger
         +svg-burger()
@@ -72,4 +74,6 @@ mixin header(params)
         +bordered-button({text: 'войти'})
       .header__reg-button
         +primary-button({text: 'зарегистрироваться'})
+      span.header__separator
+      a.header__user-name(href='change me' title='личный кабинет')= userName
 
