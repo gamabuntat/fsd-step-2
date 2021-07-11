@@ -55,25 +55,31 @@ mixin header(params)
       userName = 'Юлий Цезарь',
     } = params
 
-  .header.js-header(class=authorized && 'header_for-authorized-user')
+  header.header.js-header(class=authorized && 'header_for-authorized-user')
     .header__container 
-      button.header__burger.js-header__burger
+      button.header__burger.js-header__burger(aria-label='toggle navigation')
         +svg-burger()
+
       a.header__logo(href='landing.html' title='toxin home page')
         .header__main-logo
           +svg-logo()
         .header__toxin
           +svg-toxin()
-      ul.header__menu
+
+      ul.header__menu(aria-label='navigation')
         each i in content
           if i.type === 'expandableItem'
             +expandable-menu-item(i)
           else
             +menu-item(i)
+
       .header__sign-in-button
         +bordered-button({text: 'войти'})
+
       .header__reg-button
         +primary-button({text: 'зарегистрироваться'})
+
       span.header__separator
+
       a.header__user-name(href='change me' title='личный кабинет')= userName
 

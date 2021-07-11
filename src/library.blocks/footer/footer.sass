@@ -1,0 +1,81 @@
+@use 'sass:color'
+
+@use '@styles/useless/useless'
+@import '@styles/vars/colors'
+
+.footer
+  display: flex
+  flex-direction: column
+  align-items: center
+  background-color: #fff
+  box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.95)
+  box-sizing: border-box
+
+  &__container
+    display: grid
+    grid-template-columns: repeat(12, 1fr)
+    gap: 40px
+    padding: 100px 10px
+    width: min(1440px, 100%)
+    box-sizing: border-box
+
+  &__sub-container
+    display: flex
+    flex-direction: column
+    grid-column: span 3
+    gap: 20px
+
+  &__logo
+    display: flex
+    gap: 12.5px
+    align-items: center
+
+  &__hype
+    margin: 0
+    line-height: 24px
+    color: $color-main-fg
+    max-width: 260px
+
+  &__list 
+    grid-column: span 2
+    margin: 0
+    padding: 0
+    list-style: none
+
+    &-item
+      margin-bottom: 22px
+
+    &-title
+      @include useless.font-bold-type
+      margin: 0
+      color: $color-title-fg
+
+    &-link
+      color: $color-additional-fg
+      text-decoration: none
+      outline: none
+
+      &:hover, &:focus
+        color: $color-main-fg
+
+  &__subscription
+    display: flex
+    flex-direction: column
+    gap: 20px
+    grid-column: span 3
+
+    &-title
+      @extend .footer__list-title
+
+    &-caption
+      line-height: 24px
+      margin: 0
+      color: $color-main-fg
+
+  &__copyrating-bar
+    width: 100%
+    padding: 0 10px
+    height: 70px
+    border-top: 1px solid color.adjust($color-title-fg, $alpha: -0.9)
+    box-sizing: border-box
+

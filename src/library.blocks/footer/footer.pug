@@ -1,0 +1,59 @@
+include /svg-logo/svg-logo
+include /svg-toxin/svg-toxin
+include /subscription-text-field/subscription-text-field
+
+mixin list(params)
+  - 
+    const {
+      title = 'навигация',
+      items = ['о нас', 'новости', 'служба поддержки', 'услуги'],
+      href = Array(4).fill('change me')
+    } = params
+
+  ul.footer__list
+    if title
+      li.footer__list-item
+        h2.footer__list-title= title
+    - for (let i = 0; i < items.length; i++)
+      li.footer__list-item
+        a.footer__list-link(
+          href=href[i] || 'change me'
+          title=items[i]
+        )= items[i].slice(0, 1).toUpperCase() + items[i].slice(1)
+
+mixin footer(params)
+  - 
+    const {
+      lists = [
+        {},
+        {
+          title: 'о нас',
+          items: ['О сервисе', 'Наша команда', 'Вакансии', 'Инвесторы']
+        },
+        {
+          title: 'Служба поддержки',
+          items: ['Соглашения', 'Сообщества', 'Связь с нами']
+        },
+      ] 
+    } = params
+
+  footer.footer
+    .footer__container
+      .footer__sub-container
+        .footer__logo 
+          +svg-logo()
+          +svg-toxin()
+        p.footer__hype
+          | Бронирование номеров в лучшем отеле 2019 года по версии ассоциации «Отельные взгляды»
+
+      each l in lists
+        +list(l)
+
+      .footer__subscription
+        h2.footer__subscription-title Подписка
+        p.footer__subscription-caption
+          | Получайте специальные предложения и новости сервиса
+        +subscription-text-field({placeholder: 'Email', type: 'email'})
+
+    .footer__copyrating-bar
+

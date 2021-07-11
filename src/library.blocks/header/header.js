@@ -42,9 +42,8 @@ class MenuButton extends EventEmmiter {
   }
 }
 
-class Burger extends EventEmmiter {
+class Burger {
   constructor(button) {
-    super();
     this.burger = button;
     this.bindListeners();
   }

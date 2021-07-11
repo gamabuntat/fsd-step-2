@@ -3,10 +3,12 @@ extends ../../layout/layout
 block vars
   include /watermark/watermark
   include /header/header
+  include /footer/footer
 
 block main
   +watermark({})
   .hf-main
     +header({})
     +header({authorized: true})
+    +footer({})
 
