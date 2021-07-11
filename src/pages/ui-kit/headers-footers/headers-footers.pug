@@ -4,6 +4,11 @@ block vars
   include /watermark/watermark
   include /header/header
   include /footer/footer
+  include /svg-logo/svg-logo
+  include /svg-toxin/svg-toxin
+  include /svg-twitter/svg-twitter
+  include /svg-facebook/svg-facebook
+  include /svg-instagram/svg-instagram
 
 block main
   +watermark({})
@@ -11,4 +16,14 @@ block main
     +header({})
     +header({authorized: true})
     +footer({})
+    .hf-footer
+      .hf-footer__logo
+        +svg-logo()
+        +svg-toxin()
+      p.hf-footer__copyright
+        | Copyright © 2018 Toxin отель. Все права зачищены.
+      .hf-footer__social
+        +svg-twitter()
+        +svg-facebook()
+        +svg-instagram()
 

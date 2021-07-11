@@ -1,11 +1,45 @@
+@use 'sass:color'
+
+@import '@styles/vars/colors'
+
 html
   background-color: #E5E5E5
 
 body
   padding: 150px 0
 
-.hf-main
-  display: flex
-  flex-direction: column
-  row-gap: 40px
-  
+.hf
+
+  &-main
+    display: flex
+    flex-direction: column
+    gap: 40px
+    
+  &-footer
+    align-self: center
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 20px
+    width: 768px
+    height: 367px
+    background-color: #fff
+    box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.95)
+
+    & > *:first-child
+      margin-bottom: 5px
+
+    &__logo
+      display: flex
+      align-items: center
+      gap: 12.5px
+
+    &__copyright
+      margin: 0
+      color: $color-main-fg
+
+    &__social
+      display: flex
+      gap: 20px
+
