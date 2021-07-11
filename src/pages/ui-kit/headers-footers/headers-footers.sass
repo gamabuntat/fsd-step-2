@@ -22,13 +22,10 @@ body
     justify-content: center
     align-items: center
     gap: 20px
-    width: 768px
+    width: min(768px, 100%)
     height: 367px
     background-color: #fff
     box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.95)
-
-    & > *:first-child
-      margin-bottom: 5px
 
     &__logo
       display: flex
@@ -37,6 +34,7 @@ body
 
     &__copyright
       margin: 0
+      margin-bottom: 5px
       color: $color-main-fg
 
     &__social
