@@ -28,6 +28,15 @@
     display: flex
     align-items: center
     column-gap: 12.5px
+    outline: none
+
+    &:focus, &:hover
+
+      & .header__main-logo .svg-logo__circle, & .svg-logo__left-petal
+        fill: url(#gradient_focus)
+
+      & .header__main-logo .svg-logo__right-petal
+        fill: url(#secondary_gradient_focus)
 
   &__main-logo
     display: flex
@@ -57,17 +66,13 @@
     display: flex
     column-gap: 5px
     align-items: stretch
-    border: 1px solid rgba(0, 0, 0, 0)
 
     &_pressed 
 
       & ~ .header__sub-menu
         display: flex
 
-    &:focus
-      outline: revert
-    
-    &:hover
+    &:hover, &:focus
 
       & .header__menu-button-caption
         color: $color-main-fg
@@ -106,15 +111,16 @@
     background-color: #fff
     color: $color-additional-fg 
     box-sizing: border-box
+    outline: none
 
-    &:hover
+    &:hover, &:focus
       color: $color-main-fg
 
     &_important
       font-weight: bold
       color: $color-main-fg
 
-      &:hover
+      &:hover, &:focus
         color: $color-title-fg
 
   &__sign-in-button, &__reg-button
