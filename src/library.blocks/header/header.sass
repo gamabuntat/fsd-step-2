@@ -10,6 +10,7 @@
   background-color: white
   padding: 0 10px
   color: $color-additional-fg
+  box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.95)
 
   &_for-authorized-user
 
@@ -69,10 +70,8 @@
   &__menu-item
     display: flex
     align-items: center
-    min-width: max-content
 
   &__menu-expandable-item
-    width: min-content
     position: relative
 
   &__menu-button
@@ -206,6 +205,20 @@
       grid-column: 1 / -1
       flex-direction: column
       margin-left: 0
+      gap: 0
+
+    &__sub-menu
+      position: initial
+
+      & .header__menu-item
+        padding: 0
+
+    &__menu-link, &__menu-button
+      width: 100%
+      padding: 10px 4px
+
+      &:hover, &:focus
+        background-color: color.adjust($color-title-fg, $lightness: 74%)
 
     &__reg-button
       display: none
