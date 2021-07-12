@@ -1,0 +1,108 @@
+@use 'sass:color'
+
+@use '@styles/useless/useless'
+@import '@styles/vars/colors'
+
+body
+  padding: 150px 0 0
+
+.ct
+
+  &-main
+    display: flex
+    justify-content: space-evenly
+    gap: 40px
+
+.color
+  display: flex
+  flex-direction: column
+  gap: 20px
+
+  & &-type:nth-child(2) &-type__example
+    background-color: $color-main-fg
+
+  & &-type:nth-child(3) &-type__example
+    background-color: $color-additional-fg
+
+  & &-type:nth-child(4) &-type__example
+    background-color: $color-unclaimed-fg
+
+  & &-type:nth-child(5) &-type__example
+    background-color: color.adjust($color-title-fg, $alpha: -0.95)
+
+  & &-type:nth-child(6) &-type__example
+    background-color: $color-primary
+
+  & &-type:nth-child(7) &-type__example
+    background-color: $color-secondary
+
+  &-type
+    display: flex
+    gap: 40px
+
+    &__example
+      $size: 70px
+      width: $size
+      height: $size
+      background-color: $color-title-fg
+      border-radius: 6px
+
+    &__container
+      display: flex
+      flex-direction: column
+      justify-content: center
+      line-height: 24px
+
+    &__title
+      margin: 0
+      width: max-content
+      color: $color-title-fg
+      font-size: useless.px2rem(19px)
+      font-weight: bold
+
+    &__caption
+      margin: 0
+      font-size: useless.px2rem(19px)
+
+.font
+  display: flex
+  flex-direction: column
+  gap: 50px
+
+  & &-type:nth-child(2)
+
+    & .font-type
+      &__title, &__example
+        font-size: useless.px2rem(19px)
+
+  & &-type:nth-child(3)
+
+    & .font-type
+      &__title, &__example
+        font-size: useless.px2rem(12px)
+        text-transform: uppercase
+
+  & &-type:nth-child(4)
+
+    & .font-type
+      &__title, &__example
+        font-size: useless.px2rem(14px)
+
+      &__example
+        color: $color-main-fg
+        font-weight: normal
+
+  &-type
+    display: flex
+    gap: 30px
+    line-height: 24px
+
+    &__title
+      color: $color-unclaimed-fg
+      font-size: useless.px2rem(24px)
+
+    &__example
+      color: $color-title-fg
+      font-size: useless.px2rem(24px)
+      font-weight: bold
+

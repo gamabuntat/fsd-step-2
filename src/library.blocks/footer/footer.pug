@@ -16,7 +16,7 @@ mixin list(params)
   ul.footer__list
     if title
       li.footer__list-item
-        h2.footer__list-title= title
+        h3.footer__list-title= title
     - for (let i = 0; i < items.length; i++)
       li.footer__list-item
         a.footer__list-link(
@@ -53,7 +53,7 @@ mixin footer(params)
         +list(l)
 
       form.footer__subscription
-        h2.footer__subscription-title Подписка
+        h3.footer__subscription-title Подписка
         p.footer__subscription-caption
           | Получайте специальные предложения и новости сервиса
         +subscription-text-field(

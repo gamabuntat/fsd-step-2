@@ -1,0 +1,57 @@
+extends ../../layout/layout
+
+block vars
+  include /watermark/watermark
+
+  - const title = 'Colors & Types'
+
+  mixin color-type({title = 'Dark Shade 100%', color = '#1F2041'})
+    .color-type
+      .color-type__example
+      .color-type__container
+        h2.color-type__title= title
+        p.color-type__caption= color
+
+  mixin font-type(params)
+    -
+      const {
+        type = 'H1',
+        example = 'This one is the sub-section or widget title'
+      } = params
+
+    .font-type
+      .font-type__title= type
+      .font-type__example= example
+
+  - 
+    const colorTypes = [
+      {}, 
+      {title: 'Dark Shade 75%'},
+      {title: 'Dark Shade 50%'},
+      {title: 'Dark Shade 25%'},
+      {title: 'Dark Shade 5%'},
+      {title: 'Purple', color: '#BC9CFF'},
+      {title: 'Green', color: '#6FCF97'},
+    ]
+
+  -
+    const fontTypes = [
+      {},
+      {type: 'H2', example: 'Next one is the item title inside widgets'},
+      {type: 'H3', example: 'This is a label or CTA text'},
+      {
+        type: 'Body', 
+        example: 'This is the body text which is used for most of the design, like paragraphs, lists, etc.'
+      }
+    ]
+
+block main
+  +watermark({})
+  main.ct-main
+    .color
+      each t in colorTypes
+        +color-type(t)
+    .font
+      each t in fontTypes
+        +font-type(t)
+  
