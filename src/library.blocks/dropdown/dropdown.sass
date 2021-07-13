@@ -67,7 +67,7 @@ $color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
     border-top-left-radius: 0
     border-top-right-radius: 0
     box-shadow: 0 10px 20px color.adjust($color-main-fg, $alpha: -0.7)
-    z-index: 10
+    z-index: 9
 
     &_hidden
       display: none
@@ -97,12 +97,10 @@ $color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
       border: 1px solid color.adjust($color-unclaimed-fg, $alpha: $alpha-delta)
 
     &_disabled
-      color: $color-disabled
-      border: 1px solid $color-disabled
-
-      &:hover, &:focus
-        color: color.adjust($color-disabled, $alpha: $alpha-delta)
-        border: 1px solid color.adjust($color-disabled, $alpha: $alpha-delta)
+      
+      &, &:hover, &:focus
+        color: $color-disabled
+        border: 1px solid $color-disabled
 
   &__counter
     @include useless.font-bold-type

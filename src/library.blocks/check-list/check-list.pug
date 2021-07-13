@@ -1,7 +1,21 @@
 include ../check/check
 include ../svg-expand-icon/svg-expand-icon
 
-mixin check-list({checkParams = [], label = 'expandable checkbox list', isOpen})
+mixin check-list(params)
+  - 
+    const {
+      checkParams = [
+        {text: 'завтрак'},
+        {text: 'письменный стол', attrs: {checked: true}},
+        {text: 'Стул для кормления', attrs: {checked: true}},
+        {text: 'Кроватка', attrs: {checked: true}},
+        {text: 'Телевизор'},
+        {text: 'Шампунь'},
+      ],
+      label = 'дополнительные удобства',
+      isOpen
+    } = params
+
   .check-list(class=isOpen && 'check-list_open')
     button.check-list__button
       span.check-list__button-label #{label}

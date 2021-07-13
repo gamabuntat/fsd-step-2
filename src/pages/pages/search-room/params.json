@@ -1,0 +1,80 @@
+[
+  {},
+  {
+    "roomNumber": 840,
+    "isLuxury": false,
+    "cost": 9900,
+    "nReviews": 65,
+    "rate": 4
+  },
+  {
+    "roomNumber": 980,
+    "cost": 8500,
+    "nReviews": 35,
+    "rate": 3
+  },
+  {
+    "roomNumber": 856,
+    "isLuxury": false,
+    "cost": 7300,
+    "nReviews": 19,
+    "rate": 5
+  },
+  {
+    "roomNumber": 740,
+    "isLuxury": false,
+    "cost": 6000,
+    "nReviews": 44,
+    "rate": 4
+  },
+  {
+    "roomNumber": 982,
+    "isLuxury": false,
+    "cost": 5800,
+    "nReviews": 56,
+    "rate": 3
+  },
+  {
+    "roomNumber": 678,
+    "isLuxury": false,
+    "cost": 5500,
+    "nReviews": 45,
+    "rate": 5
+  },
+  {
+    "roomNumber": 450,
+    "isLuxury": false,
+    "cost": 5300,
+    "nReviews": 39,
+    "rate": 4
+  },
+  {
+    "roomNumber": 350,
+    "isLuxury": false,
+    "cost": 5000,
+    "nReviews": 77,
+    "rate": 3
+  },
+  {
+    "roomNumber": 666,
+    "isLuxury": false,
+    "cost": 13,
+    "nReviews": 999,
+    "rate": 1
+  },
+  {
+    "roomNumber": 444,
+    "isLuxury": false,
+    "cost": 5000,
+    "nReviews": 15,
+    "rate": 3
+  },
+  {
+    "roomNumber": 352,
+    "isLuxury": false,
+    "cost": 5000,
+    "nReviews": 55,
+    "rate": 3
+  }
+]
+

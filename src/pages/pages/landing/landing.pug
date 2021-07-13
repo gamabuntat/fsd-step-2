@@ -1,8 +1,6 @@
 extends ../../layout/layout
 
 append vars
-  include /card-search-room/card-search-room
-
   - const title = 'Landing'
 
 block main
@@ -24,10 +22,10 @@ block main
       article.landing-main-card
         +card-search-room({
           dateDropdownParams: {
-            calAttrs: {hash: 'CAL_MAIN'},
+            calAttrs: {hash: calHash},
           },
           dropdownParams: {
-            hash: 'DROP_MAIN' 
+            hash: dropdownHash
           }
         })
 
