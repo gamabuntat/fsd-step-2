@@ -7,50 +7,52 @@ append vars
 
 block main
   main.sr-main
-    aside.sr-main-filter 
-      section.sr-date-dropdown
-        h2.sr-main-filter-title даты пребывания в отеле
-        +filter-date-dropdown({calAttrs: {hash: calHash}})
+    button.sr-main-aside-button >>
+    aside.sr-main-filter.js-sr-main-filter 
+      .sr-main-filter__container
+        section.sr-date-dropdown
+          h2.sr-main-filter-title даты пребывания в отеле
+          +filter-date-dropdown({calAttrs: {hash: calHash}})
 
-      section.sr-dropdown
-        h2.sr-main-filter-title гости
-        +dropdown({hash: dropdownHash, narrow: true})
+        section.sr-dropdown
+          h2.sr-main-filter-title гости
+          +dropdown({hash: dropdownHash, narrow: true})
 
-      section.sr-range-slider
-        h2.sr-main-filter-title диапазон цены
-        .sr-range-slider__range-label
-          +range-label({sliderID: 'srs1', step: 100})
-        .sr-range-slider__container
-          +range-slider({bsp: 0.333, bep: 0.666, id: 'srs1'})
-        .sr-range-slider__caption 
-          | Стоимость за сутки пребывания в номере
+        section.sr-range-slider
+          h2.sr-main-filter-title диапазон цены
+          .sr-range-slider__range-label
+            +range-label({sliderID: 'srs1', step: 100})
+          .sr-range-slider__container
+            +range-slider({bsp: 0.333, bep: 0.666, id: 'srs1'})
+          .sr-range-slider__caption 
+            | Стоимость за сутки пребывания в номере
 
-      section.sr-house-rules
-        h2.sr-main-filter-title правила дома
-        +check({text: 'можно курить'})
-        +check({text: 'Можно с питомцами', attrs: {checked: true}})
-        +check({attrs: {checked: true}})
+        section.sr-house-rules
+          h2.sr-main-filter-title правила дома
+          +check({text: 'можно курить'})
+          +check({text: 'Можно с питомцами', attrs: {checked: true}})
+          +check({attrs: {checked: true}})
 
-      section.sr-accessibility
-        h2.sr-main-filter-title доступность
-        +rich-check({
-          text: 'Ширина коридоров в номере не менее 91 см.',
-          title: 'Широкий коридор'
-        })
-        +rich-check({})
+        section.sr-accessibility
+          h2.sr-main-filter-title доступность
+          +rich-check({
+            text: 'Ширина коридоров в номере не менее 91 см.',
+            title: 'Широкий коридор'
+          })
+          +rich-check({})
 
-      section.sr-room-amenitie
-        h2.sr-main-filter-title удобства номера
-        +dropdown({
-          narrow: true,
-          sectionNames: ['спальни', 'кровати','ванные комнаты'],
-          glossary: 'спальни, кровати, ванные комнаты',
-          defaultSignature: 'Выберите удобства',
-          counterValues: '2 2 0',
-        })
+        section.sr-room-amenitie
+          h2.sr-main-filter-title удобства номера
+          +dropdown({
+            narrow: true,
+            sectionNames: ['спальни', 'кровати','ванные комнаты'],
+            glossary: 'спальни, кровати, ванные комнаты',
+            defaultSignature: 'Выберите удобства',
+            counterValues: '2 2 0',
+          })
 
-      section.sr-additional-amenities
-        +check-list({})
+        section.sr-additional-amenities
+          +check-list({})
 
     article.sr-main-content
       h1.sr-main-title Номера, которые мы для вас подобрали

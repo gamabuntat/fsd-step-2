@@ -1,3 +1,7 @@
+@use 'sass:color'
+
+@use '@styles/useless/useless'
+
 body 
   display: flex
   flex-direction: column
@@ -9,11 +13,41 @@ body
     flex-grow: 1
     display: flex
     gap: 40px
+    margin: 0 auto
+
+    &-aside-button
+      min-width: 50px
+      height: 50px
+      cursor: pointer
 
     &-filter
-      background-color: lightcyan
+      background-color: color.adjust(lightcyan, $alpha: -0.7)
+      display: none
+      width: 100%
+      height: calc(100vh - 70px)
+      position: absolute
+      z-index: 100
+
+      &__container
+        width: 281px
+        display: flex
+        flex-direction: column
+        background-color: lightcyan
+        padding: 0 20px
+        height: calc(100vh - 70px)
+        overflow: scroll
+
+      &_expanded
+        display: block
 
     &-content
       background-color: mediumspringgreen
       flex-grow: 1
+
+      &__container
+        display: flex
+        flex-wrap: wrap
+        column-gap: 12px
+        row-gap: 20px
+        max-width: 834px
 
