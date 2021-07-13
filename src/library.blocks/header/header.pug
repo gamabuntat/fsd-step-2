@@ -73,11 +73,11 @@ mixin header(params)
           else
             +menu-item(i)
 
-      .header__sign-in-button
-        +bordered-button({text: 'войти'})
+      form.header__sign-in-button(action='sign-in.html')
+        +bordered-button({text: 'войти', attrs: {type: 'submit'}})
 
-      .header__reg-button
-        +primary-button({text: 'зарегистрироваться'})
+      form.header__reg-button(action='registration.html')
+        +primary-button({text: 'зарегистрироваться', attrs: {type: 'submit'}})
 
       span.header__separator
 

@@ -52,12 +52,12 @@ mixin footer(params)
       each l in lists
         +list(l)
 
-      form.footer__subscription
+      form.footer__subscription(action='change me')
         h3.footer__subscription-title Подписка
         p.footer__subscription-caption
           | Получайте специальные предложения и новости сервиса
         +subscription-text-field(
-          {placeholder: 'Email', type: 'email'},
+          {placeholder: 'Email', type: 'email', required: true},
           {type: 'submit'}
         )
 
