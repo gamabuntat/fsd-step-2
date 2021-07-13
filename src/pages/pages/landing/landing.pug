@@ -1,0 +1,38 @@
+extends ../../layout/layout
+
+append vars
+  include /card-search-room/card-search-room
+
+  - const title = 'Landing'
+
+block main
+  main.landing-main
+    img.landing-main-photo(
+      src=require('./img/i1.webp').default 
+      alt='a very green room with green walls with a green bed with a green plant and an amazing view from the window'
+    )
+    img.landing-main-photo(
+      src=require('./img/i2.webp').default
+      alt='a room illuminated with snow-white light with a large light sofa in the center, a round coffee table and a bush rose bouquet'
+    )
+    img.landing-main-photo(
+      src=require('./img/i3.webp').default
+      alt='everything is the same as in the previous two photos, only in pink tones'
+    )
+
+    .landing-main-container
+
+      article.landing-main-card
+        +card-search-room({
+          dateDropdownParams: {
+            calAttrs: {hash: 'CAL_MAIN'},
+          },
+          dropdownParams: {
+            hash: 'DROP_MAIN' 
+          }
+        })
+
+      p.landing-main-caption
+        | Лучшие номера для вашей работы,
+        | отдыха и просто вдохновения
+

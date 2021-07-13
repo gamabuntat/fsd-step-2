@@ -1,7 +1,6 @@
 extends ../../layout/layout
 
-block vars
-  include /watermark/watermark
+append vars
   include /card-search-room/card-search-room
   include /card-reg/card-reg
   include /card-room-details/card-room-details
@@ -11,9 +10,9 @@ block vars
 
   - 
     const title = 'Cards'
+    isUikit = true
 
-block main
-  +watermark({})
+append main
   main.c-main
     .c-column
       +card-search-room({

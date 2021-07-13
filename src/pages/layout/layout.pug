@@ -1,4 +1,9 @@
 block vars
+  include /watermark/watermark
+  include /header/header
+  include /footer/footer
+
+  - let isUikit = false
 
 doctype html
 html(lang="ru")
@@ -28,5 +33,11 @@ html(lang="ru")
     )
 
   body
+    unless isUikit
+      +header({})
     block main
+      if isUikit
+        +watermark({})
+    unless isUikit
+      +footer({})
 

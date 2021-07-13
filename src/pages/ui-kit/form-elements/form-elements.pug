@@ -1,7 +1,6 @@
 extends ../../layout/layout
 
-block vars
-  include /watermark/watermark
+append vars
   include /text-field/text-field
   include /subscription-text-field/subscription-text-field
   include /dropdown/dropdown
@@ -28,6 +27,7 @@ block vars
 
   -
     const title = 'Form Elements'
+    isUikit = true
 
     const narrowDropdownParams = {
       narrow: true,
@@ -43,8 +43,7 @@ block vars
       if subTitle
         span.fe-title__subtitle #{subTitle}
 
-block main
-  +watermark
+append main
   main.fe-main
     article.group.group_huppa
       .fe-container

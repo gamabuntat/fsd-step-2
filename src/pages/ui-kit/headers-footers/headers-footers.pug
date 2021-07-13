@@ -1,7 +1,6 @@
 extends ../../layout/layout
 
-block vars
-  include /watermark/watermark
+append vars
   include /header/header
   include /footer/footer
   include /svg-logo/svg-logo
@@ -10,10 +9,11 @@ block vars
   include /svg-facebook/svg-facebook
   include /svg-instagram/svg-instagram
 
-  - const title = 'Headers & Footers'
+  - 
+    const title = 'Headers & Footers'
+    isUikit = true
 
-block main
-  +watermark({})
+append main
   .hf-main
     +header({})
     +header({authorized: true})

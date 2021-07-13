@@ -1,0 +1,66 @@
+body
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+
+.landing
+  
+  &-main
+    display: flex
+    position: relative
+    flex-grow: 1
+
+    &-photo
+      position: absolute
+      width: 100%
+      height: 100%
+      box-sizing: border-box
+      object-fit: cover
+      z-index: -1
+      animation-duration: 30s
+      animation-name: hide-bg
+      animation-iteration-count: infinite
+
+      &:nth-child(2)
+        animation-delay: 10s
+
+      &:nth-child(3)
+        animation-delay: 20s
+
+    &-container
+      display: flex
+      flex-direction: column
+      justify-content: space-between
+      margin: 0 auto
+      padding: 70px 10px
+      width: min(1440px, 100%)
+      box-sizing: border-box
+      gap: 25px
+
+    &-caption
+      align-self: flex-end
+      margin: 0
+      max-width: 290px
+      text-align: right
+
+@keyframes hide-bg
+  0%
+    opacity: 1
+  15%
+    opacity: 1
+  30%
+    opacity: 0
+  85%
+    opacity: 0
+  100%
+    opacity: 1
+
+@media (max-width: 410px)
+  .landing
+    
+    &-main
+
+      &-container
+        padding: 70px 0
+  
+

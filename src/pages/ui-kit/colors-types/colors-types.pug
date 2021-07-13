@@ -1,9 +1,9 @@
 extends ../../layout/layout
 
-block vars
-  include /watermark/watermark
-
-  - const title = 'Colors & Types'
+append vars
+  - 
+    const title = 'Colors & Types'
+    isUikit = true
 
   mixin color-type({title = 'Dark Shade 100%', color = '#1F2041'})
     .color-type
@@ -45,8 +45,7 @@ block vars
       }
     ]
 
-block main
-  +watermark({})
+append main
   main.ct-main
     .color
       each t in colorTypes
