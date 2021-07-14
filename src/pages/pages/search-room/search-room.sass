@@ -1,47 +1,59 @@
 @use 'sass:color'
 
 @use '@styles/useless/useless'
+@import '@styles/vars/colors'
 
 body 
   display: flex
   flex-direction: column
   height: 100vh
 
+.header
+  position: sticky
+  top: 0
+  z-index: 1000
+
 .sr
 
   &-main
     flex-grow: 1
     display: flex
-    gap: 40px
     margin: 0 auto
 
-    &-aside-button
-      min-width: 50px
+    &__aside-button
+      min-width: 30px
       height: 50px
       cursor: pointer
 
     &-filter
-      background-color: color.adjust(lightcyan, $alpha: -0.7)
       display: none
       width: 100%
       height: calc(100vh - 70px)
-      position: absolute
+      position: fixed
+      top: 70px
       z-index: 100
 
-      &__container
-        width: 281px
+      &_expanded
         display: flex
-        flex-direction: column
+
+      &__container
+        width: min-content
         background-color: lightcyan
         padding: 0 20px
         height: calc(100vh - 70px)
-        overflow: scroll
+        overflow-y: scroll
 
-      &_expanded
-        display: block
+      &__content
+        display: flex
+        flex-direction: column
+        width: 266px
+
+      &__plug
+        flex-grow: 1
+        background-color: color.adjust($color-title-fg, $alpha: -0.7, $lightness: 10%)
+
 
     &-content
-      background-color: mediumspringgreen
       flex-grow: 1
 
       &__container
