@@ -17,17 +17,29 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
   box-sizing: border-box
   z-index: 10
 
-  &_narrow
-    padding: 12px
+  &_narrow 
+    padding: 7px
     width: 266px
 
-    & .cal__table-container
-      width: 238px
-   
-    & .cal__day-btn
-      width: 34px
-      height: 34px
-      font-size: useless.px2rem(10px)
+    & .cal
+
+      $small-size: 252px
+      &__table-container
+        min-width: $small-size
+        width: $small-size
+
+      &__main-table
+        max-width: $small-size
+
+      $small-button-size: calc(#{$small-size} / 7)
+      &__day
+        max-width: $small-button-size
+        height: $small-button-size
+     
+      &__day-btn
+        width: $small-button-size
+        height: $small-button-size
+        font-size: useless.px2rem(10px)
 
   &__prev-month-btn, &__next-month-btn
     @include useless.button-common-styles
@@ -78,6 +90,8 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
 
   &__main-table
     border-collapse: collapse
+    border-spacing: 0px
+    border: 0
     transition: all 0.2s
     height: min-content
 

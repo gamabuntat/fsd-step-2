@@ -527,5 +527,7 @@ class Cal extends Tables {
   }
 }
 
-document.querySelectorAll('.js-cal').forEach((cal) => new Cal(cal));
+window.addEventListener('load', () => (
+  document.querySelectorAll('.js-cal').forEach((cal) => new Cal(cal))
+));
 

@@ -14,7 +14,7 @@ body
     flex-grow: 1
     display: flex
     margin: 0 auto
-    gap: 10px
+    gap: 50px
 
     &__aside-button
       @include useless.button-common-styles
@@ -22,7 +22,7 @@ body
       align-items: center
       justify-content: center
       min-width: 30px
-      height: 60px
+      height: 70px
       cursor: pointer
 
       &:hover, &:focus
@@ -35,6 +35,11 @@ body
 
     &-filter
       padding-left: 10px
+
+      &-title
+        @include useless.font-bold-type
+        margin: 0 0 5px
+        color: $color-title-fg
 
       &__container
         display: flex
@@ -49,6 +54,8 @@ body
       &__content
         display: flex
         flex-direction: column
+        row-gap: 30px
+        padding: 30px 0
         width: 266px
 
       &__plug
@@ -66,7 +73,7 @@ body
         row-gap: 20px
         max-width: 834px
 
-@media (max-width: 570px)
+@media (max-width: 615px)
   .sr
     
     &-main
