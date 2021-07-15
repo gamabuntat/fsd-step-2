@@ -8,40 +8,43 @@ body
   flex-direction: column
   height: 100vh
 
-.header
-  position: sticky
-  top: 0
-  z-index: 1000
-
 .sr
 
   &-main
     flex-grow: 1
     display: flex
     margin: 0 auto
+    gap: 10px
 
     &__aside-button
+      @include useless.button-common-styles
+      display: none
+      align-items: center
+      justify-content: center
       min-width: 30px
-      height: 50px
+      height: 60px
       cursor: pointer
 
-    &-filter
-      display: none
-      width: 100%
-      height: calc(100vh - 70px)
-      position: fixed
-      top: 70px
-      z-index: 100
+      &:hover, &:focus
 
-      &_expanded
-        display: flex
+        & > .svg-expand-icon
+          opacity: 1
+        
+      & > .svg-expand-icon
+        transform: rotate(-90deg)
+
+    &-filter
+      padding-left: 10px
 
       &__container
-        width: min-content
-        background-color: lightcyan
-        padding: 0 20px
-        height: calc(100vh - 70px)
-        overflow-y: scroll
+        display: flex
+        gap: 10px
+        background-color: white
+
+      &__button
+        @extend .sr-main__aside-button
+        display: none
+        transform: rotate(180deg)
 
       &__content
         display: flex
@@ -62,4 +65,30 @@ body
         column-gap: 12px
         row-gap: 20px
         max-width: 834px
+
+@media (max-width: 570px)
+  .sr
+    
+    &-main
+      gap: 0
+
+      &__aside-button
+        display: flex
+
+      &-filter
+        display: none
+        padding: 0
+        width: 100%
+        height: calc(100vh - 70px)
+        position: fixed
+        top: 70px
+        z-index: 100
+
+        &_expanded
+          display: flex
+
+        &__container
+          width: max(320px, 350px)
+          height: calc(100vh - 70px)
+          overflow-y: scroll
 

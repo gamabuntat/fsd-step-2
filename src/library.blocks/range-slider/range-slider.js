@@ -2,9 +2,7 @@ const iff = (predicate, fn) => (...args) => predicate() && fn(...args);
 const pipe = (...fns) => fns.reduceRight((a, b) => (...args) => a(b(...args)));
 
 const resizeBar = (bar, state) => () => (
-  bar.style.width = `${
-    (state.pb() + state.getRelBw() / 2) * 100 / state.getRatio() 
-  }%`
+  bar.style.width = `${state.pb() * 100 / state.getRatio()}%`
 );
 
 const calcPosition = (container, state) => (e) => {
@@ -85,7 +83,7 @@ const newState = (bw, track) => {
 
 const bindListeners = (root) => {
   const container = root.querySelector('.js-range-slider__container');
-  const track = root.querySelector('.js-range-slider__body');
+  const track = root.querySelector('.js-range-slider__track');
   const bs = root.querySelector('.js-range-slider__button_start-range');
   const be = root.querySelector('.js-range-slider__button_end-range');
   const pbs = root.querySelector('.js-range-slider__progress-bar_start');
@@ -114,12 +112,6 @@ const bindListeners = (root) => {
   be.addEventListener('pointermove', iff(state().getTrigger, moveHandlerE));
 };
 
-const init = (slider) => ( 
-  console.log('init!'),
-  document.readyState == 'complete' 
-    ? bindListeners(slider)
-    : document.addEventListener('load', () => bindListeners(slider))
-);
-
-export {init};
+document.querySelectorAll('.js-range-slider')
+  .forEach((rs) => bindListeners(rs));
 

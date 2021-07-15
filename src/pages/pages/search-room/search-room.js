@@ -4,8 +4,6 @@ import '@scripts/common.scripts.js';
 
 import './search-room.sass';
 
-import {init} from '@library/range-slider/range-slider.js';
-
 class AsideButton {
   constructor(button, aside) {
     this.asideButton = button;
@@ -19,41 +17,39 @@ class AsideButton {
   }
 
   handleAsideButtonClick() {
-    this.aside.expandAside();
-    setTimeout(() => init(document.querySelector('.js-range-slider')), 1000);
+    this.aside.showAside();
   }
 }
 
 class Filter {
   constructor(root) {
     this.filter = root;
-    this.content = root.querySelector('.js-sr-main-filter__content');
+    this.button = root.querySelector('.js-sr-main-filter__button');
+    this.plug = root.querySelector('.js-sr-main-filter__plug');
     this.bindListeners();
   }
 
   bindListeners() {
-    this.filter.addEventListener('click', () => this.handleFilterClick());
-    this.content.addEventListener(
-      'click',
-      ((c) => () => this.handleContentClick(c += 1))(0)
-    );
+    this.button.addEventListener('click', () => this.handleButtonClick());
+    this.plug.addEventListener('click', () => this.handlePlugClick());
   }
 
-  handleAssideButtonClick() {
-    this.expandAside();
+  handleButtonClick() {
+    this.hideAside();
   }
 
-  handleFilterClick() {
-    // this.filter.classList.remove('sr-main-filter_expanded');
+  handlePlugClick() {
+    this.hideAside();
   }
 
-  handleContentClick(counter) {
-    console.log(counter);
-  }
-
-  expandAside() {
-    this.filter.classList.toggle('sr-main-filter_expanded');
+  showAside() {
+    this.filter.classList.add('sr-main-filter_expanded');
     document.body.style.overflowY = 'hidden';
+  }
+
+  hideAside() {
+    this.filter.classList.remove('sr-main-filter_expanded');
+    document.body.style.overflowY = '';
   }
 }
 

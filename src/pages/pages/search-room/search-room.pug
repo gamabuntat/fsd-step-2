@@ -1,16 +1,23 @@
 extends ../../layout/layout
 
 append vars
+  include /svg-expand-icon/svg-expand-icon
+
   - 
     const title = 'Search room'
     const roomParams = require('./params.json')
 
 block main
   main.sr-main
-    button.sr-main__aside-button.js-sr-main__aside-button >>
-    aside.sr-main-filter.js-sr-main-filter 
+    button.sr-main__aside-button.js-sr-main__aside-button 
+      +svg-expand-icon()
+      +svg-expand-icon()
+    aside.sr-main-filter.js-sr-main-filter
       .sr-main-filter__container
-        .sr-main-filter__content.js-sr-main-filter__content
+        button.sr-main-filter__button.js-sr-main-filter__button
+          +svg-expand-icon()
+          +svg-expand-icon()
+        .sr-main-filter__content
           section.sr-date-dropdown
             h2.sr-main-filter-title даты пребывания в отеле
             +filter-date-dropdown({calAttrs: {hash: calHash}})
@@ -24,7 +31,7 @@ block main
             .sr-range-slider__range-label
               +range-label({sliderID: 'srs1', step: 100})
             .sr-range-slider__container
-              +range-slider({bsp: 0.333, bep: 0.666, id: 'srs1'})
+              +range-slider({id: 'srs1'})
             .sr-range-slider__caption 
               | Стоимость за сутки пребывания в номере
 
@@ -55,7 +62,7 @@ block main
           section.sr-additional-amenities
             +check-list({})
 
-      .sr-main-filter__plug
+      .sr-main-filter__plug.js-sr-main-filter__plug
 
     article.sr-main-content
       h1.sr-main-title Номера, которые мы для вас подобрали
