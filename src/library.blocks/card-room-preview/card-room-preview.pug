@@ -14,6 +14,10 @@ mixin card-room-preview(params)
       rate = 5,
     } = params
 
+    const imgNamesFormated = typeof imgNames == 'string' 
+      ? Array(4).fill(imgNames)
+      : imgNames
+
     const formater = new Intl.NumberFormat('ru', {
       style: 'currency',
       currency: 'RUB',
@@ -35,7 +39,7 @@ mixin card-room-preview(params)
         +svg-expand-icon('white', 1)
       .card-room-preview__radio-container
         - const name = 'crp' + Math.round(Math.random() * 1e5)
-        - for (let i = 0; i < imgNames.length; i++) 
+        - for (let i = 0; i < imgNamesFormated.length; i++) 
           - 
             const attrs = {
               name,
@@ -45,7 +49,7 @@ mixin card-room-preview(params)
           label.card-room-preview__radio-label
             input.card-room-preview__radio-input.js-card-room-preview__radio-input&attributes(attrs)(type='radio')
             span.card-room-preview__radio-box
-      each i of imgNames
+      each i of imgNamesFormated
         img.card-room-preview__room-img.js-card-room-preview__room-img(
           src=require(`@library/card-room-preview/img/${i}`).default
           alt='room preview'

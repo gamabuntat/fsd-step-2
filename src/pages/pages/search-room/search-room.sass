@@ -11,6 +11,9 @@ body
   &--locked
     overflow-y: auto
 
+.footer
+  border-top: 1px solid $color-unclaimed-fg
+
 .sr
 
   &-main
@@ -25,7 +28,7 @@ body
       align-items: center
       justify-content: center
       min-width: 30px
-      height: 70px
+      height: 78px
       cursor: pointer
 
       &:hover, &:focus
@@ -72,8 +75,16 @@ body
         background-color: color.adjust($color-title-fg, $alpha: -0.7, $lightness: 10%)
         outline: revert
 
+    &-title
+      margin: 0
+      color: $color-title-fg
+
     &-content
+      display: flex
+      flex-direction: column
+      gap: 20px
       flex-grow: 1
+      padding: 22px 0
 
       &__container
         display: flex
@@ -81,6 +92,11 @@ body
         column-gap: 12px
         row-gap: 20px
         max-width: 834px
+
+      &__pagination
+        margin: 20px 0 70px
+        width: 241px
+        align-self: center
 
   &-range-slider
     display: flex
