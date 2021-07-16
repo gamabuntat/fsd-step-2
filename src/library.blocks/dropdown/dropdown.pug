@@ -35,7 +35,9 @@ mixin dropdown(params)
           button.dropdown__decrease-button.js-dropdown__decrease-button.dropdown__decrease-button_disabled&attributes({
             type: 'button',
             ...params.decreaseButtonAttrs
-          }) -
+          })(
+            tabindex='-1'
+          ) -
           .dropdown__counter.js-dropdown__counter 0
           button.dropdown__increase-button.js-dropdown__increase-button&attributes({
           type: 'button',

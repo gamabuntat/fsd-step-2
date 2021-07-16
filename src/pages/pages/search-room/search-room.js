@@ -32,6 +32,8 @@ class Filter {
   bindListeners() {
     this.button.addEventListener('click', () => this.handleButtonClick());
     this.plug.addEventListener('click', () => this.handlePlugClick());
+    this.button.addEventListener('keydown', (e) => this.handleButtonKeydown(e));
+    this.plug.addEventListener('keydown', (e) => this.handlePlugKeydown(e));
   }
 
   handleButtonClick() {
@@ -42,14 +44,30 @@ class Filter {
     this.hideAside();
   }
 
+  handleButtonKeydown(e) {
+    if (e.code == 'Tab' && e.shiftKey) {
+      e.preventDefault();
+      this.plug.focus(); 
+    }
+  }
+
+  handlePlugKeydown(e) {
+    if (e.code == 'Tab' && !e.shiftKey) { 
+      e.preventDefault();
+      this.button.focus(); 
+    }
+  }
+
   showAside() {
     this.filter.classList.add('sr-main-filter_expanded');
-    document.body.style.overflowY = 'hidden';
+    this.filter.click();
+    document.body.classList.add('body--locked');
+    this.button.focus();
   }
 
   hideAside() {
     this.filter.classList.remove('sr-main-filter_expanded');
-    document.body.style.overflowY = '';
+    document.body.classList.remove('body--locked');
   }
 }
 
@@ -57,5 +75,4 @@ new AsideButton(
   document.querySelector('.js-sr-main__aside-button'),
   new Filter(document.querySelector('.js-sr-main-filter'))
 );
-
 

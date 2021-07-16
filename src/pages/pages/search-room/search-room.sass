@@ -8,6 +8,9 @@ body
   flex-direction: column
   height: 100vh
 
+  &--locked
+    overflow-y: auto
+
 .sr
 
   &-main
@@ -58,10 +61,16 @@ body
         padding: 30px 0
         width: 266px
 
+      &__dropdown-container
+        display: flex
+        flex-direction: column
+        gap: 20px
+
       &__plug
+        @include useless.button-common-styles
         flex-grow: 1
         background-color: color.adjust($color-title-fg, $alpha: -0.7, $lightness: 10%)
-
+        outline: revert
 
     &-content
       flex-grow: 1
@@ -73,7 +82,35 @@ body
         row-gap: 20px
         max-width: 834px
 
+  &-range-slider
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+    gap: 10px
+
+    &__range-label
+      margin-bottom: 10px
+      color: $color-additional-fg
+    
+    &__container
+      flex-basis: 100%
+
+    &__caption
+      font-size: useless.px2rem(12px)
+      color: $color-additional-fg
+
+  &-house-rules
+    display: flex
+    flex-direction: column
+    gap: 10px
+
+  &-accessibility
+    @extend .sr-house-rules
+
 @media (max-width: 615px)
+  .body--locked
+    overflow-y: hidden
+
   .sr
     
     &-main
@@ -86,15 +123,16 @@ body
         display: none
         padding: 0
         width: 100%
-        height: calc(100vh - 70px)
+        height: 100vh
         position: fixed
-        top: 70px
+        top: 0
         z-index: 100
 
         &_expanded
           display: flex
 
         &__container
+          padding-top: 70px
           width: max(320px, 350px)
           height: calc(100vh - 70px)
           overflow-y: scroll

@@ -8,7 +8,7 @@ append vars
     const roomParams = require('./params.json')
 
 block main
-  main.sr-main
+  main.sr-main.js-sr-main
     button.sr-main__aside-button.js-sr-main__aside-button 
       +svg-expand-icon()
       +svg-expand-icon()
@@ -19,13 +19,14 @@ block main
           +svg-expand-icon()
 
         .sr-main-filter__content
-          section.sr-date-dropdown
-            h2.sr-main-filter-title даты пребывания в отеле
-            +filter-date-dropdown({calAttrs: {hash: calHash}})
+          .sr-main-filter__dropdown-container
+            section.sr-date-dropdown
+              h2.sr-main-filter-title даты пребывания в отеле
+              +filter-date-dropdown({calAttrs: {hash: calHash}})
 
-          section.sr-dropdown
-            h2.sr-main-filter-title гости
-            +dropdown({hash: dropdownHash, narrow: true})
+            section.sr-dropdown
+              h2.sr-main-filter-title гости
+              +dropdown({hash: dropdownHash, narrow: true})
 
           section.sr-range-slider
             h2.sr-main-filter-title диапазон цены
@@ -63,7 +64,7 @@ block main
           section.sr-additional-amenities
             +check-list({})
 
-      .sr-main-filter__plug.js-sr-main-filter__plug
+      button.sr-main-filter__plug.js-sr-main-filter__plug
 
     article.sr-main-content
       h1.sr-main-title Номера, которые мы для вас подобрали

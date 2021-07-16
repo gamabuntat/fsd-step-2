@@ -90,24 +90,26 @@ class Dropdown {
   handleDecreaseButtonClick(e) {
     this.update(e.target);
     if (this.value === 0) { return; }
-    if (this.value === 1) { this.toggleDecreaseButtonMod(); }
+    if (this.value === 1) { 
+      this.toggleDecreaseButtonMod(); 
+      this.decreaseButtons[this.row].tabIndex = '-1';
+    }
     this.changeCounterValue(-1);
     this.updateSignature(this.signatureInterfaces);
     this.countersSum -= 1;
-    if (this.countersSum === 0) {
-      this.toggleCancelButtonMod();
-    }
+    if (this.countersSum === 0) { this.toggleCancelButtonMod(); }
   }
 
   handleIncreaseButtonClick(e) {
     this.update(e.target);
-    if (this.value === 0) { this.toggleDecreaseButtonMod(); }
+    if (this.value === 0) { 
+      this.toggleDecreaseButtonMod(); 
+      this.decreaseButtons[this.row].tabIndex = '0';
+    }
     this.changeCounterValue(1);
     this.updateSignature(this.signatureInterfaces);
     this.countersSum += 1;
-    if (this.countersSum === 1) {
-      this.toggleCancelButtonMod();
-    }
+    if (this.countersSum === 1) { this.toggleCancelButtonMod(); }
   }
 
   handeApplyButtonClick() {
