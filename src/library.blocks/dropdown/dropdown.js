@@ -27,7 +27,8 @@ class Dropdown {
     this.countersSum = 0;
     this.signatureInterfaces = this.getSignatureInterfaces();
     this.bindListeners();
-    this.hash = this.dropdown.dataset.hash;
+    this.hash = this.dropdown.dataset.hash 
+      || (this.dropdown.dataset.hash = 'commonDrpdwnHash');
     this.setCounterValues(this.getInitValues());
     if (this.dropdown.hasAttribute('data-open')) {
       this.expandButton.click(); 
@@ -98,6 +99,7 @@ class Dropdown {
     this.updateSignature(this.signatureInterfaces);
     this.countersSum -= 1;
     if (this.countersSum === 0) { this.toggleCancelButtonMod(); }
+    this.updateStorage();
   }
 
   handleIncreaseButtonClick(e) {
@@ -110,15 +112,13 @@ class Dropdown {
     this.updateSignature(this.signatureInterfaces);
     this.countersSum += 1;
     if (this.countersSum === 1) { this.toggleCancelButtonMod(); }
+    this.updateStorage();
   }
 
   handeApplyButtonClick() {
     this.expandButton.classList.toggle('dropdown__expand-button_pressed');
     this.list.classList.toggle('dropdown__list_hidden');
-    this.hash && sessionStorage.setItem(
-      this.hash, 
-      this.counters.reduce((res, c) => `${res} ${c.innerText}`, '')
-    );
+    this.updateStorage();
   }
 
   handleCancelButtonClick() {
@@ -127,6 +127,13 @@ class Dropdown {
     this.signature.innerText = this.defaultSignature;
     this.addDecreseButtonsMod();
     this.toggleCancelButtonMod();
+  }
+
+  updateStorage() {
+    sessionStorage.setItem(
+      this.hash, 
+      this.counters.reduce((res, c) => `${res} ${c.innerText}`, '')
+    );
   }
 
   setCounterValues(values) {

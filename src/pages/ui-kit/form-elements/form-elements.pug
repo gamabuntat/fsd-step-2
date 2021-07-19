@@ -30,7 +30,7 @@ append main
         +text-field({value: 'This is pretty awesome', autofocus: true})
       .fe-container
         +fe-title('dropdown')
-        +dropdown({})
+        +dropdown({counterValues: '0 0 0'})
       .fe-container
         +fe-title('masked text field')
         +text-field({masked: true})
@@ -116,7 +116,7 @@ append main
     article.group.group_huppa
       .fe-container
         +fe-title('dropdown')
-        +dropdown({isOpen: true})
+        +dropdown({isOpen: true, counterValues: '0 0 0'})
 
     article.group.group_huppa
       .fe-container
