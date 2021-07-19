@@ -8,9 +8,9 @@ const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin")
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const getEntry = (p) => {
-  return fs.readdirSync(p).reduce((entrys, name) => {
-    entrys[name] = `${p}${path.sep}${name}${path.sep}${name}.js`;
-    return entrys;
+  return fs.readdirSync(p).reduce((entries, name) => {
+    entries[name] = `${p}${path.sep}${name}${path.sep}${name}.js`;
+    return entries;
   }, {})
 };
 

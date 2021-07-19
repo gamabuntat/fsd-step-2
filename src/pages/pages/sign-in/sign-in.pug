@@ -1,0 +1,20 @@
+extends ../../layout/layout
+
+append vars
+  -
+    const title = 'Sign in'
+
+block main
+  main.sign-in-main
+    img.sign-in-main-photo(
+      src=require('../../img/bgi-3.webp').default
+      alt='pink room with a beautiful picture'
+    )
+    img.sign-in-main-photo(
+      src=require('../../img/bgi-4.webp').default 
+      alt='amazing orange chair plus everything else is gray'
+    )
+
+    .sign-in-card-sign-in
+      +card-sign-in({})
+
