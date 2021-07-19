@@ -15,6 +15,7 @@ mixin card-reg(params)
   .card-reg
     form.card-reg__container&attributes(formAttrs)
       h1.card-reg__title Регистрация аккаунта
+
       .card-reg__container.card-reg__container_with-small-gap
         +text-field({placeholder: 'Имя'})
         +text-field({placeholder: 'Фамилия'})
@@ -24,9 +25,11 @@ mixin card-reg(params)
             text: 'Женщина'
           })
           +radio({attrs: {name: 'sex', value: 'male'}, text: 'Мужчина'})
+
       .card-reg__masked-text-field
         span.card-reg__sub-title дата рождения
         +text-field({masked: true})
+
       .card-reg__container
         .card-reg__container.card-reg__container_with-small-gap
           .card-reg__email-container
@@ -36,6 +39,7 @@ mixin card-reg(params)
           +toggle({})
         .card-reg__big-button
           +big-button({ attrs: { type: 'submit', ...bigButtonAttrs } })
+
       .card-reg__container.card-reg__container_vertical
         span.card-reg__acc-caption Уже есть аккаунт на Toxin
         .card-reg__button

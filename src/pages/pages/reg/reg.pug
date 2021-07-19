@@ -1,0 +1,20 @@
+extends ../../layout/layout
+
+append vars
+  -
+    const title = 'Registration'
+
+block main
+  main.reg-main
+    img.reg-main-photo(
+      src=require('../img/bgi-3.webp').default
+      alt='pink room with a beautiful picture'
+    )
+    img.reg-main-photo(
+      src=require('../img/bgi-4.webp').default 
+      alt='amazing orange chair plus everything else is gray'
+    )
+
+    .reg-card-reg
+      +card-reg({})
+

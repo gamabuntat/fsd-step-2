@@ -5,7 +5,7 @@ mixin text-field(params)
       masked: false,
       class: 'text-field_masked js-text-field_masked',
       placeholder: 'ДД.ММ.ГГГГ',
-      maxlength: 10
+      maxlength: 10,
     }
 
   input.text-field&attributes(params.masked ? additionalParams : params)
