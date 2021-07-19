@@ -1,39 +1,43 @@
+@use '@styles/useless/useless'
+
 .impressions
   display: flex
   align-items: flex-end
   column-gap: 30px
 
-.impressions__circle
-  position: relative
+  &__circle
+    position: relative
 
-.impressions__room-number
-  font-family: 'Conv_Montserrat-Bold'
+  &__room-number
+    font-weight: bold
+    font-size: useless.px2rem(24px)
 
-.impressions__room-votes
-  font-weight: bold
+  &__room-votes
+    font-weight: bold
   
-.impressions__list
-  height: min-content
+  &__list
+    height: min-content
 
-  & ul
-    margin: 0
-    padding: 0
+    & ul
+      margin: 0
+      padding: 0
 
-.impressions__list-item
-  padding-left: 5px
-  padding-bottom: 7px
+  &__list-item
+    padding-left: 5px
+    padding-bottom: 7px
 
-  &:last-child
-    padding-bottom: 0
+    &:last-child
+      padding-bottom: 0
 
-.impressions__list-item_amazing
-  list-style-image: url(@library/impressions/__list-item/impressions__list-item_amazing.svg)
+  &__list-item_amazing
+    list-style-image: url(@library/impressions/__list-item/impressions__list-item_amazing.svg)
 
-.impressions__list-item_cool
-  list-style-image: url(@library/impressions/__list-item/impressions__list-item_cool.svg)
+  &__list-item_cool
+    list-style-image: url(@library/impressions/__list-item/impressions__list-item_cool.svg)
 
-.impressions__list-item_bad
-  list-style-image: url(@library/impressions/__list-item/impressions__list-item_bad.svg)
+  &__list-item_bad
+    list-style-image: url(@library/impressions/__list-item/impressions__list-item_bad.svg)
 
-.impressions__list-item_veryBad
-  list-style-image: url(@library/impressions/__list-item/impressions__list-item_veryBad.svg)
+  &__list-item_veryBad
+    list-style-image: url(@library/impressions/__list-item/impressions__list-item_veryBad.svg)
+
