@@ -50,6 +50,7 @@ body
       &__container
         display: flex
         gap: 10px
+        box-sizing: border-box
 
       &__button
         @extend .sr-main__aside-button
@@ -147,9 +148,9 @@ body
           display: flex
 
         &__container
-          padding-top: 70px
-          width: max(320px, 350px)
-          height: calc(100vh - 70px)
+          padding: 70px 0
+          width: min(100%, 350px)
+          height: 100vh
           overflow-y: scroll
           background-color: white
 

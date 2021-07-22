@@ -15,8 +15,9 @@ const getEntry = (p) => {
 };
 
 const entry = {
-  ...getEntry(path.resolve(__dirname, 'src/pages/ui-kit')),
-  ...getEntry(path.resolve(__dirname, './src/pages/pages')),
+  // ...getEntry(path.resolve(__dirname, 'src/pages/ui-kit')),
+  // ...getEntry(path.resolve(__dirname, './src/pages/pages')),
+  'search-room': './src/pages/pages/search-room/search-room.js'
 };
 
 const htmlPlugins = Object.entries(entry).map((entr) => (

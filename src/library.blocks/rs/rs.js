@@ -154,10 +154,19 @@ class Rs {
     anotherHandle
   ) {
     return pipe(
-      this.moveHandle.bind(this, handle),
-      this.resizeBar.bind(this, progressBar),
-      this.updateDataAttr.bind(this, dataAttr),
-      anotherHandle.updateExtremum.bind(anotherHandle)
+      (position) => {
+        handle.move(position);
+        return position;
+      },
+      (position) => {
+        progressBar.resize(position);
+        return position;
+      },
+      (position) => {
+        this.rs.dataset[dataAttr] = position;
+        return position;
+      },
+      (position) => anotherHandle.updateExtremum(position)
     );
   }
 
@@ -171,21 +180,6 @@ class Rs {
           / containerRect.width
       )
     );
-  }
-
-  updateDataAttr(dataAttr, position) {
-    this.rs.dataset[dataAttr] = position;
-    return position;
-  }
-
-  moveHandle(handle, position) {
-    handle.move(position);
-    return position;
-  }
-
-  resizeBar(progressBar, position) {
-    progressBar.resize(position);
-    return position;
   }
 
   static bindPointer(handle, pointerId) {
