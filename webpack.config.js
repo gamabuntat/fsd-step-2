@@ -15,9 +15,8 @@ const getEntry = (p) => {
 };
 
 const entry = {
-  // ...getEntry(path.resolve(__dirname, 'src/pages/ui-kit')),
-  // ...getEntry(path.resolve(__dirname, './src/pages/pages')),
-  'search-room': './src/pages/pages/search-room/search-room.js'
+  ...getEntry(path.resolve(__dirname, 'src/pages/ui-kit')),
+  ...getEntry(path.resolve(__dirname, './src/pages/pages')),
 };
 
 const htmlPlugins = Object.entries(entry).map((entr) => (
@@ -92,9 +91,7 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new ESLintPlugin(),
-      new MiniCssExtractPlugin({
-        // filename: 'ccs/[name].css'
-      }),
+      new MiniCssExtractPlugin(),
       new HTMLInlineCSSWebpackPlugin({
         filter(fn) {
           return !fn.includes('common');
