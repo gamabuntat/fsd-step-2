@@ -31,12 +31,12 @@ class RangeLable {
   handleSliderChangeAttrs() {
     this.updateStartValue(
       this.format(
-        this.calcValue(this.slider.dataset.bsp)
+        this.calcValue(this.slider.dataset.hsp)
       )
     );
     this.updateEndValue(
       this.format(
-        this.calcValue(this.slider.dataset.bep)
+        this.calcValue(this.slider.dataset.hep)
       )
     );
   }

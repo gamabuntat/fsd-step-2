@@ -51,7 +51,7 @@ mixin card-room-preview(params)
             span.card-room-preview__radio-box
       each i of imgNamesFormated
         img.card-room-preview__room-img.js-card-room-preview__room-img(
-          src=require(`@library/card-room-preview/img/${i}`).default
+          src=require(`@library/card-room-preview/img/${i}`)
           alt='room preview'
         )
 

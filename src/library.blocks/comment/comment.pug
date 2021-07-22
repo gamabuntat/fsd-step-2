@@ -13,7 +13,7 @@ mixin comment(params)
   .comment
     .comment__avatar-container
       img.comment__avatar(
-        src=require(`@library/comment/img/${avatar}`).default,
+        src=require(`@library/comment/img/${avatar}`),
         alt="avatar"
       )
     .comment__container

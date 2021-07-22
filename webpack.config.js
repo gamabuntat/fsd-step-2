@@ -15,10 +15,8 @@ const getEntry = (p) => {
 };
 
 const entry = {
-  // ...getEntry(path.resolve(__dirname, 'src/pages/ui-kit')),
-  // ...getEntry(path.resolve(__dirname, './src/pages/pages')),
-  // 'search-room': './src/pages/pages/search-room/search-room.js'
-  index: './src/pages/pages/index/index.js'
+  ...getEntry(path.resolve(__dirname, 'src/pages/ui-kit')),
+  ...getEntry(path.resolve(__dirname, './src/pages/pages')),
 };
 
 const htmlPlugins = Object.entries(entry).map((entr) => (
@@ -41,7 +39,6 @@ module.exports = (env, argv) => {
     output: {
       filename: '[name].js',
       path: path.resolve(__dirname, 'docs'),
-      publicPath: './',
       assetModuleFilename: 'images/[name][ext][query]'
     },
     resolve: {
@@ -97,11 +94,11 @@ module.exports = (env, argv) => {
       new MiniCssExtractPlugin({
         // filename: 'ccs/[name].css'
       }),
-      // new HTMLInlineCSSWebpackPlugin({
-      //   filter(fn) {
-      //     return !fn.includes('common');
-      //   },
-      // }),
+      new HTMLInlineCSSWebpackPlugin({
+        filter(fn) {
+          return !fn.includes('common');
+        },
+      }),
       ...htmlPlugins,
     ],
     module: {
@@ -128,14 +125,6 @@ module.exports = (env, argv) => {
             path.resolve(__dirname, 'src/fonts'),
             path.resolve(__dirname, 'src/favicons')
           ],
-          // use: 
-          // {
-          //   loader: 'file-loader',
-          //   options: {
-          //     name: '[name].[ext]',
-          //     outputPath: 'i',
-          //   }
-          // },
         },
         {
           test: /\.(svg|png|ico)$/i,

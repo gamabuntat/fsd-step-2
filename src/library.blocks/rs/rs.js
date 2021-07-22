@@ -1,3 +1,25 @@
+const pipe = (...fns) => fns.reduceRight((a, b) => (...args) => a(b(...args)));
+
+class ProgressBar {
+  constructor(progressBar) {
+    this.progressBar = progressBar;
+  }
+
+  resize(position) {
+    this.progressBar.style.width = `${position * 100}%`;
+  }
+}
+
+class ProgressBarEnd extends ProgressBar {
+  constructor(root) {
+    super(root.querySelector('.js-rs__progress-bar--end'));
+  }
+
+  resize(position) {
+    this.progressBar.style.width = `${(1 - position) * 100}%`;
+  }
+}
+
 class Handle {
   constructor(handle, offset) {
     this.max = 1;
@@ -7,7 +29,12 @@ class Handle {
   }
 
   setMax(newMax) { this.max = newMax; }
+
   setMin(newMin) { this.min = newMin; }
+
+  move(position) {
+    this.handle.style.left = `${position * 100}%`;
+  }
 }
 
 class HandleStart extends Handle {
@@ -33,12 +60,35 @@ class HandleEnd extends Handle {
 
 class Rs {
   constructor(root) {
+    this.rs = root;
     this.container = root.querySelector('.js-rs__container');
     this.handleStart = new HandleStart(root);
     this.handleEnd = new HandleEnd(root);
+    this.progressBarStart = new ProgressBar(
+      root.querySelector('.js-rs__progress-bar--start')
+    );
+    this.progressBarEnd = new ProgressBarEnd(root);
+    this.dataAttrStart = 'hsp';
+    this.dataAttrEnd = 'hep';
     this.trigger = false;
     this.shift = 0;
     this.bindListeners();
+    this.init();
+  }
+
+  init() {
+    this.makeMoveThenResizeThenUpdateFunc(
+      this.handleStart,
+      this.progressBarStart,
+      this.dataAttrStart,
+      this.handleEnd
+    )(+this.rs.dataset.hsp);
+    this.makeMoveThenResizeThenUpdateFunc(
+      this.handleEnd,
+      this.progressBarEnd,
+      this.dataAttrEnd,
+      this.handleStart
+    )(+this.rs.dataset.hep);
   }
 
   bindListeners() {
@@ -52,11 +102,23 @@ class Rs {
     ));
     this.handleStart.handle.addEventListener(
       'pointermove',
-      this.handleHandlePointermove.bind(this, this.handleStart, this.handleEnd)
+      this.handleHandlePointermove.bind(
+        this,
+        this.handleStart,
+        this.handleEnd,
+        this.progressBarStart,
+        this.dataAttrStart,
+      )
     );
     this.handleEnd.handle.addEventListener(
       'pointermove',
-      this.handleHandlePointermove.bind(this, this.handleEnd, this.handleStart)
+      this.handleHandlePointermove.bind(
+        this,
+        this.handleEnd,
+        this.handleStart,
+        this.progressBarEnd,
+        this.dataAttrEnd
+      )
     );
   }
 
@@ -70,19 +132,60 @@ class Rs {
     this.trigger = false;
   }
 
-  handleHandlePointermove(handle, anotherHandle, e) {
+  handleHandlePointermove(
+    handle,
+    anotherHandle,
+    progressBar,
+    dataAttr,
+    e
+  ) {
     if (!this.trigger) { return; }
-    const position = Math.min(
-      handle.max, Math.max(handle.min, this.calcPosition(handle, e))
+    this.makeMoveThenResizeThenUpdateFunc(
+      handle, progressBar, dataAttr, anotherHandle
+    )(
+      this.calcPosition(handle, e)
     );
-    handle.handle.style.left = `${position * 100}%`;
-    anotherHandle.updateExtremum(position);
+  }
+
+  makeMoveThenResizeThenUpdateFunc(
+    handle,
+    progressBar,
+    dataAttr,
+    anotherHandle
+  ) {
+    return pipe(
+      this.moveHandle.bind(this, handle),
+      this.resizeBar.bind(this, progressBar),
+      this.updateDataAttr.bind(this, dataAttr),
+      anotherHandle.updateExtremum.bind(anotherHandle)
+    );
   }
 
   calcPosition(handle, e) {
     const containerRect = this.container.getBoundingClientRect();
-    return (e.x - containerRect.x - this.shift + handle.offset) 
-      / containerRect.width;
+    return Math.min(
+      handle.max, 
+      Math.max(
+        handle.min,
+        (e.x - containerRect.x - this.shift + handle.offset) 
+          / containerRect.width
+      )
+    );
+  }
+
+  updateDataAttr(dataAttr, position) {
+    this.rs.dataset[dataAttr] = position;
+    return position;
+  }
+
+  moveHandle(handle, position) {
+    handle.move(position);
+    return position;
+  }
+
+  resizeBar(progressBar, position) {
+    progressBar.resize(position);
+    return position;
   }
 
   static bindPointer(handle, pointerId) {

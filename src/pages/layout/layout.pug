@@ -18,7 +18,6 @@ block vars
   include /like/like
   include /rate/rate
   include /pagination/pagination
-  include /range-slider/range-slider
   include /rs/rs
   include /range-label/range-label
   include /check-list/check-list
@@ -50,18 +49,18 @@ html(lang="ru")
     title= title || 'toxin'
     link(
       rel="mask-icon"
-      href=require("@src/favicons/mask-icon.svg").default 
+      href=require("@src/favicons/mask-icon.svg") 
       color="#BC9CFF"
     )
     link(
       rel="icon"
       type="image/jpg"
-      href=require("@src/favicons/favicon-16x16.png").default
+      href=require("@src/favicons/favicon-16x16.png")
     )
     link(
       rel="icon"
       type="image/jpg"
-      href=require("@src/favicons/favicon-32x32.png").default
+      href=require("@src/favicons/favicon-32x32.png")
     )
 
   body
