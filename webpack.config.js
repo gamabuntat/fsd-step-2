@@ -15,8 +15,10 @@ const getEntry = (p) => {
 };
 
 const entry = {
-  ...getEntry(path.resolve(__dirname, 'src/pages/ui-kit')),
-  ...getEntry(path.resolve(__dirname, './src/pages/pages')),
+  // ...getEntry(path.resolve(__dirname, 'src/pages/ui-kit')),
+  // ...getEntry(path.resolve(__dirname, './src/pages/pages')),
+  // 'search-room': './src/pages/pages/search-room/search-room.js'
+  index: './src/pages/pages/index/index.js'
 };
 
 const htmlPlugins = Object.entries(entry).map((entr) => (
@@ -39,6 +41,8 @@ module.exports = (env, argv) => {
     output: {
       filename: '[name].js',
       path: path.resolve(__dirname, 'docs'),
+      publicPath: './',
+      assetModuleFilename: 'images/[name][ext][query]'
     },
     resolve: {
       alias: {
@@ -90,12 +94,14 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new ESLintPlugin(),
-      new MiniCssExtractPlugin(),
-      new HTMLInlineCSSWebpackPlugin({
-        filter(fn) {
-          return !fn.includes('common');
-        },
+      new MiniCssExtractPlugin({
+        // filename: 'ccs/[name].css'
       }),
+      // new HTMLInlineCSSWebpackPlugin({
+      //   filter(fn) {
+      //     return !fn.includes('common');
+      //   },
+      // }),
       ...htmlPlugins,
     ],
     module: {
@@ -111,47 +117,40 @@ module.exports = (env, argv) => {
         {
           test: /\.css$/i,
           use: [
-            MiniCssExtractPlugin.loader,
-            'css-loader',
+            isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+            'css-loader'
           ]
         },
         {
           test: /\.(svg|png|jpe?g|gif|webp)$/i,
+          type: 'asset/resource',
           exclude: [
             path.resolve(__dirname, 'src/fonts'),
             path.resolve(__dirname, 'src/favicons')
           ],
-          use: 
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'i',
-            }
-          },
+          // use: 
+          // {
+          //   loader: 'file-loader',
+          //   options: {
+          //     name: '[name].[ext]',
+          //     outputPath: 'i',
+          //   }
+          // },
         },
         {
           test: /\.(svg|png|ico)$/i,
+          type: 'asset/resource',
           include: path.resolve(__dirname, 'src/favicons'),
-          use: 
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'favicons',
-            }
+          generator: {
+            filename: 'favicons/[name][ext][query]'
           },
         },
         {
           test: /\.(svg|ttf|otf|eot|woff)$/i,
+          type: 'asset/resource',
           include: path.resolve(__dirname, 'src/fonts'),
-          use:
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts',
-            }
+          generator: {
+            filename: 'fonts/[name][ext][query]'
           },
         },
         {

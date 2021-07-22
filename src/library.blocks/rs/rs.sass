@@ -1,0 +1,78 @@
+@import '@styles/vars/colors'
+
+$button-size: 16px
+$track-height: 6px
+
+.rs
+  position: relative
+  display: flex
+  align-items: center
+  padding: 0 $button-size
+  width: 100%
+  height: $button-size
+  box-sizing: border-box
+
+  &::before
+    content: ''
+    position: absolute
+    left: 0
+    width: 100%
+    height: $track-height
+    background-color: white
+    border: 1px solid $color-unclaimed-fg
+    border-radius: 3px
+    box-sizing: border-box
+
+  &__container
+    position: relative
+    display: flex
+    align-items: center
+    flex-grow: 1
+    height: 100%
+
+  &__handle
+    position: absolute
+    width: $button-size
+    height: $button-size
+    border: 2px solid white
+    border-radius: 50%
+    background: $gradient-secondary
+    box-sizing: border-box
+    outline: none
+    cursor: pointer
+    z-index: 1
+
+    &--start, &--end
+      @extend .rs__handle
+
+    &--start
+      transform: translateX(-$button-size)
+      left: 0%
+
+    &--end
+      left: 80%
+
+  &__track
+    display: flex
+    justify-content: space-between
+    width: 100%
+    height: $track-height
+    background: $gradient-secondary
+
+  &__progress-bar
+    background-color: white
+    height: $track-height
+    border: 1px solid $color-unclaimed-fg
+    border-left: none
+    border-right: none
+    box-sizing: border-box
+
+    &--start, &--end
+      @extend .rs__progress-bar
+
+    &--start
+      width: 20%
+
+    &--end
+      width: 20%
+
