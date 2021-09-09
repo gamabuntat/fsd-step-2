@@ -140,9 +140,8 @@ module.exports = (env, argv) => {
         },
         {
           test: /\.pug$/,
-          use: 
-          {
-            loader: 'pug3-loader',
+          use: {
+            loader: 'simple-pug-loader',
             options: {
               root: path.resolve(__dirname, 'src/library.blocks')
             },
