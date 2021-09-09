@@ -9,10 +9,9 @@ $color-primary: #BC9CFF
 $color-secondary: #6FCF97
 $color-accent: color.adjust($color-primary, $red: -49, $green: 8, $blue: -6)
 $color-secondary-accent: color.adjust($color-secondary, $red: -9, $green: 3, $blue: 83)
-$color-focus: color.adjust($color-primary, $red: 40)
-
+$color-focus: color.adjust($color-primary, $lightness: +12%)
 $gradient-primary: linear-gradient($color-primary, $color-accent)
 $gradient-secondary: linear-gradient($color-secondary, $color-secondary-accent)
-$gradient-focus: linear-gradient($color-primary, $color-focus)
+$gradient-focus: linear-gradient($color-focus, color.adjust($color-accent, $lightness: +12%))
 $gradient-secondary-focus: linear-gradient(color.adjust($color-secondary, $green: 20, $blue: 20), $color-secondary-accent)
 

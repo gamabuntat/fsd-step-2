@@ -53,6 +53,8 @@ module.exports = (env, argv) => {
     devServer: {
       compress: true,
       port: 8080,
+      hot: false,
+      liveReload: true,
     },
     optimization: {
       splitChunks: {

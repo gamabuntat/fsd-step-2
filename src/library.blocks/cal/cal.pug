@@ -15,10 +15,12 @@ mixin cal({initDate, startDate, endDate, hash, narrow})
   .cal.js-cal&attributes(rootAttrs)
     button.cal__prev-month-btn.js-cal__prev-month-btn(type='button')
       +svg-forward-arrow
-    .cal__month.js-cal__month July
+    .cal__date-container
+      span.cal__month.js-cal__month July
+      | &nbsp;
+      span.cal__year.js-cal__year 1998
     button.cal__next-month-btn.js-cal__next-month-btn(type='button')
       +svg-forward-arrow
-    .cal__year.js-cal__year 1998
     .cal__day-week-container
       each day in ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
         span.cal__day-week #{day}
