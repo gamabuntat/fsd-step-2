@@ -83,15 +83,15 @@ const insertSign = (totalMarks) => (templateElem) => (
       class="impressions__room-number" 
       text-anchor="middle" 
       x="60" 
-      y="65" 
-      fill="url(#bad)">${totalMarks}
+      y="58" 
+      fill="#BC9CFF">${totalMarks}
     </text>
     <text 
       class="impressions__room-votes" 
       text-anchor="middle" 
       x="60" 
-      y="81" 
-      fill="url(#bad)">голосов
+      y="78" 
+      fill="#BC9CFF">голосов
     </text>`
   ), templateElem
 );

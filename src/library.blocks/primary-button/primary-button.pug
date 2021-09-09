@@ -1,3 +1,9 @@
-mixin primary-button({text = 'click me', attrs})
-  button.primary-button&attributes(attrs) #{text}
+mixin primary-button({text = 'click me', attrs, isFocused = false} = {})
+  - const focusedMod = 'primary-button_focused'
+
+  button.primary-button&attributes(
+    Object.assign({ type: "button" }, attrs)
+  )(
+    class=isFocused && focusedMod
+  )= text
 
