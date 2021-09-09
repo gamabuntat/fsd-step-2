@@ -1,6 +1,6 @@
-import '@src/pages/layout/layout.sass';
+import '@src/layout/layout.sass';
 import '@styles/common.styles.js';
 import '@scripts/common.scripts.js';
 
-import './reg.sass';
+import './room-details.sass';
 
