@@ -8,6 +8,7 @@
   align-items: center
   column-gap: 10px
   row-gap: 4px
+  width: fit-content
   cursor: pointer
 
   &__input
@@ -66,10 +67,13 @@
   &__title
     color: $color-main-fg
     font-weight: bold
+    max-width: 232px
+    width: max-content
 
   &__text
     grid-column-start: 2
-    width: 232px
     color: $color-additional-fg
     font-size: useless.px2rem(12px)
+    max-width: 232px
+    width: max-content
 

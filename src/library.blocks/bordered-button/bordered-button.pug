@@ -1,6 +1,8 @@
-mixin bordered-button({text = 'click me', attrs})
-  .bordered-button(
-    class= (attrs && attrs.disabled) && 'bordered-button_disabled'
-  )
-    button.bordered-button__button&attributes(attrs) #{text}
+mixin bordered-button({text = 'click me', attrs, isFocused = false} = {})
+  - focusedMod = 'bordered-button_focused'
+
+  .bordered-button(class=isFocused && focusedMod)
+    button.bordered-button__button.js-bordered-button__button&attributes(
+      Object.assign({type: "button"}, attrs)
+    )= text
       
