@@ -1,12 +1,9 @@
 import '@src/layout/layout.sass';
 import '@styles/common.styles.js';
 import '@scripts/common.scripts.js';
+import '@scripts/initAll.js';
 
 import './search-room.sass';
-
-import calendarInit from '@library/calendar/calendar-init.js';
-
-calendarInit();
 
 class AsideButton {
   constructor(button, aside) {

@@ -1,9 +1,9 @@
 import Calendar from './Calendar.js';
 
-const calendarInit = () => {
+const calendarInit = () => (
   document.querySelectorAll(Calendar.getBEMClass())
-    .forEach((cal) => new Calendar(cal));
-};
+    .forEach((cal) => new Calendar(cal))
+);
 
 export default calendarInit;
 
