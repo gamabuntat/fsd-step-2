@@ -1,9 +1,7 @@
 import DateDropdown from './DateDropdown.js';
 
-const dateDropdownInit = () => (
+window.addEventListener('load', () => {
   document.querySelectorAll(DateDropdown.getBEMClass())
-    .forEach((dd) => new DateDropdown(dd))
-);
-
-export default dateDropdownInit;
+    .forEach((dd) => new DateDropdown(dd));
+});
 

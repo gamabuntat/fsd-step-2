@@ -1,4 +1,4 @@
-import {Tables} from './Tables.js';
+import Tables from '@scripts/Tables.js';
 
 class Calendar extends Tables {
   constructor(root) {

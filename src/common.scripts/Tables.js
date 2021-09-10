@@ -130,5 +130,5 @@ class Tables {
   }
 }
 
-export {Tables};
+export default Tables;
 
