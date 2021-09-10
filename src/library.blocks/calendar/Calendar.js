@@ -496,6 +496,14 @@ class Calendar extends Tables {
     );
   }
 
+  static getBEMBlockName() {
+    return 'js-calendar';
+  }
+
+  static getBEMClass() {
+    return `.${Calendar.getBEMBlockName()}`;
+  }
+
   static checkDateIsValid(dateStr) {
     return new Date(dateStr).toString() === 'Invalid Date';
   }
@@ -528,5 +536,4 @@ class Calendar extends Tables {
   }
 }
 
-document.querySelectorAll('.js-calendar').forEach((cal) => new Calendar(cal));
-
+export default Calendar;

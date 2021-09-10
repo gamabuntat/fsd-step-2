@@ -4,6 +4,10 @@ import '@scripts/common.scripts.js';
 
 import './search-room.sass';
 
+import calendarInit from '@library/calendar/calendar-init.js';
+
+calendarInit();
+
 class AsideButton {
   constructor(button, aside) {
     this.asideButton = button;
