@@ -1,5 +1,5 @@
 include ../svg-expand-icon/svg-expand-icon
-include ../cal/cal
+include ../calendar/calendar
 
 mixin filter-date-dropdown({calAttrs})
   article.filter-date-dropdown.js-filter-date-dropdown
@@ -9,5 +9,5 @@ mixin filter-date-dropdown({calAttrs})
         +svg-expand-icon()
     .filter-date-dropdown__cal-container
       .filter-date-dropdown__cal-wrapper.js-filter-date-dropdown__cal-wrapper.filter-date-dropdown__cal-wrapper_hidden
-        +cal({narrow: true, ...calAttrs})
+        +calendar({narrow: true, ...calAttrs})
 

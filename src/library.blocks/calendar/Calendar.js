@@ -1,8 +1,8 @@
 import {Tables} from './Tables.js';
 
-class Cal extends Tables {
+class Calendar extends Tables {
   constructor(root) {
-    super(root.getElementsByClassName('js-cal__main-table'));
+    super(root.getElementsByClassName('js-calendar__main-table'));
     this.root = root;
     this.monthFormater = new Intl.DateTimeFormat('ru', { month: 'long' });
     this.readyDateEvent = new CustomEvent(
@@ -12,27 +12,28 @@ class Cal extends Tables {
         detail: 'date range is ready (start and end range data filled)'
       }
     );
-    this.nextMonthBtn = this.root.querySelector('.js-cal__next-month-btn');
-    this.cancleBtn = this.root.querySelector('.js-cal__cancle-btn');
-    this.tableContainer = this.root.querySelector('.js-cal__table-container');
-    this.error = this.root.querySelector('.js-cal__error');
+    this.nextMonthBtn = this.root.querySelector('.js-calendar__next-month-btn');
+    this.cancleBtn = this.root.querySelector('.js-calendar__cancle-btn');
+    this.tableContainer = this.root
+      .querySelector('.js-calendar__table-container');
+    this.error = this.root.querySelector('.js-calendar__error');
     this.errorMessage = this.error.innerText;
     this.error.innerText = '';
     this.template = this.tableContainer.innerHTML;
-    this.monthDisplay = this.root.querySelector('.js-cal__month');
-    this.yearDisplay = this.root.querySelector('.js-cal__year');
+    this.monthDisplay = this.root.querySelector('.js-calendar__month');
+    this.yearDisplay = this.root.querySelector('.js-calendar__year');
     this.step = parseInt(getComputedStyle(this.tableContainer).width);
     this.rangeCounter = 0;
     this.range = [];
     this.startRange = [];
     this.endRange = [];
-    this.selectedMod = 'cal__day_selected';
-    this.startRangeMod = 'cal__day_start-range';
-    this.endRangeMod = 'cal__day_end-range';
-    this.selectedBtnMod = 'cal__day-btn_selected';
-    this.nextMonthBtnMod = 'cal__day-btn_next-month';
-    this.prevMonthBtnMod = 'cal__day-btn_prev-month';
-    this.todayBtnMod = 'cal__day-btn_todays';
+    this.selectedMod = 'calendar__day_selected';
+    this.startRangeMod = 'calendar__day_start-range';
+    this.endRangeMod = 'calendar__day_end-range';
+    this.selectedBtnMod = 'calendar__day-btn_selected';
+    this.nextMonthBtnMod = 'calendar__day-btn_next-month';
+    this.prevMonthBtnMod = 'calendar__day-btn_prev-month';
+    this.todayBtnMod = 'calendar__day-btn_todays';
     this.hash = this.root.dataset.hash 
       || (this.root.dataset.hash = 'cal0'), 'cal0';
     this.initDates = this.getInitDates();
@@ -66,9 +67,9 @@ class Cal extends Tables {
     this.updateMonthDisplayValue();
     this.updateYearDisplayValue();
     this.bindListeners();
-    if (Cal.checkDateIsValid(this.initDates.startDate)) { return; }
+    if (Calendar.checkDateIsValid(this.initDates.startDate)) { return; }
     this.setInitialRange(this.initDates.startDate);
-    if (Cal.checkDateIsValid(this.initDates.endDate)) { return; }
+    if (Calendar.checkDateIsValid(this.initDates.endDate)) { return; }
     this.setInitialRange(this.initDates.endDate);
   }
 
@@ -137,7 +138,7 @@ class Cal extends Tables {
   }
 
   bindListeners() {
-    this.root.querySelector('.js-cal__prev-month-btn')
+    this.root.querySelector('.js-calendar__prev-month-btn')
       .addEventListener('click', this.handlePrevMonthBtnClick.bind(this));
     this.nextMonthBtn
       .addEventListener('click', this.handleNextMonthBtnClick.bind(this));
@@ -147,7 +148,7 @@ class Cal extends Tables {
       .addEventListener('click', this.handleCancleBtnClick.bind(this));
     this.cancleBtn
       .addEventListener('keydown', this.handleCancleBtnKeydown.bind(this));
-    this.root.querySelector('.js-cal__apply-btn')
+    this.root.querySelector('.js-calendar__apply-btn')
       .addEventListener('click', this.handleApplyBtnClick.bind(this));
     this.tableContainer
       .addEventListener('click', this.handleTableContainerClick.bind(this));
@@ -236,7 +237,7 @@ class Cal extends Tables {
 
   handleTableContainerClick(e) {
     const btn = e.target;
-    if (!btn.classList.contains('cal__day-btn')) { return; }
+    if (!btn.classList.contains('calendar__day-btn')) { return; }
     const isSelected = btn.classList.toggle(this.selectedBtnMod);
     if (isSelected === false) {
       this.clearRange();
@@ -368,13 +369,13 @@ class Cal extends Tables {
 
   setRangeData() {
     this.root.dataset.startDate = (
-      Cal.formatDate(this.getDateFromCoord(
+      Calendar.formatDate(this.getDateFromCoord(
         this.startRange.find(this.isPresentDayBtn.bind(this))
       ))
     );
     if (this.endRange.length != 0) {
       this.root.dataset.endDate = (
-        Cal.formatDate(this.getDateFromCoord(
+        Calendar.formatDate(this.getDateFromCoord(
           this.endRange.find(this.isPresentDayBtn.bind(this))
         ))
       );
@@ -436,18 +437,18 @@ class Cal extends Tables {
       [index, 0, 0], 
       [index, this.getLastRowIndex(index), 6]
     );
-    Cal.getPrevMonthDay(
-      Cal.getMonthLastDay(this.year, this.month + index - 1),
+    Calendar.getPrevMonthDay(
+      Calendar.getMonthLastDay(this.year, this.month + index - 1),
       this.getPrevMonthNDay(index)
     ).forEach((day) => {
       const btn = this.getButton(gen.next().value);
       btn.innerText = day;
       btn.classList.add(this.prevMonthBtnMod);
     });
-    Cal.getPresentDay(this.getPresentNDay(index)).forEach((day) => (
+    Calendar.getPresentDay(this.getPresentNDay(index)).forEach((day) => (
       this.getButton(gen.next().value).innerText = day
     ));
-    Cal.getNextMonthDay(this.getNextMonthNDay(index)).forEach((day) => {
+    Calendar.getNextMonthDay(this.getNextMonthNDay(index)).forEach((day) => {
       const btn = this.getButton(gen.next().value);
       btn.innerText = day;
       btn.classList.add(this.nextMonthBtnMod);
@@ -468,19 +469,19 @@ class Cal extends Tables {
   }
 
   getNextMonthNDay(index) {
-    return 7 - Cal.getWeekDay(
+    return 7 - Calendar.getWeekDay(
       this.year, 
       this.month + index,
-      Cal.getMonthLastDay(this.year, this.month + index)
+      Calendar.getMonthLastDay(this.year, this.month + index)
     );
   }
 
   getPresentNDay(index) {
-    return Cal.getMonthLastDay(this.year, this.month + index);
+    return Calendar.getMonthLastDay(this.year, this.month + index);
   }
 
   getPrevMonthNDay(index) {
-    return Cal.getWeekDay(this.year, this.month + index) - 1;
+    return Calendar.getWeekDay(this.year, this.month + index) - 1;
   }
 
   getButton(coord) {
@@ -527,5 +528,5 @@ class Cal extends Tables {
   }
 }
 
-document.querySelectorAll('.js-cal').forEach((cal) => new Cal(cal));
+document.querySelectorAll('.js-calendar').forEach((cal) => new Calendar(cal));
 

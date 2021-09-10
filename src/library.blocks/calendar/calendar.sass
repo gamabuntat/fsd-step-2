@@ -5,7 +5,7 @@
 
 $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
 
-.cal
+.calendar
   display: flex
   justify-content: space-between
   flex-wrap: wrap
@@ -21,7 +21,7 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
     padding: 7px
     width: 266px
 
-    & .cal
+    & .calendar
 
       $small-size: 252px
       &__table-container
@@ -105,7 +105,7 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
     &_selected
       background: $color-selected-day
 
-      & > .cal__day-btn
+      & > .calendar__day-btn
         background: color.adjust($color-selected-day, $alpha: -1)
         border-radius: 0
 

@@ -5,7 +5,7 @@ append vars
   include /card-reg/card-reg
   include /card-room-details/card-room-details
   include /card-sign-in/card-sign-in
-  include /cal/cal
+  include /calendar/calendar
   include /card-room-preview/card-room-preview
 
   - 
@@ -33,7 +33,7 @@ append main
       })
       +card-sign-in({})
     .c-column.c-column_narrow
-      +cal({})
+      +calendar({})
       +card-room-preview({}) 
       - 
         const cardRoomParams = {
