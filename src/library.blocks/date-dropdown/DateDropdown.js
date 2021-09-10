@@ -15,7 +15,7 @@ class DateDropdown {
       this.handleCalAttrsChanges.bind(this)
     );
     this.observer.observe(this.cal, {attributes: true});
-    this.bindListeners();
+    this.bindListeners(root);
     this.handleCalAttrsChanges();
   }
 
@@ -68,18 +68,35 @@ class DateDropdown {
     this.endSignature.innerText = dateStr;
   }
 
-  bindListeners() {
+  bindListeners(root) {
+    window.addEventListener('click', this.handleWindowClick.bind(this));
+    root.addEventListener('click', this.handleRootClick.bind(this));
     this.startBtn.addEventListener('click', this.handleBtnClick.bind(this));
     this.endBtn.addEventListener('click', this.handleBtnClick.bind(this));
     this.calWrapper
       .addEventListener('ready-date', this.handleBtnClick.bind(this));
   }
 
+  handleWindowClick() {
+    this.calWrapper.classList.add('date-dropdown__cal-wrapper_hidden');
+  }
+
   handleBtnClick() {
     this.calWrapper.classList.toggle('date-dropdown__cal-wrapper_hidden');
   }
+
+  handleRootClick(ev) {
+    ev.stopPropagation();
+  }
+
+  static getBEMBlockName() {
+    return 'js-date-dropdown';
+  }
+
+  static getBEMClass() {
+    return `.${DateDropdown.getBEMBlockName()}`;
+  }
 }
 
-document.querySelectorAll('.js-date-dropdown')
-  .forEach((dd) => new DateDropdown(dd));
+export default DateDropdown;
 
