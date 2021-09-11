@@ -1,3 +1,4 @@
+import getLastItem from '@scripts/getLastItem.js';
 import Table from '@scripts/Table.js';
 import BEMBlock from '@scripts/BEMBlock.js';
 
@@ -291,7 +292,7 @@ class Calendar extends Table {
       this.drawPartOfRange(
         this.genCoordsInOrder(
           coord,
-          this.searchNextRangeCoord(coord) || Table.getLastItem(this.range),
+          this.searchNextRangeCoord(coord) || getLastItem(this.range),
           (
             this.getButton([coord[0], coord[1], 6])
               .classList.contains(this.nextMonthBtnMod)
@@ -308,8 +309,8 @@ class Calendar extends Table {
     );
     if (nextCoord) { 
       this.drawRange(
-        Table.isCoordEqual(nextCoord, Table.getLastItem(this.range)) 
-          ? [Table.getLastItem(this.range)[0], 0, 0] 
+        Table.isCoordEqual(nextCoord, getLastItem(this.range)) 
+          ? [getLastItem(this.range)[0], 0, 0] 
           : nextCoord
       ); 
     }
@@ -324,7 +325,7 @@ class Calendar extends Table {
     coords.forEach((coord) => (
       this.getCell(coord).classList.add(this.selectedMod)
     ));
-    return Table.getLastItem(coords);
+    return getLastItem(coords);
   }
 
   fixOrderRange() {
@@ -353,7 +354,7 @@ class Calendar extends Table {
     if (this.rangeCounter === 2) {
       [...this.genCoordsInOrder(
         this.range[0], 
-        Table.getLastItem(this.range),
+        getLastItem(this.range),
         Table.isCoordLessOrEqual,
       )]
         .forEach((coord) => (
@@ -413,7 +414,7 @@ class Calendar extends Table {
   }
 
   selectLastRangeBtn() {
-    this.getButton(Table.getLastItem(this.getLastRange()))
+    this.getButton(getLastItem(this.getLastRange()))
       .classList.add(this.selectedBtnMod);
   }
 

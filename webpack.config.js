@@ -47,7 +47,7 @@ module.exports = (env, argv) => {
         '@': path.resolve(__dirname, './'),
         '@src': path.resolve(__dirname, 'src'),
         '@styles': path.resolve(__dirname, 'src/styles'),
-        '@scripts': path.resolve(__dirname, 'src/common.scripts'),
+        '@scripts': path.resolve(__dirname, 'src/scripts'),
         '@library': path.resolve(__dirname, 'src/components'),
       },
     },

@@ -1,4 +1,4 @@
-import importAll from '@src/common.scripts/importAll.js';
+import importAll from '@scripts/importAll.js';
 
 /* eslint-disable */
 importAll(require.context('@library/', true, /\.sass$/));

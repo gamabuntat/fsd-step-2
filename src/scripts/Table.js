@@ -124,10 +124,6 @@ class Table {
   static makeNumerical(coord) {
     return +coord.reduce((res, dimension) => res + dimension, '');
   }
-
-  static getLastItem(list) {
-    return list[list.length - 1];
-  }
 }
 
 export default Table;
