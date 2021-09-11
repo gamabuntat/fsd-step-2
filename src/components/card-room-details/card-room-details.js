@@ -14,7 +14,7 @@ class CardRoomDetails {
     this.serviceSale = this.root.querySelector(`${this.c}__service-sale`);
     this.serviceAdditionalCost = this.root
       .querySelector(`${this.c}__service-additional-cost`);
-    this.cal = this.root.querySelector('.js-cal');
+    this.calendar = this.root.querySelector('.js-calendar');
     this.observer = new MutationObserver((r) => this.shortHandUpdate(r));
     this.formater = new Intl.NumberFormat('ru', {
       style: 'currency',
@@ -26,7 +26,7 @@ class CardRoomDetails {
 
   init() {
     const initData = JSON.parse(sessionStorage.getItem('roomDetails') || '{}');
-    this.observer.observe(this.cal, { attributes: true });
+    this.observer.observe(this.calendar, { attributes: true });
     this.fillNumber(initData.roomNumber);
     this.serviceCostPerDay.innerText = (this.fillCost(initData.cost));
     this.processLuxury(initData.isLuxury);
@@ -35,7 +35,7 @@ class CardRoomDetails {
   }
 
   shortHandUpdate() {
-    if (this.cal.hasAttribute('data-date-is-ready')) {
+    if (this.calendar.hasAttribute('data-date-is-ready')) {
       this.setDays();
       this.updateServiceDaysDeath();
       this.updateServiceCost();
@@ -63,8 +63,8 @@ class CardRoomDetails {
   }
 
   getDays() {
-    return (new Date(this.cal.dataset.endDate) 
-      - new Date(this.cal.dataset.startDate)) / 1000 / 60 / 60 / 24;
+    return (new Date(this.calendar.dataset.endDate) 
+      - new Date(this.calendar.dataset.startDate)) / 1000 / 60 / 60 / 24;
   }
   
   updateServiceDaysDeath() {

@@ -1,3 +1,3 @@
 import '@src/layout/layout.sass';
-import '@src/common.styles/common.styles.js';
+import '@styles/common-styles.js';
 

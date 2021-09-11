@@ -46,9 +46,9 @@ module.exports = (env, argv) => {
       alias: {
         '@': path.resolve(__dirname, './'),
         '@src': path.resolve(__dirname, 'src'),
-        '@styles': path.resolve(__dirname, 'src/common.styles'),
+        '@styles': path.resolve(__dirname, 'src/styles'),
         '@scripts': path.resolve(__dirname, 'src/common.scripts'),
-        '@library': path.resolve(__dirname, 'src/library.blocks'),
+        '@library': path.resolve(__dirname, 'src/components'),
       },
     },
     devServer: {
@@ -65,12 +65,12 @@ module.exports = (env, argv) => {
             chunks: 'all',
           },
           commonStyles: {
-            test: /(library\.blocks|layout|node_modules|fonts).*\.(sass|css)$/,
+            test: /(components|layout|node_modules|fonts).*\.(sass|css)$/,
             chunks: 'all',
             name: 'common.styles'
           },
           commonScripts: {
-            test: /library\.blocks.*\.js$/,
+            test: /components.*\.js$/,
             chunks: 'all',
             name: 'common.scripts'
           }
@@ -146,7 +146,7 @@ module.exports = (env, argv) => {
           use: {
             loader: 'simple-pug-loader',
             options: {
-              root: path.resolve(__dirname, 'src/library.blocks')
+              root: path.resolve(__dirname, 'src/components')
             },
           }
         }
