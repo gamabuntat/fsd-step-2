@@ -1,4 +1,4 @@
-class Tables {
+class Table {
   constructor(tables) {
     this.tables = tables;
     this.index = 0;
@@ -87,38 +87,38 @@ class Tables {
   }
 
   static getMinCoord(coordA, coordB) {
-    return Tables.makeUnnumerical(
-      Math.min(Tables.makeNumerical(coordA), Tables.makeNumerical(coordB))
+    return Table.makeUnnumerical(
+      Math.min(Table.makeNumerical(coordA), Table.makeNumerical(coordB))
     );
   }
 
   static compareCoord(coordA, coordB) {
-    return Tables.makeNumerical(coordA) - Tables.makeNumerical(coordB);
+    return Table.makeNumerical(coordA) - Table.makeNumerical(coordB);
   }
 
   static isCoordEqual(coord, reference) {
-    return Tables.makeNumerical(coord) === Tables.makeNumerical(reference);
+    return Table.makeNumerical(coord) === Table.makeNumerical(reference);
   }
 
   static isCoordMore(coord, reference) {
-    return Tables.makeNumerical(coord) > Tables.makeNumerical(reference);
+    return Table.makeNumerical(coord) > Table.makeNumerical(reference);
   }
 
   static isCoordLess(coord, reference) {
-    return Tables.makeNumerical(coord) < Tables.makeNumerical(reference);
+    return Table.makeNumerical(coord) < Table.makeNumerical(reference);
   }
 
   static isCoordLessOrEqual(coord, reference) {
-    return Tables.makeNumerical(coord) <= Tables.makeNumerical(reference);
+    return Table.makeNumerical(coord) <= Table.makeNumerical(reference);
   }
 
   static makeUnnumerical(numericalCoord) {
-    return Tables.fillCoord(String(numericalCoord).split('').map(Number));
+    return Table.fillCoord(String(numericalCoord).split('').map(Number));
   }
 
   static fillCoord(coord, length = coord.length) {
     if (length >= 3) { return coord; }
-    return Tables.fillCoord([0, ...coord], ++length);
+    return Table.fillCoord([0, ...coord], ++length);
   }
 
   static makeNumerical(coord) {
@@ -130,5 +130,5 @@ class Tables {
   }
 }
 
-export default Tables;
+export default Table;
 

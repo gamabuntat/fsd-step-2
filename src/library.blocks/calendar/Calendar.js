@@ -1,7 +1,13 @@
-import Tables from '@scripts/Tables.js';
+import Table from '@scripts/Table.js';
+import BEMBlock from '@scripts/BEMBlock.js';
 
-class Calendar extends Tables {
+class Calendar extends Table {
   constructor(root) {
+    console.log(
+      new BEMBlock(root).getElemsMap('year', 'day-btn', 'next-month-btn')
+    );
+    console.log(BEMBlock.kebabToCamel('hi-he-dsalk-'));
+    console.log(BEMBlock.camelToKebab('HiHe-'));
     super(root.getElementsByClassName('js-calendar__main-table'));
     this.root = root;
     this.monthFormater = new Intl.DateTimeFormat('ru', { month: 'long' });
@@ -84,7 +90,7 @@ class Calendar extends Tables {
     [...this.genCoordsInOrder(
       [0, 0, 0],
       this.getCoord( 0, this.getPrevMonthNDay(0) + now.getDate()),
-      Tables.isCoordLess,
+      Table.isCoordLess,
     )]
       .forEach((coord) => (
         this.getButton(coord).disabled = true
@@ -237,7 +243,7 @@ class Calendar extends Tables {
 
   handleTableContainerClick(e) {
     const btn = e.target;
-    if (!btn.classList.contains('calendar__day-btn')) { return; }
+    if (!btn.classList.contains('js-calendar__day-btn')) { return; }
     const isSelected = btn.classList.toggle(this.selectedBtnMod);
     if (isSelected === false) {
       this.clearRange();
@@ -285,32 +291,32 @@ class Calendar extends Tables {
       this.drawPartOfRange(
         this.genCoordsInOrder(
           coord,
-          this.searchNextRangeCoord(coord) || Tables.getLastItem(this.range),
+          this.searchNextRangeCoord(coord) || Table.getLastItem(this.range),
           (
             this.getButton([coord[0], coord[1], 6])
               .classList.contains(this.nextMonthBtnMod)
               ? ((lastCoord) => (coord) => (
-                Tables.isCoordLessOrEqual(coord, lastCoord)
-              ))(Tables.getMinCoord(
+                Table.isCoordLessOrEqual(coord, lastCoord)
+              ))(Table.getMinCoord(
                 this.getLastCellCoord(coord[0]),
                 this.range[1]
               ))
-              : Tables.isCoordLessOrEqual
+              : Table.isCoordLessOrEqual
           ),
         )
       )
     );
     if (nextCoord) { 
       this.drawRange(
-        Tables.isCoordEqual(nextCoord, Tables.getLastItem(this.range)) 
-          ? [Tables.getLastItem(this.range)[0], 0, 0] 
+        Table.isCoordEqual(nextCoord, Table.getLastItem(this.range)) 
+          ? [Table.getLastItem(this.range)[0], 0, 0] 
           : nextCoord
       ); 
     }
   }
 
   searchNextRangeCoord(coord) {
-    return this.range.find((c) => Tables.isCoordMore(c, coord));
+    return this.range.find((c) => Table.isCoordMore(c, coord));
   }
 
   drawPartOfRange(generator) {
@@ -318,14 +324,14 @@ class Calendar extends Tables {
     coords.forEach((coord) => (
       this.getCell(coord).classList.add(this.selectedMod)
     ));
-    return Tables.getLastItem(coords);
+    return Table.getLastItem(coords);
   }
 
   fixOrderRange() {
-    this.startRange.sort(Tables.compareCoord);
-    this.endRange.sort(Tables.compareCoord);
+    this.startRange.sort(Table.compareCoord);
+    this.endRange.sort(Table.compareCoord);
     const buffer = this.startRange;
-    if (Tables.isCoordLess(this.startRange[0], this.endRange[0])) { return; }
+    if (Table.isCoordLess(this.startRange[0], this.endRange[0])) { return; }
     this.startRange = this.endRange;
     this.endRange = buffer;
   }
@@ -347,8 +353,8 @@ class Calendar extends Tables {
     if (this.rangeCounter === 2) {
       [...this.genCoordsInOrder(
         this.range[0], 
-        Tables.getLastItem(this.range),
-        Tables.isCoordLessOrEqual,
+        Table.getLastItem(this.range),
+        Table.isCoordLessOrEqual,
       )]
         .forEach((coord) => (
           this.getCell(coord).classList.remove(this.selectedMod)
@@ -407,7 +413,7 @@ class Calendar extends Tables {
   }
 
   selectLastRangeBtn() {
-    this.getButton(Tables.getLastItem(this.getLastRange()))
+    this.getButton(Table.getLastItem(this.getLastRange()))
       .classList.add(this.selectedBtnMod);
   }
 
@@ -425,7 +431,7 @@ class Calendar extends Tables {
 
   orderRange() {
     this.range = [...this.startRange, ...this.endRange]
-      .sort(Tables.compareCoord);
+      .sort(Table.compareCoord);
   }
 
   changeDisplayedMonth() {

@@ -30,7 +30,7 @@ mixin calendar({initDate, startDate, endDate, hash, narrow})
           tr.calendar__week
             - for (let i = 0; i < 7; i++)
               td.calendar__day
-                button.calendar__day-btn(type='button')
+                button.calendar__day-btn.js-calendar__day-btn(type='button')
     .calendar__error.js-calendar__error Please select range!
     .calendar__cancle-btn.js-calendar__cancle-btn
       +text-button({text: 'очистить'})
