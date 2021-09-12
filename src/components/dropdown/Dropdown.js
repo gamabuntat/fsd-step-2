@@ -1,10 +1,10 @@
-import Glossary from './glossary/Glossary.js';
-import * as glossarys from './glossary/glossarys.js';
+import Glossary from '@scripts/Glossary.js';
+import * as glossarys from './glossarys.js';
 
 class Dropdown {
-  constructor(dropdown, glossary = {}) {
-    this.glossary = new Glossary(glossary);
+  constructor(dropdown) {
     this.dropdown = dropdown;
+    this.glossary = this.getGlossary();
     this.expandButton = dropdown.querySelector('.js-dropdown__expand-button');
     this.signature = dropdown.querySelector('.js-dropdown__signature');
     this.defaultSignature = this.signature.innerText;
@@ -196,21 +196,18 @@ class Dropdown {
     this.row = this.getRow(button);
     this.value = +this.counters[this.row].innerText;
   }
+
+  getGlossary() {
+    const data = this.dropdown.dataset.glossary.split(', ');
+    return new Glossary(
+      Object.values(glossarys).find(
+        (g) => (
+          Object.keys(g).filter((term) => data.indexOf(term) === -1).length == 0
+        )
+      )
+    );
+  }
 }
 
-const getSplitedData = (dropdown) => dropdown.dataset.glossary.split(', ');
-const compare = (data) => (glossary) => { 
-  const terms = Object.keys(glossary);
-  return data.filter((d) => terms.indexOf(d) == -1).length == 0;
-};
-const initDropdowns = (dropdowns, glossarys) => (
-  dropdowns.forEach((d) => (
-    new Dropdown(d, glossarys.find((compare(getSplitedData(d)))))
-  ))
-);
-
-initDropdowns(
-  document.querySelectorAll('.js-dropdown'), 
-  Object.values(glossarys)
-);
+export default Dropdown;
 

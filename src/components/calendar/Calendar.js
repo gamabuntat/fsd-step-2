@@ -556,14 +556,6 @@ class Calendar extends BEMBlock {
     );
   }
 
-  static getBEMBlockName() {
-    return 'js-calendar';
-  }
-
-  static getBEMClass() {
-    return `.${Calendar.getBEMBlockName()}`;
-  }
-
   static checkDateIsValid(dateStr) {
     return new Date(dateStr).toString() === 'Invalid Date';
   }
