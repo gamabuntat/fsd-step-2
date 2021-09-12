@@ -11,6 +11,10 @@ class BEMBlock {
     this.elemsMap = { ...this.elemsMap, ...this.getElemsMap(elemNames) };
   }
 
+  resetElemsMap() {
+    this.elemsMap = {};
+  }
+
   getElemsMap(elemNames) {
     return elemNames.reduce((map, name) => {
       map[kebabToCamel(name)] = this.getElem(name);

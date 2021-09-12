@@ -1,15 +1,18 @@
 import getLastItem from '@scripts/getLastItem.js';
-import Table from '@scripts/Table.js';
+import Tables from '@scripts/Tables.js';
 import BEMBlock from '@scripts/BEMBlock.js';
 
-class Calendar extends Table {
+class Calendar {
   constructor(root) {
-    console.log(
-      new BEMBlock(root).getElemsMap('year', 'day-btn', 'next-month-btn')
+    const block = new BEMBlock(root);
+    block.updateElemsMap(['year', 'day-btn', 'next-month-btn']);
+    console.log(block.elemsMap);
+    block.updateElemsMap(['prev-month-btn']);
+    console.log(block.elemsMap);
+    // super(root.getElementsByClassName('js-calendar__main-table'));
+    this.mainTables = new Tables(
+      root.getElementsByClassName('js-calendar__main-table')
     );
-    console.log(BEMBlock.kebabToCamel('hi-he-dsalk-'));
-    console.log(BEMBlock.camelToKebab('HiHe-'));
-    super(root.getElementsByClassName('js-calendar__main-table'));
     this.root = root;
     this.monthFormater = new Intl.DateTimeFormat('ru', { month: 'long' });
     this.readyDateEvent = new CustomEvent(
@@ -67,10 +70,10 @@ class Calendar extends Table {
   init(now) {
     this.modifyTodaysBtn(now);
     this.disableBtsn(now);
-    this.fillTable(this.index);
-    this.clearTable(this.index);
-    this.bindListenerOnLastBtn(this.index);
-    this.insertFillClearTable(this.index + 1);
+    this.fillTables(this.mainTables.index);
+    this.clearTables(this.mainTables.index);
+    this.bindListenerOnLastBtn(this.mainTables.index);
+    this.insertFillClearTables(this.mainTables.index + 1);
     this.updateMonthDisplayValue();
     this.updateYearDisplayValue();
     this.bindListeners();
@@ -82,16 +85,16 @@ class Calendar extends Table {
 
   modifyTodaysBtn(now) {
     this.getButton(
-      this.getCoord( 0, this.getPrevMonthNDay(0) + now.getDate())
+      this.mainTables.getCoord(0, this.getPrevMonthNDay(0) + now.getDate())
     )
       .classList.add(this.todayBtnMod);
   }
 
   disableBtsn(now) {
-    [...this.genCoordsInOrder(
+    [...this.mainTables.genCoordsInOrder(
       [0, 0, 0],
-      this.getCoord( 0, this.getPrevMonthNDay(0) + now.getDate()),
-      Table.isCoordLess,
+      this.mainTables.getCoord(0, this.getPrevMonthNDay(0) + now.getDate()),
+      Tables.isCoordLess,
     )]
       .forEach((coord) => (
         this.getButton(coord).disabled = true
@@ -101,15 +104,15 @@ class Calendar extends Table {
   setInitialRange(dateStr) {
     const btnDate = new Date(dateStr);
     const index = this.getIndex(btnDate);
-    this.insertFillClearTableNthTimes(index);
-    const coord = this.getCoord(
+    this.insertFillClearTablesNthTimes(index);
+    const coord = this.mainTables.getCoord(
       index, 
       this.getPrevMonthNDay(index) + btnDate.getDate()
     );
     const btn = this.getButton(coord);
-    this.index = index;
+    this.mainTables.index = index;
     btn.click();
-    this.index = 0;
+    this.mainTables.index = 0;
   }
 
   getIndex(rangeDate) {
@@ -117,30 +120,30 @@ class Calendar extends Table {
       - this.month + rangeDate.getMonth();
   }
 
-  insertFillClearTableNthTimes(n) {
+  insertFillClearTablesNthTimes(n) {
     if (!n) { return; }
-    while (this.tables.length != n + 2) {
-      this.insertFillClearTable(this.tables.length);
+    while (this.mainTables.getSize() != n + 2) {
+      this.insertFillClearTables(this.mainTables.getSize());
     }
   }
 
-  insertFillClearTable(index) {
+  insertFillClearTables(index) {
     this.insertTemplate();
-    this.fillTable(index);
-    this.clearTable(index);
+    this.fillTables(index);
+    this.clearTables(index);
     this.bindListenerOnLastBtn(index);
     this.bindListenerOnFirstBtn(index);
   }
 
   updateMonthDisplayValue() {
     this.monthDisplay.innerText = this.monthFormater
-      .format(new Date(this.year, this.month + this.index))
+      .format(new Date(this.year, this.month + this.mainTables.index))
       .replace(/^./, (s) => s.toUpperCase());
   }
 
   updateYearDisplayValue() {
     this.yearDisplay.innerText = new Date(
-      this.year, this.month + this.index
+      this.year, this.month + this.mainTables.index
     ).getFullYear();
   }
 
@@ -158,11 +161,11 @@ class Calendar extends Table {
     this.root.querySelector('.js-calendar__apply-btn')
       .addEventListener('click', this.handleApplyBtnClick.bind(this));
     this.tableContainer
-      .addEventListener('click', this.handleTableContainerClick.bind(this));
+      .addEventListener('click', this.handleTablesContainerClick.bind(this));
   }
 
   bindListenerOnLastBtn(index) {
-    this.getButton(this.getLastCellCoord(index))
+    this.getButton(this.mainTables.getLastCellCoord(index))
       .addEventListener('keydown', this.handleLastDayBtnKeydown.bind(this));
   }
 
@@ -172,20 +175,20 @@ class Calendar extends Table {
   }
 
   handlePrevMonthBtnClick() {
-    if (this.index == 0) { return; }
-    this.decreaseIndex();
+    if (this.mainTables.index == 0) { return; }
+    this.mainTables.decreaseIndex();
     this.changeDisplayedMonth();
     this.updateMonthDisplayValue();
     this.updateYearDisplayValue();
   }
 
   handleNextMonthBtnClick() {
-    this.increaseIndex();
+    this.mainTables.increaseIndex();
     this.changeDisplayedMonth();
     this.updateMonthDisplayValue();
     this.updateYearDisplayValue();
-    if (this.index === this.tables.length - 1) {
-      this.insertFillClearTable(this.index + 1);
+    if (this.mainTables.index === this.mainTables.getSize() - 1) {
+      this.insertFillClearTables(this.mainTables.index + 1);
     }
   }
 
@@ -231,18 +234,20 @@ class Calendar extends Table {
   handleCancleBtnKeydown(e) {
     if (e.code === 'Tab' && e.shiftKey) {
       e.preventDefault();
-      this.getButton(this.getLastCellCoord(this.index)).focus();
+      this.getButton(
+        this.mainTables.getLastCellCoord(this.mainTables.index)
+      ).focus();
     }
   }
 
   handleNextMonthBtnKeydown(e) {
-    if (e.code === 'Tab' && !e.shiftKey && this.index !== 0) { 
+    if (e.code === 'Tab' && !e.shiftKey && this.mainTables.index !== 0) { 
       e.preventDefault();
-      this.getButton([this.index, 0, 0]).focus();
+      this.getButton([this.mainTables.index, 0, 0]).focus();
     }
   }
 
-  handleTableContainerClick(e) {
+  handleTablesContainerClick(e) {
     const btn = e.target;
     if (!btn.classList.contains('js-calendar__day-btn')) { return; }
     const isSelected = btn.classList.toggle(this.selectedBtnMod);
@@ -257,7 +262,7 @@ class Calendar extends Table {
       this.clearRangeData();
     }
     this.rangeCounter += 1;
-    const btnCoord = this.getElemCoord(btn);
+    const btnCoord = this.mainTables.getElemCoord(btn);
     const firstRowBtn = this.getButton([btnCoord[0], btnCoord[1], 0]);
     const lastRowBtn = this.getButton([btnCoord[0], btnCoord[1], 6]);
     this.addCoordInRange(btnCoord);
@@ -268,12 +273,12 @@ class Calendar extends Table {
     const shouldSelectedNextMonth = lastRowBtn
       .classList.contains(this.nextMonthBtnMod);
     if (isPrevMonthbtn || shouldSelectedPrevMonth) {
-      if (this.index > 0) {
-        this.addCoordInRange(this.getCoordsAgo(btnCoord, 7));
+      if (this.mainTables.index > 0) {
+        this.addCoordInRange(this.mainTables.getCoordsAgo(btnCoord, 7));
       }
     }
     if (isNextMonthBtn || shouldSelectedNextMonth) {
-      this.addCoordInRange(this.getCoordsForward(btnCoord, 7));
+      this.addCoordInRange(this.mainTables.getCoordsForward(btnCoord, 7));
     }
     this.selectLastRangeBtn();
     this.removeDataIsReady();
@@ -290,26 +295,26 @@ class Calendar extends Table {
   drawRange(coord) {
     const nextCoord = this.searchNextRangeCoord(
       this.drawPartOfRange(
-        this.genCoordsInOrder(
+        this.mainTables.genCoordsInOrder(
           coord,
           this.searchNextRangeCoord(coord) || getLastItem(this.range),
           (
             this.getButton([coord[0], coord[1], 6])
               .classList.contains(this.nextMonthBtnMod)
               ? ((lastCoord) => (coord) => (
-                Table.isCoordLessOrEqual(coord, lastCoord)
-              ))(Table.getMinCoord(
-                this.getLastCellCoord(coord[0]),
+                Tables.isCoordLessOrEqual(coord, lastCoord)
+              ))(Tables.getMinCoord(
+                this.mainTables.getLastCellCoord(coord[0]),
                 this.range[1]
               ))
-              : Table.isCoordLessOrEqual
+              : Tables.isCoordLessOrEqual
           ),
         )
       )
     );
     if (nextCoord) { 
       this.drawRange(
-        Table.isCoordEqual(nextCoord, getLastItem(this.range)) 
+        Tables.isCoordEqual(nextCoord, getLastItem(this.range)) 
           ? [getLastItem(this.range)[0], 0, 0] 
           : nextCoord
       ); 
@@ -317,34 +322,34 @@ class Calendar extends Table {
   }
 
   searchNextRangeCoord(coord) {
-    return this.range.find((c) => Table.isCoordMore(c, coord));
+    return this.range.find((c) => Tables.isCoordMore(c, coord));
   }
 
   drawPartOfRange(generator) {
     const coords = [...generator];
     coords.forEach((coord) => (
-      this.getCell(coord).classList.add(this.selectedMod)
+      this.mainTables.getCell(coord).classList.add(this.selectedMod)
     ));
     return getLastItem(coords);
   }
 
   fixOrderRange() {
-    this.startRange.sort(Table.compareCoord);
-    this.endRange.sort(Table.compareCoord);
+    this.startRange.sort(Tables.compareCoord);
+    this.endRange.sort(Tables.compareCoord);
     const buffer = this.startRange;
-    if (Table.isCoordLess(this.startRange[0], this.endRange[0])) { return; }
+    if (Tables.isCoordLess(this.startRange[0], this.endRange[0])) { return; }
     this.startRange = this.endRange;
     this.endRange = buffer;
   }
 
   modifyRangeCells() {
     this.startRange.forEach((coord) => {
-      const cell = this.getCell(coord);
+      const cell = this.mainTables.getCell(coord);
       cell.classList.remove(this.selectedMod);
       cell.classList.add(this.startRangeMod);
     });
     this.endRange.forEach((coord) => {
-      const cell = this.getCell(coord);
+      const cell = this.mainTables.getCell(coord);
       cell.classList.remove(this.selectedMod);
       cell.classList.add(this.endRangeMod);
     });
@@ -352,17 +357,17 @@ class Calendar extends Table {
 
   clearRange() {
     if (this.rangeCounter === 2) {
-      [...this.genCoordsInOrder(
+      [...this.mainTables.genCoordsInOrder(
         this.range[0], 
         getLastItem(this.range),
-        Table.isCoordLessOrEqual,
+        Tables.isCoordLessOrEqual,
       )]
         .forEach((coord) => (
-          this.getCell(coord).classList.remove(this.selectedMod)
+          this.mainTables.getCell(coord).classList.remove(this.selectedMod)
         ));
     }
     [...this.startRange, ...this.endRange].forEach((coord) => {
-      const cell = this.getCell(coord);
+      const cell = this.mainTables.getCell(coord);
       cell.classList.remove(this.startRangeMod);
       cell.classList.remove(this.endRangeMod);
       this.getButton(coord).classList.remove(this.selectedBtnMod);
@@ -432,17 +437,19 @@ class Calendar extends Table {
 
   orderRange() {
     this.range = [...this.startRange, ...this.endRange]
-      .sort(Table.compareCoord);
+      .sort(Tables.compareCoord);
   }
 
   changeDisplayedMonth() {
-    this.tables[0].style.marginLeft = `${-this.index * this.step}px`;
+    this.mainTables.getTables()[0].style.marginLeft = `${
+      -this.mainTables.index * this.step
+    }px`;
   }
 
-  fillTable(index) {
-    const gen = this.genCoordsInOrder(
+  fillTables(index) {
+    const gen = this.mainTables.genCoordsInOrder(
       [index, 0, 0], 
-      [index, this.getLastRowIndex(index), 6]
+      [index, this.mainTables.getLastRowIndex(index), 6]
     );
     Calendar.getPrevMonthDay(
       Calendar.getMonthLastDay(this.year, this.month + index - 1),
@@ -462,12 +469,12 @@ class Calendar extends Table {
     });
   }
 
-  clearTable(index) {
+  clearTables(index) {
     const nFilledRows = Math.ceil(
       (this.getPrevMonthNDay(index) + this.getPresentNDay(index)) / 7
     );
     for (let row = 5; row >= nFilledRows; row--) {
-      this.tables[index].rows[row].remove();
+      this.mainTables.getTables()[index].rows[row].remove();
     }
   }
 
@@ -492,7 +499,7 @@ class Calendar extends Table {
   }
 
   getButton(coord) {
-    return this.getCell(coord).firstElementChild;
+    return this.mainTables.getCell(coord).firstElementChild;
   }
 
   getDateFromCoord(coord) {

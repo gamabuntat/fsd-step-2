@@ -6,6 +6,14 @@ class Tables {
     this.lastCellIndex = this.rowSize - 1;
   }
 
+  getTables() {
+    return this.tables;
+  }
+
+  getSize() {
+    return this.tables.length;
+  }
+
   decreaseIndex() {
     if (this.index === 0) { return; }
     this.index -= 1;
