@@ -63,8 +63,10 @@ class CardRoomDetails {
   }
 
   getDays() {
-    return (new Date(this.calendar.dataset.endDate) 
-      - new Date(this.calendar.dataset.startDate)) / 1000 / 60 / 60 / 24;
+    return Math.floor(
+      (new Date(this.calendar.dataset.endDate) 
+        - new Date(this.calendar.dataset.startDate)) / 1000 / 60 / 60 / 24
+    );
   }
   
   updateServiceDaysDeath() {
