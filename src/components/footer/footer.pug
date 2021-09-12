@@ -5,25 +5,6 @@ include /svg-twitter/svg-twitter
 include /svg-facebook/svg-facebook
 include /svg-instagram/svg-instagram
 
-mixin list(params)
-  - 
-    const {
-      title = 'навигация',
-      items = ['о нас', 'новости', 'служба поддержки', 'услуги'],
-      href = Array(4).fill('change me')
-    } = params
-
-  ul.footer__list
-    if title
-      li.footer__list-item
-        h3.footer__list-title= title
-    - for (let i = 0; i < items.length; i++)
-      li.footer__list-item
-        a.footer__list-link(
-          href=href[i] || 'change me'
-          title=items[i]
-        )= items[i].slice(0, 1).toUpperCase() + items[i].slice(1)
-
 mixin footer(params)
   - 
     const {
@@ -39,6 +20,25 @@ mixin footer(params)
         },
       ] 
     } = params
+
+  mixin list(params)
+    - 
+      const {
+        title = 'навигация',
+        items = ['о нас', 'новости', 'служба поддержки', 'услуги'],
+        href = Array(4).fill('change me')
+      } = params
+
+    ul.footer__list
+      if title
+        li.footer__list-item
+          h3.footer__list-title= title
+      - for (let i = 0; i < items.length; i++)
+        li.footer__list-item
+          a.footer__list-link(
+            href=href[i] || 'change me'
+            title=items[i]
+          )= items[i].slice(0, 1).toUpperCase() + items[i].slice(1)
 
   footer.footer
     .footer__container
