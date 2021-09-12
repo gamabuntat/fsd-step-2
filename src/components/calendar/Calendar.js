@@ -2,48 +2,25 @@ import getLastItem from '@scripts/getLastItem.js';
 import Tables from '@scripts/Tables.js';
 import BEMBlock from '@scripts/BEMBlock.js';
 
-class Calendar {
+class Calendar extends BEMBlock {
   constructor(root) {
-    const block = new BEMBlock(root);
-    block.updateElemsMap(['year', 'day-btn', 'next-month-btn']);
-    console.log(block.elemsMap);
-    block.updateElemsMap(['prev-month-btn']);
-    console.log(block.elemsMap);
-    // super(root.getElementsByClassName('js-calendar__main-table'));
+    super(root);
+    this.setElemsMap();
+    this.mods = this.getMods();
+    this.setListeners();
     this.mainTables = new Tables(
       root.getElementsByClassName('js-calendar__main-table')
     );
-    this.root = root;
-    this.monthFormater = new Intl.DateTimeFormat('ru', { month: 'long' });
-    this.readyDateEvent = new CustomEvent(
-      'ready-date',
-      { 
-        bubbles: true, 
-        detail: 'date range is ready (start and end range data filled)'
-      }
-    );
-    this.nextMonthBtn = this.root.querySelector('.js-calendar__next-month-btn');
-    this.cancleBtn = this.root.querySelector('.js-calendar__cancle-btn');
-    this.tableContainer = this.root
-      .querySelector('.js-calendar__table-container');
-    this.error = this.root.querySelector('.js-calendar__error');
-    this.errorMessage = this.error.innerText;
-    this.error.innerText = '';
-    this.template = this.tableContainer.innerHTML;
-    this.monthDisplay = this.root.querySelector('.js-calendar__month');
-    this.yearDisplay = this.root.querySelector('.js-calendar__year');
-    this.step = parseInt(getComputedStyle(this.tableContainer).width);
+    this.setReadyDateEvent();
+    this.setMonthFormater();
+    this.errorMessage = this.elemsMap.error.innerText;
+    this.elemsMap.error.innerText = '';
+    this.template = this.elemsMap.tableContainer.innerHTML;
+    this.step = parseInt(getComputedStyle(this.elemsMap.tableContainer).width);
     this.rangeCounter = 0;
     this.range = [];
     this.startRange = [];
     this.endRange = [];
-    this.selectedMod = 'calendar__day_selected';
-    this.startRangeMod = 'calendar__day_start-range';
-    this.endRangeMod = 'calendar__day_end-range';
-    this.selectedBtnMod = 'calendar__day-btn_selected';
-    this.nextMonthBtnMod = 'calendar__day-btn_next-month';
-    this.prevMonthBtnMod = 'calendar__day-btn_prev-month';
-    this.todayBtnMod = 'calendar__day-btn_todays';
     this.hash = this.root.dataset.hash 
       || (this.root.dataset.hash = 'cal0'), 'cal0';
     this.initDates = this.getInitDates();
@@ -53,6 +30,57 @@ class Calendar {
     this.month = now.getMonth();
     this.init(now);
     this.setSessStorDate();
+  }
+
+  setElemsMap() {
+    this.updateElemsMap([
+      'next-month-btn',
+      'prev-month-btn',
+      'apply-btn',
+      'cancle-btn',
+      'table-container',
+      'error',
+      'month-label',
+      'year-label'
+    ]);
+  }
+
+  getMods() {
+    return {
+      daySelected: 'calendar__day_selected',
+      dayStartRange: 'calendar__day_start-range',
+      dayEndRange: 'calendar__day_end-range',
+      dayBtnSelected: 'calendar__day-btn_selected',
+      dayBtnNextMonth: 'calendar__day-btn_next-month',
+      dayBtnPrevMonth: 'calendar__day-btn_prev-month',
+      dayBtnTodays: 'calendar__day-btn_todays'
+    };
+  }
+
+  setListeners() {
+    this.setHandlePrevMonthBtnClick();
+    this.setHandleNextMonthBtnClick();
+    this.setHandleCancleBtnClick();
+    this.setHandleApplyBtnClick();
+    this.setHandleLastDayBtnKeydown();
+    this.setHandleFirstDayBtnKeydown();
+    this.setHandleCancleBtnKeydown();
+    this.setHandleNextMonthBtnKeydown();
+    this.setHandleTablesContainerClick();
+  }
+
+  setReadyDateEvent() {
+    this.readyDateEvent = new CustomEvent(
+      'ready-date',
+      { 
+        bubbles: true, 
+        detail: 'date range is ready (start and end range data filled)'
+      }
+    );
+  }
+
+  setMonthFormater() {
+    this.monthFormater = new Intl.DateTimeFormat('ru', { month: 'long' });
   }
 
   getInitDates() {
@@ -87,7 +115,7 @@ class Calendar {
     this.getButton(
       this.mainTables.getCoord(0, this.getPrevMonthNDay(0) + now.getDate())
     )
-      .classList.add(this.todayBtnMod);
+      .classList.add(this.mods.dayBtnTodays);
   }
 
   disableBtsn(now) {
@@ -136,74 +164,82 @@ class Calendar {
   }
 
   updateMonthDisplayValue() {
-    this.monthDisplay.innerText = this.monthFormater
+    this.elemsMap.monthLabel.innerText = this.monthFormater
       .format(new Date(this.year, this.month + this.mainTables.index))
       .replace(/^./, (s) => s.toUpperCase());
   }
 
   updateYearDisplayValue() {
-    this.yearDisplay.innerText = new Date(
+    this.elemsMap.yearLabel.innerText = new Date(
       this.year, this.month + this.mainTables.index
     ).getFullYear();
   }
 
   bindListeners() {
-    this.root.querySelector('.js-calendar__prev-month-btn')
-      .addEventListener('click', this.handlePrevMonthBtnClick.bind(this));
-    this.nextMonthBtn
-      .addEventListener('click', this.handleNextMonthBtnClick.bind(this));
-    this.nextMonthBtn
-      .addEventListener('keydown', this.handleNextMonthBtnKeydown.bind(this));
-    this.cancleBtn
-      .addEventListener('click', this.handleCancleBtnClick.bind(this));
-    this.cancleBtn
-      .addEventListener('keydown', this.handleCancleBtnKeydown.bind(this));
-    this.root.querySelector('.js-calendar__apply-btn')
-      .addEventListener('click', this.handleApplyBtnClick.bind(this));
-    this.tableContainer
-      .addEventListener('click', this.handleTablesContainerClick.bind(this));
+    this.elemsMap.prevMonthBtn
+      .addEventListener('click', this.handlePrevMonthBtnClick);
+    this.elemsMap.nextMonthBtn
+      .addEventListener('click', this.handleNextMonthBtnClick);
+    this.elemsMap.nextMonthBtn
+      .addEventListener('keydown', this.handleNextMonthBtnKeydown);
+    this.elemsMap.cancleBtn
+      .addEventListener('click', this.handleCancleBtnClick);
+    this.elemsMap.cancleBtn
+      .addEventListener('keydown', this.handleCancleBtnKeydown);
+    this.elemsMap.applyBtn
+      .addEventListener('click', this.handleApplyBtnClick);
+    this.elemsMap.tableContainer
+      .addEventListener('click', this.handleTablesContainerClick);
   }
 
   bindListenerOnLastBtn(index) {
     this.getButton(this.mainTables.getLastCellCoord(index))
-      .addEventListener('keydown', this.handleLastDayBtnKeydown.bind(this));
+      .addEventListener('keydown', this.handleLastDayBtnKeydown);
   }
 
   bindListenerOnFirstBtn(index) {
     this.getButton([index, 0, 0])
-      .addEventListener('keydown', this.handleFirstDayBtnKeydown.bind(this));
+      .addEventListener('keydown', this.handleFirstDayBtnKeydown);
   }
 
-  handlePrevMonthBtnClick() {
-    if (this.mainTables.index == 0) { return; }
-    this.mainTables.decreaseIndex();
-    this.changeDisplayedMonth();
-    this.updateMonthDisplayValue();
-    this.updateYearDisplayValue();
+  setHandlePrevMonthBtnClick() {
+    this.handlePrevMonthBtnClick = () => {
+      if (this.mainTables.index == 0) { return; }
+      this.mainTables.decreaseIndex();
+      this.changeDisplayedMonth();
+      this.updateMonthDisplayValue();
+      this.updateYearDisplayValue();
+    };
   }
 
-  handleNextMonthBtnClick() {
-    this.mainTables.increaseIndex();
-    this.changeDisplayedMonth();
-    this.updateMonthDisplayValue();
-    this.updateYearDisplayValue();
-    if (this.mainTables.index === this.mainTables.getSize() - 1) {
-      this.insertFillClearTables(this.mainTables.index + 1);
-    }
+  setHandleNextMonthBtnClick() {
+    this.handleNextMonthBtnClick = () => {
+      this.mainTables.increaseIndex();
+      this.changeDisplayedMonth();
+      this.updateMonthDisplayValue();
+      this.updateYearDisplayValue();
+      if (this.mainTables.index === this.mainTables.getSize() - 1) {
+        this.insertFillClearTables(this.mainTables.index + 1);
+      }
+    };
   }
 
-  handleCancleBtnClick() {
-    this.clearRange();
-    this.clearRangeData();
+  setHandleCancleBtnClick() {
+    this.handleCancleBtnClick = () => {
+      this.clearRange();
+      this.clearRangeData();
+    };
   }
 
-  handleApplyBtnClick() {
-    this.setSessStorDate();
-    this.error.innerText = this.errorMessage;
-    if (this.isEndRange()) {
-      this.root.dispatchEvent(this.readyDateEvent);
-      this.error.innerText = '';
-    }
+  setHandleApplyBtnClick() {
+    this.handleApplyBtnClick = () => {
+      this.setSessStorDate();
+      this.elemsMap.error.innerText = this.errorMessage;
+      if (this.isEndRange()) {
+        this.root.dispatchEvent(this.readyDateEvent);
+        this.elemsMap.error.innerText = '';
+      }
+    };
   }
 
   setSessStorDate() {
@@ -217,79 +253,89 @@ class Calendar {
     );
   }
 
-  handleLastDayBtnKeydown(e) {
-    if (e.code === 'Tab' && !e.shiftKey) {
-      e.preventDefault();
-      this.cancleBtn.firstElementChild.focus();
-    }
-  }
-
-  handleFirstDayBtnKeydown(e) {
-    if (e.code === 'Tab' && e.shiftKey) {
-      e.preventDefault();
-      this.nextMonthBtn.focus();
-    }
-  }
-
-  handleCancleBtnKeydown(e) {
-    if (e.code === 'Tab' && e.shiftKey) {
-      e.preventDefault();
-      this.getButton(
-        this.mainTables.getLastCellCoord(this.mainTables.index)
-      ).focus();
-    }
-  }
-
-  handleNextMonthBtnKeydown(e) {
-    if (e.code === 'Tab' && !e.shiftKey && this.mainTables.index !== 0) { 
-      e.preventDefault();
-      this.getButton([this.mainTables.index, 0, 0]).focus();
-    }
-  }
-
-  handleTablesContainerClick(e) {
-    const btn = e.target;
-    if (!btn.classList.contains('js-calendar__day-btn')) { return; }
-    const isSelected = btn.classList.toggle(this.selectedBtnMod);
-    if (isSelected === false) {
-      this.clearRange();
-      this.clearRangeData();
-      this.removeDataIsReady();
-      return;
-    }
-    if (this.isEndRange()) { 
-      this.clearRange(); 
-      this.clearRangeData();
-    }
-    this.rangeCounter += 1;
-    const btnCoord = this.mainTables.getElemCoord(btn);
-    const firstRowBtn = this.getButton([btnCoord[0], btnCoord[1], 0]);
-    const lastRowBtn = this.getButton([btnCoord[0], btnCoord[1], 6]);
-    this.addCoordInRange(btnCoord);
-    const isPrevMonthbtn = btn.classList.contains(this.prevMonthBtnMod);
-    const isNextMonthBtn = btn.classList.contains(this.nextMonthBtnMod);
-    const shouldSelectedPrevMonth = firstRowBtn
-      .classList.contains(this.prevMonthBtnMod);
-    const shouldSelectedNextMonth = lastRowBtn
-      .classList.contains(this.nextMonthBtnMod);
-    if (isPrevMonthbtn || shouldSelectedPrevMonth) {
-      if (this.mainTables.index > 0) {
-        this.addCoordInRange(this.mainTables.getCoordsAgo(btnCoord, 7));
+  setHandleLastDayBtnKeydown() {
+    this.handleLastDayBtnKeydown = (e) => {
+      if (e.code === 'Tab' && !e.shiftKey) {
+        e.preventDefault();
+        this.elemsMap.cancleBtn.firstElementChild.focus();
       }
-    }
-    if (isNextMonthBtn || shouldSelectedNextMonth) {
-      this.addCoordInRange(this.mainTables.getCoordsForward(btnCoord, 7));
-    }
-    this.selectLastRangeBtn();
-    this.removeDataIsReady();
-    if (this.isEndRange()) {
-      this.orderRange();
-      this.drawRange(this.range[0]);
-      this.fixOrderRange();
-      this.modifyRangeCells();
-      this.setDataIsReady();
-    }
-    this.setRangeData();
+    };
+  }
+
+  setHandleFirstDayBtnKeydown() {
+    this.handleFirstDayBtnKeydown = (e) => {
+      if (e.code === 'Tab' && e.shiftKey) {
+        e.preventDefault();
+        this.elemsMap.nextMonthBtn.focus();
+      }
+    };
+  }
+
+  setHandleCancleBtnKeydown() {
+    this.handleCancleBtnKeydown = (e) => {
+      if (e.code === 'Tab' && e.shiftKey) {
+        e.preventDefault();
+        this.getButton(
+          this.mainTables.getLastCellCoord(this.mainTables.index)
+        ).focus();
+      }
+    };
+  }
+
+  setHandleNextMonthBtnKeydown() {
+    this.handleNextMonthBtnKeydown = (e) => {
+      if (e.code === 'Tab' && !e.shiftKey && this.mainTables.index !== 0) { 
+        e.preventDefault();
+        this.getButton([this.mainTables.index, 0, 0]).focus();
+      }
+    };
+  }
+
+  setHandleTablesContainerClick() {
+    this.handleTablesContainerClick = (e) => {
+      const btn = e.target;
+      if (!btn.classList.contains('js-calendar__day-btn')) { return; }
+      const isSelected = btn.classList.toggle(this.mods.dayBtnSelected);
+      if (isSelected === false) {
+        this.clearRange();
+        this.clearRangeData();
+        this.removeDataIsReady();
+        return;
+      }
+      if (this.isEndRange()) { 
+        this.clearRange(); 
+        this.clearRangeData();
+      }
+      this.rangeCounter += 1;
+      const btnCoord = this.mainTables.getElemCoord(btn);
+      const firstRowBtn = this.getButton([btnCoord[0], btnCoord[1], 0]);
+      const lastRowBtn = this.getButton([btnCoord[0], btnCoord[1], 6]);
+      this.addCoordInRange(btnCoord);
+      const isPrevMonthbtn = btn.classList.contains(this.mods.dayBtnPrevMonth);
+      const isNextMonthBtn = btn.classList.contains(this.mods.dayBtnNextMonth);
+      const shouldSelectedPrevMonth = firstRowBtn
+        .classList.contains(this.mods.dayBtnPrevMonth);
+      const shouldSelectedNextMonth = lastRowBtn
+        .classList.contains(this.mods.dayBtnNextMonth);
+      if (isPrevMonthbtn || shouldSelectedPrevMonth) {
+        if (this.mainTables.index > 0) {
+          this.addCoordInRange(this.mainTables.getCoordsAgo(btnCoord, 7));
+        }
+      }
+      if (isNextMonthBtn || shouldSelectedNextMonth) {
+        this.addCoordInRange(this.mainTables.getCoordsForward(btnCoord, 7));
+      }
+      this.selectLastRangeBtn();
+      this.removeDataIsReady();
+      if (this.isEndRange()) {
+        this.orderRange();
+        this.drawRange(this.range[0]);
+        this.fixOrderRange();
+        this.modifyRangeCells();
+        this.setDataIsReady();
+      }
+      this.setRangeData();
+    };
   }
 
   drawRange(coord) {
@@ -300,7 +346,7 @@ class Calendar {
           this.searchNextRangeCoord(coord) || getLastItem(this.range),
           (
             this.getButton([coord[0], coord[1], 6])
-              .classList.contains(this.nextMonthBtnMod)
+              .classList.contains(this.mods.dayBtnNextMonth)
               ? ((lastCoord) => (coord) => (
                 Tables.isCoordLessOrEqual(coord, lastCoord)
               ))(Tables.getMinCoord(
@@ -328,7 +374,7 @@ class Calendar {
   drawPartOfRange(generator) {
     const coords = [...generator];
     coords.forEach((coord) => (
-      this.mainTables.getCell(coord).classList.add(this.selectedMod)
+      this.mainTables.getCell(coord).classList.add(this.mods.daySelected)
     ));
     return getLastItem(coords);
   }
@@ -345,13 +391,13 @@ class Calendar {
   modifyRangeCells() {
     this.startRange.forEach((coord) => {
       const cell = this.mainTables.getCell(coord);
-      cell.classList.remove(this.selectedMod);
-      cell.classList.add(this.startRangeMod);
+      cell.classList.remove(this.mods.daySelected);
+      cell.classList.add(this.mods.dayStartRange);
     });
     this.endRange.forEach((coord) => {
       const cell = this.mainTables.getCell(coord);
-      cell.classList.remove(this.selectedMod);
-      cell.classList.add(this.endRangeMod);
+      cell.classList.remove(this.mods.daySelected);
+      cell.classList.add(this.mods.dayEndRange);
     });
   }
 
@@ -363,14 +409,14 @@ class Calendar {
         Tables.isCoordLessOrEqual,
       )]
         .forEach((coord) => (
-          this.mainTables.getCell(coord).classList.remove(this.selectedMod)
+          this.mainTables.getCell(coord).classList.remove(this.mods.daySelected)
         ));
     }
     [...this.startRange, ...this.endRange].forEach((coord) => {
       const cell = this.mainTables.getCell(coord);
-      cell.classList.remove(this.startRangeMod);
-      cell.classList.remove(this.endRangeMod);
-      this.getButton(coord).classList.remove(this.selectedBtnMod);
+      cell.classList.remove(this.mods.dayStartRange);
+      cell.classList.remove(this.mods.dayEndRange);
+      this.getButton(coord).classList.remove(this.mods.dayBtnSelected);
     });
 
     this.rangeCounter = 0;
@@ -409,8 +455,8 @@ class Calendar {
 
   isPresentDayBtn(coord) {
     const button = this.getButton(coord);
-    const isNext = button.classList.contains(this.nextMonthBtnMod);
-    const isPrev = button.classList.contains(this.prevMonthBtnMod);
+    const isNext = button.classList.contains(this.mods.dayBtnNextMonth);
+    const isPrev = button.classList.contains(this.mods.dayBtnPrevMonth);
     return !(isNext || isPrev);
   }
 
@@ -420,7 +466,7 @@ class Calendar {
 
   selectLastRangeBtn() {
     this.getButton(getLastItem(this.getLastRange()))
-      .classList.add(this.selectedBtnMod);
+      .classList.add(this.mods.dayBtnSelected);
   }
 
   getLastRange() {
@@ -457,7 +503,7 @@ class Calendar {
     ).forEach((day) => {
       const btn = this.getButton(gen.next().value);
       btn.innerText = day;
-      btn.classList.add(this.prevMonthBtnMod);
+      btn.classList.add(this.mods.dayBtnPrevMonth);
     });
     Calendar.getPresentDay(this.getPresentNDay(index)).forEach((day) => (
       this.getButton(gen.next().value).innerText = day
@@ -465,7 +511,7 @@ class Calendar {
     Calendar.getNextMonthDay(this.getNextMonthNDay(index)).forEach((day) => {
       const btn = this.getButton(gen.next().value);
       btn.innerText = day;
-      btn.classList.add(this.nextMonthBtnMod);
+      btn.classList.add(this.mods.dayBtnNextMonth);
     });
   }
 
@@ -479,7 +525,7 @@ class Calendar {
   }
 
   insertTemplate() {
-    this.tableContainer.insertAdjacentHTML('beforeend', this.template);
+    this.elemsMap.tableContainer.insertAdjacentHTML('beforeend', this.template);
   }
 
   getNextMonthNDay(index) {

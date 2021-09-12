@@ -3,7 +3,7 @@ import kebabToCamel from '@scripts/kebabToCamel.js';
 class BEMBlock {
   constructor(root) {
     this.root = root;
-    this.className = this.getBlockClass();
+    this.setClass();
     this.elemsMap = {};
   }
 
@@ -11,23 +11,19 @@ class BEMBlock {
     this.elemsMap = { ...this.elemsMap, ...this.getElemsMap(elemNames) };
   }
 
-  resetElemsMap() {
-    this.elemsMap = {};
-  }
-
   getElemsMap(elemNames) {
     return elemNames.reduce((map, name) => {
-      map[kebabToCamel(name)] = this.getElem(name);
+      map[kebabToCamel(name)] = this.findElem(name);
       return map;
     }, {});
   }
 
-  getElem(elemName) {
-    return this.root.querySelector(`.${this.className}__${elemName}`);
+  findElem(elemName) {
+    return this.root.querySelector(`.${this.rootClass}__${elemName}`);
   }
 
-  getBlockClass(block = this.root) {
-    return [...block.classList].find((c) => c.startsWith('js-'));
+  setClass() {
+    this.rootClass = [...this.root.classList].find((c) => c.startsWith('js-'));
   }
 }
 
