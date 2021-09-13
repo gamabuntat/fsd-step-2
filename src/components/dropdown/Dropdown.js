@@ -1,6 +1,6 @@
 import BEMBlock from '@scripts/BEMBlock.js';
 import Glossary from '@scripts/Glossary.js';
-import * as glossarys from './glossarys.js';
+import * as glossaries from './glossaries.js';
 
 class Dropdown extends BEMBlock {
   constructor(root) {
@@ -246,7 +246,7 @@ class Dropdown extends BEMBlock {
   getGlossary() {
     const data = this.root.dataset.glossary.split(', ');
     return new Glossary(
-      Object.values(glossarys).find(
+      Object.values(glossaries).find(
         (g) => (
           Object.keys(g).filter((term) => data.indexOf(term) === -1).length == 0
         )
