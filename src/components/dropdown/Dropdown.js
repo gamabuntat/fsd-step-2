@@ -1,38 +1,64 @@
+import BEMBlock from '@scripts/BEMBlock.js';
 import Glossary from '@scripts/Glossary.js';
 import * as glossarys from './glossarys.js';
 
-class Dropdown {
-  constructor(dropdown) {
-    this.dropdown = dropdown;
+class Dropdown extends BEMBlock {
+  constructor(root) {
+    super(root);
     this.glossary = this.getGlossary();
-    this.expandButton = dropdown.querySelector('.js-dropdown__expand-button');
-    this.signature = dropdown.querySelector('.js-dropdown__signature');
-    this.defaultSignature = this.signature.innerText;
-    this.list = dropdown.querySelector('.js-dropdown__list');
-    this.decreaseButtons = dropdown
-      .querySelectorAll('.js-dropdown__decrease-button');
-    this.increaseButtons = dropdown
-      .querySelectorAll('.js-dropdown__increase-button');
-    this.counters = [
-      ...dropdown.querySelectorAll('.js-dropdown__counter')
-    ];
-    this.sectionNames = Array.from(
-      dropdown.querySelectorAll('.js-dropdown__section-name'),
-      (section) => section.innerText
-    );
-    this.applyButton = dropdown.querySelector('.js-dropdown__apply-button');
-    this.cancelButton = dropdown.querySelector('.js-dropdown__cancel-button');
+    this.setElemsMap();
+    this.setListElems();
+    this.setMods();
     this.row = 0;
     this.value = 0;
     this.countersSum = 0;
     this.signatureInterfaces = this.getSignatureInterfaces();
+    this.setListeners();
     this.bindListeners();
-    this.hash = this.dropdown.dataset.hash 
-      || (this.dropdown.dataset.hash = 'commonDrpdwnHash');
+    this.init();
+  }
+
+  init() {
+    this.defaultSignature = this.elemsMap.signature.innerText;
+    this.hash = this.root.dataset.hash 
+      || (this.root.dataset.hash = 'commonDrpdwnHash');
     this.setCounterValues(this.getInitValues());
-    if (this.dropdown.hasAttribute('data-open')) {
-      this.expandButton.click(); 
+    if (this.root.hasAttribute('data-open')) {
+      this.handleExpandButtonClick();
     }
+  }
+
+  setElemsMap() {
+    this.updateElemsMap([
+      'expand-button',
+      'signature',
+      'list',
+      'apply-button',
+      'cancel-button',
+    ]);
+  }
+
+  setListElems() {
+    this.decreaseButtons = this.root
+      .querySelectorAll(this.getElemClass('decrease-button'));
+    this.increaseButtons = this.root
+      .querySelectorAll(this.getElemClass('increase-button'));
+    this.counters = [
+      ...this.root.querySelectorAll(this.getElemClass('counter'))
+    ];
+    this.sectionNames = Array.from(
+      this.root.querySelectorAll(this.getElemClass('section-name')),
+      (section) => section.innerText
+    );
+  }
+
+  setMods() {
+    this.mods = {
+      expandButtonPressed: 'dropdown__expand-button_pressed',
+      listHedden: 'dropdown__list_hidden',
+      decreaseButtonDisabled: 'dropdown__decrease-button_disabled',
+      cancelButtonHidden: 'dropdown__cancel-button_hidden',
+    };
   }
 
   getSignatureInterfaces() {
@@ -57,76 +83,96 @@ class Dropdown {
   }
 
   getInitValues() {
-    return this.dropdown.dataset.counterValues 
+    return this.root.dataset.counterValues 
       || sessionStorage.getItem(this.hash)
       || '';
   }
 
+  setListeners() {
+    this.setHandleExpandButtonClick();
+    this.setHandleDecreaseButtonClick();
+    this.setHandleIncreaseButtonClick();
+    this.setHandeApplyButtonClick();
+    this.setHandleCancelButtonClick();
+  }
+
   bindListeners() {
-    this.expandButton.addEventListener(
+    this.elemsMap.expandButton.addEventListener(
       'click',
-      this.handleExpandButtonClick.bind(this)
+      this.handleExpandButtonClick
     );
     this.decreaseButtons.forEach((b) => (
-      b.addEventListener('click', this.handleDecreaseButtonClick.bind(this))
+      b.addEventListener('click', this.handleDecreaseButtonClick)
     ));
     this.increaseButtons.forEach((b) => (
-      b.addEventListener('click', this.handleIncreaseButtonClick.bind(this))
+      b.addEventListener('click', this.handleIncreaseButtonClick)
     ));
-    this.applyButton && this.applyButton.addEventListener(
+    this.elemsMap.applyButton && this.elemsMap.applyButton.addEventListener(
       'click', 
-      this.handeApplyButtonClick.bind(this)
+      this.handeApplyButtonClick
     );
-    this.cancelButton && this.cancelButton.addEventListener(
+    this.elemsMap.cancelButton && this.elemsMap.cancelButton.addEventListener(
       'click',
-      this.handleCancelButtonClick.bind(this)
+      this.handleCancelButtonClick
     );
   }
 
-  handleExpandButtonClick() {
-    this.expandButton.classList.toggle('dropdown__expand-button_pressed');
-    this.list.classList.toggle('dropdown__list_hidden');
+  setHandleExpandButtonClick() {
+    this.handleExpandButtonClick = () => {
+      this.elemsMap.expandButton
+        .classList.toggle(this.mods.expandButtonPressed);
+      this.elemsMap.list.classList.toggle(this.mods.listHedden);
+    };
   }
 
-  handleDecreaseButtonClick(e) {
-    this.update(e.target);
-    if (this.value === 0) { return; }
-    if (this.value === 1) { 
-      this.toggleDecreaseButtonMod(); 
-      this.decreaseButtons[this.row].tabIndex = '-1';
-    }
-    this.changeCounterValue(-1);
-    this.updateSignature(this.signatureInterfaces);
-    this.countersSum -= 1;
-    if (this.countersSum === 0) { this.toggleCancelButtonMod(); }
-    this.updateStorage();
+  setHandleDecreaseButtonClick() {
+    this.handleDecreaseButtonClick = (e) => {
+      this.update(e.target);
+      if (this.value === 0) { return; }
+      if (this.value === 1) { 
+        this.toggleDecreaseButtonMod(); 
+        this.decreaseButtons[this.row].tabIndex = '-1';
+      }
+      this.changeCounterValue(-1);
+      this.updateSignature(this.signatureInterfaces);
+      this.countersSum -= 1;
+      if (this.countersSum === 0) { this.toggleCancelButtonMod(); }
+      this.updateStorage();
+    };
   }
 
-  handleIncreaseButtonClick(e) {
-    this.update(e.target);
-    if (this.value === 0) { 
-      this.toggleDecreaseButtonMod(); 
-      this.decreaseButtons[this.row].tabIndex = '0';
-    }
-    this.changeCounterValue(1);
-    this.updateSignature(this.signatureInterfaces);
-    this.countersSum += 1;
-    if (this.countersSum === 1) { this.toggleCancelButtonMod(); }
-    this.updateStorage();
+  setHandleIncreaseButtonClick() {
+    this.handleIncreaseButtonClick = (e) => {
+      this.update(e.target);
+      if (this.value === 0) { 
+        this.toggleDecreaseButtonMod(); 
+        this.decreaseButtons[this.row].tabIndex = '0';
+      }
+      this.changeCounterValue(1);
+      this.updateSignature(this.signatureInterfaces);
+      this.countersSum += 1;
+      if (this.countersSum === 1) { this.toggleCancelButtonMod(); }
+      this.updateStorage();
+    };
   }
 
-  handeApplyButtonClick() {
-    this.expandButton.classList.toggle('dropdown__expand-button_pressed');
-    this.list.classList.toggle('dropdown__list_hidden');
-    this.updateStorage();
+  setHandeApplyButtonClick() {
+    this.handeApplyButtonClick = () => {
+      this.elemsMap.expandButton
+        .classList.toggle(this.mods.expandButtonPressed);
+      this.elemsMap.list.classList.toggle(this.mods.listHedden);
+      this.updateStorage();
+    };
   }
 
-  handleCancelButtonClick() {
-    this.resetCounters();
-    this.countersSum = 0;
-    this.signature.innerText = this.defaultSignature;
-    this.addDecreseButtonsMod();
-    this.toggleCancelButtonMod();
+  setHandleCancelButtonClick() {
+    this.handleCancelButtonClick = () => {
+      this.resetCounters();
+      this.countersSum = 0;
+      this.elemsMap.signature.innerText = this.defaultSignature;
+      this.addDecreseButtonsMod();
+      this.toggleCancelButtonMod();
+    };
   }
 
   updateStorage() {
@@ -158,23 +204,23 @@ class Dropdown {
 
   toggleDecreaseButtonMod() {
     this.decreaseButtons[this.row]
-      .classList.toggle('dropdown__decrease-button_disabled');
+      .classList.toggle(this.mods.decreaseButtonDisabled);
   }
 
   addDecreseButtonsMod() {
     this.decreaseButtons.forEach((b) => (
-      b.classList.add('dropdown__decrease-button_disabled')
+      b.classList.add(this.mods.decreaseButtonDisabled)
     ));
   }
 
   toggleCancelButtonMod() {
-    if (this.cancelButton) {
-      this.cancelButton.classList.toggle('dropdown__cancel-button_hidden');
+    if (this.elemsMap.cancelButton) {
+      this.elemsMap.cancelButton.classList.toggle(this.mods.cancelButtonHidden);
     }
   }
 
   updateSignature(interfaces = this.signatureInterfaces) {
-    this.signature.innerText = interfaces.reduce((res, i) => {
+    this.elemsMap.signature.innerText = interfaces.reduce((res, i) => {
       const value = i.getValue();
       if (value === 0) { return res; }
       const part = `${value} ${
@@ -198,7 +244,7 @@ class Dropdown {
   }
 
   getGlossary() {
-    const data = this.dropdown.dataset.glossary.split(', ');
+    const data = this.root.dataset.glossary.split(', ');
     return new Glossary(
       Object.values(glossarys).find(
         (g) => (

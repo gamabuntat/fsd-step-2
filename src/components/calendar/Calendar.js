@@ -6,7 +6,7 @@ class Calendar extends BEMBlock {
   constructor(root) {
     super(root);
     this.setElemsMap();
-    this.mods = this.getMods();
+    this.setMods();
     this.setListeners();
     this.mainTables = new Tables(
       root.getElementsByClassName('js-calendar__main-table')
@@ -45,8 +45,8 @@ class Calendar extends BEMBlock {
     ]);
   }
 
-  getMods() {
-    return {
+  setMods() {
+    this.mods = {
       daySelected: 'calendar__day_selected',
       dayStartRange: 'calendar__day_start-range',
       dayEndRange: 'calendar__day_end-range',
@@ -589,3 +589,4 @@ class Calendar extends BEMBlock {
 }
 
 export default Calendar;
+

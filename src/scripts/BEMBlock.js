@@ -18,8 +18,12 @@ class BEMBlock {
     }, {});
   }
 
+  getElemClass(elemName) {
+    return `.${this.rootClass}__${elemName}`;
+  }
+
   findElem(elemName) {
-    return this.root.querySelector(`.${this.rootClass}__${elemName}`);
+    return this.root.querySelector(this.getElemClass(elemName));
   }
 
   setClass() {
