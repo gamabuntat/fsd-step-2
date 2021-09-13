@@ -1,14 +1,20 @@
 import BEMBlock from '@scripts/BEMBlock.js';
-// import * as glossaries from './glossaries.js';
+import Glossary from '@scripts/Glossary.js';
+import * as glossaries from './glossaries.js';
 
 class CardRoomDetails extends BEMBlock {
   constructor(root) {
     super(root);
+    this.setGlossary();
     this.setElemsMap();
     this.setCalendar();
     this.setObserver();
     this.setFormater();
     this.init();
+  }
+
+  setGlossary() {
+    this.glossary = Glossary.create('суток', glossaries);
   }
 
   setElemsMap() {
@@ -89,10 +95,9 @@ class CardRoomDetails extends BEMBlock {
   }
   
   updateServiceDaysDeath() {
-    this.elemsMap.serviceDaysDeath.innerText = (
-      this.elemsMap.serviceNDays.innerText === '1' 
-        ? ' сутки' 
-        : ' суток'
+    this.elemsMap.serviceDaysDeath.innerText = this.glossary.getDefinition(
+      'суток',
+      +this.elemsMap.serviceNDays.innerText
     );
   }
 

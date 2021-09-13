@@ -5,7 +5,7 @@ import * as glossaries from './glossaries.js';
 class Dropdown extends BEMBlock {
   constructor(root) {
     super(root);
-    this.glossary = this.getGlossary();
+    this.setGlossary();
     this.setElemsMap();
     this.setListElems();
     this.setMods();
@@ -26,6 +26,10 @@ class Dropdown extends BEMBlock {
     if (this.root.hasAttribute('data-open')) {
       this.handleExpandButtonClick();
     }
+  }
+
+  setGlossary() {
+    this.glossary = Glossary.create(this.root.dataset.glossary, glossaries);
   }
 
   setElemsMap() {
@@ -241,17 +245,6 @@ class Dropdown extends BEMBlock {
   update(button) {
     this.row = this.getRow(button);
     this.value = +this.counters[this.row].innerText;
-  }
-
-  getGlossary() {
-    const data = this.root.dataset.glossary.split(', ');
-    return new Glossary(
-      Object.values(glossaries).find(
-        (g) => (
-          Object.keys(g).filter((term) => data.indexOf(term) === -1).length == 0
-        )
-      )
-    );
   }
 }
 

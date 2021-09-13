@@ -38,6 +38,15 @@ class Glossary {
   static checkForm3(digit, last2digits) {
     return (digit === 0 || digit > 4) || (last2digits > 9 && last2digits < 20);
   }
+
+  static create(searchTerms, glossaries) {
+    return new Glossary(
+      Object.values(glossaries).find((g) => (
+        Object.keys(g).filter((term) => searchTerms.indexOf(term) === -1)
+          .length == 0
+      ))
+    );
+  }
 }
 
 export default Glossary;
