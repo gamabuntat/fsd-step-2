@@ -93,6 +93,8 @@ class Dropdown extends BEMBlock {
   }
 
   setListeners() {
+    this.setHandleWindowClick();
+    this.setHandleRootClick();
     this.setHandleExpandButtonClick();
     this.setHandleDecreaseButtonClick();
     this.setHandleIncreaseButtonClick();
@@ -101,6 +103,8 @@ class Dropdown extends BEMBlock {
   }
 
   bindListeners() {
+    window.addEventListener('click', this.handleWindowClick);
+    this.root.addEventListener('click', this.handleRootClick);
     this.elemsMap.expandButton.addEventListener(
       'click',
       this.handleExpandButtonClick
@@ -119,6 +123,20 @@ class Dropdown extends BEMBlock {
       'click',
       this.handleCancelButtonClick
     );
+  }
+
+  setHandleWindowClick() {
+    this.handleWindowClick = () => {
+      this.elemsMap.expandButton
+        .classList.remove(this.mods.expandButtonPressed);
+      this.elemsMap.list.classList.add(this.mods.listHedden);
+    };
+  }
+
+  setHandleRootClick() {
+    this.handleRootClick = (e) => {
+      e.stopPropagation();
+    };
   }
 
   setHandleExpandButtonClick() {
