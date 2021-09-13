@@ -1,5 +1,8 @@
-class DateDropdown {
+import BEMBlock from '@scripts/BEMBlock.js';
+
+class DateDropdown extends BEMBlock {
   constructor(root) {
+    super(root);
     this.dateFormater = new Intl.DateTimeFormat('ru');
     this.calWrapper = root.querySelector('.js-date-dropdown__cal-wrapper');
     this.cal = this.calWrapper.firstElementChild;
@@ -87,14 +90,6 @@ class DateDropdown {
 
   handleRootClick(ev) {
     ev.stopPropagation();
-  }
-
-  static getBEMBlockName() {
-    return 'js-date-dropdown';
-  }
-
-  static getBEMClass() {
-    return `.${DateDropdown.getBEMBlockName()}`;
   }
 }
 

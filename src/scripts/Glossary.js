@@ -1,3 +1,5 @@
+import findLastIndex from '@scripts/findLastIndex.js';
+
 class Glossary {
   constructor(glossary = {}) {
     this.glossary = glossary;
@@ -7,36 +9,45 @@ class Glossary {
   getDefinition(testWord, numeral) {
     return (
       this.glossary[this.findTerm(testWord)] || []
-    )[this.defineShape(numeral)] || testWord;
+    )[Glossary.defineShape(numeral)] || testWord;
   }
 
   findTerm(word) {
-    return this.terms.find(Glossary.compare.bind(null, word));
+    return this.terms.find((term) => (
+      term.trim().split('+').find((t) => t === word)
+    ));
   }
 
-  defineShape(n) {
-    const lastDigit = +String(n).slice(-1);
+  static defineShape(n) {
+    return findLastIndex(Array(3).fill(n), Glossary.predicate);
+  }
+
+  static predicate(item, idx) {
     return [
-      Glossary.checkForm1(lastDigit),
-      Glossary.checkForm2(lastDigit),
-      Glossary.checkForm3(lastDigit, +String(n).slice(-2))
-    ].lastIndexOf(true);
+      Glossary.checkForm1,
+      Glossary.checkForm2,
+      Glossary.checkForm3,
+    ][idx](item);
   }
 
-  static compare(searchWord, term) {
-    return term.trim().split('+').find((t) => t === searchWord);
+  static checkForm1(n) {
+    return Glossary.getLastDigits(n) === 1;
   }
 
-  static checkForm1(digit) {
-    return digit === 1;
+  static checkForm2(n) {
+    const lastDigit = Glossary.getLastDigits(n);
+    return lastDigit > 1 && lastDigit < 5;
   }
 
-  static checkForm2(digit) {
-    return digit > 1 && digit < 5;
+  static checkForm3(n) {
+    const lastDigit = Glossary.getLastDigits(n);
+    const last2digits = Glossary.getLastDigits(n, 2);
+    return (lastDigit === 0 || lastDigit > 4) 
+      || (last2digits > 9 && last2digits < 20);
   }
 
-  static checkForm3(digit, last2digits) {
-    return (digit === 0 || digit > 4) || (last2digits > 9 && last2digits < 20);
+  static getLastDigits(number, endCount = 1) {
+    return +String(number).slice(-endCount);
   }
 
   static create(searchTerms, glossaries) {

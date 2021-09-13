@@ -7,6 +7,7 @@ class CardRoomDetails extends BEMBlock {
     super(root);
     this.setGlossary();
     this.setElemsMap();
+    this.setMods();
     this.setCalendar();
     this.setObserver();
     this.setFormater();
@@ -29,6 +30,12 @@ class CardRoomDetails extends BEMBlock {
       'service-sale',
       'service-additional-cost'
     ]);
+  }
+
+  setMods() {
+    this.mods = {
+      roomNumberDeluxe: 'card-room-details__room-number_deluxe',
+    };
   }
 
   setCalendar() {
@@ -111,10 +118,10 @@ class CardRoomDetails extends BEMBlock {
 
   processLuxury(
     isLuxury = this.elemsMap.roomNumber.classList
-      .contains('card-room-details__room-number_deluxe')
+      .contains(this.mods.roomNumberDeluxe)
   ) {
     this.elemsMap.roomNumber.classList[isLuxury ? 'add' : 'remove'](
-      'card-room-details__room-number_deluxe'
+      this.mods.roomNumberDeluxe
     );
   }
 
