@@ -3,23 +3,31 @@ import BEMBlock from '@scripts/BEMBlock.js';
 class DateDropdown extends BEMBlock {
   constructor(root) {
     super(root);
+    this.init();
+    this.setListeners();
+    this.bindListeners();
+    this.handleCalAttrsChanges();
+  }
+
+  init() {
+    this.updateElemsMap([
+      'cal-wrapper',
+      'start-btn',
+      'end-btn',
+    ]);
+    this.setMods(['date-dropdown__cal-wrapper_hidden']);
     this.dateFormater = new Intl.DateTimeFormat('ru');
-    this.calWrapper = root.querySelector('.js-date-dropdown__cal-wrapper');
-    this.cal = this.calWrapper.firstElementChild;
-    this.startBtn = root.querySelector('.js-date-dropdown__start-btn');
-    this.endBtn = root.querySelector('.js-date-dropdown__end-btn');
-    this.startSignature = this.startBtn
+    this.calendar = this.elemsMap.calWrapper.firstElementChild;
+    this.startSignature = this.elemsMap.startBtn
       .querySelector('.js-date-dropdown__date-signature');
-    this.endSignature = this.endBtn
+    this.endSignature = this.elemsMap.endBtn
       .querySelector('.js-date-dropdown__date-signature');
-    this.mask = this.startSignature.innerText;
+    this.startMask = this.startSignature.innerText;
     this.endMask = this.endSignature.innerText;
     this.observer = new MutationObserver(
       this.handleCalAttrsChanges.bind(this)
     );
-    this.observer.observe(this.cal, {attributes: true});
-    this.bindListeners(root);
-    this.handleCalAttrsChanges();
+    this.observer.observe(this.calendar, {attributes: true});
   }
 
   handleCalAttrsChanges() {
@@ -36,27 +44,31 @@ class DateDropdown extends BEMBlock {
   }
 
   updateStartSignature(date) {
-    this.checkDate(date) 
-      ? this.changeStartDateSignatyre(this.mask) 
-      : this.changeStartDateSignatyre(this.formateDate(date));
+    this.changeStartDateSignatyre(
+      this.checkDate(date) 
+        ? this.formateDate(date)
+        : this.startMask
+    );
   }
 
   updateEndSignature(date) {
-    this.checkDate(date) 
-      ? this.changeEndDateSignatyre(this.endMask) 
-      : this.changeEndDateSignatyre(this.formateDate(date));
+    this.changeEndDateSignatyre(
+      this.checkDate(date) 
+        ? this.formateDate(date)
+        : this.endMask
+    );
   }
 
   getStartDate() {
-    return this.cal.dataset.startDate;
+    return this.calendar.dataset.startDate;
   }
 
   getEndDate() {
-    return this.cal.dataset.endDate;
+    return this.calendar.dataset.endDate;
   }
 
   checkDate(date) {
-    return date.toString() === 'Invalid Date';
+    return date.toString() !== 'Invalid Date';
   }
 
   formateDate(date) {
@@ -71,25 +83,37 @@ class DateDropdown extends BEMBlock {
     this.endSignature.innerText = dateStr;
   }
 
-  bindListeners(root) {
-    window.addEventListener('click', this.handleWindowClick.bind(this));
-    root.addEventListener('click', this.handleRootClick.bind(this));
-    this.startBtn.addEventListener('click', this.handleBtnClick.bind(this));
-    this.endBtn.addEventListener('click', this.handleBtnClick.bind(this));
-    this.calWrapper
-      .addEventListener('ready-date', this.handleBtnClick.bind(this));
+  setListeners() {
+    this.setHandleWindowClick();
+    this.setHandleRootClick();
+    this.setHandleBtnClick();
   }
 
-  handleWindowClick() {
-    this.calWrapper.classList.add('date-dropdown__cal-wrapper_hidden');
+  bindListeners() {
+    window.addEventListener('click', this.handleWindowClick);
+    this.root.addEventListener('click', this.handleRootClick);
+    this.elemsMap.startBtn.addEventListener('click', this.handleBtnClick);
+    this.elemsMap.endBtn.addEventListener('click', this.handleBtnClick);
+    this.elemsMap.calWrapper
+      .addEventListener('ready-date', this.handleBtnClick);
   }
 
-  handleBtnClick() {
-    this.calWrapper.classList.toggle('date-dropdown__cal-wrapper_hidden');
+  setHandleWindowClick() {
+    this.handleWindowClick = () => {
+      this.elemsMap.calWrapper.classList.add(this.mods.calWrapperHidden);
+    };
   }
 
-  handleRootClick(ev) {
-    ev.stopPropagation();
+  setHandleRootClick() {
+    this.handleRootClick = (e) => {
+      e.stopPropagation();
+    };
+  }
+
+  setHandleBtnClick() {
+    this.handleBtnClick = () => {
+      this.elemsMap.calWrapper.classList.toggle(this.mods.calWrapperHidden);
+    };
   }
 }
 

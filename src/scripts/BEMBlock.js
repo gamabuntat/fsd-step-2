@@ -5,6 +5,7 @@ class BEMBlock {
     this.root = root;
     this.setClass();
     this.elemsMap = {};
+    this.mods = {};
   }
 
   updateElemsMap(elemNames) {
@@ -15,6 +16,15 @@ class BEMBlock {
     return elemNames.reduce((map, name) => {
       map[kebabToCamel(name)] = this.findElem(name);
       return map;
+    }, {});
+  }
+
+  setMods(mods) {
+    this.mods = mods.reduce((mods, mode) => {
+      mods[
+        kebabToCamel(mode.replace(/(^.*__)(.*)(_)(.*$)/g, '$2-$4'))
+      ] = mode;
+      return mods;
     }, {});
   }
 
