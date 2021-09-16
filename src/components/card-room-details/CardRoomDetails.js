@@ -91,7 +91,7 @@ class CardRoomDetails extends BEMBlock {
   }
 
   setDays() {
-    this.elemsMap.serviceNDays.innerText = this.getDays();
+    this.elemsMap.serviceNDays.innerText = this.getDays() || 0;
   }
 
   getDays() {

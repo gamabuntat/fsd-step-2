@@ -5,11 +5,34 @@ import BEMBlock from '@scripts/BEMBlock.js';
 class Calendar extends BEMBlock {
   constructor(root) {
     super(root);
-    this.setElemsMap();
-    this.setMods();
+    this.init();
+  }
+
+  init() {
+    this.dayInMilisecond = 24 * 60 * 60 * 1000;
+    this.setListeners();
+    this.updateElemsMap([
+      'next-month-btn',
+      'prev-month-btn',
+      'apply-btn',
+      'cancle-btn',
+      'table-container',
+      'error',
+      'month-label',
+      'year-label'
+    ]);
+    this.setMods([
+      'calendar__day_selected',
+      'calendar__day_start-range',
+      'calendar__day_end-range',
+      'calendar__day-btn_selected',
+      'calendar__day-btn_next-month',
+      'calendar__day-btn_prev-month',
+      'calendar__day-btn_todays'
+    ]);
     this.setListeners();
     this.mainTables = new Tables(
-      root.getElementsByClassName('js-calendar__main-table')
+      this.root.getElementsByClassName('js-calendar__main-table')
     );
     this.setReadyDateEvent();
     this.setMonthFormater();
@@ -21,40 +44,28 @@ class Calendar extends BEMBlock {
     this.range = [];
     this.startRange = [];
     this.endRange = [];
+    this.defaultHash = 'cal0';
     this.hash = this.root.dataset.hash 
-      || (this.root.dataset.hash = 'cal0'), 'cal0';
+      || (this.root.dataset.hash = this.defaultHash);
     this.initDates = this.getInitDates();
-    this.root.dataset.date = this.initDates.date || '';
-    const now = new Date(this.initDates.date || Date());
+    this.setDataset();
+    const now = new Date(this.initDates.date);
     this.year = now.getFullYear();
     this.month = now.getMonth();
-    this.init(now);
+    this.modifyTodaysBtn(now);
+    this.disableBtns(now);
+    this.fillTables(this.mainTables.index);
+    this.clearTables(this.mainTables.index);
+    this.bindListenerOnLastBtn(this.mainTables.index);
+    this.insertFillClearTables(this.mainTables.index + 1);
+    this.updateMonthDisplayValue();
+    this.updateYearDisplayValue();
+    this.bindListeners();
     this.setSessStorDate();
-  }
-
-  setElemsMap() {
-    this.updateElemsMap([
-      'next-month-btn',
-      'prev-month-btn',
-      'apply-btn',
-      'cancle-btn',
-      'table-container',
-      'error',
-      'month-label',
-      'year-label'
-    ]);
-  }
-
-  setMods() {
-    this.mods = {
-      daySelected: 'calendar__day_selected',
-      dayStartRange: 'calendar__day_start-range',
-      dayEndRange: 'calendar__day_end-range',
-      dayBtnSelected: 'calendar__day-btn_selected',
-      dayBtnNextMonth: 'calendar__day-btn_next-month',
-      dayBtnPrevMonth: 'calendar__day-btn_prev-month',
-      dayBtnTodays: 'calendar__day-btn_todays'
-    };
+    if (!this.initDates.startDate) { return; }
+    this.setInitialRange(this.initDates.startDate);
+    if (!this.initDates.endDate) { return; }
+    this.setInitialRange(this.initDates.endDate);
   }
 
   setListeners() {
@@ -88,27 +99,35 @@ class Calendar extends BEMBlock {
     const source = data.date || data.startDate 
       ? data 
       : JSON.parse(sessionStorage.getItem(this.hash));
-    return {
+    return this.validateDate({
       date: source?.date,
       startDate: source?.startDate,
       endDate: source?.endDate
+    });
+  }
+
+  validateDate({ date, startDate, endDate }) {
+    const validDate = Calendar.checkDateIsInvalid(date) 
+      ? new Date().toISOString().slice(0, 10) :
+      date;
+    const validStartDate = new Date(startDate) - new Date(validDate) >= 0 
+      ? startDate 
+      : '';
+    const validEndDate = new Date(endDate) - new Date(validStartDate) 
+      >= this.dayInMilisecond 
+      ? endDate 
+      : '';
+    return {
+      date: validDate,
+      startDate: validStartDate,
+      endDate: validEndDate 
     };
   }
 
-  init(now) {
-    this.modifyTodaysBtn(now);
-    this.disableBtsn(now);
-    this.fillTables(this.mainTables.index);
-    this.clearTables(this.mainTables.index);
-    this.bindListenerOnLastBtn(this.mainTables.index);
-    this.insertFillClearTables(this.mainTables.index + 1);
-    this.updateMonthDisplayValue();
-    this.updateYearDisplayValue();
-    this.bindListeners();
-    if (Calendar.checkDateIsValid(this.initDates.startDate)) { return; }
-    this.setInitialRange(this.initDates.startDate);
-    if (Calendar.checkDateIsValid(this.initDates.endDate)) { return; }
-    this.setInitialRange(this.initDates.endDate);
+  setDataset({ date, startDate, endDate } = this.initDates) {
+    this.root.dataset.date = date;
+    this.root.dataset.startDate = startDate;
+    this.root.dataset.endDate = endDate;
   }
 
   modifyTodaysBtn(now) {
@@ -118,7 +137,7 @@ class Calendar extends BEMBlock {
       .classList.add(this.mods.dayBtnTodays);
   }
 
-  disableBtsn(now) {
+  disableBtns(now) {
     [...this.mainTables.genCoordsInOrder(
       [0, 0, 0],
       this.mainTables.getCoord(0, this.getPrevMonthNDay(0) + now.getDate()),
@@ -556,7 +575,7 @@ class Calendar extends BEMBlock {
     );
   }
 
-  static checkDateIsValid(dateStr) {
+  static checkDateIsInvalid(dateStr) {
     return new Date(dateStr).toString() === 'Invalid Date';
   }
 
