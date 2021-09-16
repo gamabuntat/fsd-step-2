@@ -5,23 +5,36 @@ import * as glossaries from './glossaries.js';
 class Dropdown extends BEMBlock {
   constructor(root) {
     super(root);
+    this.init();
+  }
+
+  init() {
     this.setGlossary();
-    this.setElemsMap();
+    this.updateElemsMap([
+      'expand-button',
+      'signature',
+      'list',
+      'apply-button',
+      'cancel-button',
+    ]);
     this.setListElems();
-    this.setMods();
+    this.setMods([
+      'dropdown__expand-button_pressed',
+      'dropdown__list_hidden',
+      'dropdown__decrease-button_disabled',
+      'dropdown__cancel-button_hidden',
+    ]);
     this.row = 0;
     this.value = 0;
     this.countersSum = 0;
     this.signatureInterfaces = this.getSignatureInterfaces();
     this.setListeners();
+    this.closeTrigger = true;
     this.bindListeners();
-    this.init();
-  }
-
-  init() {
     this.defaultSignature = this.elemsMap.signature.innerText;
+    this.defaultHash = 'commonDrpdwnHash';
     this.hash = this.root.dataset.hash 
-      || (this.root.dataset.hash = 'commonDrpdwnHash');
+      || (this.root.dataset.hash = this.defaultHash);
     this.setCounterValues(this.getInitValues());
     if (this.root.hasAttribute('data-open')) {
       this.handleExpandButtonClick();
@@ -30,16 +43,6 @@ class Dropdown extends BEMBlock {
 
   setGlossary() {
     this.glossary = Glossary.create(this.root.dataset.glossary, glossaries);
-  }
-
-  setElemsMap() {
-    this.updateElemsMap([
-      'expand-button',
-      'signature',
-      'list',
-      'apply-button',
-      'cancel-button',
-    ]);
   }
 
   setListElems() {
@@ -54,15 +57,6 @@ class Dropdown extends BEMBlock {
       this.root.querySelectorAll(this.getElemClass('section-name')),
       (section) => section.innerText
     );
-  }
-
-  setMods() {
-    this.mods = {
-      expandButtonPressed: 'dropdown__expand-button_pressed',
-      listHedden: 'dropdown__list_hidden',
-      decreaseButtonDisabled: 'dropdown__decrease-button_disabled',
-      cancelButtonHidden: 'dropdown__cancel-button_hidden',
-    };
   }
 
   getSignatureInterfaces() {
@@ -127,15 +121,18 @@ class Dropdown extends BEMBlock {
 
   setHandleWindowClick() {
     this.handleWindowClick = () => {
-      this.elemsMap.expandButton
-        .classList.remove(this.mods.expandButtonPressed);
-      this.elemsMap.list.classList.add(this.mods.listHedden);
+      if (this.closeTrigger) {
+        this.elemsMap.expandButton
+          .classList.remove(this.mods.expandButtonPressed);
+        this.elemsMap.list.classList.add(this.mods.listHidden);
+      }
+      this.closeTrigger = true;
     };
   }
 
   setHandleRootClick() {
-    this.handleRootClick = (e) => {
-      e.stopPropagation();
+    this.handleRootClick = () => {
+      this.closeTrigger = false;
     };
   }
 
@@ -143,7 +140,7 @@ class Dropdown extends BEMBlock {
     this.handleExpandButtonClick = () => {
       this.elemsMap.expandButton
         .classList.toggle(this.mods.expandButtonPressed);
-      this.elemsMap.list.classList.toggle(this.mods.listHedden);
+      this.elemsMap.list.classList.toggle(this.mods.listHidden);
     };
   }
 
@@ -182,7 +179,7 @@ class Dropdown extends BEMBlock {
     this.handeApplyButtonClick = () => {
       this.elemsMap.expandButton
         .classList.toggle(this.mods.expandButtonPressed);
-      this.elemsMap.list.classList.toggle(this.mods.listHedden);
+      this.elemsMap.list.classList.toggle(this.mods.listHidden);
       this.updateStorage();
     };
   }
@@ -212,7 +209,7 @@ class Dropdown extends BEMBlock {
 
   clickOnButtonNthTimes(n, button) {
     if (n <= 0) { return; }
-    button.click();
+    this.handleIncreaseButtonClick({ target: button });
     this.clickOnButtonNthTimes(--n, button);
   }
 

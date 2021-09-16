@@ -4,9 +4,6 @@ class DateDropdown extends BEMBlock {
   constructor(root) {
     super(root);
     this.init();
-    this.setListeners();
-    this.bindListeners();
-    this.handleCalAttrsChanges();
   }
 
   init() {
@@ -28,6 +25,10 @@ class DateDropdown extends BEMBlock {
       this.handleCalAttrsChanges.bind(this)
     );
     this.observer.observe(this.calendar, {attributes: true});
+    this.setListeners();
+    this.closeTrigger = true;
+    this.bindListeners();
+    this.handleCalAttrsChanges();
   }
 
   handleCalAttrsChanges() {
@@ -100,13 +101,16 @@ class DateDropdown extends BEMBlock {
 
   setHandleWindowClick() {
     this.handleWindowClick = () => {
-      this.elemsMap.calWrapper.classList.add(this.mods.calWrapperHidden);
+      if (this.closeTrigger) {
+        this.elemsMap.calWrapper.classList.add(this.mods.calWrapperHidden);
+      }
+      this.closeTrigger = true;
     };
   }
 
   setHandleRootClick() {
-    this.handleRootClick = (e) => {
-      e.stopPropagation();
+    this.handleRootClick = () => {
+      this.closeTrigger = false;
     };
   }
 

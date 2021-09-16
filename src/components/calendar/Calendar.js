@@ -108,8 +108,8 @@ class Calendar extends BEMBlock {
 
   validateDate({ date, startDate, endDate }) {
     const validDate = Calendar.checkDateIsInvalid(date) 
-      ? new Date().toISOString().slice(0, 10) :
-      date;
+      ? new Date().toISOString().slice(0, 10) 
+      : date;
     const validStartDate = new Date(startDate) - new Date(validDate) >= 0 
       ? startDate 
       : '';

@@ -5,20 +5,11 @@ import * as glossaries from './glossaries.js';
 class CardRoomDetails extends BEMBlock {
   constructor(root) {
     super(root);
-    this.setGlossary();
-    this.setElemsMap();
-    this.setMods();
-    this.setCalendar();
-    this.setObserver();
-    this.setFormater();
     this.init();
   }
 
-  setGlossary() {
-    this.glossary = Glossary.create('суток', glossaries);
-  }
-
-  setElemsMap() {
+  init() {
+    this.setGlossary();
     this.updateElemsMap([
       'room-number',
       'cost',
@@ -30,12 +21,23 @@ class CardRoomDetails extends BEMBlock {
       'service-sale',
       'service-additional-cost'
     ]);
+    this.setMods([
+      'card-room-details__room-number_deluxe'
+    ]);
+    this.setCalendar();
+    this.setObserver();
+    this.setFormater();
+    const initData = JSON.parse(sessionStorage.getItem('roomDetails') || '{}');
+    this.observer.observe(this.calendar, { attributes: true });
+    this.fillNumber(initData.roomNumber);
+    this.elemsMap.serviceCostPerDay.innerText = (this.fillCost(initData.cost));
+    this.processLuxury(initData.isLuxury);
+    this.updateServiceCost();
+    this.shortHandUpdate();
   }
 
-  setMods() {
-    this.mods = {
-      roomNumberDeluxe: 'card-room-details__room-number_deluxe',
-    };
+  setGlossary() {
+    this.glossary = Glossary.create('суток', glossaries);
   }
 
   setCalendar() {
@@ -52,16 +54,6 @@ class CardRoomDetails extends BEMBlock {
       currency: 'RUB',
       minimumFractionDigits: 0,
     });
-  }
-
-  init() {
-    const initData = JSON.parse(sessionStorage.getItem('roomDetails') || '{}');
-    this.observer.observe(this.calendar, { attributes: true });
-    this.fillNumber(initData.roomNumber);
-    this.elemsMap.serviceCostPerDay.innerText = (this.fillCost(initData.cost));
-    this.processLuxury(initData.isLuxury);
-    this.updateServiceCost();
-    this.shortHandUpdate();
   }
 
   shortHandUpdate() {

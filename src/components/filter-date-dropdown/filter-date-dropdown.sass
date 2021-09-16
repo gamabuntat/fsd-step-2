@@ -34,17 +34,19 @@
   &__expand-icon
     width: 44px
 
-  &__cal-container
-    position: relative
+  &__calendar
 
-  &__cal-wrapper
-    position: absolute
-    z-index: 10
+    &-container
+      position: relative
 
-    &_hidden
-      display: none
+    &-wrapper
+      position: absolute
+      z-index: 10
 
-    & > *
-      border-top-right-radius: 0
-      border-top-left-radius: 0
-      border-color: $color-additional-fg
+      &_hidden
+        display: none
+
+      & > *
+        border-top-right-radius: 0
+        border-top-left-radius: 0
+        border-color: $color-additional-fg
