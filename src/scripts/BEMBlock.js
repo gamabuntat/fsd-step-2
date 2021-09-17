@@ -22,10 +22,10 @@ class BEMBlock {
   setMods(mods) {
     this.mods = mods.reduce((mods, mode) => {
       mods[kebabToCamel(mode.replace(
-        /(^[^_]*)(_*)([^_]*)(_*)(.*$)/,
-        (...match) => match[5] 
-          ? `${match[3]}-${match[5]}`
-          : `${match[1]}-${match[3]}`
+        /^((.(?!(--|_)))*.)(--|_*)((.(?!(--|_)))*.)(--|_*)(.*$)/,
+        (...match) => match[9]
+          ? `${match[5]}-${match[9]}`
+          : `${match[1]}-${match[5]}`
       ))] = mode;
       return mods;
     }, {});

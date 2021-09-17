@@ -7,19 +7,26 @@ class MaskedTextField {
     this.amountPoints = 0;
     this.templateValue = '';
     this.inputValue = '';
+    this.setListeners();
     this.bindListeners();
   }
 
-  bindListeners() {
-    this.input.addEventListener('input', this.handleTextFieldInput.bind(this));
+  setListeners() {
+    this.setHandleTextFieldInput();
   }
 
-  handleTextFieldInput() {
-    const diff = this.getValueIndex() - this.index;
-    const lastSymb = this.input.value.slice(-1);
-    if (diff > 0) { this.processInput(lastSymb); }
-    if (diff < 0 && !(/\d/).test(lastSymb)) { this.removeLastCharacter(); }
-    this.index = this.getValueIndex();
+  bindListeners() {
+    this.input.addEventListener('input', this.handleTextFieldInput);
+  }
+
+  setHandleTextFieldInput() {
+    this.handleTextFieldInput = () => {
+      const diff = this.getValueIndex() - this.index;
+      const lastSymb = this.input.value.slice(-1);
+      if (diff > 0) { this.processInput(lastSymb); }
+      if (diff < 0 && !(/\d/).test(lastSymb)) { this.removeLastCharacter(); }
+      this.index = this.getValueIndex();
+    };
   }
 
   processInput(symb) {
@@ -155,6 +162,5 @@ class MaskedTextField {
   }
 }
 
-document.querySelectorAll('.js-text-field_masked')
-  .forEach((input) => new MaskedTextField(input));
+export default MaskedTextField;
 

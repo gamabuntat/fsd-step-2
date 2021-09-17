@@ -17,6 +17,20 @@
   outline: none
   cursor: pointer
 
+@mixin text-field-common-styles()
+  padding: 0
+  text-indent: 13px
+  width: min(320px, 100%)
+  height: 44px
+  color: $color-main-fg
+  border: 1px solid $color-unclaimed-fg
+  border-radius: 4px
+  outline: none
+  box-sizing: border-box
+
+  &:focus, &:hover
+    border: 1px solid $color-additional-fg
+
 @mixin card-common()
   display: flex
   justify-content: center
