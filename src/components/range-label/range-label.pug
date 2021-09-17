@@ -5,12 +5,12 @@ mixin range-label(o)
       'data-min': o.min || 0, 
       'data-max': o.max || 15000,
       'data-step': o.step || 1,
-      'data-formater-lang': o.formaterLang || 'ru',
+      'data-lang': o.lang || 'ru',
       'data-formater-opt': o.formaterOpt
     } 
 
-  .range-label&attributes(attrs)
-    span.range-label__start 0
+  .range-label.js-range-label&attributes(attrs)
+    span.range-label__start.js-range-label__start 0
     span.range-label__separator=o.sep || ' - '
-    span.range-label__end Inf
+    span.range-label__end.js-range-label__end Inf
 

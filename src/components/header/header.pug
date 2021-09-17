@@ -5,32 +5,32 @@ include /svg-expand-icon/svg-expand-icon
 include /bordered-button/bordered-button
 include /primary-button/primary-button
 
-mixin menu-item({text = 'Вакансии', href = 'change me', importatn})
-  li.header__menu-item
-    a.header__menu-link(
-      href=href
-      title=text
-      class=importatn && 'header__menu-link_important'
-    )= text
-
-mixin expandable-menu-item(params)
-  - 
-    const {
-      text = 'Услуги', 
-      href = Array(4).fill('change me'),
-      itemTexts = Array(4).fill('heawheahweh')
-    } = params
-
-  li.header__menu-expandable-item.js-header__menu-expandable-item
-    button.header__menu-button.js-header__menu-button(title=text)
-      span.header__menu-button-caption= text
-      .header__menu-button-icon
-        +svg-expand-icon()
-    ul.header__sub-menu
-      - for (let i = 0; i < Math.min(href.length, itemTexts.length); i++)
-        +menu-item({href: href[i], text: itemTexts[i]})
-
 mixin header(params) 
+  mixin menu-item({text = 'Вакансии', href = 'change me', isImportatn})
+    li.header__menu-item
+      a.header__menu-link(
+        href=href
+        title=text
+        class=isImportatn && 'header__menu-link_important'
+      )= text
+
+  mixin expandable-menu-item(params)
+    - 
+      const {
+        text = 'Услуги', 
+        href = Array(4).fill('change me'),
+        itemTexts = Array(4).fill('heawheahweh')
+      } = params
+
+    li.header__menu-expandable-item.js-header__menu-expandable-item
+      button.header__menu-button.js-header__menu-button(title=text)
+        span.header__menu-button-caption= text
+        .header__menu-button-icon
+          +svg-expand-icon()
+      ul.header__sub-menu
+        - for (let i = 0; i < Math.min(href.length, itemTexts.length); i++)
+          +menu-item({href: href[i], text: itemTexts[i]})
+
   - 
     const {
       content = [

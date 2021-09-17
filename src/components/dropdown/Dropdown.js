@@ -67,9 +67,9 @@ class Dropdown extends BEMBlock {
         {
           getValue: () => (
             splitedTerm.reduce((sum, splitedTerm) => (
-              +this.counters[this.sectionNames.indexOf(splitedTerm)]
-                .innerText
-              + sum
+              Number(
+                this.counters[this.sectionNames.indexOf(splitedTerm)].innerText
+              ) + sum
             ), 0)
           ),
           getName: () => (
@@ -203,7 +203,7 @@ class Dropdown extends BEMBlock {
 
   setCounterValues(values) {
     (values.match(/\d+/g) || []).forEach((v, idx) => (
-      this.clickOnButtonNthTimes(+v, this.increaseButtons[idx])
+      this.clickOnButtonNthTimes(Number(v), this.increaseButtons[idx])
     ));
   }
 
@@ -259,7 +259,7 @@ class Dropdown extends BEMBlock {
 
   update(button) {
     this.row = this.getRow(button);
-    this.value = +this.counters[this.row].innerText;
+    this.value = Number(this.counters[this.row].innerText);
   }
 }
 

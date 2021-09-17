@@ -1,30 +1,38 @@
-class RangeLable {
+import BEMBlock from '@scripts/BEMBlock.js';
+import calcDecimalPlaces from '@scripts/calcDecimalPlaces.js';
+
+class RangeLable extends BEMBlock {
   constructor(root) {
-    this.slider = document.getElementById(root.dataset.sliderId);
-    if (!this.slider) { return; }
-    this.start = root.querySelector('.range-label__start');
-    this.end = root.querySelector('.range-label__end');
+    super(root);
+    this.init();
+  }
+
+  init() {
+    const { sliderId, lang, formaterOpt, max, min, step } = this.root.dataset;
+    this.slider = document.getElementById(sliderId);
+    this.updateElemsMap([ 'start', 'end' ]);
     this.observer = new MutationObserver(
       this.handleSliderChangeAttrs.bind(this)
     );
     this.observer.observe(this.slider, { attributes: true });
     this.formater = new Intl.NumberFormat(
-      root.dataset.formaterLang, 
+      lang, 
       {
-        maximumFractionDigits: RangeLable.calcDecimalPlaces(+root.dataset.step),
+        maximumFractionDigits: calcDecimalPlaces(
+          Number(step)
+        ),
         minimumFractionDigits: 0,
-        ...root.dataset.formaterOpt 
-          ? JSON.parse(root.dataset.formaterOpt) 
+        ...formaterOpt 
+          ? JSON.parse(formaterOpt) 
           : {
             style: 'currency',
             currency: 'RUB',
           }
       }
     );
-    const data = root.dataset;
-    this.max = +data.max;
-    this.min = +data.min;
-    this.step = +data.step;
+    this.max = Number(max);
+    this.min = Number(min);
+    this.step = Number(step);
     this.handleSliderChangeAttrs();
   }
 
@@ -42,11 +50,11 @@ class RangeLable {
   }
 
   updateStartValue(value) {
-    this.start.innerText = value;
+    this.elemsMap.start.innerText = value;
   }
 
   updateEndValue(value) {
-    this.end.innerText = value;
+    this.elemsMap.end.innerText = value;
   }
 
   format(preValue) {
@@ -60,13 +68,7 @@ class RangeLable {
       * this.step + this.min
     );
   }
-
-  static calcDecimalPlaces(n) {
-    const sn = String(n);
-    const pointIndex = sn.indexOf('.');
-    return pointIndex === -1 ? 0 : sn.slice(pointIndex + 1).length;
-  }
 }
 
-document.querySelectorAll('.range-label').forEach((rl) => new RangeLable(rl));
+export default RangeLable;
 

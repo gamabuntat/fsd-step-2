@@ -59,29 +59,24 @@ class MaskedTextField {
     }
     if (
       this.inputValue.length == this.templateValue.length 
-      && +this.inputValue == 0
+      && Number(this.inputValue) == 0
     ) {
-      return this.setValue(
+      return this.setValue(`${
         this.prepValue.slice(0, this.prepValue.lastIndexOf(this.inputValue))
-        + this.inputValue.slice(0, -1)
-        + '1'
-      );
+      }${this.inputValue.slice(0, -1)}1`);
     }
-    if (+this.inputValue > +this.templateValue) {
-      return this.setValue(
+    if (Number(this.inputValue) > Number(this.templateValue)) {
+      return this.setValue(`${
         this.prepValue.slice(0, this.prepValue.lastIndexOf(this.inputValue))
-        + this.templateValue
-      );
+      }${this.templateValue}`);
     }
   }
 
   handlePoint() {
-    if (+this.inputValue > +this.templateValue) {
-      return this.setValue(
+    if (Number(this.inputValue) > Number(this.templateValue)) {
+      return this.setValue(`${
         this.prepValue.slice(0, -this.templateValue.length) 
-        + this.templateValue 
-        + '.'
-      );
+      }${this.templateValue}.`);
     }
     if (this.inputValue.length == 0 || this.templateValue.length == 4) {
       return this.setValue(this.prepValue);
@@ -102,7 +97,7 @@ class MaskedTextField {
       return this.setLastPoint();
     }
     if (this.templateValue.length == 4 && this.inputValue.length == 2) {
-      return +this.inputValue > 21
+      return Number(this.inputValue) > 21
         ? this.yearAutocomplete('19')
         : this.yearAutocomplete('20');
     }
@@ -110,7 +105,7 @@ class MaskedTextField {
   }
 
   setLastPoint() {
-    return this.setValue(this.prepValue + '.');
+    return this.setValue(`${this.prepValue}.`);
   }
 
   addZero() {

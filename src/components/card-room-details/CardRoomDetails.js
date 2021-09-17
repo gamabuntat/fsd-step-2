@@ -73,13 +73,13 @@ class CardRoomDetails extends BEMBlock {
   }
 
   updateTotalCost() {
-    this.elemsMap.totalCost.innerText = this.formate(
-      CardRoomDetails.unFormate(this.elemsMap.serviceCost.innerText) 
-      - CardRoomDetails.unFormate(this.elemsMap.serviceSale.innerText)
-      + +CardRoomDetails.unFormate(
+    this.elemsMap.totalCost.innerText = this.formate(String(
+      Number(CardRoomDetails.unFormate(this.elemsMap.serviceCost.innerText))
+      - Number(CardRoomDetails.unFormate(this.elemsMap.serviceSale.innerText))
+      + Number(CardRoomDetails.unFormate(
         this.elemsMap.serviceAdditionalCost.innerText
-      )
-    );
+      ))
+    ));
   }
 
   setDays() {

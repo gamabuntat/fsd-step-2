@@ -24,39 +24,50 @@ const template = (
     </defs> 
   </svg>`
 );
+
 const getTemplateElem = (template) => {
   const temp = document.createElement('div');
   temp.insertAdjacentHTML('afterbegin', template);
   return temp.firstChild;
 };
+
 const insertArc = (templateElem) => (arc) => {
   templateElem.insertAdjacentHTML('beforeend', arc);
   return templateElem;
 };
+
 const parseData = (root) => {
   const {amazing = 0, cool = 0, bad = 0, veryBad = 0} = root.dataset;
   return [+amazing, +cool, +bad, +veryBad];
 };
+
 const getNGaps = (rating) => rating.filter((r) => r).length;
+
 const getFullAngle = (gap) => (nGaps) => 360 - gap * nGaps;
+
 const getTotalMarks = (rating) => rating.reduce((s, r) => s + r);
+
 const getAngles = (totalMarks) => (fullAngle) => (rate) => (
   rate / totalMarks * fullAngle
 );
+
 const getStartAngle = (gap) => (_, idx, angles) => (
   angles.slice(0, idx)
     .filter((angle) => angle)
     .reduce((acc, angle) => acc + angle + gap, gap / 2)
 );
+
 const getClass = (idx) => (
   {0: 'amazing', 1: 'cool', 2: 'bad', 3: 'veryBad'}[idx]
 );
+
 const getPoint = (r) => (angle) => {
   const angleRad = (angle + 90) * Math.PI / 180;
   const x = r * Math.cos(angleRad) + r;
   const y = Math.abs(r * Math.sin(angleRad) - r);
   return x + ' ' + y;
 };
+
 const getArc = (gap) => (r) => (getStartAngle) => (getPoint) => 
   (angle, idx, angles) => (
     `<path 
@@ -71,11 +82,13 @@ const getArc = (gap) => (r) => (getStartAngle) => (getPoint) =>
       stroke-width="4"
      />`
   );
+
 const getCircle = (r) => (rating) => (
   `<circle cx=${r} cy=${r} r=${r} 
   stroke=url(#${getClass(rating.findIndex((r) => r))}) 
   stroke-width="4" fill="none"/>`
 );
+
 const insertSign = (totalMarks) => (templateElem) => (
   templateElem.insertAdjacentHTML(
     'beforeend', 
@@ -95,6 +108,7 @@ const insertSign = (totalMarks) => (templateElem) => (
     </text>`
   ), templateElem
 );
+
 const main = (gap) => (r) => (root) => (rating) => (totalMarks) => ( 
   root.insertAdjacentElement(
     'beforeend', 
@@ -115,13 +129,15 @@ const main = (gap) => (r) => (root) => (rating) => (totalMarks) => (
     )
   )
 );
+
 const bind = (main) => (a) => (fn) => {
   const newA = fn(a);
   return bind(main(newA)) (newA);
 };
-const init = (root) => (
-  bind (main(4)(60)(root)) (root) (parseData) (getTotalMarks)
+
+const init = (root, gap = 4, r = 60) => (
+  bind (main(gap)(r)(root)) (root) (parseData) (getTotalMarks)
 );
-document.querySelectorAll('.js-impressions__circle-container')
-  .forEach((c) => init(c));
+
+export { init };
 
