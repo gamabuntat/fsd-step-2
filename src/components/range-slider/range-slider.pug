@@ -1,0 +1,9 @@
+mixin range-slider({hsp = 0.333, hep = 0.666, id})
+  .range-slider.js-range-slider(id=id data-hsp=hsp data-hep=hep)
+    .range-slider__container.js-range-slider__container
+      button.range-slider__handle--start.js-range-slider__handle--start(tabindex='-1')
+      button.range-slider__handle--end.js-range-slider__handle--end(tabindex='-1')
+      .range-slider__track
+        .range-slider__progress-bar--start.js-range-slider__progress-bar--start
+        .range-slider__progress-bar--end.js-range-slider__progress-bar--end
+

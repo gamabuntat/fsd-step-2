@@ -3,7 +3,7 @@
 $button-size: 16px
 $track-height: 6px
 
-.rs
+.range-slider
   position: relative
   display: flex
   align-items: center
@@ -44,7 +44,7 @@ $track-height: 6px
     touch-action: none
 
     &--start, &--end
-      @extend .rs__handle
+      @extend .range-slider__handle
 
     &--start
       transform: translateX(-$button-size)
@@ -65,5 +65,5 @@ $track-height: 6px
     box-sizing: border-box
 
     &--start, &--end
-      @extend .rs__progress-bar
+      @extend .range-slider__progress-bar
 

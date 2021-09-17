@@ -1,4 +1,4 @@
-const pipe = (...fns) => fns.reduceRight((a, b) => (...args) => a(b(...args)));
+import pipe from '@scripts/pipe.js';
 
 class ProgressBar {
   constructor(progressBar) {
@@ -58,7 +58,7 @@ class HandleEnd extends Handle {
   }
 }
 
-class Rs {
+class RangeSlider {
   constructor(root) {
     this.rs = root;
     this.container = root.querySelector('.js-rs__container');
@@ -123,7 +123,7 @@ class Rs {
   }
 
   handleHandlePointerdown(e) {
-    Rs.bindPointer(e.target, e.pointerId);
+    this.bindPointer(e.target, e.pointerId);
     this.shift = e.x - e.target.getBoundingClientRect().x;
     this.trigger = true;
   }
@@ -182,11 +182,10 @@ class Rs {
     );
   }
 
-  static bindPointer(handle, pointerId) {
+  bindPointer(handle, pointerId) {
     handle.setPointerCapture(pointerId);
   }
 }
 
-document.querySelectorAll('.js-rs')
-  .forEach((rs) => new Rs(rs));
+export { RangeSlider };
 
