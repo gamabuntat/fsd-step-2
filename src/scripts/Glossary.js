@@ -47,7 +47,7 @@ class Glossary {
   }
 
   static getLastDigits(number, endCount = 1) {
-    return +String(number).slice(-endCount);
+    return Number(String(number).slice(-endCount));
   }
 
   static create(searchTerms, glossaries) {

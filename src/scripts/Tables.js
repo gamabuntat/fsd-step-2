@@ -130,7 +130,7 @@ class Tables {
   }
 
   static makeNumerical(coord) {
-    return +coord.reduce((res, dimension) => res + dimension, '');
+    return Number(coord.reduce((res, dimension) => `${res}${dimension}`, ''));
   }
 }
 
