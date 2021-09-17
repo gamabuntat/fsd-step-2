@@ -11,8 +11,8 @@ class ProgressBar {
 }
 
 class ProgressBarEnd extends ProgressBar {
-  constructor(root) {
-    super(root.querySelector('.js-rs__progress-bar--end'));
+  constructor(progressBar) {
+    super(progressBar);
   }
 
   resize(position) {
@@ -38,9 +38,8 @@ class Handle {
 }
 
 class HandleStart extends Handle {
-  constructor(root) {
-    const handleStart = root.querySelector('.js-rs__handle--start');
-    super(handleStart, parseInt(getComputedStyle(handleStart).width));
+  constructor(handle) {
+    super(handle, parseInt(getComputedStyle(handle).width));
   }
 
   updateExtremum(position) {
@@ -49,8 +48,8 @@ class HandleStart extends Handle {
 }
 
 class HandleEnd extends Handle {
-  constructor(root) {
-    super(root.querySelector('.js-rs__handle--end'), 0);
+  constructor(handle) {
+    super(handle, 0);
   }
 
   updateExtremum(position) {
@@ -60,50 +59,59 @@ class HandleEnd extends Handle {
 
 class RangeSlider {
   constructor(root) {
-    this.rs = root;
-    this.container = root.querySelector('.js-rs__container');
-    this.handleStart = new HandleStart(root);
-    this.handleEnd = new HandleEnd(root);
-    this.progressBarStart = new ProgressBar(
-      root.querySelector('.js-rs__progress-bar--start')
-    );
-    this.progressBarEnd = new ProgressBarEnd(root);
-    this.dataAttrStart = 'hsp';
-    this.dataAttrEnd = 'hep';
-    this.trigger = false;
-    this.shift = 0;
-    this.bindListeners();
+    this.root = root;
     this.init();
   }
 
   init() {
+    this.container = this.root.querySelector('.js-range-slider__container');
+    this.handleStart = new HandleStart(
+      this.root.querySelector('.js-range-slider__handle--start')
+    );
+    this.handleEnd = new HandleEnd(
+      this.root.querySelector('.js-range-slider__handle--end')
+    );
+    this.progressBarStart = new ProgressBar(
+      this.root.querySelector('.js-range-slider__progress-bar--start')
+    );
+    this.progressBarEnd = new ProgressBarEnd(
+      this.root.querySelector('.js-range-slider__progress-bar--end')
+    );
+    this.dataAttrStart = 'hsp';
+    this.dataAttrEnd = 'hep';
+    this.trigger = false;
+    this.shift = 0;
+    this.setListeners();
+    this.bindListeners();
     this.makeMoveThenResizeThenUpdateFunc(
       this.handleStart,
       this.progressBarStart,
       this.dataAttrStart,
       this.handleEnd
-    )(+this.rs.dataset.hsp);
+    )(Number(this.root.dataset.hsp));
     this.makeMoveThenResizeThenUpdateFunc(
       this.handleEnd,
       this.progressBarEnd,
       this.dataAttrEnd,
       this.handleStart
-    )(+this.rs.dataset.hep);
+    )(Number(this.root.dataset.hep));
+  }
+
+  setListeners() {
+    this.setHandleHandlePointerdown();
+    this.setHandleHandleLostpointercapture();
   }
 
   bindListeners() {
     [this.handleStart, this.handleEnd].forEach((h) => ( 
+      h.handle.addEventListener('pointerdown', this.handleHandlePointerdown),
       h.handle.addEventListener(
-        'pointerdown', (e) => this.handleHandlePointerdown(e)
-      ),
-      h.handle.addEventListener(
-        'lostpointercapture', () => this.handleHandleLostpointercapture()
+        'lostpointercapture', this.handleHandleLostpointercapture
       )
     ));
     this.handleStart.handle.addEventListener(
       'pointermove',
-      this.handleHandlePointermove.bind(
-        this,
+      this.handleHandleStartPointermove = this.makeHandleHandlePointermove(
         this.handleStart,
         this.handleEnd,
         this.progressBarStart,
@@ -112,8 +120,7 @@ class RangeSlider {
     );
     this.handleEnd.handle.addEventListener(
       'pointermove',
-      this.handleHandlePointermove.bind(
-        this,
+      this.handleHandleEndPointermove = this.makeHandleHandlePointermove(
         this.handleEnd,
         this.handleStart,
         this.progressBarEnd,
@@ -122,29 +129,34 @@ class RangeSlider {
     );
   }
 
-  handleHandlePointerdown(e) {
-    this.bindPointer(e.target, e.pointerId);
-    this.shift = e.x - e.target.getBoundingClientRect().x;
-    this.trigger = true;
+  setHandleHandlePointerdown() {
+    this.handleHandlePointerdown = (e) => {
+      this.bindPointer(e.target, e.pointerId);
+      this.shift = e.x - e.target.getBoundingClientRect().x;
+      this.trigger = true;
+    };
   }
 
-  handleHandleLostpointercapture() {
-    this.trigger = false;
+  setHandleHandleLostpointercapture() {
+    this.handleHandleLostpointercapture = () => {
+      this.trigger = false;
+    };
   }
 
-  handleHandlePointermove(
+  makeHandleHandlePointermove(
     handle,
     anotherHandle,
     progressBar,
     dataAttr,
-    e
   ) {
-    if (!this.trigger) { return; }
-    this.makeMoveThenResizeThenUpdateFunc(
-      handle, progressBar, dataAttr, anotherHandle
-    )(
-      this.calcPosition(handle, e)
-    );
+    return (e) => {
+      if (!this.trigger) { return; }
+      this.makeMoveThenResizeThenUpdateFunc(
+        handle, progressBar, dataAttr, anotherHandle
+      )(
+        this.calcPosition(handle, e)
+      );
+    };
   }
 
   makeMoveThenResizeThenUpdateFunc(
@@ -163,7 +175,7 @@ class RangeSlider {
         return position;
       },
       (position) => {
-        this.rs.dataset[dataAttr] = position;
+        this.root.dataset[dataAttr] = position;
         return position;
       },
       (position) => anotherHandle.updateExtremum(position)
