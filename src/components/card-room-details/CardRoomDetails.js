@@ -96,7 +96,7 @@ class CardRoomDetails extends BEMBlock {
   updateServiceDaysDeath() {
     this.elemsMap.serviceDaysDeath.innerText = this.glossary.getDefinition(
       'суток',
-      +this.elemsMap.serviceNDays.innerText
+      Number(this.elemsMap.serviceNDays.innerText)
     );
   }
 

@@ -49,7 +49,7 @@ class Calendar extends BEMBlock {
       || (this.root.dataset.hash = this.defaultHash);
     this.initDates = this.getInitDates();
     this.setDataset();
-    const now = new Date(this.initDates.date);
+    const now = new Date(this.initDates.date || Date());
     this.year = now.getFullYear();
     this.month = now.getMonth();
     this.modifyTodaysBtn(now);
@@ -100,7 +100,7 @@ class Calendar extends BEMBlock {
       ? data 
       : JSON.parse(sessionStorage.getItem(this.hash));
     return this.validateDate({
-      date: source?.date,
+      date: source?.date || '',
       startDate: source?.startDate,
       endDate: source?.endDate
     });
@@ -118,9 +118,9 @@ class Calendar extends BEMBlock {
       ? endDate 
       : '';
     return {
-      date: validDate,
       startDate: validStartDate,
-      endDate: validEndDate 
+      endDate: validEndDate,
+      date
     };
   }
 
