@@ -4,22 +4,22 @@ append vars
   include /impressions/impressions
 
   - 
-    const title = 'Room details'
+    const title = "Room details"
 
 block main
   main.rd-main
     .rd-gallery
       img.rd-gallery__master-room(
-        src=require('./img/rd-1.webp')
-        alt='master bedroom'
+        src=require("./img/rd-1.webp")
+        alt="master bedroom"
       )
       img.rd-gallery__secondary-room.rd-gallery__secondary-room_reflected(
-        src=require('./img/rd-2.webp')
-        alt='secondary room'
+        src=require("./img/rd-2.webp")
+        alt="secondary room"
       )
       img.rd-gallery__secondary-room(
-        src=require('./img/rd-3.webp')
-        alt='secondary room'
+        src=require("./img/rd-3.webp")
+        alt="secondary room"
       )
     
     article.rd-content
@@ -27,8 +27,8 @@ block main
         .rd-about-room
           h2.rd-title Сведения о номере
           +about-room()
-          +about-room('convenience')
-          +about-room('coziness', true)
+          +about-room("convenience")
+          +about-room("coziness", true)
 
         section.rd-impressions
           h2.rd-title Впечатления от номера
@@ -39,11 +39,11 @@ block main
           span.rd-comments__counter 2 отзыва
           +comment({})
           +comment({
-            avatar: 'avatar-2.webp',
-            name: 'Патрисия Стёклышкова',
-            lastVisited: 'Неделю назад',
+            avatar: "avatar-2.webp",
+            name: "Патрисия Стёклышкова",
+            lastVisited: "Неделю назад",
             likeParams: {value: 2, pressed: false},
-            text: 'Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент'
+            text: "Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент"
           })
 
         section.rd-rules

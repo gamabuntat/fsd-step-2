@@ -11,12 +11,12 @@ mixin footer(params)
       lists = [
         {},
         {
-          title: 'о нас',
-          items: ['О сервисе', 'Наша команда', 'Вакансии', 'Инвесторы']
+          title: "о нас",
+          items: ["О сервисе", "Наша команда", "Вакансии", "Инвесторы"]
         },
         {
-          title: 'Служба поддержки',
-          items: ['Соглашения', 'Сообщества', 'Связь с нами']
+          title: "Служба поддержки",
+          items: ["Соглашения", "Сообщества", "Связь с нами"]
         },
       ] 
     } = params
@@ -24,9 +24,9 @@ mixin footer(params)
   mixin list(params)
     - 
       const {
-        title = 'навигация',
-        items = ['о нас', 'новости', 'служба поддержки', 'услуги'],
-        href = Array(4).fill('change me')
+        title = "навигация",
+        items = ["о нас", "новости", "служба поддержки", "услуги"],
+        href = Array(4).fill("change me")
       } = params
 
     ul.footer__list
@@ -36,14 +36,14 @@ mixin footer(params)
       - for (let i = 0; i < items.length; i++)
         li.footer__list-item
           a.footer__list-link(
-            href=href[i] || 'change me'
+            href=href[i] || "change me"
             title=items[i]
           )= items[i].slice(0, 1).toUpperCase() + items[i].slice(1)
 
   footer.footer
     .footer__container
       .footer__sub-container
-        a(href='landing.html' title='home page').footer__logo 
+        a(href="landing.html" title="home page").footer__logo 
           +svg-logo()
           +svg-toxin()
         p.footer__hype
@@ -52,13 +52,13 @@ mixin footer(params)
       each l in lists
         +list(l)
 
-      form.footer__subscription(action='change me')
+      form.footer__subscription(action="change me")
         h3.footer__subscription-title Подписка
         p.footer__subscription-caption
           | Получайте специальные предложения и новости сервиса
         +subscription-text-field(
-          {placeholder: 'Email', type: 'email', required: true},
-          {type: 'submit'}
+          {placeholder: "Email", type: "email", required: true},
+          {type: "submit"}
         )
 
     .footer__copyrating
@@ -66,10 +66,10 @@ mixin footer(params)
         .footer__copyrating-caption
           | Copyright © 2018 Toxin отель. Все права зачищены.
         .footer__social
-          a.footer__twitter(href='https://twitter.com' title='twitter')
+          a.footer__twitter(href="https://twitter.com" title="twitter")
             +svg-twitter()
-          a.footer__facebook(href='https://facebook.com' title='facebook')
+          a.footer__facebook(href="https://facebook.com" title="facebook")
             +svg-facebook()
-          a.footer__instagram(href='https://instagram.com' title='instagram')
+          a.footer__instagram(href="https://instagram.com" title="instagram")
             +svg-instagram()
 

@@ -6,20 +6,20 @@ include /bordered-button/bordered-button
 include /primary-button/primary-button
 
 mixin header(params) 
-  mixin menu-item({text = 'Вакансии', href = 'change me', isImportatn})
+  mixin menu-item({text = "Вакансии", href = "change me", isImportatn})
     li.header__menu-item
       a.header__menu-link(
         href=href
         title=text
-        class=isImportatn && 'header__menu-link_important'
+        class=isImportatn && "header__menu-link_important"
       )= text
 
   mixin expandable-menu-item(params)
     - 
       const {
-        text = 'Услуги', 
-        href = Array(4).fill('change me'),
-        itemTexts = Array(4).fill('heawheahweh')
+        text = "Услуги", 
+        href = Array(4).fill("change me"),
+        itemTexts = Array(4).fill("heawheahweh")
       } = params
 
     li.header__menu-expandable-item.js-header__menu-expandable-item
@@ -35,51 +35,51 @@ mixin header(params)
     const {
       content = [
         {
-          text: 'О нас',
+          text: "О нас",
           importatn: true,
         },
         {
-          type: 'expandableItem',
+          type: "expandableItem",
         },
         {},
         {
-          text: 'Новости',
+          text: "Новости",
         },
         {
-          type: 'expandableItem',
-          text: 'Соглашения',
-          itemTexts: Array(4).fill('hieh')
+          type: "expandableItem",
+          text: "Соглашения",
+          itemTexts: Array(4).fill("hieh")
         }
       ],
       authorized = false,
-      userName = 'Юлий Цезарь',
+      userName = "Юлий Цезарь",
     } = params
 
-  header.header.js-header(class=authorized && 'header_for-authorized-user')
+  header.header.js-header(class=authorized && "header_for-authorized-user")
     .header__container 
-      button.header__burger.js-header__burger(aria-label='toggle navigation')
+      button.header__burger.js-header__burger(aria-label="toggle navigation")
         +svg-burger()
 
-      a.header__logo(href='landing.html' title='toxin home page')
+      a.header__logo(href="landing.html" title="toxin home page")
         .header__main-logo
           +svg-logo()
         .header__toxin
           +svg-toxin()
 
-      ul.header__menu(aria-label='navigation')
+      ul.header__menu(aria-label="navigation")
         each i in content
-          if i.type === 'expandableItem'
+          if i.type === "expandableItem"
             +expandable-menu-item(i)
           else
             +menu-item(i)
 
-      form.header__sign-in-button(action='sign-in.html')
-        +bordered-button({text: 'войти', attrs: {type: 'submit'}})
+      form.header__sign-in-button(action="sign-in.html")
+        +bordered-button({text: "войти", attrs: {type: "submit"}})
 
-      form.header__reg-button(action='registration.html')
-        +primary-button({text: 'зарегистрироваться', attrs: {type: 'submit'}})
+      form.header__reg-button(action="registration.html")
+        +primary-button({text: "зарегистрироваться", attrs: {type: "submit"}})
 
       span.header__separator
 
-      a.header__user-name(href='change me' title='личный кабинет')= userName
+      a.header__user-name(href="change me" title="личный кабинет")= userName
 

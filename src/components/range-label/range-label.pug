@@ -1,16 +1,26 @@
-mixin range-label(o)
+mixin range-label(options)
   - 
+    const {
+      sliderID,
+      min = 0,
+      max = 15000,
+      step = 1,
+      lang = "ru",
+      sep = " - ",
+      formaterOpt,
+    } = options
+
     const attrs = {
-      'data-slider-id': o.sliderID,
-      'data-min': o.min || 0, 
-      'data-max': o.max || 15000,
-      'data-step': o.step || 1,
-      'data-lang': o.lang || 'ru',
-      'data-formater-opt': o.formaterOpt
-    } 
+      "data-slider-id": sliderID,
+      "data-min": min, 
+      "data-max": max,
+      "data-step": step,
+      "data-lang": lang,
+      "data-formater-opt": formaterOpt
+    }
 
   .range-label.js-range-label&attributes(attrs)
     span.range-label__start.js-range-label__start 0
-    span.range-label__separator=o.sep || ' - '
+    span.range-label__separator= sep
     span.range-label__end.js-range-label__end Inf
 

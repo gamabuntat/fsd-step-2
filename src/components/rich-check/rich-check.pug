@@ -3,13 +3,13 @@ include ../svg-check-box/svg-check-box
 mixin rich-check(params)
   - 
     const {
-      title = 'Помощник для инвалидов',
-      text = 'На 1 этаже вас встретит специалист  и проводит до номера.',
+      title = "Помощник для инвалидов",
+      text = "На 1 этаже вас встретит специалист  и проводит до номера.",
       attrs
     } = params
 
   label.rich-check
-    input.rich-check__input&attributes({...attrs, type: 'checkbox'})
+    input.rich-check__input&attributes({...attrs, type: "checkbox"})
     span.rich-check__box
       +svg-check-box()
     span.rich-check__title #{title}

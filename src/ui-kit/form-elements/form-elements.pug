@@ -2,19 +2,19 @@ extends ../../layout/layout
 
 append vars
   -
-    const title = 'Form Elements'
+    const title = "Form Elements"
     isUikit = true
 
     const narrowDropdownParams = {
       narrow: true,
-      sectionNames: ['спальни', 'кровати','ванные комнаты'],
-      glossary: 'спальни, кровати, ванные комнаты',
-      defaultSignature: 'Выберите удобства',
-      counterValues: '2 2 0',
+      sectionNames: ["спальни", "кровати","ванные комнаты"],
+      glossary: "спальни, кровати, ванные комнаты",
+      defaultSignature: "Выберите удобства",
+      counterValues: "2 2 0",
     }
 
-  mixin fe-title(title = '', subTitle, isNarrow)
-    .fe-title(class=isNarrow && 'fe-title_narrow')
+  mixin fe-title(title = "", subTitle, isNarrow)
+    .fe-title(class=isNarrow && "fe-title_narrow")
       span.fe-title__topheading #{title}
       if subTitle
         span.fe-title__subtitle #{subTitle}
@@ -23,69 +23,69 @@ append main
   main.fe-main
     article.group.group_huppa
       .fe-container
-        +fe-title('text field', 'default')
-        +text-field({type: 'email', placeholder: 'Email'})
+        +fe-title("text field", "default")
+        +text-field({type: "email", placeholder: "Email"})
       .fe-container
-        +fe-title('text field', 'hover/focus')
-        +text-field({value: 'This is pretty awesome', autofocus: true})
+        +fe-title("text field", "hover/focus")
+        +text-field({value: "This is pretty awesome", autofocus: true})
       .fe-container
-        +fe-title('dropdown')
-        +dropdown({counterValues: '0 0 0'})
+        +fe-title("dropdown")
+        +dropdown({counterValues: "0 0 0"})
       .fe-container
-        +fe-title('masked text field')
+        +fe-title("masked text field")
         +masked-text-field
       .fe-container
-        +fe-title('date dropdown')
-        +date-dropdown({endMask: '19.08.2019', calAttrs: {hash: 'fecal1'}})
+        +fe-title("date dropdown")
+        +date-dropdown({endMask: "19.08.2019", calAttrs: {hash: "fecal1"}})
       .fe-container
-        +fe-title('filter date dropdown')
+        +fe-title("filter date dropdown")
         +filter-date-dropdown({
           calAttrs: {
-            hash: 'fecal2',
-            initDate: '2020',
-            startDate: '2020-08-19',
-            endDate: '2020-08-23'
+            hash: "fecal2",
+            initDate: "2020",
+            startDate: "2020-08-19",
+            endDate: "2020-08-23"
           }
         })
       .fe-container
-        +fe-title('subscription text field')
-        +subscription-text-field({placeholder: 'Email'})
+        +fe-title("subscription text field")
+        +subscription-text-field({placeholder: "Email"})
 
     article.group
       .fe-container
-        +fe-title('checkbox buttons')
+        +fe-title("checkbox buttons")
         .fe-container.fe-container_small-indent
-          +check({text: 'Можно курить'})
-          +check({text: 'Можно с питомцами', attrs: {checked: true}})
+          +check({text: "Можно курить"})
+          +check({text: "Можно с питомцами", attrs: {checked: true}})
           +check({attrs: {checked: true}})
       .fe-container
-        +fe-title('radio buttons')
+        +fe-title("radio buttons")
         .fe-container.fe-container_large-indent.fe-container_horizontal
-          +radio({attrs: {name: 'sex', checked: true}, text: 'Мужчина'})
-          +radio({attrs: {name: 'sex'}, text: 'Женщина'})
+          +radio({attrs: {name: "sex", checked: true}, text: "Мужчина"})
+          +radio({attrs: {name: "sex"}, text: "Женщина"})
       .fe-container
-        +fe-title('toggle')
+        +fe-title("toggle")
         .fe-container.fe-container_small-indent
           +toggle({attrs: {checked: true}})
           +toggle({})
       .fe-container
-        +fe-title('like button')
+        +fe-title("like button")
         .fe-container.fe-container_small-indent.fe-container_horizontal
           +like({value: 2})
           +like({value: 12, pressed: true})
       .fe-container
-        +fe-title('rate button')
+        +fe-title("rate button")
         .fe-container.fe-container_large-indent.fe-container_horizontal
           +rate({checked: 4})
           +rate({checked: 5})
 
     article.group
       .fe-slider-container
-        +fe-title('range slider')
-        +range-label({sliderID: 'feslider', step: 100})
-        +range-slider({id: 'feslider'})
+        +fe-title("range slider")
+        +range-label({sliderID: "feslider", step: 100})
+        +range-slider({id: "feslider"})
       .fe-container
-        +fe-title('buttons')
+        +fe-title("buttons")
         .fe-button-container
           .fe-button
             +primary-button()
@@ -101,27 +101,27 @@ append main
           .fe-big-button
             +big-button()
       .fe-container
-        +fe-title('pagination')
+        +fe-title("pagination")
         .fe-pagination
           +pagination()
 
     article.group.group_huppa
       .fe-container
-        +fe-title('dropdown', 'default', true)
+        +fe-title("dropdown", "default", true)
         +dropdown(narrowDropdownParams) 
       .fe-container
-        +fe-title('dropdown', 'expanded', true)
+        +fe-title("dropdown", "expanded", true)
         +dropdown({...narrowDropdownParams, isOpen: true}) 
 
     article.group.group_huppa
       .fe-container
-        +fe-title('dropdown')
-        +dropdown({isOpen: true, counterValues: '0 0 0'})
+        +fe-title("dropdown")
+        +dropdown({isOpen: true, counterValues: "0 0 0"})
 
     article.group.group_huppa
       .fe-container
-        +fe-title('dropdown')
-        +dropdown({isOpen: true, counterValues: '2 1 0'})
+        +fe-title("dropdown")
+        +dropdown({isOpen: true, counterValues: "2 1 0"})
 
     article.group
       .fe-container
@@ -129,38 +129,38 @@ append main
           +check-list({})
           +check-list({
             checkParams: [
-              {text: 'завтрак'},
-              {text: 'письменный стол', attrs: {checked: true}},
-              {text: 'Стул для кормления', attrs: {checked: true}},
-              {text: 'Кроватка', attrs: {checked: true}},
-              {text: 'Телевизор'},
-              {text: 'Шампунь'},
+              {text: "завтрак"},
+              {text: "письменный стол", attrs: {checked: true}},
+              {text: "Стул для кормления", attrs: {checked: true}},
+              {text: "Кроватка", attrs: {checked: true}},
+              {text: "Телевизор"},
+              {text: "Шампунь"},
             ],
-            label: 'expandable checkbox list',
+            label: "expandable checkbox list",
             isOpen: true,
           })
 
     article.group
       .fe-container.fe-container_small-indent
-        +fe-title('rich Checkbox Buttons')
+        +fe-title("rich Checkbox Buttons")
         +rich-check({
-          title: 'Широкий коридор',
-          text: 'Ширина коридоров в номере не менее 91 см.'
+          title: "Широкий коридор",
+          text: "Ширина коридоров в номере не менее 91 см."
         })
         +rich-check({
-          title: 'Помощник для инвалидов',
-          text: 'На 1 этаже вас встретит специалист и проводит до номера.'
+          title: "Помощник для инвалидов",
+          text: "На 1 этаже вас встретит специалист и проводит до номера."
         })
 
     article.group
       .fe-container
-        +fe-title('bullet list')
+        +fe-title("bullet list")
         +bullet-list({})
 
     article.group
       .fe-container.fe-container_large-indent
-        +about-room('comfort')
-        +about-room('convenience')
+        +about-room("comfort")
+        +about-room("convenience")
 
     article.group
       +comment({})

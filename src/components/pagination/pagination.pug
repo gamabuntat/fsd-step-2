@@ -5,7 +5,7 @@ mixin pagination({current = 1, last = 15} = {})
     - for (let i = current; i < current + 3; i++)
       a.pagination__item(
         href="change me"
-        class= i === current && 'pagination__item_active'
+        class= i === current && "pagination__item_active"
       ) #{i}
     | ...
     a(href="change me").pagination__item #{last}

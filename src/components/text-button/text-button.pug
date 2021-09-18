@@ -1,8 +1,8 @@
-mixin text-button({text = 'click me', attrs, isFocused = false} = {})
-  - const focusedMod = 'text-button_focused'
+mixin text-button({text = "click me", attrs, isFocused = false} = {})
+  - const focusedMod = "text-button_focused"
   
   button.text-button&attributes(
-    Object.assign({type: 'button'}, attrs)
+    Object.assign({type: "button"}, attrs)
   )(
     class=isFocused && focusedMod
   )= text

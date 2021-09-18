@@ -1,9 +1,9 @@
-include ../svg-check-box/svg-check-box
+include /svg-check-box/svg-check-box
 
-mixin check({attrs, text = 'Можно пригласить гостей (до 10 человек)'})
+mixin check({attrs, text = "Можно пригласить гостей (до 10 человек)"})
   .check
     label.check__label
-      input.check__input&attributes(attrs)(type='checkbox')
+      input.check__input&attributes(attrs)(type="checkbox")
       .check__box
         +svg-check-box()
       span.check__sign #{text[0].toUpperCase() + text.slice(1)}

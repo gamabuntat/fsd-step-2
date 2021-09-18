@@ -7,7 +7,7 @@ include /bordered-button/bordered-button
 mixin card-reg(params)
   -
     const {
-      formAttrs = { action: 'fill me please' },
+      formAttrs = { action: "fill me please" },
       bigButtonAttrs = {},
       buttonAttrs = {}
     } = params
@@ -17,14 +17,14 @@ mixin card-reg(params)
       h1.card-reg__title Регистрация аккаунта
 
       .card-reg__container.card-reg__container_with-small-gap
-        +text-field({placeholder: 'Имя'})
-        +text-field({placeholder: 'Фамилия'})
+        +text-field({placeholder: "Имя"})
+        +text-field({placeholder: "Фамилия"})
         .card-reg__container.card-reg__container_vertical
           +radio({
-            attrs: {name: 'sex', checked: true, value: 'female'},
-            text: 'Женщина'
+            attrs: {name: "sex", checked: true, value: "female"},
+            text: "Женщина"
           })
-          +radio({attrs: {name: 'sex', value: 'male'}, text: 'Мужчина'})
+          +radio({attrs: {name: "sex", value: "male"}, text: "Мужчина"})
 
       .card-reg__masked-text-field
         span.card-reg__sub-title дата рождения
@@ -34,17 +34,17 @@ mixin card-reg(params)
         .card-reg__container.card-reg__container_with-small-gap
           .card-reg__email-container
             .card-reg__sub-title данные для входа в сервис
-            +text-field({placeholder: 'Email', type: 'email'})
-          +text-field({placeholder: 'Пароль', type: 'password'})
+            +text-field({placeholder: "Email", type: "email"})
+          +text-field({placeholder: "Пароль", type: "password"})
           +toggle({})
         .card-reg__big-button
-          +big-button({ attrs: { type: 'submit', ...bigButtonAttrs } })
+          +big-button({ attrs: { type: "submit", ...bigButtonAttrs } })
 
       .card-reg__container.card-reg__container_vertical
         span.card-reg__acc-caption Уже есть аккаунт на Toxin
         .card-reg__button
-          +bordered-button({text: 'войти', attrs: {
-            type: 'button',
+          +bordered-button({text: "войти", attrs: {
+            type: "button",
             ...buttonAttrs
           }})
 

@@ -1,27 +1,27 @@
-include ../svg-expand-icon/svg-expand-icon
-include ../text-button/text-button
+include /svg-expand-icon/svg-expand-icon
+include /text-button/text-button
 
 mixin dropdown(params)
   - 
     const {
-      sectionNames = ['взрослые', 'дети', 'младенцы'],
-      defaultSignature = 'Сколько гостей',
+      sectionNames = ["взрослые", "дети", "младенцы"],
+      defaultSignature = "Сколько гостей",
       narrow,
       hash,
       counterValues,
     } = params
 
     const attrs = {
-      class: narrow && 'dropdown_narrow',
-      'data-glossary': params.glossary || 'взрослые+дети, младенцы',
-      'data-counter-values': counterValues,
-      'data-hash': hash,
-      'data-open': params.isOpen
+      class: narrow && "dropdown_narrow",
+      "data-glossary": params.glossary || "взрослые+дети, младенцы",
+      "data-counter-values": counterValues,
+      "data-hash": hash,
+      "data-open": params.isOpen
     }
 
   .dropdown.js-dropdown&attributes(attrs)
     button.dropdown__expand-button.js-dropdown__expand-button&attributes({
-      type: 'button',
+      type: "button",
       ...params.expandButtonAttrs
     })
       span.dropdown__signature.js-dropdown__signature 
@@ -33,20 +33,20 @@ mixin dropdown(params)
         li.dropdown__list-section
           .dropdown__section-name.js-dropdown__section-name #{name}
           button.dropdown__decrease-button.js-dropdown__decrease-button.dropdown__decrease-button_disabled&attributes({
-            type: 'button',
+            type: "button",
             ...params.decreaseButtonAttrs
           })(
-            tabindex='-1'
+            tabindex="-1"
           ) -
           .dropdown__counter.js-dropdown__counter 0
           button.dropdown__increase-button.js-dropdown__increase-button&attributes({
-          type: 'button',
+          type: "button",
           ...params.increaseButtonAttrs
           }) +
       unless narrow
         li.dropdown__control-buttons-container
           .dropdown__apply-button.js-dropdown__apply-button
-            +text-button({text: 'применить'})
+            +text-button({text: "применить"})
           .dropdown__cancel-button.js-dropdown__cancel-button.dropdown__cancel-button_hidden
-            +text-button({text: 'очистить'})
+            +text-button({text: "очистить"})
 

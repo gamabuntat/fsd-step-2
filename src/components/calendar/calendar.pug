@@ -1,28 +1,28 @@
-include ../svg-forward-arrow/svg-forward-arrow
-include ../text-button/text-button
+include /svg-forward-arrow/svg-forward-arrow
+include /text-button/text-button
 
 mixin calendar({initDate, startDate, endDate, hash, narrow})
   - 
     const rootAttrs = {
-      'data-date': initDate,
-      'data-start-date': startDate,
-      'data-end-date': endDate,
-      'data-date-is-ready': !!(startDate && endDate),
-      'data-hash': hash,
-      class: narrow && 'calendar_narrow'
+      "data-date": initDate,
+      "data-start-date": startDate,
+      "data-end-date": endDate,
+      "data-date-is-ready": !!(startDate && endDate),
+      "data-hash": hash,
+      class: narrow && "calendar_narrow"
     }
 
   .calendar.js-calendar&attributes(rootAttrs)
-    button.calendar__prev-month-btn.js-calendar__prev-month-btn(type='button')
+    button.calendar__prev-month-btn.js-calendar__prev-month-btn(type="button")
       +svg-forward-arrow
     .calendar__date-container
       span.calendar__month-label.js-calendar__month-label July
       | &nbsp;
       span.calendar__year-label.js-calendar__year-label 1998
-    button.calendar__next-month-btn.js-calendar__next-month-btn(type='button')
+    button.calendar__next-month-btn.js-calendar__next-month-btn(type="button")
       +svg-forward-arrow
     .calendar__day-week-container
-      each day in ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
+      each day in ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
         span.calendar__day-week #{day}
     .calendar__table-container.js-calendar__table-container
       table.calendar__main-table.js-calendar__main-table
@@ -30,10 +30,10 @@ mixin calendar({initDate, startDate, endDate, hash, narrow})
           tr.calendar__week
             - for (let i = 0; i < 7; i++)
               td.calendar__day
-                button.calendar__day-btn.js-calendar__day-btn(type='button')
+                button.calendar__day-btn.js-calendar__day-btn(type="button")
     .calendar__error.js-calendar__error Please select range!
     .calendar__cancle-btn.js-calendar__cancle-btn
-      +text-button({text: 'очистить'})
+      +text-button({text: "очистить"})
     .calendar__apply-btn.js-calendar__apply-btn
-      +text-button({text: 'применить'})
+      +text-button({text: "применить"})
 
