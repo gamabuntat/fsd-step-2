@@ -18,5 +18,10 @@ block main
     )
 
     .sign-in-card-sign-in
-      +card-sign-in({})
+      +card-sign-in({
+        buttonAttrs: {
+          type: 'submint',
+          formaction: 'reg.html'
+        }
+      })
 

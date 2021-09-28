@@ -18,5 +18,10 @@ block main
     )
 
     .reg-card-reg
-      +card-reg({})
+      +card-reg({
+        buttonAttrs: {
+          type: 'submit',
+          formaction: 'sign-in.html'
+        }
+      })
 

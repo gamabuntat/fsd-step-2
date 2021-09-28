@@ -17,7 +17,6 @@ const getEntry = (p) => {
 const entry = {
   ...getEntry(path.resolve(__dirname, 'src/ui-kit')),
   ...getEntry(path.resolve(__dirname, './src/pages')),
-  // 'form-elements': './src/ui-kit/form-elements/form-elements.js',
 };
 
 const htmlPlugins = Object.entries(entry).map((entr) => (
