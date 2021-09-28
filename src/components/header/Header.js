@@ -3,6 +3,7 @@ import BEMBlock from '@scripts/BEMBlock.js';
 class Header extends BEMBlock {
   constructor(root) {
     super(root);
+    this.menuButtonClass = this.getElemClass('menu-button');
     this.init();
   }
 
@@ -12,8 +13,7 @@ class Header extends BEMBlock {
       'header__menu-button_pressed',
       'header__burger_pressed'
     ]);
-    this.menuButtons = this.root
-      .querySelectorAll(this.getElemClass('menu-button'));
+    this.menuButtons = this.root.querySelectorAll(this.menuButtonClass);
     this.setListeners();
     this.bindListeners();
   }
@@ -38,12 +38,13 @@ class Header extends BEMBlock {
 
   setHandleMenuButtonClick() {
     this.handleMenuButtonClick = ({ target }) => {
-      if (target.classList.contains(this.mods.menuButtonPressed)) {
-        this.removeMenuButtonsPressedMod();
-        return;
-      }
+      const menuButton = target.closest(this.menuButtonClass);
+      const isPressedMod = menuButton
+        .classList.contains(this.mods.menuButtonPressed);
       this.removeMenuButtonsPressedMod();
-      target.classList.add(this.mods.menuButtonPressed);
+      if (!isPressedMod) {
+        menuButton.classList.add(this.mods.menuButtonPressed); 
+      }
     };
   }
 
