@@ -1,5 +1,6 @@
 import BEMBlock from '@scripts/BEMBlock.js';
 import Glossary from '@scripts/Glossary.js';
+
 import * as glossaries from './glossaries.js';
 
 class Dropdown extends BEMBlock {

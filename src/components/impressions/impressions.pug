@@ -1,11 +1,56 @@
-mixin impressions({amazing = 130, cool = 65, bad = 65, veryBad = 0})
-  .impressions
-    .impressions__circle-container.js-impressions__circle-container(
-      data-amazing=`${amazing}`
-      data-cool=`${cool}`
-      data-bad=`${bad}`
-      data-very-bad=`${veryBad}`
+mixin impressions(params = {})
+  -
+    const {
+      amazing = 130,
+      cool = 65,
+      bad = 65,
+      veryBad = 0,
+      gap = 4,
+    } = params
+
+  .impressions.js-impressions(
+    data-amazing=amazing
+    data-cool=cool
+    data-bad=bad
+    data-very-bad=veryBad
+    data-gap=gap
+    data-circle-size=circleSize
+    data-circle-thickness=circleThickness
+  )
+
+    svg.impressions__circle(
+      width="121"
+      height="121"
+      viewBox="-4 0 130 120"
     )
+      defs
+        linearGradient(id="amazing" x1="0%" y1="0%" x2="0%" y2="100%")
+          stop(offset="0%" style="stop-color:#FFE39C;stop-opacity:1")
+          stop(offset="100%" style="stop-color:#FFBA9C;stop-opacity:1")
+        linearGradient(id="cool" x1="0%" y1="0%" x2="0%" y2="100%")
+          stop(offset="0%" style="stop-color:#6FCF97;stop-opacity:1")
+          stop(offset="100%" style="stop-color:#66D2EA;stop-opacity:1")
+        linearGradient(id="bad" x1="0%" y1="0%" x2="0%" y2="100%")
+          stop(offset="0%" style="stop-color:#BC9CFF;stop-opacity:1")
+          stop(offset="100%" style="stop-color:#8BA4F9;stop-opacity:1")
+        linearGradient(id="veryBad" x1="0%" y1="0%" x2="0%" y2="100%")
+          stop(offset="0%" style="stop-color:#909090;stop-opacity:1")
+          stop(offset="100%" style="stop-color:#3D4975;stop-opacity:1")
+      path.impressions__arc.js-impressions__arc.impressions__arc_amazing
+      path.impressions__arc.js-impressions__arc.impressions__arc_cool
+      path.impressions__arc.js-impressions__arc.impressions__arc_bad
+      path.impressions__arc.js-impressions__arc.impressions__arc_very-bad
+      text.impressions__mark.js-impressions__mark(
+        text-anchor="middle" 
+        x="60" 
+        y="58" 
+      )
+      text.impressions__votes.js-impressions__votes(
+        text-anchor="middle" 
+        x="60" 
+        y="78" 
+      ) голосов
+
     ul.impressions__list
       li.impressions__list-item.impressions__list-item_amazing 
         | Великолепно

@@ -1,4 +1,5 @@
 @use '@styles/useless/useless'
+@import '@styles/vars/colors'
 
 .impressions
   display: flex
@@ -8,14 +9,38 @@
   &__circle
     position: relative
 
-  &__room-number
+  &__arc
+    fill: none
+    stroke-width: 4px
+
+    &_amazing
+      stroke: url(#amazing)
+
+    &_cool
+      stroke: url(#cool)
+
+    &_bad
+      stroke: url(#bad)
+
+    &_very-bad
+      stroke: url(#veryBad)
+
+    &_selected
+      stroke-width: 5px
+
+    &:hover
+      stroke-width: 5px
+
+  &__mark
     font-weight: bold
     font-size: useless.px2rem(24px)
+    fill: $color-primary
 
-  &__room-votes
+  &__votes
     font-weight: bold
     font-size: useless.px2rem(12px)
     text-transform: uppercase
+    fill: $color-primary
   
   &__list
     height: min-content

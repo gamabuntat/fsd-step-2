@@ -1,7 +1,7 @@
-import { init } from './impressions.js';
+import Impressions from './Impressions.js';
 
 window.addEventListener('load', () => (
-  document.querySelectorAll('.js-impressions__circle-container')
-    .forEach((c) => init(c))
+  document.querySelectorAll('.js-impressions')
+    .forEach((c) => new Impressions(c))
 ));
 
