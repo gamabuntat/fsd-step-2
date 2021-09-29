@@ -19,10 +19,10 @@ class FilterDateDropdown extends BEMBlock {
     this.calendar = this.elemsMap.calendarWrapper.firstElementChild;
     this.dateFormater = new Intl.DateTimeFormat(
       'ru', 
-      {day: 'numeric', month: 'short'}
+      { day: 'numeric', month: 'short' }
     );
     this.observer = new MutationObserver(this.handleCalAttrsChanges.bind(this));
-    this.observer.observe(this.calendar, {attributes: true});
+    this.observer.observe(this.calendar, { attributes: true });
     this.setListeners();
     this.closeTrigger = true;
     this.bindListeners();

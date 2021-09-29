@@ -109,14 +109,13 @@ class MaskedTextField {
   }
 
   addZero() {
-    return this.setValue((
-      this.inputValue == '0' 
-        ? this.prepValue + '1'
-        : this.concatString(
-          ...this.splitString(this.prepValue, this.prepValue.length - 1),
-          '0'
-        ) 
-    ) + '.');
+    return this.setValue(`${this.inputValue == '0' 
+      ? `${this.prepValue}1`
+      : this.concatString(
+        ...this.splitString(this.prepValue, this.prepValue.length - 1),
+        '0'
+      ) 
+    }.`);
   }
 
   getValueIndex() {

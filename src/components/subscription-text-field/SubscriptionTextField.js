@@ -7,8 +7,8 @@ class SubscriptionTextField extends BEMBlock {
   }
 
   init() {
-    this.updateElemsMap([ 'input', 'button' ]);
-    this.setMods([ 'subscription-text-field_active' ]);
+    this.updateElemsMap(['input', 'button']);
+    this.setMods(['subscription-text-field_active']);
     this.setListeners();
     this.bindListeners();
   }

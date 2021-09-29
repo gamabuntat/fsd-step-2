@@ -10,7 +10,7 @@ class RangeLable extends BEMBlock {
   init() {
     const { sliderId, lang, formaterOpt, max, min, step } = this.root.dataset;
     this.slider = document.getElementById(sliderId);
-    this.updateElemsMap([ 'start', 'end' ]);
+    this.updateElemsMap(['start', 'end']);
     this.observer = new MutationObserver(
       this.handleSliderChangeAttrs.bind(this)
     );

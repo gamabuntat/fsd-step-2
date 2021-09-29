@@ -24,7 +24,7 @@ class DateDropdown extends BEMBlock {
     this.observer = new MutationObserver(
       this.handleCalAttrsChanges.bind(this)
     );
-    this.observer.observe(this.calendar, {attributes: true});
+    this.observer.observe(this.calendar, { attributes: true });
     this.setListeners();
     this.closeTrigger = true;
     this.bindListeners();

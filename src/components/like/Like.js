@@ -7,7 +7,7 @@ class Like extends BEMBlock {
   }
 
   init() {
-    this.updateElemsMap([ 'counter', 'btn' ]);
+    this.updateElemsMap(['counter', 'btn']);
     this.setMods([
       'like_pressed',
       'like_focused',

@@ -8,7 +8,7 @@ class CheckList extends BEMBlock {
 
   init() {
     this.updateElemsMap(['button']);
-    this.setMods(['check-list_open' ]);
+    this.setMods(['check-list_open']);
     this.setListeners();
     this.bindListeners();
   }
