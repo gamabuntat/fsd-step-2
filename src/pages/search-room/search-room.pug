@@ -13,8 +13,8 @@ append vars
   include /pagination/pagination
 
   - 
-    const title = "Search room"
-    const roomParams = require("./params.json")
+    const title = 'Search room'
+    const roomParams = require('./params.json')
 
 block main
   main.sr-main.js-sr-main
@@ -31,26 +31,26 @@ block main
           .sr-main-filter__dropdown-container
             section.sr-date-dropdown
               h2.sr-main-filter-title даты пребывания в отеле
-              +filter-date-dropdown({calAttrs: {hash: calHash}})
+              +filter-date-dropdown({ calAttrs: { hash: calHash } })
 
             section.sr-dropdown
               h2.sr-main-filter-title гости
-              +dropdown({hash: dropdownHash, narrow: true})
+              +dropdown({ hash: dropdownHash, narrow: true })
 
           section.sr-range-slider
             h2.sr-main-filter-title диапазон цены
             .sr-range-slider__range-label
-              +range-label({sliderID: "srs1", step: 100})
+              +range-label({ sliderID: "srs1", step: 100 })
             .sr-range-slider__container
-              +range-slider({id: "srs1"})
+              +range-slider({ id: "srs1" })
             .sr-range-slider__caption 
               | Стоимость за сутки пребывания в номере
 
           section.sr-house-rules
             h2.sr-main-filter-title правила дома
-            +check({text: "можно курить"})
-            +check({text: "Можно с питомцами", attrs: {checked: true}})
-            +check({attrs: {checked: true}})
+            +check({ text: "можно курить" })
+            +check({ text: "Можно с питомцами", attrs: { checked: true } })
+            +check({ attrs: { checked: true } })
 
           section.sr-accessibility
             h2.sr-main-filter-title доступность

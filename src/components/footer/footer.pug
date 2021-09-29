@@ -11,12 +11,12 @@ mixin footer(params)
       lists = [
         {},
         {
-          title: "о нас",
-          items: ["О сервисе", "Наша команда", "Вакансии", "Инвесторы"]
+          title: 'о нас',
+          items: ['О сервисе', 'Наша команда', 'Вакансии', 'Инвесторы']
         },
         {
-          title: "Служба поддержки",
-          items: ["Соглашения", "Сообщества", "Связь с нами"]
+          title: 'Служба поддержки',
+          items: ['Соглашения', 'Сообщества', 'Связь с нами']
         },
       ] 
     } = params
@@ -24,9 +24,9 @@ mixin footer(params)
   mixin list(params)
     - 
       const {
-        title = "навигация",
-        items = ["о нас", "новости", "служба поддержки", "услуги"],
-        href = Array(4).fill("change me")
+        title = 'навигация',
+        items = ['о нас', 'новости', 'служба поддержки', 'услуги'],
+        href = Array(4).fill('change me')
       } = params
 
     ul.footer__list
@@ -57,8 +57,8 @@ mixin footer(params)
         p.footer__subscription-caption
           | Получайте специальные предложения и новости сервиса
         +subscription-text-field(
-          {placeholder: "Email", type: "email", required: true},
-          {type: "submit"}
+          { placeholder: "Email", type: "email", required: true },
+          { type: "submit" }
         )
 
     .footer__copyrating

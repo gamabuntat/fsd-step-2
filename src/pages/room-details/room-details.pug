@@ -8,7 +8,7 @@ append vars
   include /card-room-details/card-room-details
 
   - 
-    const title = "Room details"
+    const title = 'Room details'
 
 block main
   main.rd-main
@@ -46,7 +46,7 @@ block main
             avatar: "avatar-2.webp",
             name: "Патрисия Стёклышкова",
             lastVisited: "Неделю назад",
-            likeParams: {value: 2, pressed: false},
+            likeParams: { value: 2, pressed: false },
             text: "Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент"
           })
 
@@ -64,7 +64,7 @@ block main
       
       article.rd-card
         +card-room-details({
-          dropdownParams: {hash: dropdownHash},
-          dateDroppdownParams: {calAttrs: {hash: calHash}}
+          dropdownParams: { hash: dropdownHash },
+          dateDroppdownParams: { calAttrs: { hash: calHash } }
         })
 

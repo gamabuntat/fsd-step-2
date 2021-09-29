@@ -9,15 +9,15 @@ append vars
   include /card-room-preview/card-room-preview
 
   - 
-    const title = "Cards"
+    const title = 'Cards'
     isUikit = true
 
 append main
   main.c-main
     .c-column
       +card-search-room({
-        dropdownParams: {hash: "cardd_021"},
-        dateDropdownParams: {calAttrs: {initDate: "2022"}}
+        dropdownParams: { hash: "cardd_021" },
+        dateDropdownParams: { calAttrs: { initDate: "2022" } }
       })
       +card-reg({})
     .c-column
@@ -29,7 +29,7 @@ append main
             endDate: "2019-08-23"
           }
         }, 
-        dropdownParams: {counterValues: "3"}
+        dropdownParams: { counterValues: "3" }
       })
       +card-sign-in({})
     .c-column.c-column_narrow

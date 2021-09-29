@@ -16,14 +16,14 @@ mixin card-room-details(params)
       dropdownParams = {},
     } = params
 
-    const formater = new Intl.NumberFormat("ru", {
-      style: "currency",
-      currency: "RUB",
+    const formater = new Intl.NumberFormat('ru', {
+      style: 'currency',
+      currency: 'RUB',
       minimumFractionDigits: 0,
     })
 
     function format(str) {
-      return formater.format(str).replace(/\s(?=.$)/, "")
+      return formater.format(str).replace(/\s(?=.$)/, '')
     }
 
   .card-room-details.js-card-room-details
@@ -73,7 +73,11 @@ mixin card-room-details(params)
         span.card-room-details__total-cost.js-card-room-details__total-cost= format(0)
 
       .card-room-details__big-button
-        +big-button({text: "забронировать", attrs: {
-          type: "submit", ...bigButtonAttrs
-        }})
+        +big-button({ 
+          text: "забронировать",
+          attrs: {
+            type: "submit",
+            ...bigButtonAttrs
+          }
+        })
 

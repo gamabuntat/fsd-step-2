@@ -1,9 +1,9 @@
 -
   function hashIt() {
-    return "rate" + Math.round(Math.random() * 1e3)
+    return 'rate' + Math.round(Math.random() * 1e3)
   }
 
-mixin rate({checked = 1, name = hashIt(), attrs, size = 5})
+mixin rate({ checked = 1, name = hashIt(), attrs, size = 5 })
   label.rate
     - for (let v = 1; v <= size; v++)
       - const isChecked = checked === v

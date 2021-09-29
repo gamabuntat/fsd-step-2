@@ -3,7 +3,7 @@ extends ../../layout/layout
 append vars
   include /card-search-room/card-search-room
 
-  - const title = "Landing"
+  - const title = 'Landing'
 
 block main
   main.landing-main
@@ -24,15 +24,15 @@ block main
       article.landing-main-card
         +card-search-room({
           dateDropdownParams: {
-            calAttrs: {hash: calHash},
+            calAttrs: { hash: calHash },
           },
           dropdownParams: {
             hash: dropdownHash
           },
           bigBtnParams: {
             attrs: {
-              type: 'submit',
-              formaction: 'search-room.html'
+              type: "submit",
+              formaction: "search-room.html"
             }
           }
         })

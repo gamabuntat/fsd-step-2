@@ -26,7 +26,7 @@ append vars
   include /comment/comment
 
   -
-    const title = "Form Elements"
+    const title = 'Form Elements'
     isUikit = true
 
     const narrowDropdownParams = {
@@ -48,19 +48,19 @@ append main
     article.group.group_huppa
       .fe-container
         +fe-title("text field", "default")
-        +text-field({type: "email", placeholder: "Email"})
+        +text-field({ type: "email", placeholder: "Email" })
       .fe-container
         +fe-title("text field", "hover/focus")
-        +text-field({value: "This is pretty awesome", autofocus: true})
+        +text-field({ value: "This is pretty awesome", autofocus: true })
       .fe-container
         +fe-title("dropdown")
-        +dropdown({counterValues: "0 0 0"})
+        +dropdown({ counterValues: "0 0 0" })
       .fe-container
         +fe-title("masked text field")
         +masked-text-field
       .fe-container
         +fe-title("date dropdown")
-        +date-dropdown({endMask: "19.08.2019", calAttrs: {hash: "fecal1"}})
+        +date-dropdown({ endMask: "19.08.2019", calAttrs: { hash: "fecal1" } })
       .fe-container
         +fe-title("filter date dropdown")
         +filter-date-dropdown({
@@ -73,41 +73,41 @@ append main
         })
       .fe-container
         +fe-title("subscription text field")
-        +subscription-text-field({placeholder: "Email"})
+        +subscription-text-field({ placeholder: "Email" })
 
     article.group
       .fe-container
         +fe-title("checkbox buttons")
         .fe-container.fe-container_small-indent
-          +check({text: "Можно курить"})
-          +check({text: "Можно с питомцами", attrs: {checked: true}})
-          +check({attrs: {checked: true}})
+          +check({ text: "Можно курить" })
+          +check({ text: "Можно с питомцами", attrs: { checked: true } })
+          +check({ attrs: { checked: true } })
       .fe-container
         +fe-title("radio buttons")
         .fe-container.fe-container_large-indent.fe-container_horizontal
-          +radio({attrs: {name: "sex", checked: true}, text: "Мужчина"})
-          +radio({attrs: {name: "sex"}, text: "Женщина"})
+          +radio({ attrs: { name: "sex", checked: true }, text: "Мужчина" })
+          +radio({ attrs: { name: "sex" }, text: "Женщина" })
       .fe-container
         +fe-title("toggle")
         .fe-container.fe-container_small-indent
-          +toggle({attrs: {checked: true}})
+          +toggle({ attrs: { checked: true } })
           +toggle({})
       .fe-container
         +fe-title("like button")
         .fe-container.fe-container_small-indent.fe-container_horizontal
-          +like({value: 2})
-          +like({value: 12, pressed: true})
+          +like({ value: 2 })
+          +like({ value: 12, pressed: true })
       .fe-container
         +fe-title("rate button")
         .fe-container.fe-container_large-indent.fe-container_horizontal
-          +rate({checked: 4})
-          +rate({checked: 5})
+          +rate({ checked: 4 })
+          +rate({ checked: 5 })
 
     article.group
       .fe-slider-container
         +fe-title("range slider")
-        +range-label({sliderID: "feslider", step: 100})
-        +range-slider({id: "feslider"})
+        +range-label({ sliderID: "feslider", step: 100 })
+        +range-slider({ id: "feslider" })
       .fe-container
         +fe-title("buttons")
         .fe-button-container
@@ -135,17 +135,17 @@ append main
         +dropdown(narrowDropdownParams) 
       .fe-container
         +fe-title("dropdown", "expanded", true)
-        +dropdown({...narrowDropdownParams, isOpen: true}) 
+        +dropdown({ ...narrowDropdownParams, isOpen: true }) 
 
     article.group.group_huppa
       .fe-container
         +fe-title("dropdown")
-        +dropdown({isOpen: true, counterValues: "0 0 0"})
+        +dropdown({ isOpen: true, counterValues: "0 0 0" })
 
     article.group.group_huppa
       .fe-container
         +fe-title("dropdown")
-        +dropdown({isOpen: true, counterValues: "2 1 0"})
+        +dropdown({ isOpen: true, counterValues: "2 1 0" })
 
     article.group
       .fe-container
@@ -153,12 +153,12 @@ append main
           +check-list({})
           +check-list({
             checkParams: [
-              {text: "завтрак"},
-              {text: "письменный стол", attrs: {checked: true}},
-              {text: "Стул для кормления", attrs: {checked: true}},
-              {text: "Кроватка", attrs: {checked: true}},
-              {text: "Телевизор"},
-              {text: "Шампунь"},
+              { text: "завтрак" },
+              { text: "письменный стол", attrs: { checked: true } },
+              { text: "Стул для кормления", attrs: { checked: true } },
+              { text: "Кроватка", attrs: { checked: true } },
+              { text: "Телевизор" },
+              { text: "Шампунь" },
             ],
             label: "expandable checkbox list",
             isOpen: true,

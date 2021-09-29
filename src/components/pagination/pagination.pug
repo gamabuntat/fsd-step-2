@@ -1,6 +1,6 @@
 include ../svg-forward-arrow/svg-forward-arrow
 
-mixin pagination({current = 1, last = 15} = {})
+mixin pagination({ current = 1, last = 15 } = {})
   .pagination
     - for (let i = current; i < current + 3; i++)
       a.pagination__item(

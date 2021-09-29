@@ -5,18 +5,18 @@ mixin range-label(options)
       min = 0,
       max = 15000,
       step = 1,
-      lang = "ru",
-      sep = " - ",
+      lang = 'ru',
+      sep = ' - ',
       formaterOpt,
     } = options
 
     const attrs = {
-      "data-slider-id": sliderID,
-      "data-min": min, 
-      "data-max": max,
-      "data-step": step,
-      "data-lang": lang,
-      "data-formater-opt": formaterOpt
+      'data-slider-id': sliderID,
+      'data-min': min, 
+      'data-max': max,
+      'data-step': step,
+      'data-lang': lang,
+      'data-formater-opt': formaterOpt
     }
 
   .range-label.js-range-label&attributes(attrs)

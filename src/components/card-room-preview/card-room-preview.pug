@@ -10,22 +10,22 @@ mixin card-room-preview(params)
       isLuxury = true, 
       cost = 9990,
       nReviews = 145,
-      imgNames = Array(4).fill("crp-1.webp"),
+      imgNames = Array(4).fill('crp-1.webp'),
       rate = 5,
     } = params
 
-    const imgNamesFormated = typeof imgNames == "string" 
+    const imgNamesFormated = typeof imgNames == 'string' 
       ? Array(4).fill(imgNames)
       : imgNames
 
-    const formater = new Intl.NumberFormat("ru", {
-      style: "currency",
-      currency: "RUB",
+    const formater = new Intl.NumberFormat('ru', {
+      style: 'currency',
+      currency: 'RUB',
       minimumFractionDigits: 0,
     })
 
     function format(str) {
-      return formater.format(str).replace(/\s(?=.$)/, "")
+      return formater.format(str).replace(/\s(?=.$)/, '')
     }
 
   form.card-room-preview.js-card-room-preview(
@@ -66,7 +66,12 @@ mixin card-room-preview(params)
           span.card-room-preview__cost.js-card-room-preview__cost= format(cost)
         .card-room-preview__line
         .card-room-preview__summary
-          +rate({checked: rate, attrs: {disabled: true}})
+          +rate({ 
+            checked: rate,
+            attrs: { 
+              disabled: true
+            }
+          })
           .card-room-preview__reviews-container
             span.card-room-preview__n-reviews #{nReviews} 
             | &nbsp;
