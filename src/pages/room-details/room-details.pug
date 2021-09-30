@@ -9,38 +9,40 @@ append vars
 
   - 
     const title = 'Room details'
+    const pageClass = 'room-details'
+    const footerAttrs = { isWithBorders: true }
 
 block main
-  main.rd-main
-    .rd-gallery
-      img.rd-gallery__master-room(
+  main.room-details__main
+    .room-details__gallery
+      img.room-details__gallery-master-room(
         src=require("./img/rd-1.webp")
         alt="master bedroom"
       )
-      img.rd-gallery__secondary-room.rd-gallery__secondary-room_reflected(
+      img.room-details__gallery-secondary-room.room-details-gallery__secondary-room_reflected(
         src=require("./img/rd-2.webp")
         alt="secondary room"
       )
-      img.rd-gallery__secondary-room(
+      img.room-details__gallery-secondary-room(
         src=require("./img/rd-3.webp")
         alt="secondary room"
       )
     
-    article.rd-content
-      section.rd-content__container
-        .rd-about-room
-          h2.rd-title Сведения о номере
+    article.room-details__content
+      section.room-details__content-container
+        .room-details__about-room
+          h2.room-details__title Сведения о номере
           +about-room()
           +about-room("convenience")
           +about-room("coziness", true)
 
-        section.rd-impressions
-          h2.rd-title Впечатления от номера
+        section.room-details__impressions
+          h2.room-details__title Впечатления от номера
           +impressions
 
-        section.rd-comments
-          h2.rd-title Отзывы посетителей номера
-          span.rd-comments__counter 2 отзыва
+        section.room-details__comments
+          h2.room-details__title Отзывы посетителей номера
+          span.room-details__comments-counter 2 отзыва
           +comment({})
           +comment({
             avatar: "avatar-2.webp",
@@ -50,19 +52,19 @@ block main
             text: "Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент"
           })
 
-        section.rd-rules
-          h2.rd-title Правила
+        section.room-details__rules
+          h2.room-details__title Правила
           +bullet-list({})
 
-        section.rd-cancel
-          h2.rd-title Отмена
-          p.rd-cancel__text
+        section.room-details__cancel
+          h2.room-details__title Отмена
+          p.room-details__cancel-text
             | Бесплатная отмена в течение 48 ч. 
             | После этого при отмене не позднее чем за 5 дн. 
             | до прибытия вы получите полный возврат 
             | за вычетом сбора за услуги.
       
-      article.rd-card
+      article.room-details__card
         +card-room-details({
           dropdownParams: { hash: dropdownHash },
           dateDroppdownParams: { calAttrs: { hash: calHash } }

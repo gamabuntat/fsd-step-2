@@ -5,7 +5,7 @@ include /svg-expand-icon/svg-expand-icon
 include /bordered-button/bordered-button
 include /primary-button/primary-button
 
-mixin header(params) 
+mixin header(params = {}) 
   mixin menu-item({ text = "Вакансии", href = "change me", isImportatn })
     li.header__menu-item
       a.header__menu-link(

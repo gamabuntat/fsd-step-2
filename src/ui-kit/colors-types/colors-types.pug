@@ -3,25 +3,32 @@ extends ../../layout/layout
 append vars
   - 
     const title = 'Colors & Types'
-    isUikit = true
+    const isUikit = true
+    const pageClass = 'color-types'
 
   mixin color-type({ title = "Dark Shade 100%", color = "#1F2041" })
-    .color-type
-      .color-type__example
-      .color-type__container
-        h2.color-type__title= title
-        p.color-type__caption= color
+    - 
+      const findPercent = (string) => (string.match(/\d+(?=%)/) || ['100'])[0]
+      const percentToRelativeUnits = (percent) => percent / 100
 
-  mixin font-type(params)
-    -
-      const {
-        type = 'H1',
-        example = 'This one is the sub-section or widget title'
-      } = params
+    .color-types__color
+      .color-types__color-example(style=`background: ${color}; opacity: ${percentToRelativeUnits(Number(findPercent(title)))}`)
+      .color-types__color-container
+        h2.color-types__color-title= title
+        p.color-types__color-caption= color
 
-    .font-type
-      .font-type__title= type
-      .font-type__example= example
+  mixin font-types(types)
+    - 
+      const baseClass = 'color-types'
+
+    .color-types__fonts
+      each t in types
+        .color-types__fonts-title(
+          class=`${baseClass}__fonts-title_${(t.type || "H1").toLowerCase()}`
+        )= t.type || "H1"
+        .color-types__fonts-example(
+          class=`${baseClass}__fonts-example_${(t.type || "H1").toLowerCase()}`
+        )= t.example || "This one is the sub-section or widget title"
 
   - 
     const colorTypes = [
@@ -45,11 +52,9 @@ append vars
     ]
 
 append main
-  main.ct-main
-    .color
+  main.color-types__main
+    .color-types__main-colors-container
       each t in colorTypes
         +color-type(t)
-    .font
-      each t in fontTypes
-        +font-type(t)
+    +font-types(fontTypes)
   

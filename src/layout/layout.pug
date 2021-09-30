@@ -6,10 +6,6 @@ block vars
   - 
     const calHash = 'CAL_MAIN'
     const dropdownHash = 'DROPDOWN_MAIN'
-    let isUikit = false
-    let pageClass = 'page'
-    let headerAttrs = {}
-    let footerAttrs = {}
 
 doctype html
 html(lang="ru")
@@ -39,7 +35,7 @@ html(lang="ru")
     )
 
   block page
-    body(class=pageClass)
+    body(class=pageClass || "page")
       unless isUikit
         +header(headerAttrs)
       block main

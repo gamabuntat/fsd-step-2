@@ -5,19 +5,20 @@ append vars
 
   -
     const title = 'Sign in'
+    const pageClass = 'sign-in'
 
 block main
-  main.sign-in-main
-    img.sign-in-main-photo(
+  main.sign-in__main
+    img.sign-in__main-photo(
       src=require("../../img/bgi-3.webp")
       alt="pink room with a beautiful picture"
     )
-    img.sign-in-main-photo(
+    img.sign-in__main-photo(
       src=require("../../img/bgi-4.webp")
       alt="amazing orange chair plus everything else is gray"
     )
 
-    .sign-in-card-sign-in
+    .sign-in__card-sign-in
       +card-sign-in({
         buttonAttrs: {
           type: 'submint',

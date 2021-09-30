@@ -5,19 +5,20 @@ append vars
 
   -
     const title = 'Registration'
+    const pageClass = 'reg'
 
 block main
-  main.reg-main
-    img.reg-main-photo(
+  main.reg__main
+    img.reg__main-photo(
       src=require("../../img/bgi-1.webp")
       alt="pink room with a beautiful picture"
     )
-    img.reg-main-photo(
+    img.reg__main-photo(
       src=require("../../img/bgi-4.webp")
       alt="amazing orange chair plus everything else is gray"
     )
 
-    .reg-card-reg
+    .reg__card-reg
       +card-reg({
         buttonAttrs: {
           type: 'submit',

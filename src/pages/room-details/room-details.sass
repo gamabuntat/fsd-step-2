@@ -1,37 +1,32 @@
 @use '@styles/useless/useless'
 @import '@styles/vars/colors'
 
-body
+.room-details
   display: flex
   flex-direction: column
   min-height: 100vh
 
-.footer
-  border-top: 1px solid $color-unclaimed-fg
-
-.rd
-
-  &-main
+  &__main
     flex-grow: 1
 
-  &-gallery
+  &__gallery
     display: grid 
     grid-template-columns: 66% 34%
     grid-template-rows: 1fr 1fr
 
-    &__master-room
+    &-master-room
       width: 100%
       height: 100%
       grid-row: 1 / 3
     
-    &__secondary-room
+    &-secondary-room
       width: 100%
       height: 100%
 
       &_reflected
         transform: scaleX(-1)
 
-  &-content
+  &__content
     display: flex
     flex-wrap: wrap
     margin: 70px auto
@@ -39,39 +34,39 @@ body
     max-width: 1920px
     justify-content: center
 
-    &__container
+    &-container
       display: flex
       flex-wrap: wrap
       gap: 30px 70px
       padding: 0 10px
       max-width: 712px
 
-  &-title
+  &__title
     margin: 0
     color: $color-title-fg 
     font-size: useless.px2rem(19px)
     
-  &-about-room, &-impressions, &-rules, &-cancel
+  &__about-room, &__impressions, &__rules, &__cancel
     display: flex
     flex-direction: column
     gap: 20px
 
-  &-cancel
+  &__cancel
 
-    &__text
+    &-text
       margin: 0
       max-width: 340px
       line-height: 24px
 
-  &-comments
+  &__comments
     display: flex 
     flex-wrap: wrap
     justify-content: space-between
     gap: 20px
 
-    &__counter
+    &-counter
       color: $color-unclaimed-fg
 
-  &-card
+  &__card
     width: min(380px, 100%)
 

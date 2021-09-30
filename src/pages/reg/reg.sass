@@ -1,11 +1,9 @@
-body
+.reg
   display: flex
   flex-direction: column
   min-height: 100vh
 
-.reg
-  
-  &-main
+  &__main
     position: relative
     display: flex
     justify-content: center
@@ -26,7 +24,7 @@ body
       &:nth-child(2)
         animation-delay: 15s
 
-  &-card-reg
+  &__card-reg
     width: min(380px, 100%)
 
 @keyframes hide-bg

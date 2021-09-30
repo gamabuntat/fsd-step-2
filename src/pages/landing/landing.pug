@@ -3,25 +3,27 @@ extends ../../layout/layout
 append vars
   include /card-search-room/card-search-room
 
-  - const title = 'Landing'
+  - 
+    const title = 'Landing'
+    const pageClass = 'landing'
 
 block main
-  main.landing-main
-    img.landing-main-photo(
+  main.landing__main
+    img.landing__main-photo(
       src=require("../../img/bgi-1.webp")
       alt="a very green room with green walls with a green bed with a green plant and an amazing view from the window"
     )
-    img.landing-main-photo(
+    img.landing__main-photo(
       src=require("../../img/bgi-2.webp")
       alt="a room illuminated with snow-white light with a large light sofa in the center, a round coffee table and a bush rose bouquet"
     )
-    img.landing-main-photo(
+    img.landing__main-photo(
       src=require("../../img/bgi-3.webp")
       alt="everything is the same as in the previous two photos, only in pink tones"
     )
 
-    .landing-main-container
-      article.landing-main-card
+    .landing__main-container
+      article.landing__main-card
         +card-search-room({
           dateDropdownParams: {
             calAttrs: { hash: calHash },
@@ -37,7 +39,7 @@ block main
           }
         })
 
-      p.landing-main-caption
+      p.landing__main-caption
         | Лучшие номера для вашей работы,
         | отдыха и просто вдохновения
 
