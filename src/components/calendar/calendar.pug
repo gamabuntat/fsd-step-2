@@ -7,7 +7,7 @@ mixin calendar({ initDate, startDate, endDate, hash, narrow })
       'data-date': initDate,
       'data-start-date': startDate,
       'data-end-date': endDate,
-      'data-date-is-ready': !!(startDate && endDate),
+      'data-date-is-ready': Boolean(startDate && endDate),
       'data-hash': hash,
       class: narrow && 'calendar_narrow'
     }

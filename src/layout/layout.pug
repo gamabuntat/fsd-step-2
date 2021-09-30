@@ -4,9 +4,12 @@ block vars
   include /footer/footer
 
   - 
-    let isUikit = false
     const calHash = 'CAL_MAIN'
     const dropdownHash = 'DROPDOWN_MAIN'
+    let isUikit = false
+    let pageClass = 'page'
+    let headerAttrs = {}
+    let footerAttrs = {}
 
 doctype html
 html(lang="ru")
@@ -35,12 +38,13 @@ html(lang="ru")
       href=require("@src/favicons/favicon-32x32.png")
     )
 
-  body
-    unless isUikit
-      +header({})
-    block main
-      if isUikit
-        +watermark({})
-    unless isUikit
-      +footer({})
+  block page
+    body(class=pageClass)
+      unless isUikit
+        +header(headerAttrs)
+      block main
+        if isUikit
+          +watermark
+      unless isUikit
+        +footer(footerAttrs)
 

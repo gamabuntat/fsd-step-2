@@ -18,7 +18,8 @@ mixin footer(params)
           title: 'Служба поддержки',
           items: ['Соглашения', 'Сообщества', 'Связь с нами']
         },
-      ] 
+      ],
+      isWithBorders = false
     } = params
 
   mixin list(params)
@@ -40,7 +41,7 @@ mixin footer(params)
             title=items[i]
           )= items[i].slice(0, 1).toUpperCase() + items[i].slice(1)
 
-  footer.footer
+  footer.footer(class=isWithBorders && "footer_with-borders")
     .footer__container
       .footer__sub-container
         a(href="landing.html" title="home page").footer__logo 

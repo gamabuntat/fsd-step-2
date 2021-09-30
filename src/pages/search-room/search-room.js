@@ -3,12 +3,9 @@ import '@styles/common-styles.js';
 import '@scripts/common-scripts.js';
 
 import './search-room.sass';
+import SearchRoom from './SearchRoom.js';
 
-import AsideButton from './AsideButton.js';
-import Filter from './Filter.js';
-
-new AsideButton(
-  document.querySelector('.js-sr-main__aside-button'),
-  new Filter(document.querySelector('.js-sr-main-filter'))
-);
+window.addEventListener('load', () => (
+  new SearchRoom(document.querySelector('.js-search-room'))
+));
 

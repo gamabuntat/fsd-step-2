@@ -11,6 +11,9 @@
   box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.95)
   box-sizing: border-box
 
+  &_with-borders
+    border-top: 1px solid $color-unclaimed-fg
+
   &__container
     display: grid
     grid-template-columns: repeat(12, 1fr)
@@ -34,10 +37,10 @@
     &:hover, &:focus
 
       & .svg-logo__circle, & .svg-logo__left-petal
-        fill: url(#gradient_focus)
+        fill: url(#gradient-focus)
 
       & .svg-logo__right-petal
-        fill: url(#secondary_gradient_focus)
+        fill: url(#secondary_gradient-focus)
 
   &__hype
     margin: 0
@@ -110,7 +113,7 @@
       outline: none
 
       &:hover *, &:focus *
-        fill: url(#gradient_focus)
+        fill: url(#gradient-focus)
 
 @media (max-width: 1000px)
   .footer

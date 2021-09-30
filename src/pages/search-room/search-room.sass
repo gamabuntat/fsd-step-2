@@ -3,7 +3,7 @@
 @use '@styles/useless/useless'
 @import '@styles/vars/colors'
 
-body 
+.search-room
   display: flex
   flex-direction: column
   height: 100vh
@@ -11,146 +11,141 @@ body
   &--locked
     overflow-y: auto
 
-.footer
-  border-top: 1px solid $color-unclaimed-fg
-
-.sr
-
-  &-main
+  &__main
     flex-grow: 1
     display: flex
     margin: 0 auto
     gap: 50px
 
-    &__aside-button
-      @include useless.button-common-styles
-      display: none
-      align-items: center
-      justify-content: center
-      min-width: 30px
-      height: 78px
-      cursor: pointer
+  &__aside-button
+    @include useless.button-common-styles
+    display: none
+    align-items: center
+    justify-content: center
+    min-width: 30px
+    height: 78px
+    cursor: pointer
 
-      &:hover, &:focus
+    &:hover, &:focus
 
-        & > .svg-expand-icon
-          opacity: 1
-        
       & > .svg-expand-icon
-        transform: rotate(-90deg)
+        opacity: 1
+      
+    & > .svg-expand-icon
+      transform: rotate(-90deg)
 
-    &-filter
-      padding-left: 10px
-
-      &-title
-        @include useless.font-bold-type
-        margin: 0 0 5px
-        color: $color-title-fg
-
-      &__container
-        display: flex
-        gap: 10px
-        box-sizing: border-box
-
-      &__button
-        @extend .sr-main__aside-button
-        display: none
-        transform: rotate(180deg)
-
-      &__content
-        display: flex
-        flex-direction: column
-        row-gap: 30px
-        padding: 30px 0
-        width: 266px
-
-      &__dropdown-container
-        display: flex
-        flex-direction: column
-        gap: 20px
-
-      &__plug
-        @include useless.button-common-styles
-        flex-grow: 1
-        background-color: color.adjust($color-title-fg, $alpha: -0.7, $lightness: 10%)
-        outline: revert
+  &__filter
+    padding-left: 10px
 
     &-title
-      margin: 0
+      @include useless.font-bold-type
+      margin: 0 0 5px
       color: $color-title-fg
+
+    &-container
+      display: flex
+      gap: 10px
+      box-sizing: border-box
+
+    &-button
+      @extend .search-room__aside-button
+      display: none
+      transform: rotate(180deg)
 
     &-content
       display: flex
       flex-direction: column
+      row-gap: 30px
+      padding: 30px 0
+      width: 266px
+
+    &__dropdown-container
+      display: flex
+      flex-direction: column
       gap: 20px
+
+    &-plug
+      @include useless.button-common-styles
       flex-grow: 1
-      padding: 22px 0
+      background-color: color.adjust($color-title-fg, $alpha: -0.7, $lightness: 10%)
+      outline: revert
 
-      &__container
-        display: flex
-        flex-wrap: wrap
-        column-gap: 12px
-        row-gap: 20px
-        max-width: 834px
+  &__title
+    margin: 0
+    color: $color-title-fg
 
-      &__pagination
-        margin: 20px 0 70px
-        width: 241px
-        align-self: center
+  &__content
+    display: flex
+    flex-direction: column
+    gap: 20px
+    flex-grow: 1
+    padding: 22px 0
 
-  &-range-slider
+    &-container
+      display: flex
+      flex-wrap: wrap
+      column-gap: 12px
+      row-gap: 20px
+      max-width: 834px
+
+    &-pagination
+      margin: 20px 0 70px
+      width: 241px
+      align-self: center
+
+  &__range-slider
     display: flex
     flex-wrap: wrap
     justify-content: space-between
     gap: 10px
 
-    &__range-label
+    &-label
       margin-bottom: 10px
       color: $color-additional-fg
-    
-    &__container
+      
+    &-container
       flex-basis: 100%
 
-    &__caption
+    &-caption
       font-size: useless.px2rem(12px)
       color: $color-additional-fg
 
-  &-house-rules
+  &__house-rules
     display: flex
     flex-direction: column
     gap: 10px
 
-  &-accessibility
-    @extend .sr-house-rules
+  &__accessibility
+    @extend .search-room__house-rules
 
 @media (max-width: 615px)
-  .body--locked
-    overflow-y: hidden
+  .search-room
 
-  .sr
-    
-    &-main
+    &--locked
+      overflow-y: hidden
+
+    &__main
       gap: 0
 
-      &__aside-button
+    &__aside-button
+      display: flex
+
+    &__filter
+      display: none
+      padding: 0
+      width: 100%
+      height: 100vh
+      position: fixed
+      top: 0
+      z-index: 100
+
+      &_expanded
         display: flex
 
-      &-filter
-        display: none
-        padding: 0
-        width: 100%
+      &-container
+        padding: 70px 0
+        width: min(100%, 350px)
         height: 100vh
-        position: fixed
-        top: 0
-        z-index: 100
-
-        &_expanded
-          display: flex
-
-        &__container
-          padding: 70px 0
-          width: min(100%, 350px)
-          height: 100vh
-          overflow-y: scroll
-          background-color: white
+        overflow-y: scroll
+        background-color: white
 

@@ -15,53 +15,55 @@ append vars
   - 
     const title = 'Search room'
     const roomParams = require('./params.json')
+    pageClass = 'search-room js-search-room'
+    footerAttrs = { isWithBorders: true }
 
 block main
-  main.sr-main.js-sr-main
-    button.sr-main__aside-button.js-sr-main__aside-button 
+  main.search-room__main
+    button.search-room__aside-button.js-search-room__aside-button 
       +svg-expand-icon()
       +svg-expand-icon()
-    aside.sr-main-filter.js-sr-main-filter
-      .sr-main-filter__container
-        button.sr-main-filter__button.js-sr-main-filter__button
+    aside.search-room__filter.js-search-room__filter
+      .search-room__filter-container
+        button.search-room__filter-button.js-search-room__filter-button
           +svg-expand-icon()
           +svg-expand-icon()
 
-        .sr-main-filter__content
-          .sr-main-filter__dropdown-container
-            section.sr-date-dropdown
-              h2.sr-main-filter-title даты пребывания в отеле
+        .search-room__filter-content
+          .search-room__dropdowns-container
+            section.search-room__date-dropdown
+              h2.search-room__filter-title даты пребывания в отеле
               +filter-date-dropdown({ calAttrs: { hash: calHash } })
 
-            section.sr-dropdown
-              h2.sr-main-filter-title гости
+            section.search-room__dropdown
+              h2.search-room__filter-title гости
               +dropdown({ hash: dropdownHash, narrow: true })
 
-          section.sr-range-slider
-            h2.sr-main-filter-title диапазон цены
-            .sr-range-slider__range-label
+          section.search-room__range-slider
+            h2.search-room__filter-title диапазон цены
+            .search-room__range-slider-label
               +range-label({ sliderID: "srs1", step: 100 })
-            .sr-range-slider__container
+            .search-room__range-slider-container
               +range-slider({ id: "srs1" })
-            .sr-range-slider__caption 
+            .search-room__range-slider-caption 
               | Стоимость за сутки пребывания в номере
 
-          section.sr-house-rules
-            h2.sr-main-filter-title правила дома
+          section.search-room__house-rules
+            h2.search-room__filter-title правила дома
             +check({ text: "можно курить" })
             +check({ text: "Можно с питомцами", attrs: { checked: true } })
             +check({ attrs: { checked: true } })
 
-          section.sr-accessibility
-            h2.sr-main-filter-title доступность
+          section.search-room__accessibility
+            h2.search-room__filter-title доступность
             +rich-check({
               text: "Ширина коридоров в номере не менее 91 см.",
               title: "Широкий коридор"
             })
             +rich-check({})
 
-          section.sr-room-amenitie
-            h2.sr-main-filter-title удобства номера
+          section.search-room__amenitie
+            h2.search-room__filter-title удобства номера
             +dropdown({
               narrow: true,
               sectionNames: ["спальни", "кровати","ванные комнаты"],
@@ -70,16 +72,16 @@ block main
               counterValues: "2 2 0",
             })
 
-          section.sr-additional-amenities
+          section.search-room__additional-amenities
             +check-list({})
 
-      button.sr-main-filter__plug.js-sr-main-filter__plug
+      button.search-room__filter-plug.js-search-room__filter-plug
 
-    article.sr-main-content
-      h1.sr-main-title Номера, которые мы для вас подобрали
-      .sr-main-content__container
+    article.search-room__content
+      h1.search-room__title Номера, которые мы для вас подобрали
+      .search-room__content-container
         each p in roomParams
           +card-room-preview(p)
-      .sr-main-content__pagination
+      .search-room__content-pagination
         +pagination({})
 
