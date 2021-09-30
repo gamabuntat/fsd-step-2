@@ -14,4 +14,6 @@ $gradient-primary: linear-gradient($color-primary, $color-accent)
 $gradient-secondary: linear-gradient($color-secondary, $color-secondary-accent)
 $gradient-focus: linear-gradient($color-focus, color.adjust($color-accent, $lightness: +12%))
 $gradient-secondary-focus: linear-gradient(color.adjust($color-secondary, $green: 20, $blue: 20), $color-secondary-accent)
+$color-focus-not-so-faded: color.adjust($color-primary, $red: 40)
+$gradient-not-so-faded: linear-gradient($color-focus-not-so-faded, color.adjust($color-accent, $red: 51))
 

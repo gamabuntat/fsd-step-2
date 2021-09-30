@@ -15,24 +15,24 @@
   &_pressed
     background: $gradient-primary
 
-    & .like__heart *
-      stroke: $color-primary
+    & .like__heart .svg-heart__heart
+      stroke: url(#heart-gradient)
       stroke-opacity: 1
       fill-opacity: 1
-      fill: $color-primary
+      fill: url(#heart-gradient)
 
     & .like__counter
       color: $color-primary
 
-    & .like__btn:focus .like__heart *
-      stroke: url(#gradient_focus)
-      fill: url(#gradient_focus)
+    & .like__btn:focus .like__heart .svg-heart__heart
+      stroke: url(#heart-gradient-focus)
+      fill: url(#heart-gradient-focus)
 
   &_focused
     background-color: $color-additional-fg
 
   &_focused-pressed
-    background: $gradient-focus
+    background: $gradient-not-so-faded
 
   &__btn
     @include useless.button-common-styles()

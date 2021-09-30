@@ -3,6 +3,10 @@
 @use '@styles/useless/useless'
 @import '@styles/vars/colors'
 
+%social-block
+  display: flex
+  outline: none
+
 .footer
   display: flex
   flex-direction: column
@@ -36,11 +40,8 @@
 
     &:hover, &:focus
 
-      & .svg-logo__circle, & .svg-logo__left-petal
-        fill: url(#gradient-focus)
-
-      & .svg-logo__right-petal
-        fill: url(#secondary_gradient-focus)
+      & .svg-logo__circle
+        fill: url(#logo__circle-gradient-focus)
 
   &__hype
     margin: 0
@@ -108,12 +109,23 @@
     display: flex
     gap: 20px
 
-    & > *
-      display: flex
-      outline: none
+    &-twitter
+      @extend %social-block
 
-      &:hover *, &:focus *
-        fill: url(#gradient-focus)
+      &:hover .svg-twitter__icon, &:focus .svg-twitter__icon
+        fill: url(#twitter__icon-gradient-focus)
+
+    &-facebook
+      @extend %social-block
+
+      &:hover .svg-facebook__icon, &:focus .svg-facebook__icon
+        fill: url(#facebook__icon-gradient-focus)
+
+    &-instagram
+      @extend %social-block
+
+      &:hover .svg-instagram__icon, &:focus .svg-instagram__icon
+        fill: url(#instagram__icon-gradient-focus)
 
 @media (max-width: 1000px)
   .footer

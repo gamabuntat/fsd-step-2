@@ -27,11 +27,8 @@
 
       &:focus
 
-        & + .toggle__box
-          border-color: $color-focus
-
-          & > .toggle__circle
-            background: $gradient-focus
+        & + .toggle__box > .toggle__circle
+            background: $gradient-not-so-faded
 
   &__box
     display: flex

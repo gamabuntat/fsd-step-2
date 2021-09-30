@@ -14,20 +14,20 @@ mixin svg-check-box()
       height="19" 
       rx="3.5" 
       fill="white" 
-      stroke="url(#check-box-gradient-primary)"
+      stroke="url(#check-box__square-gradient)"
     )
     path.svg-check-box__mark(
       d="M6.46439 8.40768L10.707 12.6503L9.29282 14.0645L5.05018 9.82189L6.46439 8.40768Z" 
-      fill="url(#check-box-gradient-primary)"
+      fill="url(#check-box__square-gradient)"
     )
     path.svg-check-box__mark(
       d="M13.5355 6.99347L14.9497 8.40768L9.29282 14.0645L7.8786 12.6503L13.5355 6.99347Z" 
-      fill="url(#check-box-gradient-primary)"
+      fill="url(#check-box__square-gradient)"
     )
 
     defs
       linearGradient(
-        id="check-box-gradient-primary" 
+        id="check-box__square-gradient" 
         x1="12.8284" 
         y1="6.28636" 
         x2="7.1715" 
@@ -38,7 +38,7 @@ mixin svg-check-box()
         stop(offset="1" stop-color="#8BA4F9")
 
       linearGradient(
-        id="check-box-gradient-focus" 
+        id="check-box__square-gradient-focus" 
         x1="12.8284" 
         y1="6.28636" 
         x2="7.1715" 

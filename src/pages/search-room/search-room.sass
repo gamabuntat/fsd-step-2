@@ -59,16 +59,16 @@
       padding: 30px 0
       width: 266px
 
-    &__dropdown-container
-      display: flex
-      flex-direction: column
-      gap: 20px
-
     &-plug
       @include useless.button-common-styles
       flex-grow: 1
       background-color: color.adjust($color-title-fg, $alpha: -0.7, $lightness: 10%)
       outline: revert
+
+  &__dropdowns-container
+    display: flex
+    flex-direction: column
+    gap: 20px
 
   &__title
     margin: 0
