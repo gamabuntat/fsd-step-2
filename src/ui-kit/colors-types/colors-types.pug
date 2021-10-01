@@ -20,17 +20,17 @@ append vars
   mixin font-types(types)
     - 
       const baseClass = 'color-types'
-      const getTitleClass = ({ type }) => (
-        `${baseClass}__fonts-title_${(type).toLowerCase()}`
-      )
-      const getExampleClass = ({ type }) => (
-        `${baseClass}__fonts-example_${(type).toLowerCase()}`
-      )
 
     .color-types__fonts
       each t in types
-        .color-types__fonts-title(class=getTitleClass(t))= t.type
-        .color-types__fonts-example(class=getExampleClass(t))= t.example
+        - 
+          const [type, example] = Object.entries(t)[0]
+          const mod = type.toLowerCase()
+          const titleClass = `${baseClass}__fonts-title_${mod}`
+          const exampleClass = `${baseClass}__fonts-example_${mod}`
+
+        .color-types__fonts-title(class=titleClass)= type
+        .color-types__fonts-example(class=exampleClass)= example
 
   - 
     const colorTypes = [
@@ -44,12 +44,10 @@ append vars
     ]
 
     const fontTypes = [
-      { type: 'H1', example: 'This one is the sub-section or widget title' },
-      { type: 'H2', example: 'Next one is the item title inside widgets' },
-      { type: 'H3', example: 'This is a label or CTA text' },
-      {
-        type: 'Body', 
-        example: 'This is the body text which is used for most of the design, like paragraphs, lists, etc.'
+      { 'H1': 'This one is the sub-section or widget title' },
+      { 'H2': 'Next one is the item title inside widgets' },
+      { 'H3': 'This is a label or CTA text' },
+      { 'Body': 'This is the body text which is used for most of the design, like paragraphs, lists, etc.'
       }
     ]
 
