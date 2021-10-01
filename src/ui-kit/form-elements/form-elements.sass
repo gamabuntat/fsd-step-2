@@ -1,26 +1,26 @@
 @use '@styles/useless/useless'
 @import '@styles/vars/colors'
 
-body
+.form-elements
   padding: 140px 0
   box-sizing: border-box
 
-.fe-main
-  margin: 0 auto
-  display: grid
-  grid-template-columns: repeat(auto-fit, minmax(320px, min-content))
-  max-width: 1440px
-  column-gap: 100px
-  row-gap: 180px
-  box-sizing: border-box
+  &__main
+    margin: 0 auto
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(320px, min-content))
+    max-width: 1440px
+    column-gap: 100px
+    row-gap: 180px
+    box-sizing: border-box
 
-.fe-title
-  display: flex
-  justify-content: space-between
-  margin-bottom: 16px
+  &__title
+    display: flex
+    justify-content: space-between
+    margin-bottom: 16px
 
-  &_narrow
-    width: 266px
+    &_narrow
+      width: 266px
 
   &__topheading
     @include useless.font-bold-type
@@ -31,64 +31,66 @@ body
     text-transform: uppercase
     color: $color-additional-fg
 
-.fe-container
-  display: flex
-  flex-direction: column
+  &__container
+    display: flex
+    flex-direction: column
 
-  &_small-indent
-    gap: 10px
+    &_small-indent
+      gap: 10px
 
-  &_large-indent
-    gap: 20px
+    &_large-indent
+      gap: 20px
 
-  &_horizontal
-    flex-direction: row
+    &_horizontal
+      flex-direction: row
 
-.group
-  display: flex
-  flex-direction: column
-  row-gap: 40px
+  &__group
+    display: flex
+    flex-direction: column
+    row-gap: 40px
 
-  &_huppa
-    row-gap: 20px
+    &_huppa
+      row-gap: 20px
 
-    & > .fe-container:nth-child(n + 4)
-      margin-bottom: 20px
+      & > &__container:nth-child(n + 4)
+        margin-bottom: 20px
 
-    & > .fe-container:last-child
-      margin-bottom: 0
+      & > &__container:last-child
+        margin-bottom: 0
 
-    & .fe-title
-      margin-bottom: 5px
+      & &__title
+        margin-bottom: 5px
 
-  &:last-child
-    grid-column-end: span 2
+    &:last-child
+      grid-column-end: span 2
 
-.fe-slider-container
-  width: 266px
-  display: flex
-  flex-wrap: wrap
-  justify-content: space-between
+  &__slider-container
+    width: 266px
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
 
-.fe-button-container
-  width: 100%
-  display: flex
-  flex-wrap: wrap
-  column-gap: 19px
-  row-gap: 30px
+  &__button-container
+    width: 100%
+    display: flex
+    flex-wrap: wrap
+    column-gap: 19px
+    row-gap: 30px
 
-.fe-button
-  width: 99px
-  height: 44px
+  &__button
+    width: 99px
+    height: 44px
 
-.fe-big-button
-  width: 320px
-  height: 44px
+  &__big-button
+    width: 320px
+    height: 44px
 
-.fe-pagination
-  width: 241px
+  &__pagination
+    width: 241px
 
-@media (max-width: 760px)
-  .group:last-child
-    grid-column-end: auto
-  
+@media(max-width: 760px)
+  .form-elements
+
+    &__group:last-child
+      grid-column-end: auto
+    
