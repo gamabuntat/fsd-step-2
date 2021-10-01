@@ -11,20 +11,21 @@ append vars
 
   - 
     const title = 'Headers & Footers'
+    const pageClass = 'headers-footers'
     isUikit = true
 
 append main
-  .hf-main
+  .headers-footers__main
     +header({})
     +header({ authorized: true })
     +footer({})
-    .hf-footer
-      .hf-footer__logo
+    .headers-footers__footer
+      .headers-footers__footer-logo
         +svg-logo()
         +svg-toxin()
-      p.hf-footer__copyright
+      p.headers-footers__footer-copyright
         | Copyright © 2018 Toxin отель. Все права зачищены.
-      .hf-footer__social
+      .headers-footers__footer-social
         +svg-twitter()
         +svg-facebook()
         +svg-instagram()
