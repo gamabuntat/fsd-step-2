@@ -88,14 +88,14 @@
     column-gap: 12.5px
     outline: none
 
-    @media (max-width: 1000px)
-      grid-column: 2
-      justify-self: center
-
     &:focus, &:hover
 
       & .header__main-logo .svg-logo__circle
         fill: url(#logo__circle-gradient-focus)
+
+    @media (max-width: 1000px)
+      grid-column: 2
+      justify-self: center
 
   &__main-logo
     display: flex
