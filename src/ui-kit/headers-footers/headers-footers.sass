@@ -5,17 +5,15 @@
 html
   background-color: #E5E5E5
 
-body
+.headers-footers
   padding: 150px 0
 
-.hf
-
-  &-main
+  &__main
     display: flex
     flex-direction: column
     gap: 40px
     
-  &-footer
+  &__footer
     align-self: center
     display: flex
     flex-direction: column
@@ -27,18 +25,18 @@ body
     background-color: #fff
     box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.95)
 
-    &__logo
+    &-logo
       display: flex
       align-items: center
       gap: 12.5px
 
-    &__copyright
+    &-copyright
       margin: 0
       margin-bottom: 5px
       color: $color-main-fg
       text-align: center
 
-    &__social
+    &-social
       display: flex
       gap: 20px
 
