@@ -1,19 +1,19 @@
-### fsd second step  
+## fsd second step  
 
-#### description
+### description
 I am learning to make websites)))0
 
-#### demo
+### demo
 [demo](https://gamabuntat.github.io/fsd-step-2/)
 
-#### install
+### install
 ```
 $ git clone https://github.com/gamabuntat/fsd-step-2
 $ cd fsd-step-2
 $ npm i
 ```
 
-#### npm scripts
+### npm scripts
 - build project with production mod
 `$ npm run build`
 
@@ -24,7 +24,7 @@ $ npm i
 `$ npm start`
 
 
-#### technologies used
+### technologies used
 - node v14.7.0
 - webpack
 - sass
