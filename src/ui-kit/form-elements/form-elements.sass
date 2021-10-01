@@ -64,6 +64,9 @@
     &:last-child
       grid-column-end: span 2
 
+      @media(max-width: 760px)
+        grid-column-end: auto
+
   &__slider-container
     width: 266px
     display: flex
@@ -88,9 +91,3 @@
   &__pagination
     width: 241px
 
-@media(max-width: 760px)
-  .form-elements
-
-    &__group:last-child
-      grid-column-end: auto
-    
