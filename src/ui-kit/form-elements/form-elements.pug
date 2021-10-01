@@ -27,41 +27,42 @@ append vars
 
   -
     const title = 'Form Elements'
+    const pageClass = 'form-elements'
     isUikit = true
 
     const narrowDropdownParams = {
       narrow: true,
-      sectionNames: ["спальни", "кровати","ванные комнаты"],
-      glossary: "спальни, кровати, ванные комнаты",
-      defaultSignature: "Выберите удобства",
-      counterValues: "2 2 0",
+      sectionNames: ['спальни', 'кровати','ванные комнаты'],
+      glossary: 'спальни, кровати, ванные комнаты',
+      defaultSignature: 'Выберите удобства',
+      counterValues: '2 2 0',
     }
 
   mixin fe-title(title = "", subTitle, isNarrow)
-    .fe-title(class=isNarrow && "fe-title_narrow")
-      span.fe-title__topheading #{title}
+    .form-elements__title(class=isNarrow && "form-elements__title_narrow")
+      span.form-elements__topheading #{title}
       if subTitle
-        span.fe-title__subtitle #{subTitle}
+        span.form-elements__subtitle #{subTitle}
 
 append main
-  main.fe-main
-    article.group.group_huppa
-      .fe-container
+  main.form-elements__main
+    article.form-elements__group.form-elements__group_huppa
+      .form-elements__container
         +fe-title("text field", "default")
         +text-field({ type: "email", placeholder: "Email" })
-      .fe-container
+      .form-elements__container
         +fe-title("text field", "hover/focus")
         +text-field({ value: "This is pretty awesome", autofocus: true })
-      .fe-container
+      .form-elements__container
         +fe-title("dropdown")
         +dropdown({ counterValues: "0 0 0" })
-      .fe-container
+      .form-elements__container
         +fe-title("masked text field")
         +masked-text-field
-      .fe-container
+      .form-elements__container
         +fe-title("date dropdown")
         +date-dropdown({ endMask: "19.08.2019", calAttrs: { hash: "fecal1" } })
-      .fe-container
+      .form-elements__container
         +fe-title("filter date dropdown")
         +filter-date-dropdown({
           calAttrs: {
@@ -71,85 +72,85 @@ append main
             endDate: "2020-08-23"
           }
         })
-      .fe-container
+      .form-elements__container
         +fe-title("subscription text field")
         +subscription-text-field({ placeholder: "Email" })
 
-    article.group
-      .fe-container
+    article.form-elements__group
+      .form-elements__container
         +fe-title("checkbox buttons")
-        .fe-container.fe-container_small-indent
+        .form-elements__container.form-elements__container_small-indent
           +check({ text: "Можно курить" })
           +check({ text: "Можно с питомцами", attrs: { checked: true } })
           +check({ attrs: { checked: true } })
-      .fe-container
+      .form-elements__container
         +fe-title("radio buttons")
-        .fe-container.fe-container_large-indent.fe-container_horizontal
+        .form-elements__container.form-elements__container_large-indent.form-elements__container_horizontal
           +radio({ attrs: { name: "sex", checked: true }, text: "Мужчина" })
           +radio({ attrs: { name: "sex" }, text: "Женщина" })
-      .fe-container
+      .form-elements__container
         +fe-title("toggle")
-        .fe-container.fe-container_small-indent
+        .form-elements__container.form-elements__container_small-indent
           +toggle({ attrs: { checked: true } })
           +toggle({})
-      .fe-container
+      .form-elements__container
         +fe-title("like button")
-        .fe-container.fe-container_small-indent.fe-container_horizontal
+        .form-elements__container.form-elements__container_small-indent.form-elements__container_horizontal
           +like({ value: 2 })
           +like({ value: 12, pressed: true })
-      .fe-container
+      .form-elements__container
         +fe-title("rate button")
-        .fe-container.fe-container_large-indent.fe-container_horizontal
+        .form-elements__container.form-elements__container_large-indent.form-elements__container_horizontal
           +rate({ checked: 4 })
           +rate({ checked: 5 })
 
-    article.group
-      .fe-slider-container
+    article.form-elements__group
+      .form-elements-slider__container
         +fe-title("range slider")
         +range-label({ sliderID: "feslider", step: 100 })
         +range-slider({ id: "feslider" })
-      .fe-container
+      .form-elements__container
         +fe-title("buttons")
-        .fe-button-container
-          .fe-button
+        .form-elements__button-container
+          .form-elements__button
             +primary-button()
-          .fe-button
+          .form-elements__button
             +primary-button({ isFocused: true })
-          .fe-button
+          .form-elements__button
             +bordered-button()
-          .fe-button
+          .form-elements__button
             +bordered-button({ isFocused: true })
-          .fe-container.fe-container_horizontal.fe-container_large-indent
+          .form-elements__container.form-elements__container_horizontal.form-elements__container_large-indent
             +text-button()
             +text-button({ isFocused: true })
-          .fe-big-button
+          .form-elements__big-button
             +big-button()
-      .fe-container
+      .form-elements__container
         +fe-title("pagination")
-        .fe-pagination
+        .form-elements__pagination
           +pagination()
 
-    article.group.group_huppa
-      .fe-container
+    article.form-elements__group.form-elements__group_huppa
+      .form-elements__container
         +fe-title("dropdown", "default", true)
         +dropdown(narrowDropdownParams) 
-      .fe-container
+      .form-elements__container
         +fe-title("dropdown", "expanded", true)
         +dropdown({ ...narrowDropdownParams, isOpen: true }) 
 
-    article.group.group_huppa
-      .fe-container
+    article.form-elements__group.form-elements__group_huppa
+      .form-elements__container
         +fe-title("dropdown")
         +dropdown({ isOpen: true, counterValues: "0 0 0" })
 
-    article.group.group_huppa
-      .fe-container
+    article.form-elements__group.form-elements__group_huppa
+      .form-elements__container
         +fe-title("dropdown")
         +dropdown({ isOpen: true, counterValues: "2 1 0" })
 
-    article.group
-      .fe-container
-        .fe-container.fe-container_large-indent
+    article.form-elements__group
+      .form-elements__container
+        .form-elements__container.form-elements__container_large-indent
           +check-list({})
           +check-list({
             checkParams: [
@@ -164,8 +165,8 @@ append main
             isOpen: true,
           })
 
-    article.group
-      .fe-container.fe-container_small-indent
+    article.form-elements__group
+      .form-elements__container.form-elements__container_small-indent
         +fe-title("rich Checkbox Buttons")
         +rich-check({
           title: "Широкий коридор",
@@ -176,16 +177,16 @@ append main
           text: "На 1 этаже вас встретит специалист и проводит до номера."
         })
 
-    article.group
-      .fe-container
+    article.form-elements__group
+      .form-elements__container
         +fe-title("bullet list")
         +bullet-list({})
 
-    article.group
-      .fe-container.fe-container_large-indent
+    article.form-elements__group
+      .form-elements__container.form-elements__container_large-indent
         +about-room("comfort")
         +about-room("convenience")
 
-    article.group
+    article.form-elements__group
       +comment({})
 
