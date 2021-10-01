@@ -21,35 +21,47 @@ class Header extends BEMBlock {
 
   setListeners() {
     this.setHandleWindowClick();
+    this.setHandleHeaderClick();
     this.setHandleBurgerClick();
     this.setHandleMenuButtonClick();
   }
 
   bindListeners() {
     window.addEventListener('click', this.handleWindowClick);
+    this.root.addEventListener('click', this.handleHeaderClick);
     this.elemsMap.burger.addEventListener('click', this.handleBurgerClick);
     this.menuButtons.forEach((mb) => (
       mb.addEventListener('click', this.handleMenuButtonClick))
     );
   }
 
-  setHandleBurgerClick() {
-    this.handleBurgerClick = () => {
-      this.elemsMap.burger.classList.toggle(this.mods.burgerPressed);
+  setHandleWindowClick() {
+    this.handleWindowClick = () => {
+      if (this.closeTrigger) {
+        this.closeOpenSubMenu();
+        this.closeMenu();
+      }
+      this.closeTrigger = true;
     };
   }
 
-  setHandleWindowClick() {
-    this.handleWindowClick = () => {
-      if (!this.closeTrigger) { 
-        this.closeTrigger = true;
-        return; 
-      }
-      const openMenu = this.getOpenMenu();
-      if (openMenu) {
-        openMenu.classList.remove(this.mods.menuButtonPressed); 
-      }
-      this.closeTrigger = true;
+  closeOpenSubMenu() {
+    this.removeMenuButtonsPressedMod();
+  }
+
+  closeMenu() {
+    this.elemsMap.burger.classList.remove(this.mods.burgerPressed);
+  }
+
+  setHandleHeaderClick() {
+    this.handleHeaderClick = () => {
+      this.closeTrigger = false;
+    };
+  }
+
+  setHandleBurgerClick() {
+    this.handleBurgerClick = () => {
+      this.elemsMap.burger.classList.toggle(this.mods.burgerPressed);
     };
   }
 
@@ -61,14 +73,9 @@ class Header extends BEMBlock {
       this.removeMenuButtonsPressedMod();
       if (!isPressedMod) {
         menuButton.classList.add(this.mods.menuButtonPressed); 
-        this.closeTrigger = false;
+        this.closeSubMenuTrigger = false;
       }
     };
-  }
-
-  getOpenMenu() {
-    return [...this.menuButtons]
-      .find((mb) => mb.classList.contains(this.mods.menuButtonPressed));
   }
 
   removeMenuButtonsPressedMod() {
