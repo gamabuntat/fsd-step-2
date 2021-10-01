@@ -10,17 +10,18 @@ append vars
 
   - 
     const title = 'Cards'
+    const pageClass = 'cards'
     isUikit = true
 
 append main
-  main.c-main
-    .c-column
+  main.cards__main
+    .cards__column
       +card-search-room({
         dropdownParams: { hash: "cardd_021" },
         dateDropdownParams: { calAttrs: { initDate: "2022" } }
       })
       +card-reg({})
-    .c-column
+    .cards__column
       +card-room-details({
         dateDroppdownParams: {
           calAttrs: {
@@ -32,12 +33,12 @@ append main
         dropdownParams: { counterValues: "3" }
       })
       +card-sign-in({})
-    .c-column.c-column_narrow
+    .cards__column.cards__column_narrow
       +calendar({})
       +card-room-preview({}) 
       - 
         const cardRoomParams = {
-          imgNames: Array(4).fill("crp-2.webp"),
+          imgNames: Array(4).fill('crp-2.webp'),
           roomNumber: 840,
           cost: 9900,
           isLuxury: false,
