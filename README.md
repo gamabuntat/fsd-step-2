@@ -18,7 +18,7 @@ $ npm i
 `$ npm run build`
 
 - check code errors
-`$ npm lint`
+`$ npm run lint`
 
 - start dev server
 `$ npm start`
