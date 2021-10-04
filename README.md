@@ -14,14 +14,14 @@ $ npm i
 ```
 
 ### npm scripts
-- build project with production mod
 `$ npm run build`
+- build project with production mod
 
-- check code errors
 `$ npm run lint`
+- check code errors
 
-- start dev server
 `$ npm start`
+- start dev server
 
 
 ### technologies used

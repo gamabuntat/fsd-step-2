@@ -7,6 +7,18 @@ const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin")
   .default;
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
+const alias = {
+  '@': path.resolve(__dirname, './'),
+  '@src': path.resolve(__dirname, 'src'),
+  '@styles': path.resolve(__dirname, 'src/styles'),
+  '@scripts': path.resolve(__dirname, 'src/scripts'),
+  '@library': path.resolve(__dirname, 'src/components'),
+  '@assets': path.resolve(__dirname, 'src/assets'),
+  '@fonts': path.resolve(__dirname, 'src/assets/fonts'),
+  '@img': path.resolve(__dirname, 'src/assets/img'),
+  '@favicons': path.resolve(__dirname, 'src/assets/favicons'),
+};
+
 const getEntry = (p) => {
   return fs.readdirSync(p).reduce((entries, name) => {
     entries[name] = `${p}${path.sep}${name}${path.sep}${name}.js`;
@@ -38,18 +50,10 @@ module.exports = (env, argv) => {
     entry,
     output: {
       filename: '[name].js',
-      path: path.resolve(__dirname, 'docs'),
+      path: path.resolve(__dirname, 'dist'),
       assetModuleFilename: 'images/[name][ext][query]'
     },
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, './'),
-        '@src': path.resolve(__dirname, 'src'),
-        '@styles': path.resolve(__dirname, 'src/styles'),
-        '@scripts': path.resolve(__dirname, 'src/scripts'),
-        '@library': path.resolve(__dirname, 'src/components'),
-      },
-    },
+    resolve: { alias },
     devServer: {
       compress: true,
       port: 8080,
@@ -120,14 +124,14 @@ module.exports = (env, argv) => {
           test: /\.(svg|png|jpe?g|gif|webp)$/i,
           type: 'asset/resource',
           exclude: [
-            path.resolve(__dirname, 'src/fonts'),
-            path.resolve(__dirname, 'src/favicons')
+            path.resolve(__dirname, 'src/assets/fonts'),
+            path.resolve(__dirname, 'src/assets/favicons')
           ],
         },
         {
           test: /\.(svg|png|ico)$/i,
           type: 'asset/resource',
-          include: path.resolve(__dirname, 'src/favicons'),
+          include: path.resolve(__dirname, 'src/assets/favicons'),
           generator: {
             filename: 'favicons/[name][ext][query]'
           },
@@ -135,7 +139,7 @@ module.exports = (env, argv) => {
         {
           test: /\.(svg|ttf|otf|eot|woff)$/i,
           type: 'asset/resource',
-          include: path.resolve(__dirname, 'src/fonts'),
+          include: path.resolve(__dirname, 'src/assets/fonts'),
           generator: {
             filename: 'fonts/[name][ext][query]'
           },
