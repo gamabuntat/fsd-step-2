@@ -32,14 +32,11 @@
       stroke-width: 5px
 
   &__mark
-    font-weight: bold
-    font-size: useless.px2rem(24px)
+    @include useless.font-type($weight: bold, $size: 24px)
     fill: $color-primary
 
   &__votes
-    font-weight: bold
-    font-size: useless.px2rem(12px)
-    text-transform: uppercase
+    @include useless.font-type($weight: bold, $size: 12px, $transform: uppercase)
     fill: $color-primary
   
   &__list

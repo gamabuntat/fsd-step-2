@@ -169,8 +169,7 @@
         color: $color-main-fg
 
       &_important
-        font-weight: bold
-        color: $color-main-fg
+        @include useless.font-type($weight: bold, $color: $color-main-fg)
 
         &:hover, &:focus
           color: $color-title-fg

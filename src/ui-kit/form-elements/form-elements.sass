@@ -24,12 +24,9 @@
 
   &__topheading
     @include useless.font-bold-type
-    color: $color-title-fg
 
   &__subtitle
-    font-size: useless.px2rem(12px)
-    text-transform: uppercase
-    color: $color-additional-fg
+    @include useless.font-type($size: 12px, $color: $color-additional-fg, $transform: uppercase)
 
   &__container
     display: flex

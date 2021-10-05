@@ -1,5 +1,4 @@
 @use '@styles/useless/useless'
-
 @import '@styles/vars/colors'
 
 .rich-check
@@ -65,15 +64,13 @@
     display: flex
 
   &__title
-    color: $color-main-fg
-    font-weight: bold
+    @include useless.font-type($weight: bold, $color: $color-main-fg)
     max-width: 232px
     width: max-content
 
   &__text
     grid-column-start: 2
-    color: $color-additional-fg
-    font-size: useless.px2rem(12px)
+    @include useless.font-type($size: 12px, $color: $color-additional-fg)
     max-width: 232px
     width: max-content
 

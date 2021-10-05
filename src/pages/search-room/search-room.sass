@@ -61,7 +61,6 @@
     &-title
       @include useless.font-bold-type
       margin: 0 0 5px
-      color: $color-title-fg
 
     &-container
       display: flex
@@ -138,8 +137,7 @@
       flex-basis: 100%
 
     &-caption
-      font-size: useless.px2rem(12px)
-      color: $color-additional-fg
+      @include useless.font-type($size: 12px, $color: $color-additional-fg)
 
   &__house-rules
     display: flex

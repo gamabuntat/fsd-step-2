@@ -43,8 +43,7 @@
 
   &__title
     margin: 0
-    color: $color-title-fg 
-    font-size: useless.px2rem(19px)
+    @include useless.font-type($size: 19px, $color: $color-title-fg)
     
   &__about-room, &__impressions, &__rules, &__cancel
     display: flex

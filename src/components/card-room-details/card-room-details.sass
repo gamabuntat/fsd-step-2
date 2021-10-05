@@ -38,16 +38,14 @@
     display: flex
     column-gap: 4px
 
-  &__total-caption, &__total-cost
-    font-weight: bold
-    color: $color-title-fg
-    font-size: useless.px2rem(19px)
+    &-caption, &-cost
+      @include useless.font-type($size: 19px, $weight: bold, $color: $color-title-fg)
     
-  &__total-dashed-line
-    width: 100%
-    border-bottom: 1px dotted $color-unclaimed-fg
-    height: 80%
-    box-sizing: border-box
+    &-dashed-line
+      width: 100%
+      border-bottom: 1px dotted $color-unclaimed-fg
+      height: 80%
+      box-sizing: border-box
 
   & > &__container > *:last-child
     margin-top: 0

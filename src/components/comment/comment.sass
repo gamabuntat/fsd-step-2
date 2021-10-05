@@ -1,5 +1,6 @@
 @use 'sass:color'
 
+@use '@styles/useless/useless'
 @import '@styles/vars/colors'
 
 .comment
@@ -9,9 +10,9 @@
   column-gap: 10px
 
   &__avatar-container
+    $avatar-size: 48px
     display: flex
     align-items: center
-    $avatar-size: 48px
     width: $avatar-size
     height: $avatar-size
     border: 2px solid white
@@ -32,8 +33,7 @@
     line-height: 24px
 
   &__name
-    font-weight: bold
-    color: $color-title-fg
+    @include useless.font-type($weight: bold, $color: $color-title-fg)
 
   &__last-visited
     color: $color-main-fg

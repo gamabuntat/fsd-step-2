@@ -8,11 +8,14 @@ append vars
 
   mixin color-type({ title = "Dark Shade 100%", color = "#1F2041" })
     - 
-      const findPercent = (string) => (string.match(/\d+(?=%)/) || ['100'])[0]
-      const percentToRelativeUnits = (percent) => percent / 100
+      const baseClass = 'color-types__color-example'
+      const toKebab = (str) => str.replace(/\s/g, '-').toLowerCase()
+      const removePercentageSymb = (str) => (
+        str.endsWith('%') ? str.slice(0, -1) : str
+      )
 
     .color-types__color
-      .color-types__color-example(style=`background: ${color}; opacity: ${percentToRelativeUnits(Number(findPercent(title)))}`)
+      .color-types__color-example(class=`${baseClass}_${removePercentageSymb(toKebab(title))}`)
       .color-types__color-container
         h2.color-types__color-title= title
         p.color-types__color-caption= color

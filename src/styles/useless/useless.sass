@@ -1,14 +1,21 @@
 @use 'sass:math'
 
 @import '@styles/vars/colors'
+@import '@styles/vars/fonts'
 
-@function px2rem($px, $base: 14px)
-  @return math.div($px, $base) * 1rem
+@function px2rem($px)
+  @return math.div($px, $base-font-size) * 1rem
 
-@mixin font-bold-type($font-size: 12px)
-  font-size: px2rem($font-size)
-  font-weight: bold
-  text-transform: uppercase
+@mixin font-type($size: null, $color: null, $weight: null, $transform: null, $family: null)
+  @if $size
+    font-size: px2rem($size)
+  font-weight: $weight
+  color: $color
+  text-transform: $transform
+  font-family: $family
+
+@mixin font-bold-type
+  @include font-type(12px, $color-title-fg, bold, uppercase)
 
 @mixin button-common-styles($color-bg: white)
   background-color: $color-bg
@@ -31,7 +38,7 @@
   &:focus, &:hover
     border: 1px solid $color-additional-fg
 
-@mixin card-common()
+@mixin card-common
   display: flex
   justify-content: center
   max-width: 380px
@@ -58,13 +65,11 @@
 
   &__title
     margin: 0
-    color: $color-title-fg
-    font-size: px2rem(24px)
+    @include font-type($size: 24px, $color: $color-title-fg)
     line-height: 29px
 
   &__sub-title
     @include font-bold-type
-    color: $color-title-fg
 
   &__big-button
     height: 44px
@@ -79,7 +84,7 @@
   & > &__container > *:last-child
     margin-top: 8px
 
-@mixin card-heading()
+@mixin card-heading
   &__heading
     display: flex
     align-items: flex-end
@@ -87,9 +92,8 @@
 
   &__room-number
     margin: 0
-    font-size: px2rem(24px)
+    @include font-type($size: 24px, $color: $color-title-fg)
     justify-content: flex-end
-    color: $color-title-fg
     vertical-align: bottom
 
     &::before
@@ -105,11 +109,9 @@
         margin-left: 1px
 
   &__cost
-    font-weight: bold
-    color: $color-additional-fg
+    @include font-type($weight: bold, $color: $color-additional-fg)
 
     &::after
       content: ' в сутки'
-      font-weight: normal
-      font-size: px2rem(12px)
+      @include font-type($weight: normal, $size: 12px)
   

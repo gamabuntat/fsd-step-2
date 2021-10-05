@@ -27,6 +27,29 @@
       background-color: $color-title-fg
       border-radius: 6px
 
+      &_dark-shade
+
+        &-100
+          background-color: $color-title-fg
+
+        &-75
+          background-color: $color-main-fg
+          
+        &-50
+          background-color: $color-additional-fg
+
+        &-25
+          background-color: $color-unclaimed-fg
+
+        &-5
+          background-color: color.adjust($color-title-fg, $alpha: -0.95)
+
+      &_purple
+        background-color: $color-primary
+
+      &_green
+        background-color: $color-secondary
+
     &-container
       display: flex
       flex-direction: column
@@ -36,9 +59,7 @@
     &-title
       margin: 0
       width: max-content
-      color: $color-title-fg
-      font-size: useless.px2rem(19px)
-      font-weight: bold
+      @include useless.font-type($size: 19px, $weight: bold, $color: $color-title-fg)
 
     &-caption
       margin: 0
@@ -54,9 +75,7 @@
 
     &-example
       max-width: 369px
-      font-size: useless.px2rem(24px)
-      font-weight: bold
-      color: $color-title-fg
+      @include useless.font-type($size: 24px, $weight: bold, $color: $color-title-fg)
 
       &_h2
         font-size: useless.px2rem(19px)
@@ -65,25 +84,19 @@
         @include useless.font-bold-type
 
       &_body
-        font-size: useless.px2rem(14px)
-        font-weight: normal
-        color: $color-main-fg
+        @include useless.font-type($size: 14px, $weight: normal, $color: $color-main-fg)
         max-width: 310px
         
     &-title
       justify-self: end
-      font-size: useless.px2rem(24px)
-      font-weight: normal
-      color: $color-unclaimed-fg
+      @include useless.font-type($size: 24px, $weight: normal, $color: $color-unclaimed-fg)
 
       &_h2
         font-size: useless.px2rem(19px)
 
       &_h3
-        @include useless.font-bold-type
-        font-weight: normal
+        @include useless.font-type($size: 12px, $transform: uppercase)
 
       &_body
         font-size: useless.px2rem(14px)
-        font-weight: normal
         

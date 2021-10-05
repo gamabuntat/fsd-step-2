@@ -18,10 +18,9 @@
     width: 40px
     height: 40px
     background-color: $color-main-bg
-    color: $color-additional-fg
     border-radius: 50%
     text-decoration: none
-    font-size: useless.px2rem(12px)
+    @include useless.font-type($size: 12px, $color: $color-additional-fg)
     outline: none
 
     &:hover, &:focus
@@ -29,8 +28,7 @@
 
     &_active
       background: $gradient-primary
-      color: white
-      font-weight: bold
+      @include useless.font-type($color: white, $weight: bold)
 
       &:focus, &:hover
         background: $gradient-focus

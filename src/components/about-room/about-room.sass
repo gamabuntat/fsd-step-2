@@ -1,5 +1,6 @@
 @use 'sass:color'
 
+@use '@styles/useless/useless'
 @import '@styles/vars/colors'
 
 .about-room
@@ -33,8 +34,7 @@
     background-position: center center
 
   &__title
-    font-weight: bold
-    color: $color-main-fg
+    @include useless.font-type($weight: bold, $color: $color-main-fg)
 
   &__description
     color: $color-main-fg
