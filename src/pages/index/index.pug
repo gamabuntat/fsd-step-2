@@ -1,31 +1,24 @@
 extends ../../layout/layout
 
 append vars
-  - isUikit = true
+  - 
+    isUikit = true
+    const pageClass = 'index'
+    const uiKit = ['colors-types', 'form-elements', 'cards', 'headers-footers']
+    const pages = ['landing', 'search-room', 'room-details', 'reg', 'sign-in']
+    const setExt = (name) => `${name}.html`
+    const replaseDashes = (name) => name.replace(/-/g, ' ')
 
 block main
-  ul
-    li
-      h2 ui-kit:
-    li
-      a(href="colors-types.html") colors & types
-    li 
-      a(href="form-elements.html" title="hihefe") form elements
-    li 
-      a(href="cards.html") cards
-    li
-      a(href="headers-footers.html") headers & footers
+  h2.index__title ui-kit:
+  ul.index__list
+    each name of uiKit
+      li.index__item
+        a.index__link(href=setExt(name)) #{replaseDashes(name)}
 
-    li
-      h2 pages: 
-    li
-      a(href="landing.html") landing
-    li
-      a(href="search-room.html") search room
-    li
-      a(href="room-details.html") room details
-    li
-      a(href="reg.html") registration
-    li
-      a(href="sign-in.html") sign in 
+  h2.index__title pages: 
+  ul.index__list
+    each name of pages
+      li.index__item
+        a.index__link(href=setExt(name)) #{replaseDashes(name)}
 
