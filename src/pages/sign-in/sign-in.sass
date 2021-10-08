@@ -9,7 +9,7 @@
     justify-content: center
     align-items: center
     flex-grow: 1
-    height: 700px
+    min-height: 683px
 
     &-photo
       position: absolute
@@ -18,11 +18,12 @@
       object-fit: cover
       z-index: -1
       animation-duration: 30s
-      animation-name: hide-bg
+      // animation-name: hide-bg
       animation-iteration-count: infinite
 
       &:nth-child(2)
         animation-delay: 15s
+        transform: scale(1.08)
 
   &__card-sign-in
     width: min(380px, 100%)
