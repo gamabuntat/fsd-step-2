@@ -3,11 +3,13 @@ include /calendar/calendar
 
 mixin filter-date-dropdown({ calAttrs })
   article.filter-date-dropdown.js-filter-date-dropdown
-    button.filter-date-dropdown__btn.js-filter-date-dropdown__btn.js-filter-date-dropdown__btn
+    button.filter-date-dropdown__btn.js-filter-date-dropdown__btn
       .filter-date-dropdown__sign.js-filter-date-dropdown__sign Set any range
       .filter-date-dropdown__expand-icon
         +svg-expand-icon()
     .filter-date-dropdown__calendar-container
-      .filter-date-dropdown__calendar-wrapper.js-filter-date-dropdown__calendar-wrapper.filter-date-dropdown__calendar-wrapper_hidden
+      .filter-date-dropdown__calendar-wrapper(
+      ).js-filter-date-dropdown__calendar-wrapper(
+      ).filter-date-dropdown__calendar-wrapper_hidden
         +calendar({ narrow: true, ...calAttrs })
 

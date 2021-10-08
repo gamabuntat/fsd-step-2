@@ -24,8 +24,8 @@ $max-width: 1000px
     display: grid
     grid-template-columns: repeat(12, 1fr)
     gap: 40px
-    padding: 100px 10px
-    width: min(1920px, 100%)
+    padding: 104px 10px 80px
+    width: min(1180px, 100%)
     box-sizing: border-box
 
     @media (max-width: $max-width) 
@@ -37,7 +37,7 @@ $max-width: 1000px
     display: flex
     flex-direction: column
     grid-column: span 3
-    gap: 20px
+    gap: 14px
 
   &__logo
     display: flex
@@ -117,7 +117,7 @@ $max-width: 1000px
       align-items: center
       justify-content: space-between
       padding: 0 10px
-      width: min(1920px, 100%)
+      width: min(1180px, 100%)
       height: 100%
       box-sizing: border-box
 
@@ -131,7 +131,7 @@ $max-width: 1000px
     
   &__social
     display: flex
-    gap: 20px
+    gap: 22px
 
     &-twitter
       @extend %social-block
