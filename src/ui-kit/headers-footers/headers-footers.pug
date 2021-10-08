@@ -13,11 +13,29 @@ append vars
     const title = 'Headers & Footers'
     const pageClass = 'headers-footers'
     isUikit = true
+    const headerContent = [
+      {
+        text: 'О нас',
+        isImportatn: true
+      },
+      {
+        type: 'expandableItem',
+      },
+      {},
+      {
+        text: 'Новости',
+      },
+      {
+        type: 'expandableItem',
+        text: 'Соглашения',
+        itemTexts: Array(4).fill('hieh')
+      }
+    ]
 
 append main
   .headers-footers__main
-    +header({})
-    +header({ authorized: true })
+    +header({ content: headerContent })
+    +header({ content: headerContent, authorized: true })
     +footer({})
     .headers-footers__footer
       .headers-footers__footer-logo

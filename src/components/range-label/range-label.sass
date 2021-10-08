@@ -1,4 +1,6 @@
+@use '@styles/useless/useless'
 @import '@styles/vars/colors'
 
 .range-label
-  color: $color-additional-fg
+  @include useless.font-type($size: 12px, $color: $color-additional-fg)
+
