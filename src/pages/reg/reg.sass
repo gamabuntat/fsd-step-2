@@ -1,41 +1,5 @@
+@use '@styles/useless/reg-styles'
+
 .reg
-  display: flex
-  flex-direction: column
-  min-height: 100vh
-
-  &__main
-    position: relative
-    display: flex
-    justify-content: center
-    align-items: center
-    flex-grow: 1
-    min-height: 683px
-    overflow: hidden
-
-    &-photo
-      position: absolute
-      width: 100%
-      height: 100%
-      object-fit: cover
-      z-index: -1
-      animation-duration: 30s
-      animation-name: hide-bg
-      animation-iteration-count: infinite
-
-      &:nth-child(2)
-        animation-delay: 15s
-        width: 106%
-
-  &__card-reg
-    width: min(380px, 100%)
-
-@keyframes hide-bg
-  0%, 35%
-    opacity: 1
-  50%
-    opacity: 0
-  85%
-    opacity: 0
-  100%
-    opacity: 1
+  @include reg-styles.reg-styles
 
