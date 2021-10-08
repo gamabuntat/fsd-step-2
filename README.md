@@ -1,7 +1,7 @@
 ## fsd second step  
 
 ### description
-I am learning to make websites)))0
+just a training project hotel website
 
 ### demo
 [demo](https://gamabuntat.github.io/fsd-step-2/)
@@ -15,7 +15,7 @@ $ npm i
 
 ### npm scripts
 `$ npm run build`
-- build project with production mod
+- build project with production mod in dist directory
 
 `$ npm run lint`
 - check code errors
