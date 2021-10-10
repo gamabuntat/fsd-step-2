@@ -3,6 +3,8 @@
 @use '@styles/useless/useless'
 @import '@styles/vars/colors'
 
+$arrow: '.svg-expand-icon'
+
 @mixin container-styles($color-border: rgba(31, 32, 65, .25))
   display: flex
   padding: 0
@@ -41,7 +43,7 @@ $color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
     &:hover, &:focus
       border-color: $color-additional-fg
 
-      & .dropdown__expand-icon > *
+      & .dropdown__expand-icon > #{$arrow}
         opacity: .75
 
   &__signature

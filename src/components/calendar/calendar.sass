@@ -4,6 +4,7 @@
 @import '@styles/vars/colors'
 
 $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
+$arrow: '.svg-forward-arrow'
 
 .calendar
   display: flex
@@ -20,10 +21,15 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
   &_narrow 
     padding: 7px
     width: 266px
+    border-top-right-radius: 0
+    border-top-left-radius: 0
+    border-color: $color-additional-fg
 
     & .calendar
 
       $small-size: 252px
+      $small-button-size: calc(#{$small-size} / 7)
+
       &__table-container
         min-width: $small-size
         width: $small-size
@@ -31,7 +37,6 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
       &__main-table
         max-width: $small-size
 
-      $small-button-size: calc(#{$small-size} / 7)
       &__day
         max-width: $small-button-size
         height: $small-button-size
@@ -49,11 +54,11 @@ $color-selected-day: color.adjust($color-primary, $alpha: -0.80)
     align-items: center
     justify-content: center
 
-    & *
-      fill: $color-primary
+    & #{$arrow}
       opacity: 1
 
-    &:hover *, &:focus *
+    &:hover #{$arrow}__arrow,
+    &:focus #{$arrow}__arrow
       fill: $color-focus
 
   &__prev-month-btn

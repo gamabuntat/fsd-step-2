@@ -1,6 +1,8 @@
 @use '@styles/useless/useless'
 @import '@styles/vars/colors'
 
+$arrow: '.svg-expand-icon'
+
 .filter-date-dropdown
   width: 266px
 
@@ -23,7 +25,7 @@
     &:focus, &:hover
       border-color: $color-additional-fg
 
-      & .filter-date-dropdown__expand-icon > *
+      & .filter-date-dropdown__expand-icon > #{$arrow}
         opacity: .75
 
   &__sign
@@ -46,7 +48,3 @@
       &_hidden
         display: none
 
-      & > *
-        border-top-right-radius: 0
-        border-top-left-radius: 0
-        border-color: $color-additional-fg

@@ -3,6 +3,8 @@
 @use '@styles/useless/useless'
 @import '@styles/vars/colors'
 
+$arrow: '.svg-forward-arrow'
+
 .pagination
   display: flex
   justify-content: space-between
@@ -43,8 +45,10 @@
     height: 40px
     background: $gradient-secondary
 
-    & *
+    & #{$arrow}
       opacity: 1
+
+    & #{$arrow}__arrow
       fill: white
 
     &:hover, &:focus
