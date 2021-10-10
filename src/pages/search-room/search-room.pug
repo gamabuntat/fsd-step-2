@@ -20,68 +20,69 @@ append vars
 
 block main
   main.search-room__main
-    button.search-room__aside-button.js-search-room__aside-button 
-      +svg-expand-icon()
-      +svg-expand-icon()
-    aside.search-room__filter.js-search-room__filter
-      .search-room__filter-container
-        button.search-room__filter-button.js-search-room__filter-button
-          +svg-expand-icon()
-          +svg-expand-icon()
+    .search-room__main-container
+      button.search-room__aside-button.js-search-room__aside-button 
+        +svg-expand-icon()
+        +svg-expand-icon()
+      aside.search-room__filter.js-search-room__filter
+        .search-room__filter-container
+          button.search-room__filter-button.js-search-room__filter-button
+            +svg-expand-icon()
+            +svg-expand-icon()
 
-        .search-room__filter-content
-          .search-room__dropdowns-container
-            section.search-room__date-dropdown
-              h2.search-room__filter-title даты пребывания в отеле
-              +filter-date-dropdown({ calAttrs: { hash: calHash } })
+          .search-room__filter-content
+            .search-room__dropdowns-container
+              section.search-room__date-dropdown
+                h2.search-room__filter-title даты пребывания в отеле
+                +filter-date-dropdown({ calAttrs: { hash: calHash } })
 
-            section.search-room__dropdown
-              h2.search-room__filter-title гости
-              +dropdown({ hash: dropdownHash, narrow: true })
+              section.search-room__dropdown
+                h2.search-room__filter-title гости
+                +dropdown({ hash: dropdownHash, narrow: true })
 
-          section.search-room__range-slider
-            h2.search-room__filter-title диапазон цены
-            .search-room__range-slider-label
-              +range-label({ sliderID: "srs1", step: 100 })
-            .search-room__range-slider-container
-              +range-slider({ id: "srs1" })
-            .search-room__range-slider-caption 
-              | Стоимость за сутки пребывания в номере
+            section.search-room__range-slider
+              h2.search-room__filter-title диапазон цены
+              .search-room__range-slider-label
+                +range-label({ sliderID: "srs1", step: 100 })
+              .search-room__range-slider-container
+                +range-slider({ id: "srs1" })
+              .search-room__range-slider-caption 
+                | Стоимость за сутки пребывания в номере
 
-          section.search-room__house-rules
-            h2.search-room__filter-title правила дома
-            +check({ text: "можно курить" })
-            +check({ text: "Можно с питомцами", attrs: { checked: true } })
-            +check({ attrs: { checked: true } })
+            section.search-room__house-rules
+              h2.search-room__filter-title правила дома
+              +check({ text: "можно курить" })
+              +check({ text: "Можно с питомцами", attrs: { checked: true } })
+              +check({ attrs: { checked: true } })
 
-          section.search-room__accessibility
-            h2.search-room__filter-title доступность
-            +rich-check({
-              text: "Ширина коридоров в номере не менее 91 см.",
-              title: "Широкий коридор"
-            })
-            +rich-check({})
+            section.search-room__accessibility
+              h2.search-room__filter-title доступность
+              +rich-check({
+                text: "Ширина коридоров в номере не менее 91 см.",
+                title: "Широкий коридор"
+              })
+              +rich-check({})
 
-          section.search-room__amenitie
-            h2.search-room__filter-title удобства номера
-            +dropdown({
-              narrow: true,
-              sectionNames: ["спальни", "кровати","ванные комнаты"],
-              glossary: "спальни, кровати, ванные комнаты",
-              defaultSignature: "Выберите удобства",
-              counterValues: "2 2 0",
-            })
+            section.search-room__amenitie
+              h2.search-room__filter-title удобства номера
+              +dropdown({
+                narrow: true,
+                sectionNames: ["спальни", "кровати","ванные комнаты"],
+                glossary: "спальни, кровати, ванные комнаты",
+                defaultSignature: "Выберите удобства",
+                counterValues: "2 2 0",
+              })
 
-          section.search-room__additional-amenities
-            +check-list({})
+            section.search-room__additional-amenities
+              +check-list({})
 
-      button.search-room__filter-plug.js-search-room__filter-plug
+        button.search-room__filter-plug.js-search-room__filter-plug
 
-    article.search-room__content
-      h1.search-room__title Номера, которые мы для вас подобрали
-      .search-room__content-container
-        each p in roomParams
-          +card-room-preview(p)
-      .search-room__content-pagination
-        +pagination({})
+      article.search-room__content
+        h1.search-room__title Номера, которые мы для вас подобрали
+        .search-room__content-container
+          each p in roomParams
+            +card-room-preview(p)
+        .search-room__content-pagination
+          +pagination({})
 

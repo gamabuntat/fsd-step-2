@@ -8,8 +8,6 @@ mixin filter-date-dropdown({ calAttrs })
       .filter-date-dropdown__expand-icon
         +svg-expand-icon()
     .filter-date-dropdown__calendar-container
-      .filter-date-dropdown__calendar-wrapper(
-      ).js-filter-date-dropdown__calendar-wrapper(
-      ).filter-date-dropdown__calendar-wrapper_hidden
+      .filter-date-dropdown__calendar-wrapper.js-filter-date-dropdown__calendar-wrapper.filter-date-dropdown__calendar-wrapper_hidden
         +calendar({ narrow: true, ...calAttrs })
 

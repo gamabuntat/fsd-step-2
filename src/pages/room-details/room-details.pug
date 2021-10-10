@@ -29,44 +29,45 @@ block main
       )
     
     article.room-details__content
-      section.room-details__content-container
-        .room-details__about-room
-          h2.room-details__title Сведения о номере
-          +about-room()
-          +about-room("convenience")
-          +about-room("coziness", true)
+      .room-details__content-wrapper
+        section.room-details__content-container
+          .room-details__about-room
+            h2.room-details__title Сведения о номере
+            +about-room()
+            +about-room("convenience")
+            +about-room("coziness", true)
 
-        section.room-details__impressions
-          h2.room-details__title Впечатления от номера
-          +impressions
+          section.room-details__impressions
+            h2.room-details__title Впечатления от номера
+            +impressions
 
-        section.room-details__comments
-          h2.room-details__title Отзывы посетителей номера
-          span.room-details__comments-counter 2 отзыва
-          +comment({})
-          +comment({
-            avatar: "avatar-2.webp",
-            name: "Патрисия Стёклышкова",
-            lastVisited: "Неделю назад",
-            likeParams: { value: 2, pressed: false },
-            text: "Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент"
+          section.room-details__comments
+            h2.room-details__title Отзывы посетителей номера
+            span.room-details__comments-counter 2 отзыва
+            +comment({})
+            +comment({
+              avatar: "avatar-2.webp",
+              name: "Патрисия Стёклышкова",
+              lastVisited: "Неделю назад",
+              likeParams: { value: 2, pressed: false },
+              text: "Обслуживание на высоте! Всё аккуратно, чисто. Завтраки в номер советую заказать, каждый день новое блюдо и десерт как комплимент"
+            })
+
+          section.room-details__rules
+            h2.room-details__title Правила
+            +bullet-list({})
+
+          section.room-details__cancel
+            h2.room-details__title Отмена
+            p.room-details__cancel-text
+              | Бесплатная отмена в течение 48 ч. 
+              | После этого при отмене не позднее чем за 5 дн. 
+              | до прибытия вы получите полный возврат 
+              | за вычетом сбора за услуги.
+        
+        article.room-details__card
+          +card-room-details({
+            dropdownParams: { hash: dropdownHash },
+            dateDroppdownParams: { calAttrs: { hash: calHash } }
           })
-
-        section.room-details__rules
-          h2.room-details__title Правила
-          +bullet-list({})
-
-        section.room-details__cancel
-          h2.room-details__title Отмена
-          p.room-details__cancel-text
-            | Бесплатная отмена в течение 48 ч. 
-            | После этого при отмене не позднее чем за 5 дн. 
-            | до прибытия вы получите полный возврат 
-            | за вычетом сбора за услуги.
-      
-      article.room-details__card
-        +card-room-details({
-          dropdownParams: { hash: dropdownHash },
-          dateDroppdownParams: { calAttrs: { hash: calHash } }
-        })
 

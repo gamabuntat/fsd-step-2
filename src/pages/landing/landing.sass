@@ -5,6 +5,7 @@
 
   &__main
     display: flex
+    justify-content: center
     position: relative
     flex-grow: 1
     min-height: 830px
@@ -25,19 +26,16 @@
 
       &:nth-child(3)
         animation-delay: 20s
-        object-position: 50% calc(50% - 35px)
 
     &-container
       display: flex
       flex-direction: column
       justify-content: space-between
-      margin: 0 auto
-      padding: 70px 4px 21px 10px
-      width: min(1180px, 100%)
-      box-sizing: border-box
+      padding: 70px 134px 21px 140px
+      width: min(1920px, 100%)
       gap: 25px
 
-      @media (max-width: 410px)
+      @media (max-width: 654px)
         padding: 70px 0
 
     &-caption

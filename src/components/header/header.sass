@@ -7,22 +7,24 @@
   display: flex
   justify-content: center
   align-items: center
+  padding: 0 140px
   background-color: white
   color: $color-additional-fg
   box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.95)
   box-sizing: border-box
 
-  @media (max-width: 1000px)
+  @media (max-width: 1170px)
     position: sticky
     top: 0
     z-index: 1000
+    padding: 0 10px
 
   &_for-authorized-user
 
     & .header__container
       grid-template-columns: min-content 1fr auto max-content
 
-      @media (max-width: 1000px)
+      @media (max-width: 1170px)
         grid-template-columns: auto 1fr max-content
 
       @media (max-width: 420px)
@@ -34,13 +36,13 @@
     & .header__separator
       display: initial
 
-      @media (max-width: 1000px)
+      @media (max-width: 1170px)
         display: none
 
     & .header__user-name
       display: initial
 
-      @media (max-width: 1000px)
+      @media (max-width: 1170px)
         grid-row: 1
         grid-column: -2
 
@@ -49,12 +51,11 @@
     grid-template-columns: min-content 1fr 87px 196px
     align-items: center
     column-gap: 20px
-    padding: 0 10px
-    width: min(1180px, 100%)
+    width: min(1920px, 100%)
     height: 70px
     box-sizing: border-box
 
-    @media (max-width: 1000px)
+    @media (max-width: 1170px)
       grid-template-columns: auto 1fr 86px 196px
       grid-template-rows: auto auto
       padding: 15px 10px
@@ -68,7 +69,7 @@
     @include useless.button-common-styles
     display: none
 
-    @media (max-width: 1000px)
+    @media (max-width: 1170px)
       display: flex
 
       & ~ .header__menu
@@ -88,7 +89,7 @@
     column-gap: 12.5px
     outline: none
 
-    @media (max-width: 1000px)
+    @media (max-width: 1170px)
       grid-column: 2
       justify-self: center
 
@@ -103,7 +104,7 @@
   &__toxin
     display: flex
 
-    @media (max-width: 1000px)
+    @media (max-width: 1170px)
       display: none
 
   &__menu
@@ -114,7 +115,7 @@
     padding: 0
     list-style: none
 
-    @media (max-width: 1000px)
+    @media (max-width: 1170px)
       grid-column: 1 / -1
       flex-direction: column
       margin-left: 0
@@ -147,7 +148,7 @@
         & .header__menu-button-icon .svg-expand-icon
           opacity: .75
 
-      @media (max-width: 1000px)
+      @media (max-width: 1170px)
         width: 100%
         padding: 10px 4px
 
@@ -175,7 +176,7 @@
         &:hover, &:focus
           color: $color-title-fg
 
-      @media (max-width: 1000px)
+      @media (max-width: 1170px)
         width: 100%
         padding: 10px 4px
 
@@ -195,7 +196,7 @@
     padding: 0
     list-style: none
 
-    @media (max-width: 1000px)
+    @media (max-width: 1170px)
       position: initial
 
       & .header__menu-item
@@ -213,7 +214,7 @@
     height: 34px
     overflow: hidden
 
-    @media (max-width: 1000px)
+    @media (max-width: 1170px)
       grid-row: 1
       grid-column: 3
 
@@ -221,7 +222,7 @@
     height: 34px
     overflow: hidden
 
-    @media (max-width: 1000px)
+    @media (max-width: 1170px)
       grid-row: 1
       grid-column: 4
 

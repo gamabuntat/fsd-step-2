@@ -250,6 +250,7 @@ class Calendar extends BEMBlock {
     this.handleCancleBtnClick = () => {
       this.clearRange();
       this.clearRangeData();
+      this.removeDataIsReady();
     };
   }
 
@@ -465,7 +466,6 @@ class Calendar extends BEMBlock {
   clearRangeData() {
     this.root.dataset.startDate = '';
     this.root.dataset.endDate = '';
-    this.removeDataIsReady();
   }
 
   setDataIsReady() {
