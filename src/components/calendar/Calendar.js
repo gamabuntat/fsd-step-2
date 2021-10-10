@@ -465,6 +465,7 @@ class Calendar extends BEMBlock {
   clearRangeData() {
     this.root.dataset.startDate = '';
     this.root.dataset.endDate = '';
+    this.removeDataIsReady();
   }
 
   setDataIsReady() {
@@ -511,6 +512,7 @@ class Calendar extends BEMBlock {
   changeTableContainerHeight() {
     const activeTableHeight = this.mainTables.tables[this.mainTables.index]
       .getBoundingClientRect().height;
+    if (activeTableHeight === 0) { return; }
     this.elemsMap.tableContainer.style.height = `${activeTableHeight}px`;
   }
 
