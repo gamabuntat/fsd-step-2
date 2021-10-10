@@ -60,6 +60,7 @@ class Calendar extends BEMBlock {
     this.insertFillClearTables(this.mainTables.index + 1);
     this.updateMonthDisplayValue();
     this.updateYearDisplayValue();
+    this.changeTableContainerHeight();
     this.bindListeners();
     this.setSessStorDate();
     if (!this.initDates.startDate) { return; }
@@ -225,6 +226,7 @@ class Calendar extends BEMBlock {
     this.handlePrevMonthBtnClick = () => {
       if (this.mainTables.index == 0) { return; }
       this.mainTables.decreaseIndex();
+      this.changeTableContainerHeight();
       this.changeDisplayedMonth();
       this.updateMonthDisplayValue();
       this.updateYearDisplayValue();
@@ -234,6 +236,7 @@ class Calendar extends BEMBlock {
   setHandleNextMonthBtnClick() {
     this.handleNextMonthBtnClick = () => {
       this.mainTables.increaseIndex();
+      this.changeTableContainerHeight();
       this.changeDisplayedMonth();
       this.updateMonthDisplayValue();
       this.updateYearDisplayValue();
@@ -503,6 +506,12 @@ class Calendar extends BEMBlock {
   orderRange() {
     this.range = [...this.startRange, ...this.endRange]
       .sort(Tables.compareCoord);
+  }
+
+  changeTableContainerHeight() {
+    const activeTableHeight = this.mainTables.tables[this.mainTables.index]
+      .getBoundingClientRect().height;
+    this.elemsMap.tableContainer.style.height = `${activeTableHeight}px`;
   }
 
   changeDisplayedMonth() {

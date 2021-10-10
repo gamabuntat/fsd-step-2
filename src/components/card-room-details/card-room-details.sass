@@ -3,13 +3,24 @@
 
 .card-room-details
   @include useless.card-common
-
   @include useless.card-heading
+
+  & > &__container
+    gap: 0
+
+  &__heading
+    margin-bottom: 24px
 
   &__dropdown, &__date-dropdown
     display: flex
     flex-direction: column
     row-gap: 5px
+
+  &__date-dropdown
+    margin-bottom: 22px
+
+  &__dropdown
+    margin-bottom: 21px
 
   &__date-dropdown-title-container
     display: flex
@@ -19,8 +30,11 @@
       flex-basis: 50%
 
   &__cost-table
-    border-collapse: separate
-    border-spacing: 5px 10px
+    border-collapse: collapse
+    margin-bottom: 32px
+
+    &-row
+      height: 35px
 
   &__service-description
     vertical-align: top
@@ -34,9 +48,9 @@
     vertical-align: top
 
   &__total
-    margin-top: 10px
     display: flex
     column-gap: 4px
+    margin-bottom: 20px
 
     &-caption, &-cost
       @include useless.font-type($size: 19px, $weight: bold, $color: $color-title-fg)
@@ -46,7 +60,4 @@
       border-bottom: 1px dotted $color-unclaimed-fg
       height: 80%
       box-sizing: border-box
-
-  & > &__container > *:last-child
-    margin-top: 0
 

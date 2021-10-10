@@ -4,6 +4,18 @@
 .card-reg
   @include useless.card-common
 
+  & > &__container 
+
+    & > .card-reg__container:first-of-type
+      margin-bottom: 6px
+
+    & > .card-reg__container:nth-of-type(3)
+      gap: 24px
+      margin-bottom: 10px
+
+    & > .card-reg__container:last-child
+      justify-content: space-between
+
   &__masked-text-field
     display: flex
     flex-direction: column
@@ -13,7 +25,4 @@
     display: flex
     flex-direction: column
     row-gap: 5px
-
-  & > &__container > &__container:last-child
-    justify-content: space-between
 

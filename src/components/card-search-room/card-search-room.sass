@@ -1,6 +1,8 @@
 @use '@styles/useless/useless'
 @import '@styles/vars/colors'
 
+$block-name: '.card-search-room'
+
 .card-search-room
   @include useless.card-common
 
@@ -16,6 +18,9 @@
     display: flex
     column-gap: 20px
 
-    & > *
+    & #{$block-name}__sub-title
       flex-basis: 50%
+
+  &__big-button
+    margin-top: 10px
 
