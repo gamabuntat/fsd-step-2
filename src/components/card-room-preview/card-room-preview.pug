@@ -38,12 +38,12 @@ mixin card-room-preview(params)
       )
         +svg-expand-icon("white", 1)
       .card-room-preview__radio-container
-        - const name = "crp" + Math.round(Math.random() * 1e5)
+        - const name = `crp${Math.round(Math.random() * 1e5)}`
         - for (let i = 0; i < imgNamesFormated.length; i++) 
           - 
             const attrs = {
               name,
-              "data-index": i,
+              'data-index': i,
               checked: i == 0
             }
           label.card-room-preview__radio-label
