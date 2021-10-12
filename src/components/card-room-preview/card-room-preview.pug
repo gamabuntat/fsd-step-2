@@ -18,24 +18,24 @@ mixin card-room-preview(params)
       ? Array(4).fill(imgNames)
       : imgNames
 
-    const formater = new Intl.NumberFormat('ru', {
-      style: 'currency',
-      currency: 'RUB',
-      minimumFractionDigits: 0,
-    })
-
-    function format(str) {
-      return formater.format(str).replace(/\s(?=.$)/, '')
-    }
+    const format = (n) => String(Math.round(n))
+      .split('')
+      .reverse()
+      .reduce((acc, n, idx) => idx % 3 === 0 ? `${n} ${acc}` : `${n}${acc}`, '')
+      .trim()
 
   form.card-room-preview.js-card-room-preview(
     action="room-details.html"
   )&attributes(formAttrs)
 
     .card-room-preview__carousel
-      button.card-room-preview__prev-button.js-card-room-preview__prev-button(type="button")
+      button.card-room-preview__prev-button.js-card-room-preview__prev-button(
+        type="button"
+      )
         +svg-expand-icon("white", 1)
-      button.card-room-preview__next-button.js-card-room-preview__next-button(type="button")
+      button.card-room-preview__next-button.js-card-room-preview__next-button(
+        type="button"
+      )
         +svg-expand-icon("white", 1)
       .card-room-preview__radio-container
         - const name = "crp" + Math.round(Math.random() * 1e5)
@@ -63,7 +63,8 @@ mixin card-room-preview(params)
           span.card-room-preview__room-number.js-card-room-preview__room-number(
             class=isLuxury && "card-room-preview__room-number_deluxe"
           )= roomNumber
-          span.card-room-preview__cost.js-card-room-preview__cost= format(cost)
+          span.card-room-preview__cost.js-card-room-preview__cost 
+            | #{format(cost)}₽
         .card-room-preview__line
         .card-room-preview__summary
           +rate({ 
