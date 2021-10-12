@@ -25,7 +25,7 @@ $ npm i
 
 
 ### technologies used
-- node v14.7.0
+- node v16.11.0
 - webpack
 - sass
 - pug
