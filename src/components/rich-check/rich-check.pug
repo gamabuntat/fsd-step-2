@@ -8,10 +8,13 @@ mixin rich-check(params)
       attrs,
     } = params
 
-  label.rich-check(class=text.includes("\n") && "rich-check_wrapping")
+  label.rich-check
     input.rich-check__input&attributes({ ...attrs, type: "checkbox" })
     span.rich-check__box
       +svg-check-box()
     span.rich-check__title #{title}
-    span.rich-check__text #{text}
+    span.rich-check__text(
+      class=text.includes("\n") && "rich-check__text_wrapping"
+    ) 
+      | #{text}
 

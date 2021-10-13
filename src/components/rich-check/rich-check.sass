@@ -10,9 +10,6 @@
   width: fit-content
   cursor: pointer
 
-  &_wrapping
-    white-space: pre
-
   &__input
     position: absolute
     -webkit-appearance: none
@@ -76,4 +73,7 @@
     @include useless.font-type($size: 12px, $color: $color-additional-fg)
     max-width: 232px
     width: max-content
+
+    &_wrapping
+      white-space: pre
 
