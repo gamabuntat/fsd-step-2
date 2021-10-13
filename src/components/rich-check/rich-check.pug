@@ -5,11 +5,10 @@ mixin rich-check(params)
     const {
       title = 'Помощник для инвалидов',
       text = 'На 1 этаже вас встретит специалист  и проводит до номера.',
-      pre = false,
       attrs,
     } = params
 
-  label.rich-check(class=pre && "rich-check_wrapping")
+  label.rich-check(class=text.includes("\n") && "rich-check_wrapping")
     input.rich-check__input&attributes({ ...attrs, type: "checkbox" })
     span.rich-check__box
       +svg-check-box()
