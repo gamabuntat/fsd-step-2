@@ -39,12 +39,12 @@ class RangeLable extends BEMBlock {
   handleSliderChangeAttrs() {
     this.updateStartValue(
       this.format(
-        this.calcValue(this.slider.dataset.hsp)
+        this.calcValue(this.slider.dataset.from)
       )
     );
     this.updateEndValue(
       this.format(
-        this.calcValue(this.slider.dataset.hep)
+        this.calcValue(this.slider.dataset.to)
       )
     );
   }

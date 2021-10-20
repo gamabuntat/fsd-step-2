@@ -43,10 +43,7 @@ $track-height: 6px
     z-index: 1
     touch-action: none
 
-    &--start, &--end
-      @extend .range-slider__handle
-
-    &--start
+    &_starting
       transform: translateX(-$button-size)
 
   &__track
@@ -63,7 +60,4 @@ $track-height: 6px
     border-left: none
     border-right: none
     box-sizing: border-box
-
-    &--start, &--end
-      @extend .range-slider__progress-bar
 
