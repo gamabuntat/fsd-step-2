@@ -64,9 +64,9 @@ mixin footer(params = {})
           )
 
     .footer__wrapper
-      .footer__copyrating
-        .footer__copyrating-container
-          .footer__copyrating-caption
+      .footer__copyright
+        .footer__copyright-container
+          .footer__copyright-caption
             | Copyright © 2018 Toxin отель. Все права защищены.
           .footer__social
             - 
@@ -84,11 +84,11 @@ mixin footer(params = {})
                 ), {})
 
             a.footer__social-twitter&attributes(attrs.twitter)
-              +svg-twitter()
+              +svg-twitter
 
             a.footer__social-facebook&attributes(attrs.facebook)
-              +svg-facebook()
+              +svg-facebook
 
             a.footer__social-instagram&attributes(attrs.instagram)
-              +svg-instagram()
+              +svg-instagram
 
