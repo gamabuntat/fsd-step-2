@@ -3,7 +3,6 @@ import BEMBlock from '@scripts/BEMBlock.js';
 class RangeSlider extends BEMBlock {
   constructor(root) {
     super(root);
-    this.root = root;
     this.init();
   }
 
