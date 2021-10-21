@@ -10,7 +10,7 @@ class Impressions extends BEMBlock {
   }
 
   init() {
-    this.marksNames = ['amazing', 'cool', 'bad', 'veryBad'];
+    this.marksNames = ['amazing', 'cool', 'bad', 'terrible'];
     this.updateElemsMap(['mark', 'votes']);
     this.setMods(['impressions__arc_selected']);
     this.arcClass = 'impressions__arc';

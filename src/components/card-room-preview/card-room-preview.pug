@@ -10,7 +10,7 @@ mixin card-room-preview(params)
       isLuxury = true, 
       cost = 9990,
       nReviews = 145,
-      imgNames = Array(4).fill('crp-1.webp'),
+      imgNames = Array(4).fill('room-preview-1.webp'),
       rate = 5,
     } = params
 
@@ -38,7 +38,7 @@ mixin card-room-preview(params)
       )
         +svg-expand-icon("white", 1)
       .card-room-preview__radio-container
-        - const name = `crp${Math.round(Math.random() * 1e5)}`
+        - const name = `radio-uniq-name${Math.round(Math.random() * 1e5)}`
         - for (let i = 0; i < imgNamesFormated.length; i++) 
           - 
             const attrs = {
@@ -52,7 +52,7 @@ mixin card-room-preview(params)
       each i of imgNamesFormated
         img.card-room-preview__room-img.js-card-room-preview__room-img(
           src=require(`@library/card-room-preview/img/${i}`)
-          alt="room preview"
+          alt=i
         )
 
     button.card-room-preview__wrapper.js-card-room-preview__wrapper&attributes(

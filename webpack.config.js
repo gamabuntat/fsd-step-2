@@ -15,12 +15,12 @@ const alias = {
   '@library': path.resolve(__dirname, 'src/components'),
   '@assets': path.resolve(__dirname, 'src/assets'),
   '@fonts': path.resolve(__dirname, 'src/assets/fonts'),
-  '@img': path.resolve(__dirname, 'src/assets/img'),
   '@favicons': path.resolve(__dirname, 'src/assets/favicons'),
 };
 
 const getEntry = (p) => {
   return fs.readdirSync(p).reduce((entries, name) => {
+		if (name === 'img') { return entries; }
     entries[name] = `${p}${path.sep}${name}${path.sep}${name}.js`;
     return entries;
   }, {})

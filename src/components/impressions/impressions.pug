@@ -4,7 +4,7 @@ mixin impressions(params = {})
       amazing = 130,
       cool = 65,
       bad = 65,
-      veryBad = 0,
+      terrible = 0,
       gap = 4,
     } = params
 
@@ -12,7 +12,7 @@ mixin impressions(params = {})
     data-amazing=amazing
     data-cool=cool
     data-bad=bad
-    data-very-bad=veryBad
+    data-terrible=terrible
     data-gap=gap
     data-circle-size=circleSize
     data-circle-thickness=circleThickness
@@ -33,13 +33,13 @@ mixin impressions(params = {})
         linearGradient(id="bad" x1="0%" y1="0%" x2="0%" y2="100%")
           stop(offset="0%" style="stop-color:#BC9CFF;stop-opacity:1")
           stop(offset="100%" style="stop-color:#8BA4F9;stop-opacity:1")
-        linearGradient(id="veryBad" x1="0%" y1="0%" x2="0%" y2="100%")
+        linearGradient(id="terrible" x1="0%" y1="0%" x2="0%" y2="100%")
           stop(offset="0%" style="stop-color:#909090;stop-opacity:1")
           stop(offset="100%" style="stop-color:#3D4975;stop-opacity:1")
       path.impressions__arc.js-impressions__arc.impressions__arc_amazing
       path.impressions__arc.js-impressions__arc.impressions__arc_cool
       path.impressions__arc.js-impressions__arc.impressions__arc_bad
-      path.impressions__arc.js-impressions__arc.impressions__arc_very-bad
+      path.impressions__arc.js-impressions__arc.impressions__arc_terrible
       text.impressions__mark.js-impressions__mark(
         text-anchor="middle" 
         x="60" 
@@ -58,6 +58,6 @@ mixin impressions(params = {})
         | Хорошо
       li.impressions__list-item.impressions__list-item_bad 
         | Удовлетворительно
-      li.impressions__list-item.impressions__list-item_veryBad 
+      li.impressions__list-item.impressions__list-item_terrible 
         | Разочарован
 

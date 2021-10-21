@@ -5,14 +5,14 @@
     "isLuxury": false,
     "cost": 9900,
     "nReviews": 65,
-    "imgNames": "crp-2.webp",
+    "imgNames": "room-preview-2.webp",
     "rate": 4
   },
   {
     "roomNumber": 980,
     "cost": 8500,
     "nReviews": 35,
-    "imgNames": "crp-3.webp",
+    "imgNames": "room-preview-3.webp",
     "rate": 3
   },
   {
@@ -20,7 +20,7 @@
     "isLuxury": false,
     "cost": 7300,
     "nReviews": 19,
-    "imgNames": "crp-4.webp",
+    "imgNames": "room-preview-4.webp",
     "rate": 5
   },
   {
@@ -28,7 +28,7 @@
     "isLuxury": false,
     "cost": 6000,
     "nReviews": 44,
-    "imgNames": "crp-5.webp",
+    "imgNames": "room-preview-5.webp",
     "rate": 4
   },
   {
@@ -36,7 +36,7 @@
     "isLuxury": false,
     "cost": 5800,
     "nReviews": 56,
-    "imgNames": "crp-6.webp",
+    "imgNames": "room-preview-6.webp",
     "rate": 3
   },
   {
@@ -44,7 +44,7 @@
     "isLuxury": false,
     "cost": 5500,
     "nReviews": 45,
-    "imgNames": "crp-7.webp",
+    "imgNames": "room-preview-7.webp",
     "rate": 5
   },
   {
@@ -52,7 +52,7 @@
     "isLuxury": false,
     "cost": 5300,
     "nReviews": 39,
-    "imgNames": "crp-8.webp",
+    "imgNames": "room-preview-8.webp",
     "rate": 4
   },
   {
@@ -60,7 +60,7 @@
     "isLuxury": false,
     "cost": 5000,
     "nReviews": 77,
-    "imgNames": "crp-9.webp",
+    "imgNames": "room-preview-9.webp",
     "rate": 3
   },
   {
@@ -68,7 +68,7 @@
     "isLuxury": false,
     "cost": 13000000,
     "nReviews": 999,
-    "imgNames": "crp-10.webp",
+    "imgNames": "room-preview-10.webp",
     "rate": 1
   },
   {
@@ -76,7 +76,7 @@
     "isLuxury": false,
     "cost": 5000,
     "nReviews": 15,
-    "imgNames": "crp-11.webp",
+    "imgNames": "room-preview-11.webp",
     "rate": 3
   },
   {
@@ -84,7 +84,7 @@
     "isLuxury": false,
     "cost": 5000,
     "nReviews": 55,
-    "imgNames": "crp-12.webp",
+    "imgNames": "room-preview-12.webp",
     "rate": 3
   }
 ]
