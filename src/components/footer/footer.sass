@@ -142,21 +142,20 @@ $max-width: 1170px
     display: flex
     gap: 22px
 
-    &-twitter
+    &-link
       @extend %social-block
 
-      &:hover .svg-twitter__icon, &:focus .svg-twitter__icon
-        fill: url(#twitter__icon-gradient-focus)
+      &_icon
 
-    &-facebook
-      @extend %social-block
+        &_twitter
+          &:hover .svg-twitter__icon, &:focus .svg-twitter__icon
+            fill: url(#twitter__icon-gradient-focus)
 
-      &:hover .svg-facebook__icon, &:focus .svg-facebook__icon
-        fill: url(#facebook__icon-gradient-focus)
-
-    &-instagram
-      @extend %social-block
-
-      &:hover .svg-instagram__icon, &:focus .svg-instagram__icon
-        fill: url(#instagram__icon-gradient-focus)
+        &_facebook
+          &:hover .svg-facebook__icon, &:focus .svg-facebook__icon
+            fill: url(#facebook__icon-gradient-focus)
+        
+        &_instagram
+          &:hover .svg-instagram__icon, &:focus .svg-instagram__icon
+            fill: url(#instagram__icon-gradient-focus)
 

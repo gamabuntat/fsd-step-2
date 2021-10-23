@@ -8,14 +8,22 @@
   flex-direction: column
   row-gap: 17px
 
-  &_comfort &__icon
-    background-image: url(img/comfort-icon.svg)
+  &_icon
 
-  &_convenience &__icon
-    background-image: url(img/convenience-icon.svg)
+    &_comfort 
 
-  &_coziness &__icon
-    background-image: url(img/coziness-icon.svg)
+      & .about-room__icon
+        background-image: url(img/comfort-icon.svg)
+
+    &_convenience 
+
+      & .about-room__icon
+        background-image: url(img/convenience-icon.svg)
+
+    &_coziness 
+
+      & .about-room__icon
+        background-image: url(img/coziness-icon.svg)
 
   &__container
     display: flex

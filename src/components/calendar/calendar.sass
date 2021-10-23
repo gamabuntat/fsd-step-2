@@ -46,7 +46,8 @@ $arrow: '.svg-forward-arrow'
         height: $small-button-size
         font-size: useless.px2rem(10px)
 
-  &__prev-month-btn, &__next-month-btn
+  &__prev-month-btn,
+  &__next-month-btn
     @include useless.button-common-styles
     width: 20px
     height: 20px
@@ -64,7 +65,8 @@ $arrow: '.svg-forward-arrow'
   &__prev-month-btn
     transform: rotate(.5turn)
 
-  &__month-label, &__year-label
+  &__month-label,
+  &__year-label
     align-self: center
     @include useless.font-type($size: 19px, $weight: bold, $color: $color-title-fg)
 
@@ -111,12 +113,12 @@ $arrow: '.svg-forward-arrow'
         background: color.adjust($color-selected-day, $alpha: -1)
         border-radius: 0
 
-        &:hover, &:focus
+        &:hover,
+        &:focus
           background: color.adjust($color-selected-day, $blue: 100)
 
-    &_start-range
-
-      &::after
+    &_range
+      @at-root %range
         content: ''
         position: absolute
         right: 0
@@ -125,16 +127,17 @@ $arrow: '.svg-forward-arrow'
         height: 100%
         background-color: $color-selected-day
 
-    &_end-range
+      &_start
 
-      &::before
-        content: ''
-        position: absolute
-        left: 0
-        top: 0
-        width: 50%
-        height: 100%
-        background-color: $color-selected-day
+        &::after
+          @extend %range
+
+      &_end
+
+        &::before
+          @extend %range
+          left: 0
+          right: unset
 
   &__day-btn
     position: relative
@@ -150,17 +153,22 @@ $arrow: '.svg-forward-arrow'
     box-sizing: border-box
     z-index: 1
 
-    &:hover, &:focus
+    &:hover,
+    &:focus
       background: color.adjust($color-main-bg, $red: -17, $green: -17, $blue: -8)
 
-    &_prev-month, &_next-month
-      color: $color-unclaimed-fg
+    &_month
+      
+      &_prev,
+      &_next
+        color: $color-unclaimed-fg
 
     &_todays
       @include useless.font-type($weight: bold, $color: $color-main-bg)
       background: $gradient-secondary
 
-      &:hover, &:focus
+      &:hover,
+      &:focus
         @include useless.font-type($weight: bold, $color: $color-main-bg)
         background: $gradient-secondary-focus
 

@@ -10,7 +10,7 @@ class SearchRoom extends BEMBlock {
     this.updateElemsMap([
       'aside-button', 'filter',  'filter-plug', 'filter-button'
     ]);
-    this.setMods(['search-room__filter_expanded', 'search-room--locked']);
+    this.setMods(['search-room__filter_expanded', 'search-room_locked']);
     this.setListeners();
     this.bindListeners();
   }

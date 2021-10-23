@@ -36,10 +36,10 @@ mixin impressions(params = {})
         linearGradient(id="terrible" x1="0%" y1="0%" x2="0%" y2="100%")
           stop(offset="0%" style="stop-color:#909090;stop-opacity:1")
           stop(offset="100%" style="stop-color:#3D4975;stop-opacity:1")
-      path.impressions__arc.js-impressions__arc.impressions__arc_amazing
-      path.impressions__arc.js-impressions__arc.impressions__arc_cool
-      path.impressions__arc.js-impressions__arc.impressions__arc_bad
-      path.impressions__arc.js-impressions__arc.impressions__arc_terrible
+      path.impressions__arc.js-impressions__arc.impressions__arc_score_amazing
+      path.impressions__arc.js-impressions__arc.impressions__arc_score_cool
+      path.impressions__arc.js-impressions__arc.impressions__arc_score_bad
+      path.impressions__arc.js-impressions__arc.impressions__arc_score_terrible
       text.impressions__mark.js-impressions__mark(
         text-anchor="middle" 
         x="60" 
@@ -52,12 +52,12 @@ mixin impressions(params = {})
       ) голосов
 
     ul.impressions__list
-      li.impressions__list-item.impressions__list-item_amazing 
+      li.impressions__list-item.impressions__list-item_score_amazing 
         | Великолепно
-      li.impressions__list-item.impressions__list-item_cool
+      li.impressions__list-item.impressions__list-item_score_cool
         | Хорошо
-      li.impressions__list-item.impressions__list-item_bad 
+      li.impressions__list-item.impressions__list-item_score_bad 
         | Удовлетворительно
-      li.impressions__list-item.impressions__list-item_terrible 
+      li.impressions__list-item.impressions__list-item_score_terrible 
         | Разочарован
 

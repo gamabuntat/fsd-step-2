@@ -15,7 +15,9 @@ append vars
       )
 
     .color-types__color
-      .color-types__color-example(class=`${baseClass}_${removePercentageSymb(toKebab(title))}`)
+      .color-types__color-example(
+        class=`${baseClass}_color_${removePercentageSymb(toKebab(title))}`
+      )
       .color-types__color-container
         h2.color-types__color-title= title
         p.color-types__color-caption= color
@@ -29,8 +31,8 @@ append vars
         - 
           const [type, example] = Object.entries(t)[0]
           const mod = type.toLowerCase()
-          const titleClass = `${baseClass}__fonts-title_${mod}`
-          const exampleClass = `${baseClass}__fonts-example_${mod}`
+          const titleClass = `${baseClass}__fonts-title_type_${mod}`
+          const exampleClass = `${baseClass}__fonts-example_type_${mod}`
 
         .color-types__fonts-title(class=titleClass)= type
         .color-types__fonts-example(class=exampleClass)= example

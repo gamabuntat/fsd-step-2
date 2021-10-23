@@ -13,17 +13,19 @@
     fill: none
     stroke-width: 4px
 
-    &_amazing
-      stroke: url(#amazing)
+    &_score
 
-    &_cool
-      stroke: url(#cool)
+      &_amazing
+        stroke: url(#amazing)
 
-    &_bad
-      stroke: url(#bad)
+      &_cool
+        stroke: url(#cool)
 
-    &_terrible
-      stroke: url(#terrible)
+      &_bad
+        stroke: url(#bad)
+
+      &_terrible
+        stroke: url(#terrible)
 
     &_selected
       stroke-width: 5px
@@ -52,15 +54,17 @@
     &:last-child
       padding-bottom: 0
 
-  &__list-item_amazing
-    list-style-image: url(img/amazing-item.svg)
+    &_score
 
-  &__list-item_cool
-    list-style-image: url(img/cool-item.svg)
+      &_amazing
+        list-style-image: url(img/amazing-item.svg)
 
-  &__list-item_bad
-    list-style-image: url(img/bad-item.svg)
+      &_cool
+        list-style-image: url(img/cool-item.svg)
 
-  &__list-item_terrible
-    list-style-image: url(img/terrible-item.svg)
+      &_bad
+        list-style-image: url(img/bad-item.svg)
+
+      &_terrible
+        list-style-image: url(img/terrible-item.svg)
 

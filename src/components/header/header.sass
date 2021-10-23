@@ -30,7 +30,8 @@
       @media (max-width: 420px)
         grid-template-columns: min-content 1fr auto max-content
 
-    & .header__sign-in-button, & .header__reg-button
+    & .header__sign-in-button,
+    & .header__reg-button
       display: none
 
     & .header__separator
@@ -80,7 +81,8 @@
         & ~ .header__menu
           display: flex
 
-      &:hover .svg-burger, &:focus .svg-burger
+      &:hover .svg-burger,
+      &:focus .svg-burger
         opacity: 0.75
 
   &__logo
@@ -93,7 +95,8 @@
       grid-column: 2
       justify-self: center
 
-    &:focus, &:hover
+    &:focus,
+    &:hover
 
       & .header__main-logo .svg-logo__circle
         fill: url(#logo__circle-gradient-focus)
@@ -140,7 +143,8 @@
         & ~ .header__sub-menu
           display: flex
 
-      &:hover, &:focus
+      &:hover,
+      &:focus
 
         & .header__menu-button-caption
           color: $color-main-fg
@@ -152,7 +156,8 @@
         width: 100%
         padding: 10px 4px
 
-        &:hover, &:focus
+        &:hover,
+        &:focus
           background-color: color.adjust($color-title-fg, $lightness: 74%)
 
     &-button-icon
@@ -167,20 +172,23 @@
       box-sizing: border-box
       outline: none
 
-      &:hover, &:focus
+      &:hover,
+      &:focus
         color: $color-main-fg
 
       &_important
         @include useless.font-type($weight: bold, $color: $color-main-fg)
 
-        &:hover, &:focus
+        &:hover,
+        &:focus
           color: $color-title-fg
 
       @media (max-width: 1170px)
         width: 100%
         padding: 10px 4px
 
-        &:hover, &:focus
+        &:hover,
+        &:focus
           background-color: color.adjust($color-title-fg, $lightness: 74%)
 
   &__sub-menu
@@ -207,7 +215,8 @@
       outline: none
       padding: 5px
 
-      &:hover, &:focus
+      &:hover,
+      &:focus
         background-color: color.adjust($color-title-fg, $lightness: 74%)
 
   &__sign-in-button
@@ -241,6 +250,7 @@
     color: $color-additional-fg
     outline: none
 
-    &:hover, &:focus
+    &:hover,
+    &:focus
       color: $color-main-fg
 

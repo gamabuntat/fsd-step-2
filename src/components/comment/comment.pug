@@ -5,7 +5,7 @@ mixin comment(params)
     const {
       avatar = 'avatar-1.webp',
       name = 'Мурад Сарафанов',
-      lastVisited = '5 дней назад',
+      lastVisit = '5 дней назад',
       likeParams = { value: 12, pressed: true },
       text = 'Великолепный матрас на кровати в основной спальне! А пуфик вообще потрясающий. И стены, действительно, шумоподавляющие. Выкрикивал комплименты повару — никто не жаловался из соседей.'
     } = params
@@ -18,7 +18,7 @@ mixin comment(params)
       )
     .comment__container
       span.comment__name #{name}
-      span.comment__last-visited #{lastVisited}
+      span.comment__last-visit #{lastVisit}
     .comment__like
       +like(likeParams)
     .comment__text #{text}

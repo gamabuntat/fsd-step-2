@@ -46,7 +46,7 @@ append vars
 
 append main
   main.form-elements__main
-    article.form-elements__group.form-elements__group_huppa
+    article.form-elements__group.form-elements__group_alt
       .form-elements__container
         +fe-title("text field", "default")
         +text-field({ type: "email", placeholder: "Email" })
@@ -79,28 +79,28 @@ append main
     article.form-elements__group
       .form-elements__container
         +fe-title("checkbox buttons")
-        .form-elements__container.form-elements__container_small-indent
+        .form-elements__container.form-elements__container_indent_small
           +check({ text: "Можно курить" })
           +check({ text: "Можно с питомцами", attrs: { checked: true } })
           +check({ attrs: { checked: true } })
       .form-elements__container
         +fe-title("radio buttons")
-        .form-elements__container.form-elements__container_large-indent.form-elements__container_horizontal
+        .form-elements__container.form-elements__container_indent_large.form-elements__container_horizontal
           +radio({ attrs: { name: "sex", checked: true }, text: "Мужчина" })
           +radio({ attrs: { name: "sex" }, text: "Женщина" })
       .form-elements__container
         +fe-title("toggle")
-        .form-elements__container.form-elements__container_small-indent
+        .form-elements__container.form-elements__container_indent_small
           +toggle({ attrs: { checked: true } })
           +toggle({})
       .form-elements__container
         +fe-title("like button")
-        .form-elements__container.form-elements__container_small-indent.form-elements__container_horizontal
+        .form-elements__container.form-elements__container_indent_small.form-elements__container_horizontal
           +like({ value: 2 })
           +like({ value: 12, pressed: true })
       .form-elements__container
         +fe-title("rate button")
-        .form-elements__container.form-elements__container_large-indent.form-elements__container_horizontal
+        .form-elements__container.form-elements__container_indent_large.form-elements__container_horizontal
           +rate({ checked: 4 })
           +rate({ checked: 5 })
 
@@ -120,7 +120,7 @@ append main
             +bordered-button()
           .form-elements__button
             +bordered-button({ isFocused: true })
-          .form-elements__container.form-elements__container_horizontal.form-elements__container_large-indent
+          .form-elements__container.form-elements__container_horizontal.form-elements__container_indent_large
             +text-button()
             +text-button({ isFocused: true })
           .form-elements__big-button
@@ -130,7 +130,7 @@ append main
         .form-elements__pagination
           +pagination()
 
-    article.form-elements__group.form-elements__group_huppa
+    article.form-elements__group.form-elements__group_alt
       .form-elements__container
         +fe-title("dropdown", "default", true)
         +dropdown(narrowDropdownParams) 
@@ -138,19 +138,19 @@ append main
         +fe-title("dropdown", "expanded", true)
         +dropdown({ ...narrowDropdownParams, isOpen: true }) 
 
-    article.form-elements__group.form-elements__group_huppa
+    article.form-elements__group.form-elements__group_alt
       .form-elements__container
         +fe-title("dropdown")
         +dropdown({ isOpen: true, counterValues: "0 0 0" })
 
-    article.form-elements__group.form-elements__group_huppa
+    article.form-elements__group.form-elements__group_alt
       .form-elements__container
         +fe-title("dropdown")
         +dropdown({ isOpen: true, counterValues: "2 1 0" })
 
     article.form-elements__group
       .form-elements__container
-        .form-elements__container.form-elements__container_large-indent
+        .form-elements__container.form-elements__container_indent_large
           +check-list({})
           +check-list({
             checkParams: [
@@ -166,7 +166,7 @@ append main
           })
 
     article.form-elements__group
-      .form-elements__container.form-elements__container_small-indent
+      .form-elements__container.form-elements__container_indent_small
         +fe-title("rich Checkbox Buttons")
         +rich-check({
           title: "Широкий коридор",
@@ -183,7 +183,7 @@ append main
         +bullet-list({})
 
     article.form-elements__group
-      .form-elements__container.form-elements__container_large-indent
+      .form-elements__container.form-elements__container_indent_large
         +about-room("comfort")
         +about-room("convenience")
 

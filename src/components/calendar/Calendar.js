@@ -23,12 +23,12 @@ class Calendar extends BEMBlock {
     ]);
     this.setMods([
       'calendar__day_selected',
-      'calendar__day_start-range',
-      'calendar__day_end-range',
+      'calendar__day_range_start',
+      'calendar__day_range_end',
       'calendar__day-btn_selected',
-      'calendar__day-btn_next-month',
-      'calendar__day-btn_prev-month',
-      'calendar__day-btn_todays'
+      'calendar__day-btn_todays',
+      'calendar__day-btn_month_next',
+      'calendar__day-btn_month_prev',
     ]);
     this.setListeners();
     this.mainTables = new Tables(
@@ -36,8 +36,8 @@ class Calendar extends BEMBlock {
     );
     this.setReadyDateEvent();
     this.setMonthFormater();
-    this.errorMessage = this.elemsMap.error.innerText;
-    this.elemsMap.error.innerText = '';
+    this.errorMessage = this.elemsMap.error.textContent;
+    this.elemsMap.error.textContent = '';
     this.template = this.elemsMap.tableContainer.innerHTML;
     this.step = parseInt(getComputedStyle(this.elemsMap.tableContainer).width);
     this.rangeCounter = 0;
@@ -184,13 +184,13 @@ class Calendar extends BEMBlock {
   }
 
   updateMonthDisplayValue() {
-    this.elemsMap.monthLabel.innerText = this.monthFormater
+    this.elemsMap.monthLabel.textContent = this.monthFormater
       .format(new Date(this.year, this.month + this.mainTables.index))
       .replace(/^./, (s) => s.toUpperCase());
   }
 
   updateYearDisplayValue() {
-    this.elemsMap.yearLabel.innerText = new Date(
+    this.elemsMap.yearLabel.textContent = new Date(
       this.year, this.month + this.mainTables.index
     ).getFullYear();
   }
@@ -257,10 +257,10 @@ class Calendar extends BEMBlock {
   setHandleApplyBtnClick() {
     this.handleApplyBtnClick = () => {
       this.setSessStorDate();
-      this.elemsMap.error.innerText = this.errorMessage;
+      this.elemsMap.error.textContent = this.errorMessage;
       if (this.isEndRange()) {
         this.root.dispatchEvent(this.readyDateEvent);
-        this.elemsMap.error.innerText = '';
+        this.elemsMap.error.textContent = '';
       }
     };
   }
@@ -334,12 +334,14 @@ class Calendar extends BEMBlock {
       const firstRowBtn = this.getButton([btnCoord[0], btnCoord[1], 0]);
       const lastRowBtn = this.getButton([btnCoord[0], btnCoord[1], 6]);
       this.addCoordInRange(btnCoord);
-      const isPrevMonthbtn = btn.classList.contains(this.mods.dayBtnPrevMonth);
-      const isNextMonthBtn = btn.classList.contains(this.mods.dayBtnNextMonth);
+      const isPrevMonthbtn = btn
+        .classList.contains(this.mods.dayBtnMonthPrev);
+      const isNextMonthBtn = btn
+        .classList.contains(this.mods.dayBtnMonthNext);
       const shouldSelectedPrevMonth = firstRowBtn
-        .classList.contains(this.mods.dayBtnPrevMonth);
+        .classList.contains(this.mods.dayBtnMonthPrev);
       const shouldSelectedNextMonth = lastRowBtn
-        .classList.contains(this.mods.dayBtnNextMonth);
+        .classList.contains(this.mods.dayBtnMonthNext);
       if (isPrevMonthbtn || shouldSelectedPrevMonth) {
         if (this.mainTables.index > 0) {
           this.addCoordInRange(this.mainTables.getCoordsAgo(btnCoord, 7));
@@ -369,7 +371,7 @@ class Calendar extends BEMBlock {
           this.searchNextRangeCoord(coord) || getLastItem(this.range),
           (
             this.getButton([coord[0], coord[1], 6])
-              .classList.contains(this.mods.dayBtnNextMonth)
+              .classList.contains(this.mods.dayBtnMonthNext)
               ? ((lastCoord) => (coord) => (
                 Tables.isCoordLessOrEqual(coord, lastCoord)
               ))(Tables.getMinCoord(
@@ -415,12 +417,12 @@ class Calendar extends BEMBlock {
     this.startRange.forEach((coord) => {
       const cell = this.mainTables.getCell(coord);
       cell.classList.remove(this.mods.daySelected);
-      cell.classList.add(this.mods.dayStartRange);
+      cell.classList.add(this.mods.dayRangeStart);
     });
     this.endRange.forEach((coord) => {
       const cell = this.mainTables.getCell(coord);
       cell.classList.remove(this.mods.daySelected);
-      cell.classList.add(this.mods.dayEndRange);
+      cell.classList.add(this.mods.dayRangeEnd);
     });
   }
 
@@ -432,13 +434,14 @@ class Calendar extends BEMBlock {
         Tables.isCoordLessOrEqual,
       )]
         .forEach((coord) => (
-          this.mainTables.getCell(coord).classList.remove(this.mods.daySelected)
+          this.mainTables.getCell(coord)
+            .classList.remove(this.mods.daySelected)
         ));
     }
     [...this.startRange, ...this.endRange].forEach((coord) => {
       const cell = this.mainTables.getCell(coord);
-      cell.classList.remove(this.mods.dayStartRange);
-      cell.classList.remove(this.mods.dayEndRange);
+      cell.classList.remove(this.mods.dayRangeStart);
+      cell.classList.remove(this.mods.dayRangeEnd);
       this.getButton(coord).classList.remove(this.mods.dayBtnSelected);
     });
 
@@ -478,8 +481,8 @@ class Calendar extends BEMBlock {
 
   isPresentDayBtn(coord) {
     const button = this.getButton(coord);
-    const isNext = button.classList.contains(this.mods.dayBtnNextMonth);
-    const isPrev = button.classList.contains(this.mods.dayBtnPrevMonth);
+    const isNext = button.classList.contains(this.mods.dayBtnMonthNext);
+    const isPrev = button.classList.contains(this.mods.dayBtnMonthPrev);
     return !(isNext || isPrev);
   }
 
@@ -532,16 +535,16 @@ class Calendar extends BEMBlock {
       this.getPrevMonthNDay(index)
     ).forEach((day) => {
       const btn = this.getButton(gen.next().value);
-      btn.innerText = day;
-      btn.classList.add(this.mods.dayBtnPrevMonth);
+      btn.textContent = day;
+      btn.classList.add(this.mods.dayBtnMonthPrev);
     });
     Calendar.getPresentDay(this.getPresentNDay(index)).forEach((day) => (
-      this.getButton(gen.next().value).innerText = day
+      this.getButton(gen.next().value).textContent = day
     ));
     Calendar.getNextMonthDay(this.getNextMonthNDay(index)).forEach((day) => {
       const btn = this.getButton(gen.next().value);
-      btn.innerText = day;
-      btn.classList.add(this.mods.dayBtnNextMonth);
+      btn.textContent = day;
+      btn.classList.add(this.mods.dayBtnMonthNext);
     });
   }
 

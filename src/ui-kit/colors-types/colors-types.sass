@@ -27,28 +27,30 @@
       background-color: $color-title-fg
       border-radius: 6px
 
-      &_dark-shade
+      &_color
 
-        &-100
-          background-color: $color-title-fg
+        &_dark-shade
 
-        &-75
-          background-color: $color-main-fg
-          
-        &-50
-          background-color: $color-additional-fg
+          &-100
+            background-color: $color-title-fg
 
-        &-25
-          background-color: $color-unclaimed-fg
+          &-75
+            background-color: $color-main-fg
+            
+          &-50
+            background-color: $color-additional-fg
 
-        &-5
-          background-color: color.adjust($color-title-fg, $alpha: -0.95)
+          &-25
+            background-color: $color-unclaimed-fg
 
-      &_purple
-        background-color: $color-primary
+          &-5
+            background-color: color.adjust($color-title-fg, $alpha: -0.95)
 
-      &_green
-        background-color: $color-secondary
+        &_purple
+          background-color: $color-primary
+
+        &_green
+          background-color: $color-secondary
 
     &-container
       display: flex
@@ -77,26 +79,30 @@
       max-width: 369px
       @include useless.font-type($size: 24px, $weight: bold, $color: $color-title-fg)
 
-      &_h2
-        font-size: useless.px2rem(19px)
+      &_type
 
-      &_h3
-        @include useless.font-bold-type
+        &_h2
+          font-size: useless.px2rem(19px)
 
-      &_body
-        @include useless.font-type($size: 14px, $weight: normal, $color: $color-main-fg)
-        max-width: 310px
+        &_h3
+          @include useless.font-bold-type
+
+        &_body
+          @include useless.font-type($size: 14px, $weight: normal, $color: $color-main-fg)
+          max-width: 310px
         
     &-title
       justify-self: end
       @include useless.font-type($size: 24px, $weight: normal, $color: $color-unclaimed-fg)
 
-      &_h2
-        font-size: useless.px2rem(19px)
+      &_type
 
-      &_h3
-        @include useless.font-type($size: 12px, $transform: uppercase)
+        &_h2
+          font-size: useless.px2rem(19px)
 
-      &_body
-        font-size: useless.px2rem(14px)
-        
+        &_h3
+          @include useless.font-type($size: 12px, $transform: uppercase)
+
+        &_body
+          font-size: useless.px2rem(14px)
+          

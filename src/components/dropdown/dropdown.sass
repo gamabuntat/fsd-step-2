@@ -40,7 +40,8 @@ $color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
       border-bottom-left-radius: 0
       border-bottom-right-radius: 0
 
-    &:hover, &:focus
+    &:hover,
+    &:focus
       border-color: $color-additional-fg
 
       & .dropdown__expand-icon > #{$arrow}
@@ -84,7 +85,8 @@ $color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
     flex-grow: 1
     text-indent: 13px
 
-  &__decrease-button, &__increase-button
+  &__decrease-button,
+  &__increase-button
     @include useless.button-common-styles
     width: 30px
     height: 30px
@@ -92,13 +94,16 @@ $color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
     border: 1px solid $color-unclaimed-fg
     border-radius: 50%
 
-    &:hover, &:focus
+    &:hover,
+    &:focus
       color: color.adjust($color-additional-fg, $alpha: $alpha-delta)
       border: 1px solid color.adjust($color-unclaimed-fg, $alpha: $alpha-delta)
 
     &_disabled
       
-      &, &:hover, &:focus
+      &,
+      &:hover,
+      &:focus
         color: $color-disabled
         border: 1px solid $color-disabled
 
@@ -115,7 +120,8 @@ $color-disabled: color.adjust($color-main-fg, $alpha: -0.65)
     padding-top: 15px
     padding-left: 13px
 
-  &__apply-button, &__cancel-button
+  &__apply-button,
+  &__cancel-button
 
     &_hidden
       display: none
