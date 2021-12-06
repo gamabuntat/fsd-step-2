@@ -39,7 +39,13 @@ mixin card-reg(params)
           +text-field({ placeholder: "Пароль", type: "password" })
           +toggle({})
         .card-reg__big-button
-          +big-button({ attrs: { type: "submit", ...bigButtonAttrs } })
+          +big-button({
+            text: "зарегистрироваться",
+            attrs: {
+              type: "submit",
+              ...bigButtonAttrs,
+            } 
+          })
 
       .card-reg__container.card-reg__container_vertical
         span.card-reg__acc-caption Уже есть аккаунт на Toxin
