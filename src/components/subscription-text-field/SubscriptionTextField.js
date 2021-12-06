@@ -20,7 +20,7 @@ class SubscriptionTextField extends BEMBlock {
 
   bindListeners() {
     this.elemsMap.input.addEventListener(
-      'focus', 
+      'focus',
       this.handleSubscriptionTextFieldInputFocus
     );
     this.elemsMap.input.addEventListener(
@@ -51,4 +51,3 @@ class SubscriptionTextField extends BEMBlock {
 }
 
 export default SubscriptionTextField;
-

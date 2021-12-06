@@ -3,8 +3,8 @@ const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin")
-  .default;
+const HTMLInlineCSSWebpackPlugin =
+  require('html-inline-css-webpack-plugin').default;
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const alias = {
@@ -20,10 +20,12 @@ const alias = {
 
 const getEntry = (p) => {
   return fs.readdirSync(p).reduce((entries, name) => {
-		if (name === 'img') { return entries; }
+    if (name === 'img') {
+      return entries;
+    }
     entries[name] = `${p}${path.sep}${name}${path.sep}${name}.js`;
     return entries;
-  }, {})
+  }, {});
 };
 
 const entry = {
@@ -31,27 +33,28 @@ const entry = {
   ...getEntry(path.resolve(__dirname, './src/pages')),
 };
 
-const htmlPlugins = Object.entries(entry).map((entr) => (
-  new HtmlWebpackPlugin({
-    filename: `${entr[0]}.html`,
-    template: entr[1].replace(/(?<=\.)\w+$/, 'pug'),
-    chunks: [entr[0]],
-    inject: 'body',
-    mobile: true
-  })
-));
+const htmlPlugins = Object.entries(entry).map(
+  (entr) =>
+    new HtmlWebpackPlugin({
+      filename: `${entr[0]}.html`,
+      template: entr[1].replace(/(?<=\.)\w+$/, 'pug'),
+      chunks: [entr[0]],
+      inject: 'body',
+      mobile: true,
+    })
+);
 
 module.exports = (env, argv) => {
   const isProd = argv.mode === 'production';
   return {
     mode: 'development',
     devtool: isProd ? false : 'inline-source-map',
-    stats: { children: true, },
+    stats: { children: true },
     entry,
     output: {
       filename: '[name].js',
       path: path.resolve(__dirname, 'dist'),
-      assetModuleFilename: 'images/[name][ext][query]'
+      assetModuleFilename: 'images/[name][ext][query]',
     },
     resolve: { alias },
     devServer: {
@@ -70,14 +73,14 @@ module.exports = (env, argv) => {
           commonStyles: {
             test: /(components|layout|node_modules|fonts).*\.(sass|css)$/,
             chunks: 'all',
-            name: 'common.styles'
+            name: 'common.styles',
           },
           commonScripts: {
             test: /components.*\.js$/,
             chunks: 'all',
-            name: 'common.scripts'
-          }
-        }
+            name: 'common.scripts',
+          },
+        },
       },
       minimizer: [
         `...`,
@@ -91,7 +94,7 @@ module.exports = (env, argv) => {
             ],
           },
         }),
-      ]
+      ],
     },
     plugins: [
       new ESLintPlugin(),
@@ -110,22 +113,22 @@ module.exports = (env, argv) => {
           use: [
             isProd ? MiniCssExtractPlugin.loader : 'style-loader',
             'css-loader',
-            'sass-loader'
+            'sass-loader',
           ],
         },
         {
           test: /\.css$/i,
           use: [
             isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-            'css-loader'
-          ]
+            'css-loader',
+          ],
         },
         {
           test: /\.(svg|png|jpe?g|gif|webp)$/i,
           type: 'asset/resource',
           exclude: [
             path.resolve(__dirname, 'src/assets/fonts'),
-            path.resolve(__dirname, 'src/assets/favicons')
+            path.resolve(__dirname, 'src/assets/favicons'),
           ],
         },
         {
@@ -133,7 +136,7 @@ module.exports = (env, argv) => {
           type: 'asset/resource',
           include: path.resolve(__dirname, 'src/assets/favicons'),
           generator: {
-            filename: 'favicons/[name][ext][query]'
+            filename: 'favicons/[name][ext][query]',
           },
         },
         {
@@ -141,7 +144,7 @@ module.exports = (env, argv) => {
           type: 'asset/resource',
           include: path.resolve(__dirname, 'src/assets/fonts'),
           generator: {
-            filename: 'fonts/[name][ext][query]'
+            filename: 'fonts/[name][ext][query]',
           },
         },
         {
@@ -149,12 +152,11 @@ module.exports = (env, argv) => {
           use: {
             loader: 'simple-pug-loader',
             options: {
-              root: path.resolve(__dirname, 'src/components')
+              root: path.resolve(__dirname, 'src/components'),
             },
-          }
-        }
-      ]
-    }
+          },
+        },
+      ],
+    },
   };
-}
-
+};

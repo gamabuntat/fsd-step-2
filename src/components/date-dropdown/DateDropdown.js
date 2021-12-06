@@ -7,23 +7,19 @@ class DateDropdown extends BEMBlock {
   }
 
   init() {
-    this.updateElemsMap([
-      'cal-wrapper',
-      'start-btn',
-      'end-btn',
-    ]);
+    this.updateElemsMap(['cal-wrapper', 'start-btn', 'end-btn']);
     this.setMods(['date-dropdown__cal-wrapper_hidden']);
     this.dateFormater = new Intl.DateTimeFormat('ru');
     this.calendar = this.elemsMap.calWrapper.firstElementChild;
-    this.startSignature = this.elemsMap.startBtn
-      .querySelector('.js-date-dropdown__date-signature');
-    this.endSignature = this.elemsMap.endBtn
-      .querySelector('.js-date-dropdown__date-signature');
+    this.startSignature = this.elemsMap.startBtn.querySelector(
+      '.js-date-dropdown__date-signature'
+    );
+    this.endSignature = this.elemsMap.endBtn.querySelector(
+      '.js-date-dropdown__date-signature'
+    );
     this.startMask = this.startSignature.innerText;
     this.endMask = this.endSignature.innerText;
-    this.observer = new MutationObserver(
-      this.handleCalAttrsChanges.bind(this)
-    );
+    this.observer = new MutationObserver(this.handleCalAttrsChanges.bind(this));
     this.observer.observe(this.calendar, { attributes: true });
     this.setListeners();
     this.closeTrigger = true;
@@ -46,17 +42,13 @@ class DateDropdown extends BEMBlock {
 
   updateStartSignature(date) {
     this.changeStartDateSignatyre(
-      this.checkDate(date) 
-        ? this.formateDate(date)
-        : this.startMask
+      this.checkDate(date) ? this.formateDate(date) : this.startMask
     );
   }
 
   updateEndSignature(date) {
     this.changeEndDateSignatyre(
-      this.checkDate(date) 
-        ? this.formateDate(date)
-        : this.endMask
+      this.checkDate(date) ? this.formateDate(date) : this.endMask
     );
   }
 
@@ -95,8 +87,10 @@ class DateDropdown extends BEMBlock {
     this.root.addEventListener('click', this.handleRootClick);
     this.elemsMap.startBtn.addEventListener('click', this.handleBtnClick);
     this.elemsMap.endBtn.addEventListener('click', this.handleBtnClick);
-    this.elemsMap.calWrapper
-      .addEventListener('ready-date', this.handleBtnClick);
+    this.elemsMap.calWrapper.addEventListener(
+      'ready-date',
+      this.handleBtnClick
+    );
   }
 
   setHandleWindowClick() {
@@ -122,4 +116,3 @@ class DateDropdown extends BEMBlock {
 }
 
 export default DateDropdown;
-

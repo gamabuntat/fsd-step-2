@@ -9,11 +9,13 @@ class RangeSlider extends BEMBlock {
   init() {
     this.updateElemsMap(['container']);
     this.handles = [...document.querySelectorAll('.js-range-slider__handle')];
-    this.progressBars = document
-      .querySelectorAll('.js-range-slider__progress-bar');
+    this.progressBars = document.querySelectorAll(
+      '.js-range-slider__progress-bar'
+    );
     this.dataAttrs = ['from', 'to'];
-    this.positions = this.dataAttrs
-      .map((data) => Number(this.root.dataset[data]));
+    this.positions = this.dataAttrs.map((data) =>
+      Number(this.root.dataset[data])
+    );
     this.shift = 0;
     this.trigger = true;
     this.setListeners();
@@ -55,7 +57,9 @@ class RangeSlider extends BEMBlock {
 
   setHandleHandlePointermove() {
     this.handleHandlePointermove = (e) => {
-      if (!this.trigger) { return; }
+      if (!this.trigger) {
+        return;
+      }
       const handleIDX = this.handles.indexOf(e.target);
       const position = this.calcPosition(
         ...this.selectExtremums(handleIDX),
@@ -76,19 +80,14 @@ class RangeSlider extends BEMBlock {
   calcPosition(min, max, x, offset) {
     const rect = this.elemsMap.container.getBoundingClientRect();
     return Math.min(
-      max, 
-      Math.max(
-        min,
-        (x - rect.x - this.shift - offset) / rect.width
-      )
+      max,
+      Math.max(min, (x - rect.x - this.shift - offset) / rect.width)
     );
   }
 
   selectExtremums(idx) {
     const preExtremums = [idx, this.positions[1 - idx]];
-    return idx === 0 
-      ? preExtremums
-      : preExtremums.reverse();
+    return idx === 0 ? preExtremums : preExtremums.reverse();
   }
 
   updatePosition(position, idx) {
@@ -104,7 +103,7 @@ class RangeSlider extends BEMBlock {
   }
 
   resizeProgressBar(position, idx) {
-    this.progressBars[idx].style.width = `${(Math.abs(idx - position)) * 100}%`;
+    this.progressBars[idx].style.width = `${Math.abs(idx - position) * 100}%`;
   }
 
   getOffset(handle) {
@@ -117,4 +116,3 @@ class RangeSlider extends BEMBlock {
 }
 
 export { RangeSlider };
-

@@ -8,7 +8,10 @@ class SearchRoom extends BEMBlock {
 
   init() {
     this.updateElemsMap([
-      'aside-button', 'filter',  'filter-plug', 'filter-button'
+      'aside-button',
+      'filter',
+      'filter-plug',
+      'filter-button',
     ]);
     this.setMods(['search-room__filter_expanded', 'search-room_locked']);
     this.setListeners();
@@ -23,14 +26,22 @@ class SearchRoom extends BEMBlock {
   }
 
   bindListeners() {
-    this.elemsMap.asideButton
-      .addEventListener('click', this.handleAsideButtonClick);
-    this.elemsMap.filterButton
-      .addEventListener('click', this.handleFilterButtonClick);
-    this.elemsMap.filterPlug
-      .addEventListener('click', this.handleFilterPlugClick);
-    this.elemsMap.filterPlug
-      .addEventListener('keydown', this.handleFilterPlugKeydown);
+    this.elemsMap.asideButton.addEventListener(
+      'click',
+      this.handleAsideButtonClick
+    );
+    this.elemsMap.filterButton.addEventListener(
+      'click',
+      this.handleFilterButtonClick
+    );
+    this.elemsMap.filterPlug.addEventListener(
+      'click',
+      this.handleFilterPlugClick
+    );
+    this.elemsMap.filterPlug.addEventListener(
+      'keydown',
+      this.handleFilterPlugKeydown
+    );
   }
 
   setHandleAsideButtonClick() {
@@ -57,9 +68,9 @@ class SearchRoom extends BEMBlock {
 
   setHandleFilterPlugKeydown() {
     this.handleFilterPlugKeydown = (e) => {
-      if (e.code == 'Tab' && !e.shiftKey) { 
+      if (e.code == 'Tab' && !e.shiftKey) {
         e.preventDefault();
-        this.elemsMap.filterButton.focus(); 
+        this.elemsMap.filterButton.focus();
       }
     };
   }
@@ -76,4 +87,3 @@ class SearchRoom extends BEMBlock {
 }
 
 export default SearchRoom;
-

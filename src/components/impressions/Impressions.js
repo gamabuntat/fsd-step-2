@@ -27,11 +27,13 @@ class Impressions extends BEMBlock {
   }
 
   getArcs() {
-    return [...document.querySelectorAll(`.js-${this.arcClass}`)]
-      .reduce((map, arc, idx) => { 
+    return [...document.querySelectorAll(`.js-${this.arcClass}`)].reduce(
+      (map, arc, idx) => {
         map[this.marksNames[idx]] = arc;
         return map;
-      }, {});
+      },
+      {}
+    );
   }
 
   getRating() {
@@ -56,7 +58,9 @@ class Impressions extends BEMBlock {
 
   render() {
     Object.entries(this.rating).reduce((angle, [key, value]) => {
-      if (value == 0) { return angle; }
+      if (value == 0) {
+        return angle;
+      }
       const startAngle = angle + this.gap;
       const nextAngle = this.getAngle(value) + startAngle - this.gap;
       this.arcs[key].setAttribute('d', this.getArcPath(startAngle, nextAngle));
@@ -67,25 +71,25 @@ class Impressions extends BEMBlock {
   }
 
   getAngle(mark) {
-    return mark / this.totalMarks * 360;
+    return (mark / this.totalMarks) * 360;
   }
 
   getArcPath(startAngle, endAngle) {
-    return `M${
-      this.getPoint(this.getAngleRad(startAngle))
-    } A${this.r} ${this.r} 0 ${
-      Number(endAngle - startAngle + this.gap > 180)
-    } 0 ${this.getPoint(this.getAngleRad(endAngle))}`;
+    return `M${this.getPoint(this.getAngleRad(startAngle))} A${this.r} ${
+      this.r
+    } 0 ${Number(endAngle - startAngle + this.gap > 180)} 0 ${this.getPoint(
+      this.getAngleRad(endAngle)
+    )}`;
   }
 
   getPoint(angleRad) {
-    return `${this.r * Math.cos(angleRad) + this.r} ${
-      Math.abs(this.r * Math.sin(angleRad) - this.r)
-    }`;
+    return `${this.r * Math.cos(angleRad) + this.r} ${Math.abs(
+      this.r * Math.sin(angleRad) - this.r
+    )}`;
   }
 
   getAngleRad(angle) {
-    return (angle + 90) * Math.PI / 180;
+    return ((angle + 90) * Math.PI) / 180;
   }
 
   updateMark(mark = this.totalMarks) {
@@ -111,7 +115,9 @@ class Impressions extends BEMBlock {
   setHandleArcPointerover() {
     this.handleArcPointerover = ({ target }) => {
       const mod = this.findModInClassList(target.classList);
-      if (!mod) { return; }
+      if (!mod) {
+        return;
+      }
       const mark = mod.slice(mod.lastIndexOf('_') + 1);
       this.updateMark(this.rating[mark]);
       this.updateVotes(this.rating[mark]);
@@ -124,18 +130,19 @@ class Impressions extends BEMBlock {
       this.updateMark();
       this.updateVotes();
       const mod = this.findModInClassList(target.classList);
-      if (!mod) { return; }
+      if (!mod) {
+        return;
+      }
       const mark = mod.slice(mod.lastIndexOf('_') + 1);
       this.arcs[mark].classList.remove(this.mods.arcSelected);
     };
   }
 
   findModInClassList(classList) {
-    return [...classList].find((c) => (
-      Object.keys(this.rating)).find((k) => c.includes(k))
+    return [...classList].find((c) =>
+      Object.keys(this.rating).find((k) => c.includes(k))
     );
   }
 }
 
 export default Impressions;
-

@@ -8,14 +8,19 @@ class Glossary {
 
   getDefinition(testWord, numeral) {
     return (
-      this.glossary[this.findTerm(testWord)] || []
-    )[Glossary.defineShape(numeral)] || testWord;
+      (this.glossary[this.findTerm(testWord)] || [])[
+        Glossary.defineShape(numeral)
+      ] || testWord
+    );
   }
 
   findTerm(word) {
-    return this.terms.find((term) => (
-      term.trim().split('+').find((t) => t === word)
-    ));
+    return this.terms.find((term) =>
+      term
+        .trim()
+        .split('+')
+        .find((t) => t === word)
+    );
   }
 
   static defineShape(n) {
@@ -23,11 +28,9 @@ class Glossary {
   }
 
   static predicate(item, idx) {
-    return [
-      Glossary.checkForm1,
-      Glossary.checkForm2,
-      Glossary.checkForm3,
-    ][idx](item);
+    return [Glossary.checkForm1, Glossary.checkForm2, Glossary.checkForm3][idx](
+      item
+    );
   }
 
   static checkForm1(n) {
@@ -42,8 +45,9 @@ class Glossary {
   static checkForm3(n) {
     const lastDigit = Glossary.getLastDigits(n);
     const last2digits = Glossary.getLastDigits(n, 2);
-    return (lastDigit === 0 || lastDigit > 4) 
-      || (last2digits > 9 && last2digits < 20);
+    return (
+      lastDigit === 0 || lastDigit > 4 || (last2digits > 9 && last2digits < 20)
+    );
   }
 
   static getLastDigits(number, endCount = 1) {
@@ -52,13 +56,13 @@ class Glossary {
 
   static create(searchTerms, glossaries) {
     return new Glossary(
-      Object.values(glossaries).find((g) => (
-        Object.keys(g).filter((term) => searchTerms.indexOf(term) === -1)
-          .length == 0
-      ))
+      Object.values(glossaries).find(
+        (g) =>
+          Object.keys(g).filter((term) => searchTerms.indexOf(term) === -1)
+            .length == 0
+      )
     );
   }
 }
 
 export default Glossary;
-

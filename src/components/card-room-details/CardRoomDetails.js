@@ -19,9 +19,9 @@ class CardRoomDetails extends BEMBlock {
       'service-days-death',
       'total-cost',
       'service-sale',
-      'service-additional-cost'
+      'service-additional-cost',
     ]);
-    this.localeOpt = { 
+    this.localeOpt = {
       style: 'currency',
       currency: 'RUB',
       minimumFractionDigits: 0,
@@ -61,18 +61,22 @@ class CardRoomDetails extends BEMBlock {
 
   updateServiceCost() {
     this.elemsMap.serviceCost.textContent = this.formate(
-      CardRoomDetails.unFormate(this.elemsMap.cost.textContent) 
-      * this.elemsMap.serviceNDays.textContent
+      CardRoomDetails.unFormate(this.elemsMap.cost.textContent) *
+        this.elemsMap.serviceNDays.textContent
     );
   }
 
   updateTotalCost() {
     this.elemsMap.totalCost.textContent = this.formate(
-      Number(CardRoomDetails.unFormate(this.elemsMap.serviceCost.textContent))
-      - Number(CardRoomDetails.unFormate(this.elemsMap.serviceSale.textContent))
-      + Number(CardRoomDetails.unFormate(
-        this.elemsMap.serviceAdditionalCost.textContent
-      ))
+      Number(CardRoomDetails.unFormate(this.elemsMap.serviceCost.textContent)) -
+        Number(
+          CardRoomDetails.unFormate(this.elemsMap.serviceSale.textContent)
+        ) +
+        Number(
+          CardRoomDetails.unFormate(
+            this.elemsMap.serviceAdditionalCost.textContent
+          )
+        )
     );
   }
 
@@ -82,11 +86,15 @@ class CardRoomDetails extends BEMBlock {
 
   getDays() {
     return Math.floor(
-      (new Date(this.calendar.dataset.endDate) 
-        - new Date(this.calendar.dataset.startDate)) / 1000 / 60 / 60 / 24
+      (new Date(this.calendar.dataset.endDate) -
+        new Date(this.calendar.dataset.startDate)) /
+        1000 /
+        60 /
+        60 /
+        24
     );
   }
-  
+
   updateServiceDaysDeath() {
     this.elemsMap.serviceDaysDeath.textContent = this.glossary.getDefinition(
       'суток',
@@ -99,12 +107,13 @@ class CardRoomDetails extends BEMBlock {
   }
 
   fillCost(cost = this.elemsMap.cost.textContent) {
-    return this.elemsMap.cost.textContent = this.formate(Number(cost));
+    return (this.elemsMap.cost.textContent = this.formate(Number(cost)));
   }
 
   processLuxury(
-    isLuxury = this.elemsMap.roomNumber.classList
-      .contains(this.mods.roomNumberDeluxe)
+    isLuxury = this.elemsMap.roomNumber.classList.contains(
+      this.mods.roomNumberDeluxe
+    )
   ) {
     this.elemsMap.roomNumber.classList[isLuxury ? 'add' : 'remove'](
       this.mods.roomNumberDeluxe
@@ -112,7 +121,8 @@ class CardRoomDetails extends BEMBlock {
   }
 
   formate(value) {
-    return value.toLocaleString('ru-RU', this.localeOpt)
+    return value
+      .toLocaleString('ru-RU', this.localeOpt)
       .replace(/\s(?!\d)/g, '');
   }
 
@@ -122,4 +132,3 @@ class CardRoomDetails extends BEMBlock {
 }
 
 export default CardRoomDetails;
-

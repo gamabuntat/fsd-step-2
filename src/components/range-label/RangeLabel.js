@@ -15,21 +15,16 @@ class RangeLable extends BEMBlock {
       this.handleSliderChangeAttrs.bind(this)
     );
     this.observer.observe(this.slider, { attributes: true });
-    this.formater = new Intl.NumberFormat(
-      lang, 
-      {
-        maximumFractionDigits: calcDecimalPlaces(
-          Number(step)
-        ),
-        minimumFractionDigits: 0,
-        ...formaterOpt 
-          ? JSON.parse(formaterOpt) 
-          : {
+    this.formater = new Intl.NumberFormat(lang, {
+      maximumFractionDigits: calcDecimalPlaces(Number(step)),
+      minimumFractionDigits: 0,
+      ...(formaterOpt
+        ? JSON.parse(formaterOpt)
+        : {
             style: 'currency',
             currency: 'RUB',
-          }
-      }
-    );
+          }),
+    });
     this.max = Number(max);
     this.min = Number(min);
     this.step = Number(step);
@@ -38,15 +33,9 @@ class RangeLable extends BEMBlock {
 
   handleSliderChangeAttrs() {
     this.updateStartValue(
-      this.format(
-        this.calcValue(this.slider.dataset.from)
-      )
+      this.format(this.calcValue(this.slider.dataset.from))
     );
-    this.updateEndValue(
-      this.format(
-        this.calcValue(this.slider.dataset.to)
-      )
-    );
+    this.updateEndValue(this.format(this.calcValue(this.slider.dataset.to)));
   }
 
   updateStartValue(value) {
@@ -64,11 +53,11 @@ class RangeLable extends BEMBlock {
   calcValue(pos) {
     return Math.min(
       this.max,
-      Math.floor(pos * (this.max - this.min + this.step) / this.step) 
-      * this.step + this.min
+      Math.floor((pos * (this.max - this.min + this.step)) / this.step) *
+        this.step +
+        this.min
     );
   }
 }
 
 export default RangeLable;
-

@@ -15,16 +15,20 @@ class Tables {
   }
 
   decreaseIndex() {
-    if (this.index === 0) { return; }
+    if (this.index === 0) {
+      return;
+    }
     this.index -= 1;
   }
 
   increaseIndex() {
-    if (this.index === this.tables.length - 1) { return; }
+    if (this.index === this.tables.length - 1) {
+      return;
+    }
     this.index += 1;
   }
 
-  * genCoordsInOrder(coord, reference, compareFunc = () => true) {
+  *genCoordsInOrder(coord, reference, compareFunc = () => true) {
     let currentCoord = coord;
     while (compareFunc(currentCoord, reference)) {
       yield currentCoord;
@@ -33,12 +37,16 @@ class Tables {
   }
 
   getCoordsForward(coord, n) {
-    if (n === 0) { return coord; }
+    if (n === 0) {
+      return coord;
+    }
     return this.getCoordsForward(this.getNextCoord(coord), --n);
   }
 
   getCoordsAgo(coord, n) {
-    if (n === 0) { return coord; }
+    if (n === 0) {
+      return coord;
+    }
     return this.getCoordsAgo(this.getPrevCoord(coord), --n);
   }
 
@@ -52,9 +60,9 @@ class Tables {
 
   getElemCoord(elem) {
     return [
-      this.index, 
-      elem.closest('tr').rowIndex, 
-      elem.closest('td').cellIndex
+      this.index,
+      elem.closest('tr').rowIndex,
+      elem.closest('td').cellIndex,
     ];
   }
 
@@ -62,7 +70,7 @@ class Tables {
     return [
       index,
       Math.floor((nCells - 1) / this.rowSize),
-      (nCells - 1) % this.rowSize
+      (nCells - 1) % this.rowSize,
     ];
   }
 
@@ -71,23 +79,19 @@ class Tables {
   }
 
   getNextCoord(coord) {
-    return coord[2] < this.lastCellIndex 
-      ? [coord[0], coord[1], coord[2] + 1] 
-      : this.getCell([coord[0], coord[1] + 1, 0]) 
-        ? [coord[0], coord[1] + 1, 0] 
-        : [coord[0] + 1, 0, 0];
+    return coord[2] < this.lastCellIndex
+      ? [coord[0], coord[1], coord[2] + 1]
+      : this.getCell([coord[0], coord[1] + 1, 0])
+      ? [coord[0], coord[1] + 1, 0]
+      : [coord[0] + 1, 0, 0];
   }
 
   getPrevCoord(coord) {
-    return coord[2] > 0 
-      ? [coord[0], coord[1], coord[2] - 1] 
+    return coord[2] > 0
+      ? [coord[0], coord[1], coord[2] - 1]
       : coord[1] > 0
-        ? [coord[0], coord[1] - 1, this.lastCellIndex]
-        : [
-          coord[0] - 1,
-          this.getLastRowIndex(coord[0] - 1),
-          this.lastCellIndex
-        ];
+      ? [coord[0], coord[1] - 1, this.lastCellIndex]
+      : [coord[0] - 1, this.getLastRowIndex(coord[0] - 1), this.lastCellIndex];
   }
 
   getNRows(index) {
@@ -125,7 +129,9 @@ class Tables {
   }
 
   static fillCoord(coord, length = coord.length) {
-    if (length >= 3) { return coord; }
+    if (length >= 3) {
+      return coord;
+    }
     return Tables.fillCoord([0, ...coord], ++length);
   }
 
@@ -135,4 +141,3 @@ class Tables {
 }
 
 export default Tables;
-

@@ -1,6 +1,6 @@
-import getLastItem from '@scripts/getLastItem.js';
-import Tables from '@scripts/Tables.js';
-import BEMBlock from '@scripts/BEMBlock.js';
+import getLastItem from '@scripts/getLastItem';
+import Tables from '@scripts/Tables';
+import BEMBlock from '@scripts/BEMBlock';
 
 class Calendar extends BEMBlock {
   constructor(root) {
@@ -19,7 +19,7 @@ class Calendar extends BEMBlock {
       'table-container',
       'error',
       'month-label',
-      'year-label'
+      'year-label',
     ]);
     this.setMods([
       'calendar__day_selected',
@@ -39,14 +39,17 @@ class Calendar extends BEMBlock {
     this.errorMessage = this.elemsMap.error.textContent;
     this.elemsMap.error.textContent = '';
     this.template = this.elemsMap.tableContainer.innerHTML;
-    this.step = parseInt(getComputedStyle(this.elemsMap.tableContainer).width);
+    this.step = parseInt(
+      getComputedStyle(this.elemsMap.tableContainer).width,
+      10
+    );
     this.rangeCounter = 0;
     this.range = [];
     this.startRange = [];
     this.endRange = [];
     this.defaultHash = 'cal0';
-    this.hash = this.root.dataset.hash 
-      || (this.root.dataset.hash = this.defaultHash);
+    this.hash =
+      this.root.dataset.hash || (this.root.dataset.hash = this.defaultHash);
     this.initDates = this.getInitDates();
     this.setDataset();
     const now = new Date(this.initDates.date || Date());
@@ -63,9 +66,13 @@ class Calendar extends BEMBlock {
     this.changeTableContainerHeight();
     this.bindListeners();
     this.setSessStorDate();
-    if (!this.initDates.startDate) { return; }
+    if (!this.initDates.startDate) {
+      return;
+    }
     this.setInitialRange(this.initDates.startDate);
-    if (!this.initDates.endDate) { return; }
+    if (!this.initDates.endDate) {
+      return;
+    }
     this.setInitialRange(this.initDates.endDate);
   }
 
@@ -82,13 +89,10 @@ class Calendar extends BEMBlock {
   }
 
   setReadyDateEvent() {
-    this.readyDateEvent = new CustomEvent(
-      'ready-date',
-      { 
-        bubbles: true, 
-        detail: 'date range is ready (start and end range data filled)'
-      }
-    );
+    this.readyDateEvent = new CustomEvent('ready-date', {
+      bubbles: true,
+      detail: 'date range is ready (start and end range data filled)',
+    });
   }
 
   setMonthFormater() {
@@ -97,31 +101,31 @@ class Calendar extends BEMBlock {
 
   getInitDates() {
     const data = this.root.dataset;
-    const source = data.date || data.startDate 
-      ? data 
-      : JSON.parse(sessionStorage.getItem(this.hash));
+    const source =
+      data.date || data.startDate
+        ? data
+        : JSON.parse(sessionStorage.getItem(this.hash));
     return this.validateDate({
       date: source?.date || '',
       startDate: source?.startDate,
-      endDate: source?.endDate
+      endDate: source?.endDate,
     });
   }
 
   validateDate({ date, startDate, endDate }) {
-    const validDate = Calendar.checkDateIsInvalid(date) 
+    const validDate = Calendar.checkDateIsInvalid(date)
       ? Calendar.formatDate(new Date())
       : date;
-    const validStartDate = new Date(startDate) - new Date(validDate) >= 0 
-      ? startDate 
-      : '';
-    const validEndDate = new Date(endDate) - new Date(validStartDate) 
-      >= this.dayInMilisecond 
-      ? endDate 
-      : '';
+    const validStartDate =
+      new Date(startDate) - new Date(validDate) >= 0 ? startDate : '';
+    const validEndDate =
+      new Date(endDate) - new Date(validStartDate) >= this.dayInMilisecond
+        ? endDate
+        : '';
     return {
       startDate: validStartDate,
       endDate: validEndDate,
-      date
+      date,
     };
   }
 
@@ -134,19 +138,19 @@ class Calendar extends BEMBlock {
   modifyTodaysBtn(now) {
     this.getButton(
       this.mainTables.getCoord(0, this.getPrevMonthNDay(0) + now.getDate())
-    )
-      .classList.add(this.mods.dayBtnTodays);
+    ).classList.add(this.mods.dayBtnTodays);
   }
 
   disableBtns(now) {
-    [...this.mainTables.genCoordsInOrder(
-      [0, 0, 0],
-      this.mainTables.getCoord(0, this.getPrevMonthNDay(0) + now.getDate()),
-      Tables.isCoordLess,
-    )]
-      .forEach((coord) => (
-        this.getButton(coord).disabled = true
-      ));
+    [
+      ...this.mainTables.genCoordsInOrder(
+        [0, 0, 0],
+        this.mainTables.getCoord(0, this.getPrevMonthNDay(0) + now.getDate()),
+        Tables.isCoordLess
+      ),
+    ].forEach((coord) => {
+      this.getButton(coord).disabled = true;
+    });
   }
 
   setInitialRange(dateStr) {
@@ -154,7 +158,7 @@ class Calendar extends BEMBlock {
     const index = this.getIndex(btnDate);
     this.insertFillClearTablesNthTimes(index);
     const coord = this.mainTables.getCoord(
-      index, 
+      index,
       this.getPrevMonthNDay(index) + btnDate.getDate()
     );
     const btn = this.getButton(coord);
@@ -164,13 +168,18 @@ class Calendar extends BEMBlock {
   }
 
   getIndex(rangeDate) {
-    return (rangeDate.getFullYear() - this.year) * 12 
-      - this.month + rangeDate.getMonth();
+    return (
+      (rangeDate.getFullYear() - this.year) * 12 -
+      this.month +
+      rangeDate.getMonth()
+    );
   }
 
   insertFillClearTablesNthTimes(n) {
-    if (!n) { return; }
-    while (this.mainTables.getSize() != n + 2) {
+    if (!n) {
+      return;
+    }
+    while (this.mainTables.getSize() !== n + 2) {
       this.insertFillClearTables(this.mainTables.getSize());
     }
   }
@@ -191,40 +200,58 @@ class Calendar extends BEMBlock {
 
   updateYearDisplayValue() {
     this.elemsMap.yearLabel.textContent = new Date(
-      this.year, this.month + this.mainTables.index
+      this.year,
+      this.month + this.mainTables.index
     ).getFullYear();
   }
 
   bindListeners() {
-    this.elemsMap.prevMonthBtn
-      .addEventListener('click', this.handlePrevMonthBtnClick);
-    this.elemsMap.nextMonthBtn
-      .addEventListener('click', this.handleNextMonthBtnClick);
-    this.elemsMap.nextMonthBtn
-      .addEventListener('keydown', this.handleNextMonthBtnKeydown);
-    this.elemsMap.cancleBtn
-      .addEventListener('click', this.handleCancleBtnClick);
-    this.elemsMap.cancleBtn
-      .addEventListener('keydown', this.handleCancleBtnKeydown);
-    this.elemsMap.applyBtn
-      .addEventListener('click', this.handleApplyBtnClick);
-    this.elemsMap.tableContainer
-      .addEventListener('click', this.handleTablesContainerClick);
+    this.elemsMap.prevMonthBtn.addEventListener(
+      'click',
+      this.handlePrevMonthBtnClick
+    );
+    this.elemsMap.nextMonthBtn.addEventListener(
+      'click',
+      this.handleNextMonthBtnClick
+    );
+    this.elemsMap.nextMonthBtn.addEventListener(
+      'keydown',
+      this.handleNextMonthBtnKeydown
+    );
+    this.elemsMap.cancleBtn.addEventListener(
+      'click',
+      this.handleCancleBtnClick
+    );
+    this.elemsMap.cancleBtn.addEventListener(
+      'keydown',
+      this.handleCancleBtnKeydown
+    );
+    this.elemsMap.applyBtn.addEventListener('click', this.handleApplyBtnClick);
+    this.elemsMap.tableContainer.addEventListener(
+      'click',
+      this.handleTablesContainerClick
+    );
   }
 
   bindListenerOnLastBtn(index) {
-    this.getButton(this.mainTables.getLastCellCoord(index))
-      .addEventListener('keydown', this.handleLastDayBtnKeydown);
+    this.getButton(this.mainTables.getLastCellCoord(index)).addEventListener(
+      'keydown',
+      this.handleLastDayBtnKeydown
+    );
   }
 
   bindListenerOnFirstBtn(index) {
-    this.getButton([index, 0, 0])
-      .addEventListener('keydown', this.handleFirstDayBtnKeydown);
+    this.getButton([index, 0, 0]).addEventListener(
+      'keydown',
+      this.handleFirstDayBtnKeydown
+    );
   }
 
   setHandlePrevMonthBtnClick() {
     this.handlePrevMonthBtnClick = () => {
-      if (this.mainTables.index == 0) { return; }
+      if (this.mainTables.index === 0) {
+        return;
+      }
       this.mainTables.decreaseIndex();
       this.changeTableContainerHeight();
       this.changeDisplayedMonth();
@@ -267,11 +294,11 @@ class Calendar extends BEMBlock {
 
   setSessStorDate() {
     sessionStorage.setItem(
-      this.hash, 
+      this.hash,
       JSON.stringify({
         date: this.root.dataset.date,
         startDate: this.root.dataset.startDate,
-        endDate: this.root.dataset.endDate
+        endDate: this.root.dataset.endDate,
       })
     );
   }
@@ -307,7 +334,7 @@ class Calendar extends BEMBlock {
 
   setHandleNextMonthBtnKeydown() {
     this.handleNextMonthBtnKeydown = (e) => {
-      if (e.code === 'Tab' && !e.shiftKey && this.mainTables.index !== 0) { 
+      if (e.code === 'Tab' && !e.shiftKey && this.mainTables.index !== 0) {
         e.preventDefault();
         this.getButton([this.mainTables.index, 0, 0]).focus();
       }
@@ -317,7 +344,9 @@ class Calendar extends BEMBlock {
   setHandleTablesContainerClick() {
     this.handleTablesContainerClick = (e) => {
       const btn = e.target;
-      if (!btn.classList.contains('js-calendar__day-btn')) { return; }
+      if (!btn.classList.contains('js-calendar__day-btn')) {
+        return;
+      }
       const isSelected = btn.classList.toggle(this.mods.dayBtnSelected);
       if (isSelected === false) {
         this.clearRange();
@@ -325,8 +354,8 @@ class Calendar extends BEMBlock {
         this.removeDataIsReady();
         return;
       }
-      if (this.isEndRange()) { 
-        this.clearRange(); 
+      if (this.isEndRange()) {
+        this.clearRange();
         this.clearRangeData();
       }
       this.rangeCounter += 1;
@@ -334,14 +363,14 @@ class Calendar extends BEMBlock {
       const firstRowBtn = this.getButton([btnCoord[0], btnCoord[1], 0]);
       const lastRowBtn = this.getButton([btnCoord[0], btnCoord[1], 6]);
       this.addCoordInRange(btnCoord);
-      const isPrevMonthbtn = btn
-        .classList.contains(this.mods.dayBtnMonthPrev);
-      const isNextMonthBtn = btn
-        .classList.contains(this.mods.dayBtnMonthNext);
-      const shouldSelectedPrevMonth = firstRowBtn
-        .classList.contains(this.mods.dayBtnMonthPrev);
-      const shouldSelectedNextMonth = lastRowBtn
-        .classList.contains(this.mods.dayBtnMonthNext);
+      const isPrevMonthbtn = btn.classList.contains(this.mods.dayBtnMonthPrev);
+      const isNextMonthBtn = btn.classList.contains(this.mods.dayBtnMonthNext);
+      const shouldSelectedPrevMonth = firstRowBtn.classList.contains(
+        this.mods.dayBtnMonthPrev
+      );
+      const shouldSelectedNextMonth = lastRowBtn.classList.contains(
+        this.mods.dayBtnMonthNext
+      );
       if (isPrevMonthbtn || shouldSelectedPrevMonth) {
         if (this.mainTables.index > 0) {
           this.addCoordInRange(this.mainTables.getCoordsAgo(btnCoord, 7));
@@ -369,26 +398,28 @@ class Calendar extends BEMBlock {
         this.mainTables.genCoordsInOrder(
           coord,
           this.searchNextRangeCoord(coord) || getLastItem(this.range),
-          (
-            this.getButton([coord[0], coord[1], 6])
-              .classList.contains(this.mods.dayBtnMonthNext)
-              ? ((lastCoord) => (coord) => (
-                Tables.isCoordLessOrEqual(coord, lastCoord)
-              ))(Tables.getMinCoord(
-                this.mainTables.getLastCellCoord(coord[0]),
-                this.range[1]
-              ))
-              : Tables.isCoordLessOrEqual
-          ),
+          this.getButton([coord[0], coord[1], 6]).classList.contains(
+            this.mods.dayBtnMonthNext
+          )
+            ? (
+                (lastCoord) => (coord) =>
+                  Tables.isCoordLessOrEqual(coord, lastCoord)
+              )(
+                Tables.getMinCoord(
+                  this.mainTables.getLastCellCoord(coord[0]),
+                  this.range[1]
+                )
+              )
+            : Tables.isCoordLessOrEqual
         )
       )
     );
-    if (nextCoord) { 
+    if (nextCoord) {
       this.drawRange(
-        Tables.isCoordEqual(nextCoord, getLastItem(this.range)) 
-          ? [getLastItem(this.range)[0], 0, 0] 
+        Tables.isCoordEqual(nextCoord, getLastItem(this.range))
+          ? [getLastItem(this.range)[0], 0, 0]
           : nextCoord
-      ); 
+      );
     }
   }
 
@@ -398,9 +429,9 @@ class Calendar extends BEMBlock {
 
   drawPartOfRange(generator) {
     const coords = [...generator];
-    coords.forEach((coord) => (
+    coords.forEach((coord) =>
       this.mainTables.getCell(coord).classList.add(this.mods.daySelected)
-    ));
+    );
     return getLastItem(coords);
   }
 
@@ -408,7 +439,9 @@ class Calendar extends BEMBlock {
     this.startRange.sort(Tables.compareCoord);
     this.endRange.sort(Tables.compareCoord);
     const buffer = this.startRange;
-    if (Tables.isCoordLess(this.startRange[0], this.endRange[0])) { return; }
+    if (Tables.isCoordLess(this.startRange[0], this.endRange[0])) {
+      return;
+    }
     this.startRange = this.endRange;
     this.endRange = buffer;
   }
@@ -428,15 +461,15 @@ class Calendar extends BEMBlock {
 
   clearRange() {
     if (this.rangeCounter === 2) {
-      [...this.mainTables.genCoordsInOrder(
-        this.range[0], 
-        getLastItem(this.range),
-        Tables.isCoordLessOrEqual,
-      )]
-        .forEach((coord) => (
-          this.mainTables.getCell(coord)
-            .classList.remove(this.mods.daySelected)
-        ));
+      [
+        ...this.mainTables.genCoordsInOrder(
+          this.range[0],
+          getLastItem(this.range),
+          Tables.isCoordLessOrEqual
+        ),
+      ].forEach((coord) =>
+        this.mainTables.getCell(coord).classList.remove(this.mods.daySelected)
+      );
     }
     [...this.startRange, ...this.endRange].forEach((coord) => {
       const cell = this.mainTables.getCell(coord);
@@ -452,16 +485,16 @@ class Calendar extends BEMBlock {
   }
 
   setRangeData() {
-    this.root.dataset.startDate = (
-      Calendar.formatDate(this.getDateFromCoord(
+    this.root.dataset.startDate = Calendar.formatDate(
+      this.getDateFromCoord(
         this.startRange.find(this.isPresentDayBtn.bind(this))
-      ))
+      )
     );
     if (this.endRange.length != 0) {
-      this.root.dataset.endDate = (
-        Calendar.formatDate(this.getDateFromCoord(
+      this.root.dataset.endDate = Calendar.formatDate(
+        this.getDateFromCoord(
           this.endRange.find(this.isPresentDayBtn.bind(this))
-        ))
+        )
       );
     }
   }
@@ -491,8 +524,9 @@ class Calendar extends BEMBlock {
   }
 
   selectLastRangeBtn() {
-    this.getButton(getLastItem(this.getLastRange()))
-      .classList.add(this.mods.dayBtnSelected);
+    this.getButton(getLastItem(this.getLastRange())).classList.add(
+      this.mods.dayBtnSelected
+    );
   }
 
   getLastRange() {
@@ -508,14 +542,18 @@ class Calendar extends BEMBlock {
   }
 
   orderRange() {
-    this.range = [...this.startRange, ...this.endRange]
-      .sort(Tables.compareCoord);
+    this.range = [...this.startRange, ...this.endRange].sort(
+      Tables.compareCoord
+    );
   }
 
   changeTableContainerHeight() {
-    const activeTableHeight = this.mainTables.tables[this.mainTables.index]
-      .getBoundingClientRect().height;
-    if (activeTableHeight === 0) { return; }
+    const activeTableHeight =
+      this.mainTables.tables[this.mainTables.index].getBoundingClientRect()
+        .height;
+    if (activeTableHeight === 0) {
+      return;
+    }
     this.elemsMap.tableContainer.style.height = `${activeTableHeight}px`;
   }
 
@@ -527,7 +565,7 @@ class Calendar extends BEMBlock {
 
   fillTables(index) {
     const gen = this.mainTables.genCoordsInOrder(
-      [index, 0, 0], 
+      [index, 0, 0],
       [index, this.mainTables.getLastRowIndex(index), 6]
     );
     Calendar.getPrevMonthDay(
@@ -538,9 +576,9 @@ class Calendar extends BEMBlock {
       btn.textContent = day;
       btn.classList.add(this.mods.dayBtnMonthPrev);
     });
-    Calendar.getPresentDay(this.getPresentNDay(index)).forEach((day) => (
-      this.getButton(gen.next().value).textContent = day
-    ));
+    Calendar.getPresentDay(this.getPresentNDay(index)).forEach(
+      (day) => (this.getButton(gen.next().value).textContent = day)
+    );
     Calendar.getNextMonthDay(this.getNextMonthNDay(index)).forEach((day) => {
       const btn = this.getButton(gen.next().value);
       btn.textContent = day;
@@ -562,10 +600,13 @@ class Calendar extends BEMBlock {
   }
 
   getNextMonthNDay(index) {
-    return 7 - Calendar.getWeekDay(
-      this.year, 
-      this.month + index,
-      Calendar.getMonthLastDay(this.year, this.month + index)
+    return (
+      7 -
+      Calendar.getWeekDay(
+        this.year,
+        this.month + index,
+        Calendar.getMonthLastDay(this.year, this.month + index)
+      )
     );
   }
 
@@ -584,7 +625,7 @@ class Calendar extends BEMBlock {
   getDateFromCoord(coord) {
     return new Date(
       this.year,
-      this.month + coord[0], 
+      this.month + coord[0],
       coord[1] * 7 + coord[2] + 1 - this.getPrevMonthNDay(coord[0])
     );
   }
@@ -594,7 +635,9 @@ class Calendar extends BEMBlock {
   }
 
   static getNextMonthDay(nextMonthNDay) {
-    return Array(nextMonthNDay).fill(1).map((d, idx) => d + idx);
+    return Array(nextMonthNDay)
+      .fill(1)
+      .map((d, idx) => d + idx);
   }
 
   static getPresentDay(presentMonthNDay) {
@@ -622,4 +665,3 @@ class Calendar extends BEMBlock {
 }
 
 export default Calendar;
-

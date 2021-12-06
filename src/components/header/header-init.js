@@ -1,6 +1,5 @@
 import Header from './Header.js';
 
-window.addEventListener('load', () => (
+window.addEventListener('load', () =>
   document.querySelectorAll('.js-header').forEach((h) => new Header(h))
-));
-
+);

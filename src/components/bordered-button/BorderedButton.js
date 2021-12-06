@@ -7,12 +7,8 @@ class BorderedButton extends BEMBlock {
   }
 
   init() {
-    this.updateElemsMap([
-      'button',
-    ]);
-    this.setMods([
-      'bordered-button_focused'
-    ]);
+    this.updateElemsMap(['button']);
+    this.setMods(['bordered-button_focused']);
     this.setListeners();
     this.bindListeners();
   }
@@ -41,4 +37,3 @@ class BorderedButton extends BEMBlock {
 }
 
 export default BorderedButton;
-

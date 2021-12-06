@@ -9,10 +9,7 @@ class Header extends BEMBlock {
 
   init() {
     this.updateElemsMap(['burger']);
-    this.setMods([
-      'header__menu-button_pressed',
-      'header__burger_pressed'
-    ]);
+    this.setMods(['header__menu-button_pressed', 'header__burger_pressed']);
     this.menuButtons = this.root.querySelectorAll(this.menuButtonClass);
     this.closeTrigger = true;
     this.setListeners();
@@ -30,8 +27,8 @@ class Header extends BEMBlock {
     window.addEventListener('click', this.handleWindowClick);
     this.root.addEventListener('click', this.handleHeaderClick);
     this.elemsMap.burger.addEventListener('click', this.handleBurgerClick);
-    this.menuButtons.forEach((mb) => (
-      mb.addEventListener('click', this.handleMenuButtonClick))
+    this.menuButtons.forEach((mb) =>
+      mb.addEventListener('click', this.handleMenuButtonClick)
     );
   }
 
@@ -68,21 +65,22 @@ class Header extends BEMBlock {
   setHandleMenuButtonClick() {
     this.handleMenuButtonClick = ({ target }) => {
       const menuButton = target.closest(this.menuButtonClass);
-      const isPressedMod = menuButton
-        .classList.contains(this.mods.menuButtonPressed);
+      const isPressedMod = menuButton.classList.contains(
+        this.mods.menuButtonPressed
+      );
       this.removeMenuButtonsPressedMod();
       if (!isPressedMod) {
-        menuButton.classList.add(this.mods.menuButtonPressed); 
+        menuButton.classList.add(this.mods.menuButtonPressed);
         this.closeSubMenuTrigger = false;
       }
     };
   }
 
   removeMenuButtonsPressedMod() {
-    this.menuButtons
-      .forEach((mb) => mb.classList.remove(this.mods.menuButtonPressed));
+    this.menuButtons.forEach((mb) =>
+      mb.classList.remove(this.mods.menuButtonPressed)
+    );
   }
 }
 
 export default Header;
-

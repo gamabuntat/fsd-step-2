@@ -21,9 +21,7 @@ class BEMBlock {
 
   setMods(mods) {
     this.mods = mods.reduce((mods, mode) => {
-      mods[kebabToCamel(
-        mode.replace(/.*__/, '').replace(/_/g, '-')
-      )] = mode;
+      mods[kebabToCamel(mode.replace(/.*__/, '').replace(/_/g, '-'))] = mode;
       return mods;
     }, {});
   }
@@ -42,4 +40,3 @@ class BEMBlock {
 }
 
 export default BEMBlock;
-

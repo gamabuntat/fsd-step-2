@@ -8,11 +8,7 @@ class Like extends BEMBlock {
 
   init() {
     this.updateElemsMap(['counter', 'btn']);
-    this.setMods([
-      'like_pressed',
-      'like_focused',
-      'like_focused-pressed'
-    ]);
+    this.setMods(['like_pressed', 'like_focused', 'like_focused-pressed']);
     this.setListeners();
     this.bindListeners();
   }
@@ -31,9 +27,9 @@ class Like extends BEMBlock {
 
   setHandleRootClick() {
     this.handleRootClick = () => {
-      this.root.classList.toggle(this.mods.likePressed) 
-        ? this.elemsMap.counter.innerText -= -1
-        : this.elemsMap.counter.innerText -= 1;
+      this.root.classList.toggle(this.mods.likePressed)
+        ? (this.elemsMap.counter.innerText -= -1)
+        : (this.elemsMap.counter.innerText -= 1);
       this.handleBtnFocus();
     };
   }
@@ -42,9 +38,9 @@ class Like extends BEMBlock {
     this.handleBtnFocus = () => {
       this.handleBtnBlur();
       this.root.classList.add(
-        this.root.classList.contains(this.mods.likePressed) 
+        this.root.classList.contains(this.mods.likePressed)
           ? this.mods.likeFocusedPressed
-          : this.mods.likeFocused 
+          : this.mods.likeFocused
       );
     };
   }
@@ -58,4 +54,3 @@ class Like extends BEMBlock {
 }
 
 export default Like;
-

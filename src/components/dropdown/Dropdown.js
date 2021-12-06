@@ -34,8 +34,8 @@ class Dropdown extends BEMBlock {
     this.bindListeners();
     this.defaultSignature = this.elemsMap.signature.innerText;
     this.defaultHash = 'commonDrpdwnHash';
-    this.hash = this.root.dataset.hash 
-      || (this.root.dataset.hash = this.defaultHash);
+    this.hash =
+      this.root.dataset.hash || (this.root.dataset.hash = this.defaultHash);
     this.setCounterValues(this.getInitValues());
     if (this.root.hasAttribute('data-open')) {
       this.handleExpandButtonClick();
@@ -47,12 +47,14 @@ class Dropdown extends BEMBlock {
   }
 
   setListElems() {
-    this.decreaseButtons = this.root
-      .querySelectorAll(this.getElemClass('decrease-button'));
-    this.increaseButtons = this.root
-      .querySelectorAll(this.getElemClass('increase-button'));
+    this.decreaseButtons = this.root.querySelectorAll(
+      this.getElemClass('decrease-button')
+    );
+    this.increaseButtons = this.root.querySelectorAll(
+      this.getElemClass('increase-button')
+    );
     this.counters = [
-      ...this.root.querySelectorAll(this.getElemClass('counter'))
+      ...this.root.querySelectorAll(this.getElemClass('counter')),
     ];
     this.sectionNames = Array.from(
       this.root.querySelectorAll(this.getElemClass('section-name')),
@@ -61,30 +63,31 @@ class Dropdown extends BEMBlock {
   }
 
   getSignatureInterfaces() {
-    return this.glossary.terms.reduce((interfaces, term) => { 
+    return this.glossary.terms.reduce((interfaces, term) => {
       const splitedTerm = term.split('+');
       return [
-        ...interfaces, 
+        ...interfaces,
         {
-          getValue: () => (
-            splitedTerm.reduce((sum, splitedTerm) => (
-              Number(
-                this.counters[this.sectionNames.indexOf(splitedTerm)].innerText
-              ) + sum
-            ), 0)
-          ),
-          getName: () => (
-            this.sectionNames.find((name) => name === splitedTerm[0])
-          )
-        }
+          getValue: () =>
+            splitedTerm.reduce(
+              (sum, splitedTerm) =>
+                Number(
+                  this.counters[this.sectionNames.indexOf(splitedTerm)]
+                    .innerText
+                ) + sum,
+              0
+            ),
+          getName: () =>
+            this.sectionNames.find((name) => name === splitedTerm[0]),
+        },
       ];
     }, []);
   }
 
   getInitValues() {
-    return this.root.dataset.counterValues 
-      || sessionStorage.getItem(this.hash)
-      || '';
+    return (
+      this.root.dataset.counterValues || sessionStorage.getItem(this.hash) || ''
+    );
   }
 
   setListeners() {
@@ -104,27 +107,30 @@ class Dropdown extends BEMBlock {
       'click',
       this.handleExpandButtonClick
     );
-    this.decreaseButtons.forEach((b) => (
+    this.decreaseButtons.forEach((b) =>
       b.addEventListener('click', this.handleDecreaseButtonClick)
-    ));
-    this.increaseButtons.forEach((b) => (
+    );
+    this.increaseButtons.forEach((b) =>
       b.addEventListener('click', this.handleIncreaseButtonClick)
-    ));
-    this.elemsMap.applyButton && this.elemsMap.applyButton.addEventListener(
-      'click', 
-      this.handeApplyButtonClick
     );
-    this.elemsMap.cancelButton && this.elemsMap.cancelButton.addEventListener(
-      'click',
-      this.handleCancelButtonClick
-    );
+    this.elemsMap.applyButton &&
+      this.elemsMap.applyButton.addEventListener(
+        'click',
+        this.handeApplyButtonClick
+      );
+    this.elemsMap.cancelButton &&
+      this.elemsMap.cancelButton.addEventListener(
+        'click',
+        this.handleCancelButtonClick
+      );
   }
 
   setHandleWindowClick() {
     this.handleWindowClick = () => {
       if (this.closeTrigger) {
-        this.elemsMap.expandButton
-          .classList.remove(this.mods.expandButtonPressed);
+        this.elemsMap.expandButton.classList.remove(
+          this.mods.expandButtonPressed
+        );
         this.elemsMap.list.classList.add(this.mods.listHidden);
       }
       this.closeTrigger = true;
@@ -139,8 +145,9 @@ class Dropdown extends BEMBlock {
 
   setHandleExpandButtonClick() {
     this.handleExpandButtonClick = () => {
-      this.elemsMap.expandButton
-        .classList.toggle(this.mods.expandButtonPressed);
+      this.elemsMap.expandButton.classList.toggle(
+        this.mods.expandButtonPressed
+      );
       this.elemsMap.list.classList.toggle(this.mods.listHidden);
     };
   }
@@ -148,15 +155,19 @@ class Dropdown extends BEMBlock {
   setHandleDecreaseButtonClick() {
     this.handleDecreaseButtonClick = (e) => {
       this.update(e.target);
-      if (this.value === 0) { return; }
-      if (this.value === 1) { 
-        this.toggleDecreaseButtonMod(); 
+      if (this.value === 0) {
+        return;
+      }
+      if (this.value === 1) {
+        this.toggleDecreaseButtonMod();
         this.decreaseButtons[this.row].tabIndex = '-1';
       }
       this.changeCounterValue(-1);
       this.updateSignature(this.signatureInterfaces);
       this.countersSum -= 1;
-      if (this.countersSum === 0) { this.toggleCancelButtonMod(); }
+      if (this.countersSum === 0) {
+        this.toggleCancelButtonMod();
+      }
       this.updateStorage();
     };
   }
@@ -164,22 +175,25 @@ class Dropdown extends BEMBlock {
   setHandleIncreaseButtonClick() {
     this.handleIncreaseButtonClick = (e) => {
       this.update(e.target);
-      if (this.value === 0) { 
-        this.toggleDecreaseButtonMod(); 
+      if (this.value === 0) {
+        this.toggleDecreaseButtonMod();
         this.decreaseButtons[this.row].tabIndex = '0';
       }
       this.changeCounterValue(1);
       this.updateSignature(this.signatureInterfaces);
       this.countersSum += 1;
-      if (this.countersSum === 1) { this.toggleCancelButtonMod(); }
+      if (this.countersSum === 1) {
+        this.toggleCancelButtonMod();
+      }
       this.updateStorage();
     };
   }
 
   setHandeApplyButtonClick() {
     this.handeApplyButtonClick = () => {
-      this.elemsMap.expandButton
-        .classList.toggle(this.mods.expandButtonPressed);
+      this.elemsMap.expandButton.classList.toggle(
+        this.mods.expandButtonPressed
+      );
       this.elemsMap.list.classList.toggle(this.mods.listHidden);
       this.updateStorage();
     };
@@ -197,40 +211,43 @@ class Dropdown extends BEMBlock {
 
   updateStorage() {
     sessionStorage.setItem(
-      this.hash, 
+      this.hash,
       this.counters.reduce((res, c) => `${res} ${c.innerText}`, '')
     );
   }
 
   setCounterValues(values) {
-    (values.match(/\d+/g) || []).forEach((v, idx) => (
+    (values.match(/\d+/g) || []).forEach((v, idx) =>
       this.clickOnButtonNthTimes(Number(v), this.increaseButtons[idx])
-    ));
+    );
   }
 
   clickOnButtonNthTimes(n, button) {
-    if (n <= 0) { return; }
+    if (n <= 0) {
+      return;
+    }
     this.handleIncreaseButtonClick({ target: button });
     this.clickOnButtonNthTimes(--n, button);
   }
 
   changeCounterValue(diff) {
-    return this.counters[this.row].innerText = this.value + diff;
+    return (this.counters[this.row].innerText = this.value + diff);
   }
 
   resetCounters() {
-    this.counters.forEach((c) => c.innerText = 0);
+    this.counters.forEach((c) => (c.innerText = 0));
   }
 
   toggleDecreaseButtonMod() {
-    this.decreaseButtons[this.row]
-      .classList.toggle(this.mods.decreaseButtonDisabled);
+    this.decreaseButtons[this.row].classList.toggle(
+      this.mods.decreaseButtonDisabled
+    );
   }
 
   addDecreseButtonsMod() {
-    this.decreaseButtons.forEach((b) => (
+    this.decreaseButtons.forEach((b) =>
       b.classList.add(this.mods.decreaseButtonDisabled)
-    ));
+    );
   }
 
   toggleCancelButtonMod() {
@@ -240,14 +257,18 @@ class Dropdown extends BEMBlock {
   }
 
   updateSignature(interfaces = this.signatureInterfaces) {
-    this.elemsMap.signature.innerText = interfaces.reduce((res, i) => {
-      const value = i.getValue();
-      if (value === 0) { return res; }
-      const part = `${value} ${
-        this.glossary.getDefinition(i.getName(), value)
-      }`;
-      return res === '' ? part : `${res}, ${part}`;
-    }, '') || this.defaultSignature;
+    this.elemsMap.signature.innerText =
+      interfaces.reduce((res, i) => {
+        const value = i.getValue();
+        if (value === 0) {
+          return res;
+        }
+        const part = `${value} ${this.glossary.getDefinition(
+          i.getName(),
+          value
+        )}`;
+        return res === '' ? part : `${res}, ${part}`;
+      }, '') || this.defaultSignature;
   }
 
   getRow(button) {
@@ -265,4 +286,3 @@ class Dropdown extends BEMBlock {
 }
 
 export default Dropdown;
-

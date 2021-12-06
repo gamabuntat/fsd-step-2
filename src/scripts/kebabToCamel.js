@@ -1,6 +1,4 @@
-const kebabToCamel = (kebab) => (
-  kebab.replace(/-(.)/g, (match, s) => s.toUpperCase())
-);
+const kebabToCamel = (kebab) =>
+  kebab.replace(/-(.)/g, (match, s) => s.toUpperCase());
 
 export default kebabToCamel;
-

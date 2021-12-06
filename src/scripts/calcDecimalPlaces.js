@@ -5,4 +5,3 @@ const calcDecimalPlaces = (n) => {
 };
 
 export default calcDecimalPlaces;
-

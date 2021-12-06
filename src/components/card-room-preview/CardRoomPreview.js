@@ -13,21 +13,21 @@ class CardRoomPreview extends BEMBlock {
       'prev-button',
       'wrapper',
       'room-number',
-      'cost'
+      'cost',
     ]);
-    this.setMods([
-      'card-room-preview__room-number_deluxe'
-    ]);
+    this.setMods(['card-room-preview__room-number_deluxe']);
     this.counter = 0;
     this.step = 270;
-    this.nImg = this.root
-      .querySelectorAll(this.getElemClass('room-img'))
-      .length;
-    this.radioInputs = this.root
-      .querySelectorAll(this.getElemClass('radio-input'));
+    this.nImg = this.root.querySelectorAll(
+      this.getElemClass('room-img')
+    ).length;
+    this.radioInputs = this.root.querySelectorAll(
+      this.getElemClass('radio-input')
+    );
     this.roomNumber = Number(this.elemsMap.roomNumber.innerText);
-    this.isLuxury = this.elemsMap.roomNumber
-      .classList.contains(this.mods.roomNumberDeluxe);
+    this.isLuxury = this.elemsMap.roomNumber.classList.contains(
+      this.mods.roomNumberDeluxe
+    );
     this.cost = Number(this.elemsMap.cost.innerText.replace(/\D/g, ''));
     this.setListeners();
     this.bindListeners();
@@ -41,19 +41,25 @@ class CardRoomPreview extends BEMBlock {
   }
 
   bindListeners() {
-    this.elemsMap.nextButton
-      .addEventListener('click', this.handleNextButtonClick);
-    this.elemsMap.prevButton
-      .addEventListener('click', this.handlePrevButtonClick);
-    this.radioInputs.forEach((ri) => (
+    this.elemsMap.nextButton.addEventListener(
+      'click',
+      this.handleNextButtonClick
+    );
+    this.elemsMap.prevButton.addEventListener(
+      'click',
+      this.handlePrevButtonClick
+    );
+    this.radioInputs.forEach((ri) =>
       ri.addEventListener('change', this.handleRadioInputChange)
-    ));
+    );
     this.elemsMap.wrapper.addEventListener('click', this.handleWrapperClick);
   }
 
   setHandleNextButtonClick() {
     this.handleNextButtonClick = () => {
-      if (this.counter === this.nImg - 1) { return; }
+      if (this.counter === this.nImg - 1) {
+        return;
+      }
       this.counter += 1;
       this.checkInput();
       this.flipImg();
@@ -62,7 +68,9 @@ class CardRoomPreview extends BEMBlock {
 
   setHandlePrevButtonClick() {
     this.handlePrevButtonClick = () => {
-      if (this.counter === 0) { return; }
+      if (this.counter === 0) {
+        return;
+      }
       this.counter -= 1;
       this.checkInput();
       this.flipImg();
@@ -86,14 +94,16 @@ class CardRoomPreview extends BEMBlock {
 
   setHandleWrapperClick() {
     this.handleWrapperClick = () => {
-      sessionStorage.setItem('roomDetails', JSON.stringify({
-        roomNumber: this.roomNumber,
-        cost: this.cost,
-        isLuxury: this.isLuxury
-      }));
+      sessionStorage.setItem(
+        'roomDetails',
+        JSON.stringify({
+          roomNumber: this.roomNumber,
+          cost: this.cost,
+          isLuxury: this.isLuxury,
+        })
+      );
     };
   }
 }
 
 export default CardRoomPreview;
-

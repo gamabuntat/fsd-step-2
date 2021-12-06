@@ -29,4 +29,3 @@ class CheckList extends BEMBlock {
 }
 
 export default CheckList;
-
