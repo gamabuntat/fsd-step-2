@@ -7,9 +7,12 @@ mixin pagination({ current = 1, last = 15 } = {})
         href="change me"
         class= i === current && "pagination__item_active"
       ) #{i}
-    | ...
-    a(href="change me").pagination__item #{last}
-    button.pagination__next-item 
-      +svg-forward-arrow()
+    - const diff = last - current
+    if (diff >= 3)
+      if (last - 3 > 1)
+        | ...
+      a(href="change me").pagination__item #{last}
+      button.pagination__next-item 
+        +svg-forward-arrow()
     span.pagination__sign 1 – 12 из 100+ вариантов аренды
 
