@@ -1,7 +1,7 @@
 import BEMBlock from '@scripts/BEMBlock.js';
 import Glossary from '@scripts/Glossary.js';
 
-import * as glossaries from './glossaries.js';
+import * as glossaries from './glossaries';
 
 class Dropdown extends BEMBlock {
   constructor(root) {
@@ -32,7 +32,7 @@ class Dropdown extends BEMBlock {
     this.setListeners();
     this.closeTrigger = true;
     this.bindListeners();
-    this.defaultSignature = this.elemsMap.signature.innerText;
+    this.defaultSignature = this.elemsMap.signature.textContent;
     this.defaultHash = 'commonDrpdwnHash';
     this.hash =
       this.root.dataset.hash || (this.root.dataset.hash = this.defaultHash);
@@ -58,27 +58,27 @@ class Dropdown extends BEMBlock {
     ];
     this.sectionNames = Array.from(
       this.root.querySelectorAll(this.getElemClass('section-name')),
-      (section) => section.innerText
+      (section) => section.textContent
     );
   }
 
   getSignatureInterfaces() {
     return this.glossary.terms.reduce((interfaces, term) => {
-      const splitedTerm = term.split('+');
+      const splitedTerms = term.split('+');
       return [
         ...interfaces,
         {
           getValue: () =>
-            splitedTerm.reduce(
+            splitedTerms.reduce(
               (sum, splitedTerm) =>
                 Number(
                   this.counters[this.sectionNames.indexOf(splitedTerm)]
-                    .innerText
+                    .textContent
                 ) + sum,
               0
             ),
           getName: () =>
-            this.sectionNames.find((name) => name === splitedTerm[0]),
+            this.sectionNames.find((name) => name === splitedTerms[0]),
         },
       ];
     }, []);
@@ -113,16 +113,18 @@ class Dropdown extends BEMBlock {
     this.increaseButtons.forEach((b) =>
       b.addEventListener('click', this.handleIncreaseButtonClick)
     );
-    this.elemsMap.applyButton &&
+    if (this.elemsMap.applyButton) {
       this.elemsMap.applyButton.addEventListener(
         'click',
         this.handeApplyButtonClick
       );
-    this.elemsMap.cancelButton &&
+    }
+    if (this.elemsMap.cancelButton) {
       this.elemsMap.cancelButton.addEventListener(
         'click',
         this.handleCancelButtonClick
       );
+    }
   }
 
   setHandleWindowClick() {
@@ -203,7 +205,7 @@ class Dropdown extends BEMBlock {
     this.handleCancelButtonClick = () => {
       this.resetCounters();
       this.countersSum = 0;
-      this.elemsMap.signature.innerText = this.defaultSignature;
+      this.elemsMap.signature.textContent = this.defaultSignature;
       this.addDecreseButtonsMod();
       this.toggleCancelButtonMod();
     };
@@ -212,7 +214,7 @@ class Dropdown extends BEMBlock {
   updateStorage() {
     sessionStorage.setItem(
       this.hash,
-      this.counters.reduce((res, c) => `${res} ${c.innerText}`, '')
+      this.counters.reduce((res, c) => `${res} ${c.textContent}`, '')
     );
   }
 
@@ -227,15 +229,19 @@ class Dropdown extends BEMBlock {
       return;
     }
     this.handleIncreaseButtonClick({ target: button });
-    this.clickOnButtonNthTimes(--n, button);
+    this.clickOnButtonNthTimes(n - 1, button);
   }
 
   changeCounterValue(diff) {
-    return (this.counters[this.row].innerText = this.value + diff);
+    const newValue = this.value + diff;
+    this.counters[this.row].textContent = newValue;
+    return newValue;
   }
 
   resetCounters() {
-    this.counters.forEach((c) => (c.innerText = 0));
+    this.counters.forEach((c) => {
+      c.textContent = 0;
+    });
   }
 
   toggleDecreaseButtonMod() {
@@ -257,7 +263,7 @@ class Dropdown extends BEMBlock {
   }
 
   updateSignature(interfaces = this.signatureInterfaces) {
-    this.elemsMap.signature.innerText =
+    this.elemsMap.signature.textContent =
       interfaces.reduce((res, i) => {
         const value = i.getValue();
         if (value === 0) {
@@ -281,7 +287,7 @@ class Dropdown extends BEMBlock {
 
   update(button) {
     this.row = this.getRow(button);
-    this.value = Number(this.counters[this.row].innerText);
+    this.value = Number(this.counters[this.row].textContent);
   }
 }
 

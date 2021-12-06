@@ -1,4 +1,4 @@
-import Impressions from './Impressions.js';
+import Impressions from './Impressions';
 
 window.addEventListener('load', () =>
   document

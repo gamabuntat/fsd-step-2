@@ -68,7 +68,7 @@ class SearchRoom extends BEMBlock {
 
   setHandleFilterPlugKeydown() {
     this.handleFilterPlugKeydown = (e) => {
-      if (e.code == 'Tab' && !e.shiftKey) {
+      if (e.code === 'Tab' && !e.shiftKey) {
         e.preventDefault();
         this.elemsMap.filterButton.focus();
       }

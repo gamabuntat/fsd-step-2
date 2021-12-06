@@ -13,17 +13,20 @@ class BEMBlock {
   }
 
   getElemsMap(elemNames) {
-    return elemNames.reduce((map, name) => {
-      map[kebabToCamel(name)] = this.findElem(name);
-      return map;
-    }, {});
+    return elemNames.reduce(
+      (map, name) => ({ ...map, [kebabToCamel(name)]: this.findElem(name) }),
+      {}
+    );
   }
 
   setMods(mods) {
-    this.mods = mods.reduce((mods, mode) => {
-      mods[kebabToCamel(mode.replace(/.*__/, '').replace(/_/g, '-'))] = mode;
-      return mods;
-    }, {});
+    this.mods = mods.reduce(
+      (newMods, mode) => ({
+        ...newMods,
+        [kebabToCamel(mode.replace(/.*__/, '').replace(/_/g, '-'))]: mode,
+      }),
+      {}
+    );
   }
 
   getElemClass(elemName) {

@@ -38,13 +38,13 @@ class MaskedTextField {
     if (/\d/.test(symb)) {
       return this.handleDigit();
     }
-    if (symb == '.') {
+    if (symb === '.') {
       return this.handlePoint();
     }
-    if (symb == ' ') {
+    if (symb === ' ') {
       return this.autocomplete();
     }
-    this.removeLastCharacter();
+    return this.removeLastCharacter();
   }
 
   updateValues() {
@@ -55,7 +55,7 @@ class MaskedTextField {
   }
 
   handleDigit() {
-    if (this.template[this.getValueIndex()] == '.') {
+    if (this.template[this.getValueIndex()] === '.') {
       return this.setValue(
         this.concatString(
           ...this.splitString(this.input.value, this.getValueIndex()),
@@ -64,8 +64,8 @@ class MaskedTextField {
       );
     }
     if (
-      this.inputValue.length == this.templateValue.length &&
-      Number(this.inputValue) == 0
+      this.inputValue.length === this.templateValue.length &&
+      Number(this.inputValue) === 0
     ) {
       return this.setValue(
         `${this.prepValue.slice(
@@ -82,6 +82,7 @@ class MaskedTextField {
         )}${this.templateValue}`
       );
     }
+    return '';
   }
 
   handlePoint() {
@@ -92,30 +93,31 @@ class MaskedTextField {
         }.`
       );
     }
-    if (this.inputValue.length == 0 || this.templateValue.length == 4) {
+    if (this.inputValue.length === 0 || this.templateValue.length === 4) {
       return this.setValue(this.prepValue);
     }
-    if (this.inputValue.length == 1 && this.templateValue.length == 2) {
+    if (this.inputValue.length === 1 && this.templateValue.length === 2) {
       return this.addZero();
     }
-    if (this.inputValue.length == 2) {
-      this.setLastPoint();
+    if (this.inputValue.length === 2) {
+      return this.setLastPoint();
     }
+    return '';
   }
 
   autocomplete() {
-    if (this.inputValue.length == 1 && this.templateValue.length == 2) {
+    if (this.inputValue.length === 1 && this.templateValue.length === 2) {
       return this.addZero();
     }
-    if (this.inputValue.length == this.templateValue.length) {
+    if (this.inputValue.length === this.templateValue.length) {
       return this.setLastPoint();
     }
-    if (this.templateValue.length == 4 && this.inputValue.length == 2) {
+    if (this.templateValue.length === 4 && this.inputValue.length === 2) {
       return Number(this.inputValue) > 21
         ? this.yearAutocomplete('19')
         : this.yearAutocomplete('20');
     }
-    this.removeLastCharacter();
+    return this.removeLastCharacter();
   }
 
   setLastPoint() {
@@ -125,7 +127,7 @@ class MaskedTextField {
   addZero() {
     return this.setValue(
       `${
-        this.inputValue == '0'
+        this.inputValue === '0'
           ? `${this.prepValue}1`
           : this.concatString(
               ...this.splitString(this.prepValue, this.prepValue.length - 1),
@@ -140,7 +142,8 @@ class MaskedTextField {
   }
 
   setValue(value) {
-    return (this.input.value = value);
+    this.input.value = value;
+    return value;
   }
 
   splitString(str, pos) {

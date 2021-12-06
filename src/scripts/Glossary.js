@@ -59,7 +59,7 @@ class Glossary {
       Object.values(glossaries).find(
         (g) =>
           Object.keys(g).filter((term) => searchTerms.indexOf(term) === -1)
-            .length == 0
+            .length === 0
       )
     );
   }

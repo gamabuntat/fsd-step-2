@@ -402,8 +402,8 @@ class Calendar extends BEMBlock {
             this.mods.dayBtnMonthNext
           )
             ? (
-                (lastCoord) => (coord) =>
-                  Tables.isCoordLessOrEqual(coord, lastCoord)
+                (lastCoord) => (anotherCoord) =>
+                  Tables.isCoordLessOrEqual(anotherCoord, lastCoord)
               )(
                 Tables.getMinCoord(
                   this.mainTables.getLastCellCoord(coord[0]),
@@ -490,7 +490,7 @@ class Calendar extends BEMBlock {
         this.startRange.find(this.isPresentDayBtn.bind(this))
       )
     );
-    if (this.endRange.length != 0) {
+    if (this.endRange.length !== 0) {
       this.root.dataset.endDate = Calendar.formatDate(
         this.getDateFromCoord(
           this.endRange.find(this.isPresentDayBtn.bind(this))
@@ -576,9 +576,9 @@ class Calendar extends BEMBlock {
       btn.textContent = day;
       btn.classList.add(this.mods.dayBtnMonthPrev);
     });
-    Calendar.getPresentDay(this.getPresentNDay(index)).forEach(
-      (day) => (this.getButton(gen.next().value).textContent = day)
-    );
+    Calendar.getPresentDay(this.getPresentNDay(index)).forEach((day) => {
+      this.getButton(gen.next().value).textContent = day;
+    });
     Calendar.getNextMonthDay(this.getNextMonthNDay(index)).forEach((day) => {
       const btn = this.getButton(gen.next().value);
       btn.textContent = day;
@@ -590,7 +590,7 @@ class Calendar extends BEMBlock {
     const nFilledRows = Math.ceil(
       (this.getPrevMonthNDay(index) + this.getPresentNDay(index)) / 7
     );
-    for (let row = 5; row >= nFilledRows; row--) {
+    for (let row = 5; row >= nFilledRows; row -= 1) {
       this.mainTables.getTables()[index].rows[row].remove();
     }
   }

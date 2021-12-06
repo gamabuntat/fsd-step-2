@@ -115,4 +115,4 @@ class RangeSlider extends BEMBlock {
   }
 }
 
-export { RangeSlider };
+export default RangeSlider;

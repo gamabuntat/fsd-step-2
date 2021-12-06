@@ -1,4 +1,4 @@
-import RangeLable from './RangeLabel.js';
+import RangeLable from './RangeLabel';
 
 window.addEventListener('load', () =>
   document

@@ -1,4 +1,4 @@
-import MaskedTextField from './MaskedTextField.js';
+import MaskedTextField from './MaskedTextField';
 
 window.addEventListener('load', () =>
   document

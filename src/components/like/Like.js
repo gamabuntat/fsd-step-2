@@ -27,9 +27,11 @@ class Like extends BEMBlock {
 
   setHandleRootClick() {
     this.handleRootClick = () => {
-      this.root.classList.toggle(this.mods.likePressed)
-        ? (this.elemsMap.counter.innerText -= -1)
-        : (this.elemsMap.counter.innerText -= 1);
+      if (this.root.classList.toggle(this.mods.likePressed)) {
+        this.elemsMap.counter.innerText -= -1;
+      } else {
+        this.elemsMap.counter.innerText -= 1;
+      }
       this.handleBtnFocus();
     };
   }

@@ -1,4 +1,4 @@
-import CardRoomDetails from './CardRoomDetails.js';
+import CardRoomDetails from './CardRoomDetails';
 
 window.addEventListener('load', () =>
   document

@@ -1,4 +1,4 @@
-import CardRoomPreview from './CardRoomPreview.js';
+import CardRoomPreview from './CardRoomPreview';
 
 window.addEventListener('load', () =>
   document

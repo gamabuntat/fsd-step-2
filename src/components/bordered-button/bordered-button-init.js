@@ -1,4 +1,4 @@
-import BorderedButton from './BorderedButton.js';
+import BorderedButton from './BorderedButton';
 
 window.addEventListener('load', () =>
   document

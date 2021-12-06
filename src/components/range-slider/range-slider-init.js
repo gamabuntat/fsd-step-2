@@ -1,4 +1,4 @@
-import { RangeSlider } from './RangeSlider.js';
+import RangeSlider from './RangeSlider';
 
 window.addEventListener('load', () =>
   document

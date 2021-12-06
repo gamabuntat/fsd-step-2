@@ -1,4 +1,4 @@
-import DateDropdown from './DateDropdown.js';
+import DateDropdown from './DateDropdown';
 
 window.addEventListener('load', () => {
   document

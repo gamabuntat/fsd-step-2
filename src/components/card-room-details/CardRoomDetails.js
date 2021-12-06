@@ -1,6 +1,7 @@
 import BEMBlock from '@scripts/BEMBlock.js';
 import Glossary from '@scripts/Glossary.js';
-import * as glossaries from './glossaries.js';
+
+import * as glossaries from './glossaries';
 
 class CardRoomDetails extends BEMBlock {
   constructor(root) {
@@ -107,7 +108,9 @@ class CardRoomDetails extends BEMBlock {
   }
 
   fillCost(cost = this.elemsMap.cost.textContent) {
-    return (this.elemsMap.cost.textContent = this.formate(Number(cost)));
+    const formattedCost = this.formate(Number(cost));
+    this.elemsMap.cost.textContent = formattedCost;
+    return formattedCost;
   }
 
   processLuxury(

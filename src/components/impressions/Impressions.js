@@ -1,7 +1,7 @@
 import BEMBlock from '@scripts/BEMBlock.js';
 import Glossary from '@scripts/Glossary.js';
 
-import * as glossaries from './glossaries.js';
+import * as glossaries from './glossaries';
 
 class Impressions extends BEMBlock {
   constructor(root) {
@@ -28,20 +28,17 @@ class Impressions extends BEMBlock {
 
   getArcs() {
     return [...document.querySelectorAll(`.js-${this.arcClass}`)].reduce(
-      (map, arc, idx) => {
-        map[this.marksNames[idx]] = arc;
-        return map;
-      },
+      (map, arc, idx) => ({ ...map, [this.marksNames[idx]]: arc }),
       {}
     );
   }
 
   getRating() {
     const data = this.root.dataset;
-    return this.marksNames.reduce((rating, key) => {
-      rating[key] = Number(data[key]);
-      return rating;
-    }, {});
+    return this.marksNames.reduce(
+      (rating, key) => ({ ...rating, [key]: Number(data[key]) }),
+      {}
+    );
   }
 
   getGap() {
@@ -58,7 +55,7 @@ class Impressions extends BEMBlock {
 
   render() {
     Object.entries(this.rating).reduce((angle, [key, value]) => {
-      if (value == 0) {
+      if (value === 0) {
         return angle;
       }
       const startAngle = angle + this.gap;

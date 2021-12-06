@@ -20,4 +20,8 @@ module.exports = {
       },
     },
   },
+  rules: {
+    'class-methods-use-this': 0,
+    'no-param-reassign': 0
+  }
 };

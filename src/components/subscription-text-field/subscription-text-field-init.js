@@ -1,4 +1,4 @@
-import SubscriptionTextField from './SubscriptionTextField.js';
+import SubscriptionTextField from './SubscriptionTextField';
 
 window.addEventListener('load', () =>
   document

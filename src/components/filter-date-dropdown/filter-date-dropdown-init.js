@@ -1,4 +1,4 @@
-import FilterDateDropdown from './FilterDateDropdown.js';
+import FilterDateDropdown from './FilterDateDropdown';
 
 window.addEventListener('load', () => {
   document
