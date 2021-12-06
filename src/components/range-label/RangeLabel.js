@@ -39,11 +39,11 @@ class RangeLable extends BEMBlock {
   }
 
   updateStartValue(value) {
-    this.elemsMap.start.innerText = value;
+    this.elemsMap.start.textContent = value;
   }
 
   updateEndValue(value) {
-    this.elemsMap.end.innerText = value;
+    this.elemsMap.end.textContent = value;
   }
 
   format(preValue) {

@@ -28,7 +28,7 @@ class FilterDateDropdown extends BEMBlock {
   handleCalAttrsChanges() {
     if (this.calendar.hasAttribute('data-date-is-ready')) {
       const data = this.calendar.dataset;
-      this.elemsMap.sign.innerText = `${this.formateDate(
+      this.elemsMap.sign.textContent = `${this.formateDate(
         new Date(data.startDate)
       )} - ${this.formateDate(new Date(data.endDate))}`;
     }

@@ -17,8 +17,8 @@ class DateDropdown extends BEMBlock {
     this.endSignature = this.elemsMap.endBtn.querySelector(
       '.js-date-dropdown__date-signature'
     );
-    this.startMask = this.startSignature.innerText;
-    this.endMask = this.endSignature.innerText;
+    this.startMask = this.startSignature.textContent;
+    this.endMask = this.endSignature.textContent;
     this.observer = new MutationObserver(this.handleCalAttrsChanges.bind(this));
     this.observer.observe(this.calendar, { attributes: true });
     this.setListeners();
@@ -69,11 +69,11 @@ class DateDropdown extends BEMBlock {
   }
 
   changeStartDateSignatyre(dateStr) {
-    this.startSignature.innerText = dateStr;
+    this.startSignature.textContent = dateStr;
   }
 
   changeEndDateSignatyre(dateStr) {
-    this.endSignature.innerText = dateStr;
+    this.endSignature.textContent = dateStr;
   }
 
   setListeners() {

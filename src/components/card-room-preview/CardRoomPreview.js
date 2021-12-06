@@ -24,11 +24,11 @@ class CardRoomPreview extends BEMBlock {
     this.radioInputs = this.root.querySelectorAll(
       this.getElemClass('radio-input')
     );
-    this.roomNumber = Number(this.elemsMap.roomNumber.innerText);
+    this.roomNumber = Number(this.elemsMap.roomNumber.textContent);
     this.isLuxury = this.elemsMap.roomNumber.classList.contains(
       this.mods.roomNumberDeluxe
     );
-    this.cost = Number(this.elemsMap.cost.innerText.replace(/\D/g, ''));
+    this.cost = Number(this.elemsMap.cost.textContent.replace(/\D/g, ''));
     this.setListeners();
     this.bindListeners();
   }
